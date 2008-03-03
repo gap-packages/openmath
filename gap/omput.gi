@@ -332,13 +332,13 @@ end);
 ##
 ##  Printing for vectors: specified in linalg2.ocd
 ##
-InstallMethod(OMPut, "for a row vector", true,
-[IsOutputStream, IsRowVector],0,
-function(stream, x)
-
-  OMPutApplication( stream, "linalg2", "vector", x );
-
-end);
+#InstallMethod(OMPut, "for a row vector", true,
+#[IsOutputStream, IsRowVector],0,
+#function(stream, x)
+#
+#  OMPutApplication( stream, "linalg2", "vector", x );
+#
+#end);
 
 
 
