@@ -404,6 +404,9 @@ function(symbol)
                 elif name = "N" then return NonnegativeIntegers;
                 elif name = "Q" then return Rationals;
                 fi;
+        elif cd = "fieldname1" then      
+                if name = "Q" then return Rationals;   
+                fi;
 	fi;
 	return OMsymLookup( [ cd, name ] );
 end);
