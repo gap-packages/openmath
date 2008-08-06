@@ -53,7 +53,6 @@ function(x)
 end);
 
 
-
 ######################################################################
 ##
 ##  Semantic mappings for symbols from arith1.cd
@@ -63,12 +62,6 @@ BindGlobal("OMgapTimes", Product);
 BindGlobal("OMgapDivide", x-> OMgapId([OMgap2ARGS(x), x[1]/x[2]])[2]);
 BindGlobal("OMgapPower", x-> OMgapId([OMgap2ARGS(x), x[1]^x[2]])[2]);
 
-######################################################################
-##
-##  Semantic mappings for symbols from algnums.cd
-## 
-BindGlobal("OMgapNthRootOfUnity", 
-	x-> OMgapId([OMgap2ARGS(x), E(x[1])^x[2]])[2]);
 ######################################################################
 ##
 ##  Semantic mappings for symbols from relation.cd
@@ -169,8 +162,6 @@ BindGlobal("OMgapStabilizer",
 BindGlobal("OMgapIsTransitive", 
 	x->OMgapId([OMgap1ARGS(x), IsTransitive(x[1])])[2]);
 
-
-
 ######################################################################
 ##
 ##  Semantic mappings for symbols from cas.cd
@@ -269,22 +260,56 @@ BindGlobal("OMgapNativeOutput",
 
 ######################################################################
 ##
-##  The Symbol Table proper
+##  The Symbol Table for supported symbols from official OpenMath CDs
 ##
 ##  Maps a pair ["cd", "name"] to the corresponding OMgap... function
-##  defined above.
+##  defined above or immediately in the table
 ##
 
 BindGlobal("OMsymTable", [
-["arith1", # see more symbols in new.g
-	[[ "plus", OMgapPlus],
+["arith1", [ # see more symbols in new.g
+    [ "abs", x -> AbsoluteValue(x[1]) ],
+    [ "divide", OMgapDivide],
+    [ "gcd", Gcd ],
+ 	[ "lcm", Lcm ],
+ 	[ "minus", x -> x[1]-x[2] ],   
+  	[ "plus", OMgapPlus],
+  	[ "power", OMgapPower],
+  	# TODO: product
+    [ "root", 
+        function(x) 
+        if x[2]=2 then 
+          return Sqrt(x[1]);
+        elif x[1]=1 then 
+          return E(x[2]);
+        else
+          Error("OpenMath package: the symbol arith1.root \n", 
+                "is supported only for square roots and roots of unity!\n");  
+        fi;  
+        end ],
+  	# TODO: sum
 	[ "times", OMgapTimes],
-	[ "divide", OMgapDivide],
-	[ "power", OMgapPower]]],
+	[ "unary_minus", x -> -x[1] ]]],
+
+[ "calculus1", [
+    [ "diff", x -> Derivative(x[1]) ], 
+    [ "nthdiff", 
+      function(x)
+      local n, f, i;
+      n := x[1];
+      f := x[2];
+      for i in [ 1 .. n ] do
+        f := Derivative( f );
+        if IsZero(f) then
+          return f;
+        fi;
+      od;
+      return f;
+      end ]]],
+
 ["nums",   # there is no nums cd now, see nums1 entry in new.g
 	[[ "rational", OMgapDivide]]],
-["algnums",# see this CD in openmath/cds directory
-	[[ "NthRootOfUnity", OMgapNthRootOfUnity]]], # outdated?
+
 ["relation1",
 	[[ "eq", OMgapEq],
 	[ "neq", OMgapNeq],

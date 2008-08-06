@@ -14,16 +14,22 @@
 
 Revision.("openmath/gap/new.g") :=
     "@(#)$Id$";
-
-
+    
 ## The content of this file is not exhaustively tested!
 
+######################################################################
+##
+##  Semantic mappings for symbols from algnums.cd
+## 
+BindGlobal("OMgapNthRootOfUnity", 
+	x-> OMgapId([OMgap2ARGS(x), E(x[1])^x[2]])[2]);
+	
 
 #######################################################################
 ## From OpenMath to Gap
 
 # CDs already in OMsymTable:
-#  [ "algnums", "arith1", "cas", "group1", "integer", "linalg1", "list1", "logic1", "nums", 
+#  [ "arith1", "cas", "group1", "integer", "linalg1", "list1", "logic1", "nums", 
 #    "permgroup", "permut1", "relation1", "set1" ]
 
 
@@ -32,22 +38,31 @@ OMsymTable_new := [
 # official CDs
 
 [ "arith1", [
-    [ "lcm", Lcm ],
-    [ "gcd", Gcd ],
-    [ "unary_minus", x -> -x[1] ],
-    [ "minus", x -> x[1] -x[2] ],
-    [ "abs", x -> AbsoluteValue(x[1]) ],        # also AbsInt
-    [ "sum", x -> Sum( x[1], x[2] ) ],          # check this !!!
-    [ "product", x -> Product( x[1], x[2] ) ],  # check this !!!
+    # now these two symbols correspond to the definition from CD. 
+    # the problem is that x[2] is a function, and this is not supported yet
+    [ "product", x -> Product( List( x[1], i -> x[2](i) ) ) ],  
+    [ "sum", x -> Sum( List( x[1], i -> x[2](i) ) ) ],
   ],
 ],
-
 
 [ "calculus1", [
-    [ "diff", x -> Derivative(x[1]) ], # must work, when we will have polynomials
-  ],
-],
-
+    [ "partialdiff", 
+      # the code is correct, but the problem is to match variables 
+      # during OpenMath encoding/decoding - check handling of polyd1.DMP
+      function(x)
+      local ind, f, i;
+      ind := x[1];
+      f := x[2];
+      for i in ind do
+        Print( "Derivative of ", f, " by ", i, " = \c" );
+        f := Derivative( f, i );
+        Print( f, "\n" );
+        if IsZero(f) then
+          return f;
+        fi;
+      od;
+      return f;
+      end ]]],	
 
 [ "complex1", [
     [ "complex_cartesian", x-> OMgapId([OMgap2ARGS(x), x[1]+E(4)*x[2]])[2]],
@@ -149,6 +164,8 @@ ReflexiveClosureBinaryRelation( x[1] ) ) ) ],
 
 # experimental CDs
 
+["algnums",# see this CD in openmath/cds directory
+	[[ "NthRootOfUnity", OMgapNthRootOfUnity]]], 
 
 [ "permgp1", [
     [ "group", OMgapGroup ], # n-ary function in permgp1 cd, test with >1 generators
