@@ -95,6 +95,10 @@ DeclareGlobalFunction("OMPutVar");
 ##
 DeclareGlobalFunction("OMPutApplication");
 
+DeclareAttribute( "OMReference", IsObject );
+
+DeclareOperation( "OMPutReference", [ IsOutputStream, IsObject ] );
+
 
 #######################################################################
 ##

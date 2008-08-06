@@ -17,7 +17,6 @@ Revision.("openmath/gap/gap.g") :=
     "@(#)$Id$";
 
 
-
 ######################################################################
 ##
 #F  OMgapId( <obj> )
@@ -25,8 +24,6 @@ Revision.("openmath/gap/gap.g") :=
 ##  Forces GAP to evaluate its argument.
 ##
 BindGlobal("OMgapId",  x->x);
-
-
 
 
 ######################################################################
@@ -62,6 +59,36 @@ BindGlobal("OMgapTimes", Product);
 BindGlobal("OMgapDivide", x-> OMgapId([OMgap2ARGS(x), x[1]/x[2]])[2]);
 BindGlobal("OMgapPower", x-> OMgapId([OMgap2ARGS(x), x[1]^x[2]])[2]);
 
+
+######################################################################
+##
+##  Semantic mappings for symbols from field3.cd
+##
+BindGlobal("OMgap_field_by_poly",
+    # The 1st argument of field_by_poly is a univariate polynomial 
+    # ring R over a field, and the second argument is an irreducible    # polynomial f in this polynomial ring R. So, when applied to R
+    # and f, the value of field_by_poly is value the quotient ring R/(f).
+	function( x )
+	return AlgebraicExtension( x[1], x[2] );;
+	end);	
+	
+	
+######################################################################
+##
+##  Semantic mappings for symbols from field4.cd
+##
+BindGlobal("OMgap_field_by_poly_vector",
+    # The symbol field_by_poly_vector has two arguments, the 1st 
+    # should be a field_by_poly(R,f). The 2nd argument should be a     # list L of elements of F, the coefficient field of the univariate 
+    # polynomial ring R = F[X]. The length of the list L should be equal 
+    # to the degree d of f. When applied to R and L, it represents the 
+    # element L[0] + L[1] x + L[2] x^2 + ... + L[d-1] ^(d-1) of R/(f),
+    # where x stands for the image of x under the natural map R -> R/(f).
+	function( x )
+	return ObjByExtRep( FamilyObj( One( x[1] ) ), x[2] );
+	end);
+	
+	
 ######################################################################
 ##
 ##  Semantic mappings for symbols from relation.cd
@@ -162,6 +189,103 @@ BindGlobal("OMgapStabilizer",
 BindGlobal("OMgapIsTransitive", 
 	x->OMgapId([OMgap1ARGS(x), IsTransitive(x[1])])[2]);
 
+
+######################################################################
+##
+##  Semantic mappings for symbols from polyd1.cd
+##
+BindGlobal("OMgap_poly_ring_d_named",
+    # poly_ring_d_named is the constructor of polynomial ring. 
+    # The first argument is a ring (the ring of the coefficients), 
+    # the remaining arguments are the names of the variables.
+	function( x )
+	local coeffring, indetnames, indets, name;
+	coeffring := x[1];
+	indetnames := x{[2..Length(x)]};
+	# We call Indeterminate with the 'old' option to enforce 
+	# the usage of existing indeterminates when applicable
+	indets := List( indetnames, name -> Indeterminate( coeffring, name : old ) );
+	return PolynomialRing( coeffring, indets );
+	end);
+	
+	
+BindGlobal("OMgap_poly_ring_d",
+    # poly_ring_d is the constructor of polynomial ring.
+    # The first argument is a ring (the ring of the coefficients), 
+    # the second is the number of variables as an integer. 
+	function( x )
+	local coeffring, rank;
+	coeffring := x[1];
+	rank := x[2];
+	return PolynomialRing( coeffring, rank );
+	end);
+		
+
+BindGlobal("OMgap_SDMP",
+    # SDMP is the constructor for multivariate polynomials without    # any indication of variables or domain for the coefficients.	# Its arguments are just *monomials*. No monomials should differ only by    # the coefficient (i.e it is not permitted to have both 2*x*y and x*y 
+    # as monomials in a SDMP). 
+	function( x )
+	# we just pass the list of monomials (represented as lists containing
+	# coefficients and powers and indeterminates) as the 2nd argument in 
+	# the DMP symbol, which will construct the polynomial in the polynomial 
+	# ring given as the 1st argument of the DMP symbol
+	return x;
+	end);
+	
+	
+BindGlobal("OMgap_DMP",
+    # DMP is the constructor of Distributed Multivariate Polynomials. 
+    # The first argument is the polynomial ring containing the polynomial 
+    # and the second is a "SDMP"
+	function( x )
+	local polyring, terms, fam, ext, t, term, i, poly;
+	polyring := x[1];
+	terms := x[2];
+	fam:=RationalFunctionsFamily( FamilyObj( One( CoefficientsRing( polyring ))));
+	ext := [];
+	for t in terms do
+	  term := [];
+	  for i in [2..Length(t)] do
+	    if t[i]<>0 then
+	      Append( term, [i-1,t[i]] );
+	    fi;
+	  od;
+	  Add( ext, term );
+	  Add( ext, t[1] );
+	od;
+    poly := PolynomialByExtRep( fam, ext );	
+	return poly;
+	end);
+
+
+######################################################################
+##
+##  Semantic mappings for symbols from polyu.cd
+##
+BindGlobal("OMgap_poly_u_rep",
+	function( x )
+	local indetname, rep, coeffs, r, i, indet, fam, nr;
+	indetname := x[1];
+	rep := x{[2..Length(x)]};
+	coeffs:=[];
+	for r in rep do
+      coeffs[r[1]+1]:=r[2];
+    od;  
+    for i in [1..Length(coeffs)] do
+      if not IsBound(coeffs[i]) then
+        coeffs[i]:=0;
+      fi;  
+    od;
+    indet := Indeterminate( Rationals, indetname : old );
+	fam := FamilyObj( 1 );
+    nr := IndeterminateNumberOfLaurentPolynomial( indet ); 
+	return LaurentPolynomialByCoefficients( fam, coeffs, 0, nr );
+	end );
+	
+BindGlobal("OMgap_term",
+	x->x );
+		
+
 ######################################################################
 ##
 ##  Semantic mappings for symbols from cas.cd
@@ -257,7 +381,8 @@ end);
 
 BindGlobal("OMgapNativeOutput",
 	x->OMgapId(OMgapNativeOutputFunc()));
-
+	
+	
 ######################################################################
 ##
 ##  The Symbol Table for supported symbols from official OpenMath CDs
@@ -307,6 +432,12 @@ BindGlobal("OMsymTable", [
       return f;
       end ]]],
 
+[ "field3", [
+    ["field_by_poly", OMgap_field_by_poly]]],
+    
+[ "field4", [
+     ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
+     
 ["nums",   # there is no nums cd now, see nums1 entry in new.g
 	[[ "rational", OMgapDivide]]],
 
@@ -358,6 +489,18 @@ BindGlobal("OMsymTable", [
 	["Orbit", OMgapOrbit],                                  # permgp1 (orbit)
 	["Stabilizer", OMgapStabilizer],                        # permgp1 (stabilizer)
 	["IsTransitive", OMgapIsTransitive]]],                  # permgp1 (is_transitive)
+
+[ "polyd1", [
+     ["DMP", OMgap_DMP],
+     ["poly_ring_d", OMgap_poly_ring_d],
+     ["poly_ring_d_named", OMgap_poly_ring_d_named],
+     ["SDMP", OMgap_SDMP],
+	 ["term", OMgap_term]]],
+
+[ "polyu", [
+     ["poly_u_rep", OMgap_poly_u_rep], 
+	 ["term", OMgap_term]]],
+     	
 ["cas", # see this CD in openmath/cds directory
 	[["quit", OMgapQuit],
 	["assign", OMgapAssign],
@@ -366,7 +509,10 @@ BindGlobal("OMsymTable", [
 	["native_error", OMgapNativeError],
 	["native_output", OMgapNativeOutput]]]]);
 
-
+ 
+     
+  
+     
 ######################################################################
 ##
 #F  OMsymLookup( [<cd>, <name>] )
