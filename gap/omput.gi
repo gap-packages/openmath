@@ -198,12 +198,12 @@ fi;
 end);
 
 
-#######################################################################
+#############################################################################
 ##
-#F  OMPrint( <obj> ) .......   Print <obj> as OpenMath object
+#F  OMPrint( <obj> ) .......................   Print <obj> as OpenMath object
 ##
 ##
-InstallGlobalFunction(OMPrint,
+InstallGlobalFunction( OMPrint,
 function(x)
 	local str, outstream;
 
@@ -215,6 +215,20 @@ function(x)
 end);
 
 
+#############################################################################
+## 
+## OMString( <obj> ) ............ Return string with <obj> as OpenMath object
+##
+InstallGlobalFunction( OMString,
+function ( x )
+local str, outstream;
+str := "";
+outstream := OutputTextString( str, true );
+OMPutObject( outstream, x );
+CloseStream( outstream );
+NormalizeWhitespace( str );
+return str;
+end);
 
 
 #############################################################################
@@ -1063,6 +1077,44 @@ function(stream, c)
 end);
 
 
+#############################################################################
+#
+# Functions and methods for OMPlainString
+#
+InstallGlobalFunction( OMPlainString,
+function( string )
+local pos;
+if IsString( string ) then
+    # note that we do not validate the string!
+    return Objectify( OMPlainStringDefaultType, [ string ] );
+else
+    Error( "The argument of OMPlainString must be a string" );
+fi;                    
+end);
+
+
+#############################################################################
+##
+#M  PrintObj( <IsOMPlainString> )
+##
+InstallMethod( PrintObj, "for IsOMPlainString",
+[ IsOMPlainStringRep and IsOMPlainString ],
+function( obj )
+    Print( obj![1] );
+end);
+
+
+#############################################################################
+##
+#M  OMPut( <IsOMPlainString> )
+##
+InstallMethod( OMPut, "for IsOMPlainString",
+true,
+[ IsOutputStream, IsOMPlainString ],
+0,
+function( stream, s )
+    OMWriteLine( stream, [ s ] );
+end); 
 
 
 #############################################################################

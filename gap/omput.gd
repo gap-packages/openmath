@@ -27,6 +27,7 @@ Revision.("openmath/gap/omput.gd") :=
 ## 
 DeclareGlobalFunction("OMPutObject");
 
+
 #######################################################################
 ##
 #O  OMPut(<stream>,<obj> ) 
@@ -37,13 +38,19 @@ DeclareOperation("OMPut", [IsOutputStream, IsObject ]);
 
 #######################################################################
 ##
-#F  OMPrint( <obj> ) ....   Print <obj> as OpenMath object 
+#F  OMPrint( <obj> ) .................   Print <obj> as OpenMath object 
 ##
 ##  OMPrint writes the XML OpenMath encoding of GAP object <obj> 
 ##  to the standard output.
 ##
-
 DeclareGlobalFunction("OMPrint");
+
+
+########################################################################
+## 
+## OMString( <obj> ) ....... Return string with <obj> as OpenMath object
+##
+DeclareGlobalFunction("OMString");
 
 
 #######################################################################
@@ -112,6 +119,17 @@ DeclareOperation("OMPutList", [IsOutputStream, IsObject ]);
 # Determines the indentation of the next line to be printed.
 OMIndent := 0;
 
+
+#############################################################################
+#
+# Declarations for OMPlainString objects
+#
+DeclareCategory( "IsOMPlainString", IsObject );
+OMPlainStringsFamily := NewFamily( "OMPlainStringsFamily" );
+DeclareGlobalFunction ( "OMPlainString" );
+DeclareRepresentation( "IsOMPlainStringRep", IsPositionalObjectRep, [ ] );
+OMPlainStringDefaultType := NewType( OMPlainStringsFamily, 
+                                IsOMPlainStringRep and IsOMPlainString );
 
 #############################################################################
 #E
