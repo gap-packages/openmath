@@ -19,13 +19,20 @@ Revision.("openmath/gap/omput.gd") :=
 #######################################################################
 ##
 #F  OMPutObject( <stream>, <obj> )  
+#F  OMPutObjectOMPutObjectNoOMOBJtags( <stream>, <obj> )  
 ## 
 ##  OMPutObject writes (appends) the XML OpenMath encoding of the GAP
 ##  object <obj> to output stream <stream> (see "ref: OutputTextFile",
 ##  "ref: OutputTextUser", "ref: OutputTextString",
 ##  "ref: InputOutputLocalProcess" ).
+##
+##  The second version does the same but without <OMOBJ> .. </OMOBJ> 
+##  tags in the beginning and end, which maybe useful for combining
+##  complex objects.
 ## 
 DeclareGlobalFunction("OMPutObject");
+
+DeclareGlobalFunction("OMPutObjectNoOMOBJtags");
 
 
 #######################################################################

@@ -157,6 +157,29 @@ function(stream, x)
 end);
 
 
+#######################################################################
+##
+#F  OMPutObjectNoOMOBJtags( <stream>, <obj> ) 
+##
+##
+InstallGlobalFunction(OMPutObjectNoOMOBJtags,
+function(stream, x)
+
+	if IsClosedStream( stream )  then
+		Error( "closed stream" );
+	fi;
+
+	if IsOutputTextStream( stream )  then
+		SetPrintFormattingStatus( stream, false );
+	fi;
+
+	OMIndent := 0;
+	# OMIndent:= OMIndent+1;
+	OMPut(stream, x);
+	# OMIndent:=OMIndent-1;
+end);
+
+
 #############################################################################
 #
 # OMPutReference( stream, x );
@@ -221,10 +244,17 @@ end);
 ##
 InstallGlobalFunction( OMString,
 function ( x )
-local str, outstream;
+local noomobj, str, outstream;
+if ValueOption("noomobj") <> fail then
+    noomobj := true;
+fi;
 str := "";
 outstream := OutputTextString( str, true );
-OMPutObject( outstream, x );
+if noomobj then
+    OMPutObjectNoOMOBJtags( outstream, x );
+else
+    OMPutObject( outstream, x );
+fi;
 CloseStream( outstream );
 NormalizeWhitespace( str );
 return str;
