@@ -95,7 +95,12 @@ BindGlobal( "OMObjects",
         else
             head := OMParseXmlObj( node.content[1] );
         fi;
-        return head( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ) );
+        # extra check to achieve compatibility with SCSCP
+        if node.content[1].attributes.cd="scscp2" and node.content[1].attributes.name="get_signature" then
+            return head( [ node.content[2].attributes.cd, node.content[2].attributes.name ] );
+        else
+            return head( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ) );
+        fi;
     end,
 
 
