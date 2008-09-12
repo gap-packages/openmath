@@ -20,8 +20,8 @@ PackageName := "openmath",
 Subtitle := "OpenMath functionality in GAP",
 
 
-Version := "06.03.02",
-Date := "02/03/2006",
+Version := "08.09.12",
+Date := "12/09/2008",
 
 
 ArchiveURL := Concatenation([
@@ -106,8 +106,8 @@ AvailabilityTest := ReturnTrue,
 Autoload := false,
 
 # the banner
-BannerString := 
-"OpenMath package, by Andrew Solomon and Marco Costantini\n",
+#BannerString := 
+#"OpenMath package, by Andrew Solomon and Marco Costantini\n",
 
 
 TestFile := "tst/test_new",
