@@ -452,6 +452,8 @@ BindGlobal("OMsymTable", [
 	[[ "quotient", OMgapQuotient],
 	[ "rem", OMgapRem],    # changed name to "remainder" in integer1
 	[ "gcd", OMgapGcd]]],  # now in arith1, see new.g
+["integer2", # there is no integer cd now, there is integer1, see new.g
+	[[ "euler", x -> Phi(x[1]) ]]],
 ["logic1",
 	[ ["not", OMgapNot],
 	["or", OMgapOr],     # should be made n-ary (see logic1 cd)
