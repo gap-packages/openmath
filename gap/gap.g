@@ -382,16 +382,15 @@ end);
 BindGlobal("OMgapNativeOutput",
 	x->OMgapId(OMgapNativeOutputFunc()));
 	
-	
-######################################################################
+
+#####################################################################
 ##
 ##  The Symbol Table for supported symbols from official OpenMath CDs
 ##
 ##  Maps a pair ["cd", "name"] to the corresponding OMgap... function
 ##  defined above or immediately in the table
 ##
-
-BindGlobal("OMsymTable", [
+InstallValue( OMsymTable, [
 ["arith1", [ # see more symbols in new.g
     [ "abs", x -> AbsoluteValue(x[1]) ],
     [ "divide", OMgapDivide],
@@ -510,11 +509,8 @@ BindGlobal("OMsymTable", [
 	["native_statement", OMgapNativeStatement],
 	["native_error", OMgapNativeError],
 	["native_output", OMgapNativeOutput]]]]);
-
- 
-     
-  
-     
+	
+	     
 ######################################################################
 ##
 #F  OMsymLookup( [<cd>, <name>] )

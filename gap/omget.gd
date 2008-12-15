@@ -34,5 +34,14 @@ Revision.("openmath/gap/omget.gd") :=
 
 DeclareGlobalFunction("OMGetObject");
 
+#####################################################################
+##
+##  The Symbol Table for supported symbols from official OpenMath CDs
+##
+##  Maps a pair ["cd", "name"] to the corresponding OMgap... function
+##  defined above or immediately in the table
+##
+DeclareGlobalVariable("OMsymTable");
+
 #############################################################################
 #E

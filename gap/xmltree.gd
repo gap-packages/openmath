@@ -23,6 +23,5 @@ DeclareGlobalFunction("OMParseXmlObj");
 DeclareGlobalFunction("OMgetObjectXMLTree");
 
 
-
 #############################################################################
 #E
