@@ -437,9 +437,6 @@ InstallValue( OMsymTable, [
 [ "field4", [
      ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
      
-["nums",   # there is no nums cd now, see nums1 entry in new.g
-	[[ "rational", OMgapDivide]]],
-
 ["relation1",
 	[[ "eq", OMgapEq],
 	[ "neq", OMgapNeq],
@@ -447,11 +444,10 @@ InstallValue( OMsymTable, [
 	[ "leq", OMgapLe],
 	[ "gt", OMgapGt],
 	[ "geq", OMgapGe]]],
-["integer", # there is no integer cd now, there is integer1, see new.g
+["integer1", 
 	[[ "quotient", OMgapQuotient],
-	[ "rem", OMgapRem],    # changed name to "remainder" in integer1
-	[ "gcd", OMgapGcd]]],  # now in arith1, see new.g
-["integer2", # there is no integer cd now, there is integer1, see new.g
+	[ "remainder", OMgapRem]]],    
+["integer2", 
 	[[ "euler", x -> Phi(x[1]) ]]],
 ["logic1",
 	[ ["not", OMgapNot],
@@ -466,9 +462,6 @@ InstallValue( OMsymTable, [
 	["union", OMgapUnion],         # should be made n-ary (see set1 cd)
 	["intersect", OMgapIntersect], # should be made n-ary (see set1 cd)
 	["setdiff", OMgapSetDiff]]],
-["linalg1",
-	[["matrixrow", OMgapMatrixRow], # now in linalg2, see new.g
-	["matrix", OMgapMatrix]]],      # now in linalg2, see new.g
 ["permut1",
 	[["permutation", OMgapPermutation]]], # no capital letter
 ["group1", # experimental version, mix from various CDs, names differ from CDs
@@ -485,11 +478,6 @@ InstallValue( OMsymTable, [
 	["QuotientGroup", OMgapQuotientGroup],                  # group3 (quotient_group)
 	["RightTransversal", OMgapQuotientGroup],               # group4 (right_transversal)
 	["SylowSubgroup", OMgapSylowSubgroup]]],                # group3 (sylow_subgroup)
-["permgroup", # now permgp1 CD, with different spelling, see new.g
-	[["IsPrimitive", OMgapIsPrimitive],                     # permgp1 (is_primitive)
-	["Orbit", OMgapOrbit],                                  # permgp1 (orbit)
-	["Stabilizer", OMgapStabilizer],                        # permgp1 (stabilizer)
-	["IsTransitive", OMgapIsTransitive]]],                  # permgp1 (is_transitive)
 
 [ "polyd1", [
      ["DMP", OMgap_DMP],
@@ -551,7 +539,7 @@ function(symbol)
 	cd := symbol[1];
 	name := symbol[2];
 
-	if cd = "fns" then     # now the name of CD is "fns1"
+	if cd = "fns1" then    
 		if name = "lambda" then return "LAMBDA";
 		fi;
         elif cd = "logic1" then
@@ -562,8 +550,6 @@ function(symbol)
 		if name = "i" then return Sqrt(-1);
 		elif name = "infinity" then return infinity;
 		elif name = "NaN" then return Float( "NaN" );
-		elif name = "false" then return false; # there is no 'false' in nums1
-		elif name = "true" then return true;   # there is no 'true'  in nums1
 		fi;
         elif cd = "set1" then
                 if name = "emptyset" then return [];
