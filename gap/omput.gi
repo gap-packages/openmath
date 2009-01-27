@@ -39,10 +39,12 @@ fi;
 #
 BIND_GLOBAL( "RandomString",
     function( n )
-    local symbols, rs, i;
+    local symbols, i;
+    if not IsBoundGlobal( "OpenMathRealRandomSource" ) then
+    	BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
+    fi;
     symbols := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-    rs := RandomSource( IsRealRandomSource, "random" );
-    return List( [1..n], i -> Random( rs, symbols) );
+    return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
     end);
 
 
