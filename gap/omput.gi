@@ -37,12 +37,12 @@ fi;
 # This function generates a random string of the length n
 # It is needed to create references
 #
+
+BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
+
 BIND_GLOBAL( "RandomString",
     function( n )
     local symbols, i;
-    if not IsBoundGlobal( "OpenMathRealRandomSource" ) then
-    	BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
-    fi;
     symbols := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
     return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
     end);
