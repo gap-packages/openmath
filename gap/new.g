@@ -32,18 +32,9 @@ BindGlobal("OMgapNthRootOfUnity",
 #  [ "arith1", "cas", "group1", "integer", "linalg1", "list1", "logic1", "nums", 
 #    "permgroup", "permut1", "relation1", "set1" ]
 
-
 OMsymTable_new := [
 
 # official CDs
-
-[ "arith1", [
-    # now these two symbols correspond to the definition from CD. 
-    # the problem is that x[2] is a function, and this is not supported yet
-    [ "product", x -> Product( List( x[1], i -> x[2](i) ) ) ],  
-    [ "sum", x -> Sum( List( x[1], i -> x[2](i) ) ) ],
-  ],
-],
 
 [ "calculus1", [
     [ "partialdiff", 
@@ -86,13 +77,6 @@ OMsymTable_new := [
     [ "quotient", x -> EuclideanQuotient( x[1], x[2] ) ],
   ]
 ],
-
-
-[ "interval1", [
-    [ "integer_interval", x -> [ x[1] .. x[2] ] ]
-  ]
-],
-
 
 [ "linalg1", [
     [ "determinant", x -> DeterminantMat(x[1]) ],

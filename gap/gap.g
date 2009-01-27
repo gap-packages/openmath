@@ -391,7 +391,7 @@ BindGlobal("OMgapNativeOutput",
 ##  defined above or immediately in the table
 ##
 InstallValue( OMsymTable, [
-["arith1", [ # see more symbols in new.g
+["arith1", [
     [ "abs", x -> AbsoluteValue(x[1]) ],
     [ "divide", OMgapDivide],
     [ "gcd", Gcd ],
@@ -399,7 +399,7 @@ InstallValue( OMsymTable, [
  	[ "minus", x -> x[1]-x[2] ],   
   	[ "plus", OMgapPlus],
   	[ "power", OMgapPower],
-  	# TODO: product
+    [ "product", x -> Product( List( x[1], i -> x[2](i) ) ) ],  
     [ "root", 
         function(x) 
         if x[2]=2 then 
@@ -411,9 +411,26 @@ InstallValue( OMsymTable, [
                 "is supported only for square roots and roots of unity!\n");  
         fi;  
         end ],
-  	# TODO: sum
+    [ "sum", x -> Sum( List( x[1], i -> x[2](i) ) ) ], 	
 	[ "times", OMgapTimes],
 	[ "unary_minus", x -> -x[1] ]]],
+	
+["arith2", [
+	[ "inverse", x -> Inverse(x[1]) ],
+	[ "times", OMgapTimes ]]],   	
+	
+["arith3", [
+	[ "extended_gcd",
+		function(x)
+		local r;
+		if Length(x)=2 then
+			r := Gcdex( x[1], x[2] );
+			return [ r.gcd, r.coeff1, r.coeff2 ];
+		else
+          Error("OpenMath package: the symbol arith3.extended_gcd \n", 
+                "for more than two arguments is not implemented yet!\n");  
+		fi;
+		end ]]],   	
 
 [ "calculus1", [
     [ "diff", x -> Derivative(x[1]) ], 
@@ -437,18 +454,22 @@ InstallValue( OMsymTable, [
 [ "field4", [
      ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
      
-["relation1",
-	[[ "eq", OMgapEq],
+["relation1", [
+	[ "eq", OMgapEq],
 	[ "neq", OMgapNeq],
 	[ "lt", OMgapLt],
 	[ "leq", OMgapLe],
 	[ "gt", OMgapGt],
 	[ "geq", OMgapGe]]],
-["integer1", 
-	[[ "quotient", OMgapQuotient],
+["integer1", [
+	[ "quotient", OMgapQuotient],
 	[ "remainder", OMgapRem]]],    
-["integer2", 
-	[[ "euler", x -> Phi(x[1]) ]]],
+["integer2", [
+	[ "euler", x -> Phi(x[1]) ]]],
+
+["interval1", 
+	[[ "integer_interval", x -> [ x[1] .. x[2] ] ]]],
+
 ["logic1",
 	[ ["not", OMgapNot],
 	["or", OMgapOr],     # should be made n-ary (see logic1 cd)
