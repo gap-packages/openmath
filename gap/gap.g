@@ -447,6 +447,14 @@ InstallValue( OMsymTable, [
       od;
       return f;
       end ]]],
+      
+["combinat1", [
+	[ "Bell", x ->Bell(x[1]) ],
+	[ "binomial", x -> Binomial(x[1],x[2]) ],
+	[ "Fibonacci", x -> Fibonacci(x[1]) ],
+	[ "multinomial", x -> Factorial(x[1]) / Product( List( x{[ 2 .. Length(x) ]}, Factorial ) ) ],
+	[ "Stirling1", x -> Stirling1(x[1],x[2]) ],
+	[ "Stirling2", x -> Stirling2(x[1],x[2]) ]]],        
 
 [ "field3", [
     ["field_by_poly", OMgap_field_by_poly]]],
@@ -461,9 +469,11 @@ InstallValue( OMsymTable, [
 	[ "leq", OMgapLe],
 	[ "gt", OMgapGt],
 	[ "geq", OMgapGe]]],
+	
 ["integer1", [
 	[ "quotient", OMgapQuotient],
-	[ "remainder", OMgapRem]]],    
+	[ "remainder", OMgapRem]]],  
+	  
 ["integer2", [
 	[ "euler", x -> Phi(x[1]) ]]],
 
