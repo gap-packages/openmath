@@ -433,7 +433,9 @@ InstallValue( OMsymTable, [
 		end ]]],   	
 
 [ "calculus1", [
+	[ "defint", ],
     [ "diff", x -> Derivative(x[1]) ], 
+	[ "int", ],
     [ "nthdiff", 
     	function(x)
         local n, f, i;
@@ -446,7 +448,8 @@ InstallValue( OMsymTable, [
           fi;
         od;
         return f;
-        end ]]],
+        end ],
+    [ "partialdiff", ]]],
       
 ["combinat1", [
 	[ "Bell", x ->Bell(x[1]) ],
@@ -561,15 +564,23 @@ function(symbol)
 		if cd[1] = symbol[1] then	# the cd names are the same
 			for sym in cd[2] do
 				if sym[1] = symbol[2] then
-					return sym[2]; # return the function
+					if IsBound( sym[2] ) then
+						return sym[2]; # return the function
+					else
+						# a symbol is present in the CD but not implemented
+						# The number, format and sequence of arguments for the three error messages
+						# below is strongly fixed as it is needed in the SCSCP package to return
+						# standard OpenMath errors to the client
+						Error("OpenMathError: ", "unhandled_symbol", " cd=", symbol[1], " name=", symbol[2]);
+					fi;	
 				fi;
 			od;
-			# if we got here, we found the cd but not the symbol
-			Error("unknown OpenMath symbol, cd=", symbol[1], " name=", symbol[2]);
+			# if we got here, a symbol is not present in the mentioned content dictionary.
+			Error("OpenMathError: ", "unexpected_symbol", " cd=", symbol[1], " name=", symbol[2]);
 		fi;
 	od;
 	# we didn't even find the cd
-	Error("unknown OpenMath cd, cd=", symbol[1], " name=", symbol[2]);
+	Error("OpenMathError: ", "unsupported_CD", " cd=", symbol[1], " name=", symbol[2]);
 end);
 
 

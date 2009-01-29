@@ -156,8 +156,14 @@ BindGlobal( "OMObjects",
 
 
   OME := function ( node )
-        Error( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ),
+  		if IsBound(node.content[1].attributes.cd) and node.content[1].attributes.cd="error" then
+  			Error( node.content[1].attributes.name, " : cd=", 
+  			       node.content[2].attributes.cd, ", name=",
+  			       node.content[2].attributes.name, "\n" );		
+		else
+		Error( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ),
             "\n", node.content[1].attributes );
+        fi;    
     end,
 
 
