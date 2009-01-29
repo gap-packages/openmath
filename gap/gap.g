@@ -435,18 +435,18 @@ InstallValue( OMsymTable, [
 [ "calculus1", [
     [ "diff", x -> Derivative(x[1]) ], 
     [ "nthdiff", 
-      function(x)
-      local n, f, i;
-      n := x[1];
-      f := x[2];
-      for i in [ 1 .. n ] do
-        f := Derivative( f );
-        if IsZero(f) then
-          return f;
-        fi;
-      od;
-      return f;
-      end ]]],
+    	function(x)
+        local n, f, i;
+        n := x[1];
+        f := x[2];
+        for i in [ 1 .. n ] do
+          f := Derivative( f );
+          if IsZero(f) then
+            return f;
+          fi;
+        od;
+        return f;
+        end ]]],
       
 ["combinat1", [
 	[ "Bell", x ->Bell(x[1]) ],
@@ -462,20 +462,28 @@ InstallValue( OMsymTable, [
 [ "field4", [
      ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
      
-["relation1", [
-	[ "eq", OMgapEq],
-	[ "neq", OMgapNeq],
-	[ "lt", OMgapLt],
-	[ "leq", OMgapLe],
-	[ "gt", OMgapGt],
-	[ "geq", OMgapGe]]],
-	
-["integer1", [
-	[ "quotient", OMgapQuotient],
-	[ "remainder", OMgapRem]]],  
+[ "integer1", [
+    [ "factorial", x -> Factorial( x[1] ) ],
+    [ "factorof",  x -> IsInt( x[2]/ x[1] ) ],
+    [ "quotient", x -> QuoInt( x[1], x[2] ) ], # is OMgapQuotient now obsolete?
+    [ "remainder", x -> RemInt( x[1], x[2] ) ]]], # is OMgapRem now obsolete?
 	  
 ["integer2", [
-	[ "euler", x -> Phi(x[1]) ]]],
+	[ "class", x -> ZmodnZObj(x[1],x[2]) ],
+	[ "divides", x -> IsInt( x[2]/ x[1] ) ],
+	[ "eqmod", x -> IsInt( (x[1]-x[2])/x[3] ) ],
+	[ "euler", x -> Phi(x[1]) ],
+	[ "modulo_relation", x -> function(a,b) return IsInt( (a-b)/x[1] ); end ],
+	[ "neqmod", x -> not IsInt( (x[1]-x[2])/x[3] ) ],
+	[ "ord", 
+		function(x)
+		local i;
+		if not IsInt(x[2]/x[1]) then
+			return 0;
+		else
+			return Number( FactorsInt(x[2]), i -> i=x[1]);
+		fi;	 
+		end ]]],
 
 ["interval1", 
 	[[ "integer_interval", x -> [ x[1] .. x[2] ] ]]],
@@ -520,6 +528,14 @@ InstallValue( OMsymTable, [
 [ "polyu", [
      ["poly_u_rep", OMgap_poly_u_rep], 
 	 ["term", OMgap_term]]],
+	 
+["relation1", [
+	[ "eq", OMgapEq],
+	[ "neq", OMgapNeq],
+	[ "lt", OMgapLt],
+	[ "leq", OMgapLe],
+	[ "gt", OMgapGt],
+	[ "geq", OMgapGe]]],	 
      	
 ["cas", # see this CD in openmath/cds directory
 	[["quit", OMgapQuit],

@@ -70,14 +70,6 @@ OMsymTable_new := [
 ],
 
 
-[ "integer1", [
-    [ "factorof",  x -> IsZero( EuclideanRemainder( x[2], x[1] ) ) ],
-    [ "factorial", x -> Factorial( x[1] ) ],
-    [ "remainder", x -> EuclideanRemainder( x[1], x[2] ) ],
-    [ "quotient", x -> EuclideanQuotient( x[1], x[2] ) ],
-  ]
-],
-
 [ "linalg1", [
     [ "determinant", x -> DeterminantMat(x[1]) ],
     [ "matrix_selector", x -> x[3][x[1]][x[2]] ],
