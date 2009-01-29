@@ -355,6 +355,20 @@ end);
 
 #######################################################################
 ##
+#M  OMPut( <stream>, <resclass> )  
+##
+##  Printing for rationals
+## 
+InstallMethod(OMPut, "for a residue class", true,
+[IsOutputStream, IsZmodnZObj],0,
+function(stream, x)
+	OMPutApplication( stream, "integer2", "class",
+		[  x![1], FamilyObj(x)!.modulus ] );
+end);
+
+
+#######################################################################
+##
 #M  OMPut( <stream>, <cyc> )  
 ##
 ##  Printing for cyclotomics
