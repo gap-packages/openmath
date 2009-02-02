@@ -90,13 +90,6 @@ OMsymTable_new := [
 ],
 
 
-[ "logic1", [
-    [ "equivalent", x -> x[1] and x[2] or not x[1] and not x[2] ],
-    [ "implies", x -> not x[1] or x[2] ],
-  ]
-],
-
-
 [ "minmax1", [
     [ "min", x -> Minimum(x[1]) ],
     [ "max", x-> Maximum(x[1]) ]
@@ -120,20 +113,6 @@ ReflexiveClosureBinaryRelation( x[1] ) ) ) ],
     [ "is_reflexive", x ->IsReflexiveBinaryRelation( x[1] ) ],
     [ "is_symmetric", x ->IsSymmetricBinaryRelation( x[1] ) ],
     [ "is_equivalence", x ->IsEquivalenceRelation( x[1] ) ],
-  ]
-],
-
-
-[ "set1", [
-    [ "cartesian_product", Cartesian ],
-    [ "map", x -> List( x[2], x[1] ) ],      # needs test!!! now also defined in list1
-    [ "size", x -> Size( x[1] ) ],
-    [ "suchthat", x->Filtered(x[1], x[2]) ], # needs test!!! now also defined in list1
-    [ "subset", x -> IsSubset( x[2], x[1] ) ],
-    [ "notin", x -> not x[1] in x[2] ],
-    [ "prsubset", x -> IsSubset( x[2], x[1] ) and not IsEqualSet( x[2], x[1] ) ],
-    [ "notsubset", x -> not IsSubset( x[2], x[1] ) ],
-    [ "notprsubset", x -> not IsSubset( x[2], x[1] ) or IsEqualSet( x[2], x[1] ) ],
   ]
 ],
 

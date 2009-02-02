@@ -130,6 +130,9 @@ BindGlobal("OMgapAnd", function(x) local t; return ForAll( x, t -> t = true ); e
 ##  Semantic mappings for symbols from list1.cd
 ## 
 BindGlobal("OMgapList", List);
+BindGlobal("OMgapMap", x -> List( x[2], x[1] ) );
+BindGlobal("OMgapSuchthat", x -> Filtered( x[1], x[2] ) );
+
 
 ######################################################################
 ##
@@ -499,23 +502,36 @@ InstallValue( OMsymTable, [
 ["interval1", 
 	[[ "integer_interval", x -> [ x[1] .. x[2] ] ]]],
 
-["logic1",
-	[ ["not", OMgapNot],
-	["or", OMgapOr], 
-	["xor", OMgapXor], 
-	["and", OMgapAnd]]],
+["logic1", [
+	["and", OMgapAnd ],
+    [ "equivalent", x -> x[1] and x[2] or not x[1] and not x[2] ],
+    [ "implies", x -> not x[1] or x[2] ],   	
+	[ "not", OMgapNot ],
+	[ "or", OMgapOr ], 
+	[ "xor", OMgapXor ]]],
 	
 ["list1", [
 	[ "list", OMgapList ],
-	[ "map", x -> List( x[2], x[1] ) ],
-	[ "suchthat",  x -> Filtered( x[1], x[2] ) ]]],
+	[ "map", OMgapMap ],
+	[ "suchthat", OMgapSuchthat ]]],
 	
-["set1",
-	[["set", OMgapSet],
-	["in", OMgapIn],
-	["union", OMgapUnion],        
-	["intersect", OMgapIntersect], 
-	["setdiff", OMgapSetDiff]]],
+["set1", [
+    [ "cartesian_product", Cartesian ],
+ 	[ "in", OMgapIn ],
+	[ "intersect", OMgapIntersect ],  
+	[ "map", OMgapMap ],  
+	[ "notin", x -> not x[1] in x[2] ],	   
+    [ "notprsubset", x -> not IsSubset( x[2], x[1] ) or IsEqualSet( x[2], x[1] ) ],	
+    [ "notsubset", x -> not IsSubset( x[2], x[1] ) ],
+    [ "prsubset", x -> IsSubset( x[2], x[1] ) and not IsEqualSet( x[2], x[1] ) ],
+	[ "set", OMgapSet ],
+	[ "setdiff", OMgapSetDiff ],
+	[ "size", x -> Size( x[1] ) ],
+	[ "subset", x -> IsSubset( x[2], x[1] ) ],    
+	[ "suchthat", OMgapSuchthat ], 
+	[ "union", OMgapUnion ]]],       
+
+	
 ["permut1",
 	[["permutation", OMgapPermutation]]], # no capital letter
 ["group1", # experimental version, mix from various CDs, names differ from CDs
