@@ -115,10 +115,15 @@ BindGlobal("OMgapGcd", Gcd);
 ##  Semantic mappings for symbols from logic1.cd
 ## 
 BindGlobal("OMgapNot", x-> OMgapId([OMgap1ARGS(x), not x[1]])[2]);
-BindGlobal("OMgapOr", x-> OMgapId([OMgap2ARGS(x), x[1] or x[2]])[2]);
+BindGlobal("OMgapOr", function(x) local t; return ForAny( x, t -> t = true ); end );
 BindGlobal("OMgapXor", 
-	x-> OMgapId([OMgap2ARGS(x), (x[1] or x[2]) and not (x[1] and x[2])])[2]);
-BindGlobal("OMgapAnd", x-> OMgapId([OMgap2ARGS(x), x[1] and x[2]])[2]);
+			function(x) local t; return IsOddInt(Number( x, t -> t = true ) ); end );
+BindGlobal("OMgapAnd", function(x) local t; return ForAll( x, t -> t = true ); end );
+# Old 2-argument versions were:
+# BindGlobal("OMgapOr", x -> OMgapId([OMgap2ARGS(x), x[1] or x[2]])[2]);
+# BindGlobal("OMgapXor", 
+#	x-> OMgapId([OMgap2ARGS(x), (x[1] or x[2]) and not (x[1] and x[2])])[2]);
+# BindGlobal("OMgapAnd", x-> OMgapId([OMgap2ARGS(x), x[1] and x[2]])[2]);
 
 ######################################################################
 ##
@@ -493,9 +498,9 @@ InstallValue( OMsymTable, [
 
 ["logic1",
 	[ ["not", OMgapNot],
-	["or", OMgapOr],     # should be made n-ary (see logic1 cd)
-	["xor", OMgapXor],   # should be made n-ary (see logic1 cd)
-	["and", OMgapAnd]]], # should be made n-ary (see logic1 cd)
+	["or", OMgapOr], 
+	["xor", OMgapXor], 
+	["and", OMgapAnd]]],
 	
 ["list1", [
 	[ "list", OMgapList ],
@@ -505,8 +510,8 @@ InstallValue( OMsymTable, [
 ["set1",
 	[["set", OMgapSet],
 	["in", OMgapIn],
-	["union", OMgapUnion],         # should be made n-ary (see set1 cd)
-	["intersect", OMgapIntersect], # should be made n-ary (see set1 cd)
+	["union", OMgapUnion],         # TODO: made n-ary (see set1 cd)
+	["intersect", OMgapIntersect], # TODO: made n-ary (see set1 cd)
 	["setdiff", OMgapSetDiff]]],
 ["permut1",
 	[["permutation", OMgapPermutation]]], # no capital letter
