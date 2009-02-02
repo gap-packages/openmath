@@ -137,11 +137,14 @@ BindGlobal("OMgapList", List);
 ## 
 BindGlobal("OMgapSet", Set);
 BindGlobal("OMgapIn", x-> OMgapId([OMgap2ARGS(x), x[1] in x[2]])[2]);
-BindGlobal("OMgapUnion", x-> OMgapId([OMgap2ARGS(x), Union(x[1],x[2])])[2]);
-BindGlobal("OMgapIntersect", 
-	x-> OMgapId([OMgap2ARGS(x), Intersection(x[1], x[2])])[2]);
+BindGlobal("OMgapUnion", Union);
+BindGlobal("OMgapIntersect", Intersection);
 BindGlobal("OMgapSetDiff", 
 	x-> OMgapId([OMgap2ARGS(x), Difference(x[1], x[2])])[2]);
+# Old 2-argument versions were:
+# BindGlobal("OMgapUnion", x-> OMgapId([OMgap2ARGS(x), Union(x[1],x[2])])[2]);
+# BindGlobal("OMgapIntersect", 
+#	x-> OMgapId([OMgap2ARGS(x), Intersection(x[1], x[2])])[2]);
 
 ######################################################################
 ##
@@ -510,8 +513,8 @@ InstallValue( OMsymTable, [
 ["set1",
 	[["set", OMgapSet],
 	["in", OMgapIn],
-	["union", OMgapUnion],         # TODO: made n-ary (see set1 cd)
-	["intersect", OMgapIntersect], # TODO: made n-ary (see set1 cd)
+	["union", OMgapUnion],        
+	["intersect", OMgapIntersect], 
 	["setdiff", OMgapSetDiff]]],
 ["permut1",
 	[["permutation", OMgapPermutation]]], # no capital letter
