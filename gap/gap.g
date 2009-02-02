@@ -496,8 +496,12 @@ InstallValue( OMsymTable, [
 	["or", OMgapOr],     # should be made n-ary (see logic1 cd)
 	["xor", OMgapXor],   # should be made n-ary (see logic1 cd)
 	["and", OMgapAnd]]], # should be made n-ary (see logic1 cd)
-["list1",
-	[["list", OMgapList]]],
+	
+["list1", [
+	[ "list", OMgapList ],
+	[ "map", x -> List( x[2], x[1] ) ],
+	[ "suchthat",  x -> Filtered( x[1], x[2] ) ]]],
+	
 ["set1",
 	[["set", OMgapSet],
 	["in", OMgapIn],
@@ -596,8 +600,11 @@ function(symbol)
 
 	cd := symbol[1];
 	name := symbol[2];
-
-	if cd = "fns1" then    
+	if cd = "alg1" then
+		if name = "zero" then return 0;
+		elif name = "one" then return 1;
+		fi;
+	elif cd = "fns1" then    
 		if name = "lambda" then return "LAMBDA";
 		fi;
         elif cd = "logic1" then
