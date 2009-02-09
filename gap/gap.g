@@ -87,7 +87,19 @@ BindGlobal("OMgap_field_by_poly_vector",
 	function( x )
 	return ObjByExtRep( FamilyObj( One( x[1] ) ), x[2] );
 	end);
-	
+
+######################################################################
+##
+##  Semantic mappings for symbols from groupname1.cd
+##
+BindGlobal("OMquaternion_group",	
+	function() 
+	local F, a, b, Q;
+	F := FreeGroup( "a", "b" );
+	a:=F.1; b:=F.2;
+	Q :=F/[ a^4, b^2*a^2, a*b*a^-1*b ]; 
+	return Image( EpimorphismQuotientSystem( PQuotient( Q, 2, 3 ) ) );
+	end);
 	
 ######################################################################
 ##
@@ -476,13 +488,18 @@ InstallValue( OMsymTable, [
 [ "field4", [
      ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
      
+[ "groupname1", [
+	[ "dihedral_group", x -> DihedralGroup(2*x[1]) ],
+	[ "cyclic_group", x -> CyclicGroup(x[1]) ],
+	[ "generalized_quaternion_group", ]]],     
+     
 [ "integer1", [
     [ "factorial", x -> Factorial( x[1] ) ],
     [ "factorof",  x -> IsInt( x[2]/ x[1] ) ],
     [ "quotient", x -> QuoInt( x[1], x[2] ) ], # is OMgapQuotient now obsolete?
     [ "remainder", x -> RemInt( x[1], x[2] ) ]]], # is OMgapRem now obsolete?
 	  
-["integer2", [
+[ "integer2", [
 	[ "class", x -> ZmodnZObj(x[1],x[2]) ],
 	[ "divides", x -> IsInt( x[2]/ x[1] ) ],
 	[ "eqmod", x -> IsInt( (x[1]-x[2])/x[3] ) ],
@@ -499,10 +516,10 @@ InstallValue( OMsymTable, [
 		fi;	 
 		end ]]],
 
-["interval1", 
+[ "interval1", 
 	[[ "integer_interval", x -> [ x[1] .. x[2] ] ]]],
 
-["logic1", [
+[ "logic1", [
 	["and", OMgapAnd ],
     [ "equivalent", x -> x[1] and x[2] or not x[1] and not x[2] ],
     [ "implies", x -> not x[1] or x[2] ],   	
@@ -510,12 +527,12 @@ InstallValue( OMsymTable, [
 	[ "or", OMgapOr ], 
 	[ "xor", OMgapXor ]]],
 	
-["list1", [
+[ "list1", [
 	[ "list", OMgapList ],
 	[ "map", OMgapMap ],
 	[ "suchthat", OMgapSuchthat ]]],
 	
-["set1", [
+[ "set1", [
     [ "cartesian_product", Cartesian ],
  	[ "in", OMgapIn ],
 	[ "intersect", OMgapIntersect ],  
@@ -533,7 +550,8 @@ InstallValue( OMsymTable, [
 
 	
 ["permut1",
-	[["permutation", OMgapPermutation]]], # no capital letter
+	[["permutation", OMgapPermutation]]], 
+	
 ["group1", # experimental version, mix from various CDs, names differ from CDs
 	[["CharacterTableOfGroup", OMgapCharacterTableOfGroup], # cd?
 	["CharacterTable", OMgapCharacterTableOfGroup],         # cd?
@@ -631,10 +649,13 @@ function(symbol)
 	elif cd = "fns1" then    
 		if name = "lambda" then return "LAMBDA";
 		fi;
-        elif cd = "logic1" then
-                if name = "false" then return false;
-                elif name = "true" then return true;
-                fi;
+    elif cd = "logic1" then
+        if name = "false" then return false;
+        elif name = "true" then return true;
+        fi;
+	elif cd = "groupname1" then
+		if name = "quaternion_group" then return OMquaternion_group();
+		fi;
 	elif cd = "nums1" or cd = "nums" then 
 		if name = "i" then return Sqrt(-1);
 		elif name = "infinity" then return infinity;
