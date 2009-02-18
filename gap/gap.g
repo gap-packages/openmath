@@ -488,6 +488,72 @@ InstallValue( OMsymTable, [
 [ "field4", [
      ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
      
+[ "group1", [ 
+	[ "carrier", OMgapElementSet ],      
+	[ "expression" ],                  
+	[ "group", OMgapGroup ],  
+	[ "identity" ],
+	[ "inversion" ],  
+	[ "is_commutative", OMgapIsAbelian ],                     
+	[ "is_normal", OMgapIsNormal ],                           
+	[ "is_subgroup", OMgapIsSubgroup ],     
+	[ "monoid" ],
+	[ "multiplication" ],                 
+	[ "normal_closure", OMgapNormalClosure ],
+	[ "power" ],
+	[ "subgroup" ]]],   
+
+[ "group2", [
+	[ "conjugation" ],
+	[ "is_automorphism" ],
+	[ "is_endomorphism" ], 
+	[ "is_homomorphism" ],
+	[ "is_isomorphism" ], 
+	[ "isomorphic" ],
+	[ "left_multiplication" ], 
+	[ "right_inverse_multiplication" ],
+	[ "right_multiplication" ]]],
+
+["group3", [ 
+	[ "alternating_group" ],
+	[ "alternatingn" ],
+	[ "automorphism_group" ], 
+	[ "center" ],
+	[ "centralizer" ],
+	[ "derived_subgroup", OMgapDerivedSubgroup],      
+	[ "direct_power" ],
+	[ "direct_product" ],
+	[ "free_group" ],
+	[ "GL" ],
+	[ "GLn" ],
+	[ "invertibles" ],
+	[ "normalizer" ],
+	[ "quotient_group", OMgapQuotientGroup ],     
+	[ "SL" ],
+	[ "SLn" ],
+	[ "sylow_subgroup", OMgapSylowSubgroup ],
+	[ "symmetric_group" ], 
+	[ "symmetric_groupn" ]]],
+	
+["group4", [ 
+	[ "are_conjugate" ], 
+	[ "conjugacy_class", OMgapConjugacyClass ], 
+	[ "conjugacy_class_representatives" ],
+	[ "conjugacy_classes" ], 
+	[ "left_coset" ], 
+	[ "left_coset_representative" ], 
+	[ "left_cosets" ],
+	[ "left_transversal" ], 
+	[ "right_coset" ], 
+	[ "right_coset_representative" ], 
+	[ "right_cosets" ],
+	[ "right_transversal" ]]],   
+	
+["group5", [ 
+	[ "homomorphism_by_generators" ],
+	[ "left_quotient_map" ],
+	[ "right_quotient_map" ]]],         
+				     
 [ "groupname1", [
 	[ "dihedral_group", x -> DihedralGroup(2*x[1]) ],
 	[ "cyclic_group", x -> CyclicGroup(x[1]) ],
@@ -548,25 +614,76 @@ InstallValue( OMsymTable, [
 	[ "suchthat", OMgapSuchthat ], 
 	[ "union", OMgapUnion ]]],       
 
-	
-["permut1",
-	[["permutation", OMgapPermutation]]], 
-	
-["group1", # experimental version, mix from various CDs, names differ from CDs
-	[["CharacterTableOfGroup", OMgapCharacterTableOfGroup], # cd?
-	["CharacterTable", OMgapCharacterTableOfGroup],         # cd?
-	["ConjugacyClass", OMgapConjugacyClass],                # cf.group4
-	["DerivedSubgroup", OMgapDerivedSubgroup],              # cf.group3
-	["ElementSet", OMgapElementSet],                        # cd?
-	["Group", OMgapGroup],                                  # group1
-	["IsAbelian", OMgapIsAbelian],                          # group1 (is_commutative)
-	["IsNormal", OMgapIsNormal],                            # group1 (is_normal)
-	["IsSubgroup", OMgapIsSubgroup],                        # group1 (is_subgroup)
-	["NormalClosure", OMgapNormalClosure],                  # group1 (normal_closure)
-	["QuotientGroup", OMgapQuotientGroup],                  # group3 (quotient_group)
-	["RightTransversal", OMgapQuotientGroup],               # group4 (right_transversal)
-	["SylowSubgroup", OMgapSylowSubgroup]]],                # group3 (sylow_subgroup)
+[ "permgp1", [
+    [ "group", OMgapGroup ], # n-ary function  
+    [ "base" ],
+    [ "generators" ],
+    [ "is_in" ],
+    [ "is_primitive", OMgapIsPrimitive ],
+    [ "is_subgroup" ],
+    [ "is_transitive", OMgapIsTransitive ],
+    [ "orbit", OMgapOrbit ],
+    [ "orbits" ],
+    [ "order" ],
+    [ "schreier_tree" ],
+    [ "stabilizer", OMgapStabilizer ], # n-ary function  
+    [ "stabilizer_chain" ],
+    [ "support" ]
+  ]
+],
 
+[ "permgp2", [
+    [ "alternating_group" ],
+    [ "symmetric_group" ],
+    [ "cyclic_group" ],
+    [ "dihedral_group" ],
+    [ "quaternion_group" ],
+    [ "vierer_group" ]
+  ]
+],
+
+[ "permgrp", [
+    [ "is_primitive" ],
+    [ "is_transitive" ],
+    [ "orbit" ],
+    [ "stabilizer" ]
+  ]
+],
+
+[ "permut1", [
+	[ "permutation", OMgapPermutation ] ] ], 
+	
+[ "permutation1", [
+	[ "action" ], 
+	[ "are_distinct" ], 
+	[ "cycle" ], 
+	[ "cycle_type" ], 
+	[ "cycles" ], 
+	[ "domain" ], 
+	[ "endomap" ], 
+	[ "endomap_left_compose" ], 
+	[ "endomap_right_compose" ],
+	[ "fix" ], 
+	[ "inverse" ], 
+	[ "is_bijective" ], 
+	[ "is_endomap" ], 
+	[ "is_list_perm" ], 
+	[ "is_permutation" ], 
+	[ "left_compose" ], 
+	[ "length" ], 
+	[ "list_perm" ],
+	[ "listendomap" ], 
+	[ "order" ], 
+	[ "permutation" ], 
+	[ "permutationsn" ], 
+	[ "right_compose" ], 
+	[ "sign" ], 
+	[ "support" ] 
+  ] 
+],
+	
+	
+	
 [ "polyd1", [
      ["DMP", OMgap_DMP],
      ["poly_ring_d", OMgap_poly_ring_d],

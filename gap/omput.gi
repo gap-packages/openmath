@@ -823,8 +823,7 @@ end);
 InstallMethod(OMPut, "for a group", true,
 [IsOutputStream, IsGroup],0,
 function(stream, x)
-
-	OMPutApplication( stream, "group1", "Group", 
+	OMPutApplication( stream, "group1", "group", 
 		GeneratorsOfGroup(x) );
 end);
 

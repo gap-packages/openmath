@@ -117,22 +117,14 @@ ReflexiveClosureBinaryRelation( x[1] ) ) ) ],
 ],
 
 
-# experimental CDs
+# experimental CDs and symbols
+
+[ "group1", [ # experimental symbols
+	[ "CharacterTableOfGroup", OMgapCharacterTableOfGroup ],  
+	[ "CharacterTable", OMgapCharacterTableOfGroup]]],  
 
 ["algnums",# see this CD in openmath/cds directory
 	[[ "NthRootOfUnity", OMgapNthRootOfUnity]]], 
-
-[ "permgp1", [
-    [ "group", OMgapGroup ], # n-ary function in permgp1 cd, test with >1 generators
-    [ "is_primitive", OMgapIsPrimitive ],
-    [ "orbit", OMgapOrbit ],
-    [ "stabilizer", OMgapStabilizer ], # n-ary function in permgp1 cd
-    [ "is_transitive", OMgapIsTransitive ]
-  ]
-],
-
-
-
 
 ];
 
