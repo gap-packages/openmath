@@ -162,7 +162,7 @@ BindGlobal( "OMObjects",
   			       node.content[2].attributes.cd, ", name=",
   			       node.content[2].attributes.name, "\n" );		
 		else
-		Error( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ),
+		Error( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) )[1],
             "\n", node.content[1].attributes );
         fi;    
     end,
