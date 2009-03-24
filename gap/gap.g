@@ -186,7 +186,7 @@ BindGlobal("OMgapDerivedSubgroup",
 	x->OMgapId([OMgap1ARGS(x), DerivedSubgroup(x[1])])[2]);
 BindGlobal("OMgapElementSet",
 	x->OMgapId([OMgap1ARGS(x), Elements(x[1])])[2]);
-BindGlobal("OMgapGroup", Group);
+BindGlobal("OMgapGroup", Group );
 BindGlobal("OMgapIsAbelian", 
 	x->OMgapId([OMgap1ARGS(x), IsAbelian(x[1])])[2]);
 BindGlobal("OMgapIsNormal", 
@@ -490,21 +490,23 @@ InstallValue( OMsymTable, [
      
 [ "group1", [ 
 	[ "carrier", OMgapElementSet ],      
-	[ "expression" ],                  
+	[ "expression" ], # might be useful to embed the result of the 2nd argument into the 1st argument,
+	                  # but single expression from arith1 CD will work too                 
 	[ "group", OMgapGroup ],  
-	[ "identity" ],
-	[ "inversion" ],  
+	[ "identity", x -> One( x[1] ) ],
+	[ "inversion", x -> MappingByFunction( x[1], x[1], a->a^-1, a->a^-1 ) ],  
 	[ "is_commutative", OMgapIsAbelian ],                     
 	[ "is_normal", OMgapIsNormal ],                           
 	[ "is_subgroup", OMgapIsSubgroup ],     
-	[ "monoid" ],
-	[ "multiplication" ],                 
+	[ "monoid", x -> AsMonoid( x[1] ) ],
+	[ "multiplication" ], # represents a unary function, whose argument should be a group G.  
+	                      # It returns the multiplication map on G. We allow for the map to be n-ary. 
 	[ "normal_closure", OMgapNormalClosure ],
-	[ "power" ],
-	[ "subgroup" ]]],   
+	[ "power" ], # using just arith1 CD will work too   
+	[ "subgroup", x-> Subgroup( x[2], x[1] ) ] ] ],   
 
 [ "group2", [
-	[ "conjugation" ],
+	[ "conjugation", x -> ConjugatorAutomorphism( x[1], x[2] ) ],
 	[ "is_automorphism" ],
 	[ "is_endomorphism" ], 
 	[ "is_homomorphism" ],
@@ -515,25 +517,25 @@ InstallValue( OMsymTable, [
 	[ "right_multiplication" ]]],
 
 ["group3", [ 
-	[ "alternating_group" ],
-	[ "alternatingn" ],
-	[ "automorphism_group" ], 
-	[ "center" ],
-	[ "centralizer" ],
-	[ "derived_subgroup", OMgapDerivedSubgroup],      
-	[ "direct_power" ],
-	[ "direct_product" ],
-	[ "free_group" ],
+	[ "alternating_group", x -> AlternatingGroup( x[1] ) ],
+	[ "alternatingn", x -> AlternatingGroup( x[1] ) ],
+	[ "automorphism_group", x -> AutomorphismGroup( x[1] ) ], 
+	[ "center", x -> Center( x[1] ) ],
+	[ "centralizer", x -> Centralizer( x[1], x[2] ) ], # 2nd argument as list not supported yet
+	[ "derived_subgroup", OMgapDerivedSubgroup ],      
+	[ "direct_power", x -> DirectProduct( ListWithIdenticalEntries( x[1], x[2] ) ) ],
+	[ "direct_product", x -> DirectProduct( x[1] )  ],
+	[ "free_group", x -> FreeGroup( x[1] ) ],
 	[ "GL" ],
-	[ "GLn" ],
+	[ "GLn", x -> GL( x[1], x[2] ) ],
 	[ "invertibles" ],
-	[ "normalizer" ],
+	[ "normalizer", x ->  Normalizer( x[1], x[2] ) ],
 	[ "quotient_group", OMgapQuotientGroup ],     
 	[ "SL" ],
-	[ "SLn" ],
+	[ "SLn", x -> SL( x[1], x[2] ) ],
 	[ "sylow_subgroup", OMgapSylowSubgroup ],
-	[ "symmetric_group" ], 
-	[ "symmetric_groupn" ]]],
+	[ "symmetric_group", x -> SymmetricGroup( x[1] ) ], 
+	[ "symmetric_groupn", x -> SymmetricGroup( x[1] ) ] ] ],
 	
 ["group4", [ 
 	[ "are_conjugate" ], 
@@ -681,9 +683,7 @@ InstallValue( OMsymTable, [
 	[ "support" ] 
   ] 
 ],
-	
-	
-	
+		
 [ "polyd1", [
      ["DMP", OMgap_DMP],
      ["poly_ring_d", OMgap_poly_ring_d],
