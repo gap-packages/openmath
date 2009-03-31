@@ -4,20 +4,23 @@
 
 The package provides an OpenMath phrasebook for GAP: it allows GAP 
 users to import and export mathematical objects encoded in OpenMath, 
-for the purpose of exchanging them with other applications which are 
-OpenMath enabled. 
+for the purpose of exchanging them with other OpenMath-enabled 
+applications. 
 
 Copyright:
 ==========
 
-This package is distributed under GPL license and the terms of the GAP
-copyright. Additionally, it contains code developed at INRIA
-(copyright INRIA), under the ESPRIT project number 24969 (OpenMath).
-The user may not use the library in commercial products without seeking
-permission from the &GAP; group (support@gap-system.org) and the 
-CAFE team at INRIA SA (stephane.dalmas@sophia.inria.fr).
+The openmath package is free software; you can redistribute it and/or 
+modify it under the terms of the GNU General Public License as published 
+by the Free Software Foundation; either version 2 of the License, or 
+(at your option) any later version. For details, see the FSF's own site
+http://www.gnu.org/licenses/gpl.html.
 
-This package may be redistributed ``as is'' together with this notice.
+Additionally, it contains code developed at INRIA (copyright INRIA), 
+under the ESPRIT project number 24969 (OpenMath). The user may not use 
+the library in commercial products without seeking permission from the 
+GAP group (support@gap-system.org) and the CAFE team at INRIA SA 
+(stephane.dalmas@sophia.inria.fr).
 
 Installation:
 =============

@@ -92,22 +92,26 @@
 {\small 
 \section*{Abstract}
 \logpage{[ 0, 0, 1 ]}
- \index{SCSCP package@\textsf{openmath} package} The \textsf{openmath} package provides an OpenMath phrasebook for \textsf{GAP}: it allows \textsf{GAP} users to import and export mathematical objects encoded in OpenMath, for the
-purpose of exchanging them with other applications which are OpenMath enabled. \mbox{}}\\[1cm]
+ \index{SCSCP package@\textsf{openmath} package} The \textsf{openmath} package provides an \textsf{OpenMath} phrasebook for \textsf{GAP}: it allows \textsf{GAP} users to import and export mathematical objects encoded in OpenMath, for the
+purpose of exchanging them with other applications which are \textsf{OpenMath}-enabled. \mbox{}}\\[1cm]
 {\small 
 \section*{Copyright}
 \logpage{[ 0, 0, 2 ]}
- This package is distributed under GPL license and the terms of the \textsf{GAP} copyright. Additionally, it contains code developed at INRIA (copyright
-INRIA), under the ESPRIT project number 24969 (OpenMath). The user may not use
-the library in commercial products without seeking permission from the \textsf{GAP} group (support@gap-system.org) and the CAFE team at INRIA SA
-(stephane.dalmas@sophia.inria.fr). This package may be redistributed ``as is''
-together with this notice. \mbox{}}\\[1cm]
+ The \textsf{openmath} package is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version. For details, see the FSF's own site \href{http://www.gnu.org/licenses/gpl.html} {\texttt{http://www.gnu.org/licenses/gpl.html}}. 
+
+ Additionally, The \textsf{openmath} package contains code developed at INRIA (copyright INRIA), under the ESPRIT
+project number 24969 (OpenMath). The user may not use the library in
+commercial products without seeking permission from the \textsf{GAP} group (support@gap-system.org) and the CAFE team at INRIA SA
+(stephane.dalmas@sophia.inria.fr). \mbox{}}\\[1cm]
 {\small 
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 3 ]}
  On various stages the development of the \textsf{openmath} package was supported by: 
 \begin{itemize}
-\item European Commission through ESPRIT grant EP 24969 ``Accessing and Using Mathematical Information Electronically''; (see \href{http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html} {\texttt{http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html}}).
+\item European Commission through ESPRIT grant EP 24969 ``Accessing and Using Mathematical Information Electronically'' (see \href{http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html} {\texttt{http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html}}).
 \item EU FP6 Programme project 026133 ``SCIEnce - Symbolic Computation Infrastructure for Europe'' (see \href{http://www.symbolic-computation.org/} {\texttt{http://www.symbolic-computation.org/}}).
 \end{itemize}
  We acknowledge with gratitude this support.
@@ -121,18 +125,33 @@ together with this notice. \mbox{}}\\[1cm]
 \newpage
 
   
-\chapter{\textcolor{Chapter }{Introduction}}\label{Intro}
+\chapter{\textcolor{Chapter }{Introduction and Installation}}\label{Intro}
 \logpage{[ 1, 0, 0 ]}
-\hyperdef{L}{X7DFB63A97E67C0A1}{}
+\hyperdef{L}{X7FE7D77A82FEB4AB}{}
 {
-  The \textsf{GAP} package \textsf{openmath} provides an \textsf{OpenMath} phrasebook for \textsf{GAP}: it allows \textsf{GAP} users to import and export mathematical objects encoded in \textsf{OpenMath}, for the purpose of exchanging them with other applications which are \textsf{OpenMath}-enabled. Visit the OpenMath Society webpage at
-\texttt{\symbol{92}}URL\texttt{\symbol{123}}http://www.openmath.org\texttt{\symbol{125}}
-(you may try
-\texttt{\symbol{92}}URL\texttt{\symbol{123}}http://openmath.activemath.org/\texttt{\symbol{125}}),
-or the ESPRIT project webpage at
-\texttt{\symbol{92}}URL\texttt{\symbol{123}}http://www.nag.co.uk/projects/OpenMath.html\texttt{\symbol{125}}
-(you may try
-\texttt{\symbol{92}}URL\texttt{\symbol{123}}http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html\texttt{\symbol{125}}). }
+  The \textsf{GAP} package \textsf{openmath} provides an \textsf{OpenMath} phrasebook for \textsf{GAP}: it allows \textsf{GAP} users to import and export mathematical objects encoded in \textsf{OpenMath}, for the purpose of exchanging them with other applications which are \textsf{OpenMath}-enabled. 
+
+ For further information about \textsf{OpenMath} standard see the \textsf{OpenMath} homepage \href{http://www.openmath.org} {\texttt{http://www.openmath.org}}. 
+
+ The \textsf{openmath} package will be useful only if used in conjunction with any other \textsf{OpenMath}-enabled application. For the automated exchange of the \textsf{OpenMath}-encoded data with other compliant applications, we suggest to use the \textsf{GAP} package \textsf{SCSCP} (\cite{SCSCPpkg}) which implements the Symbolic Computation Software Composability protocol (\cite{SCSCPspec}) for the \textsf{GAP} system, providing suport for \textsf{OpenMath} content dictionaries \textsf{scscp1} and \textsf{scscp2} (\cite{scscp1cd}, \cite{scscp2cd}). 
+
+ To use \textsf{openmath} package it is required to install the \textsf{GAPDoc} package \cite{GAPDoc} to use \textsf{openmath} help system and parse \textsf{OpenMath} objects in XML encoding. 
+
+ To install \textsf{openmath} package, unpack the archive and place the \texttt{openmath} directory in the \texttt{pkg} subdirectory of your \textsf{GAP}4.4 installation. When you don't have access to the directory of your main \textsf{GAP} installation, you can also install the package \emph{outside the \textsf{GAP} main directory} by unpacking it inside a directory \texttt{MYGAPDIR/pkg}. Then to be able to load \textsf{openmath} you need to call GAP with the \texttt{-l ";MYGAPDIR"} option. 
+
+ The package comes together with the program \texttt{gpipe} which should be used to parse binary \textsf{OpenMath} format. To compile binaries, do the following: 
+\begin{Verbatim}[fontsize=\small,frame=single,label=Example]
+  
+  cd pkg/openmath
+  cd OMCv1.3c/src/
+  ./configure
+  make
+  cd ../../
+  ./configure ../../
+  make
+  
+\end{Verbatim}
+ However, it is fine to ignore this step if binary \textsf{OpenMath} format will not be used. }
 
   
 \chapter{\textcolor{Chapter }{\textsf{OpenMath} functionality in \textsf{GAP}}}\label{OpenMathFunctionality}
@@ -158,10 +177,10 @@ or the ESPRIT project webpage at
   true
   
 \end{Verbatim}
- During this, suggested packages may be loaded as well. }
+ During this step, the \textsf{GAP} system may load required and suggested packages as well. }
 
  
-\section{\textcolor{Chapter }{Viewing OpenMath representation of an object}}\label{OpenMath}
+\section{\textcolor{Chapter }{Viewing OpenMath representation of an object}}\label{ViewOpenMath}
 \logpage{[ 2, 2, 0 ]}
 \hyperdef{L}{X817CD8387FEDF873}{}
 {
@@ -219,9 +238,9 @@ or the ESPRIT project webpage at
  }
 
  
-\section{\textcolor{Chapter }{Writing and reading OpenMath code to/from streams}}\label{OpenMath}
+\section{\textcolor{Chapter }{Writing and reading OpenMath code to/from streams}}\label{ExchangeOpenMath}
 \logpage{[ 2, 3, 0 ]}
-\hyperdef{L}{X78D84A657BEFB775}{}
+\hyperdef{L}{X7AAF47368566FB3F}{}
 {
   
 
@@ -233,9 +252,7 @@ or the ESPRIT project webpage at
 }\hfill{\scriptsize (function)}}\\
 
 
- \mbox{\texttt{\slshape stream}} is an input stream (see "ref: InputTextFile", "ref: InputTextUser", "ref:
-InputTextString", "ref: InputOutputLocalProcess" ) with an OpenMath object on
-it. OMGetObject takes precisely one object off \mbox{\texttt{\slshape stream}} and returns it as a GAP object. Both XML and binary OpenMath encoding are
+ \mbox{\texttt{\slshape stream}} is an input stream (see \texttt{InputTextFile} (\textbf{Reference: InputTextFile}), \texttt{InputTextUser} (\textbf{Reference: InputTextUser}), \texttt{InputTextString} (\textbf{Reference: InputTextString}), \texttt{InputOutputLocalProcess} (\textbf{Reference: InputOutputLocalProcess}), \texttt{InputOutputTCPStream} (\textbf{SCSCP: InputOutputTCPStream (for client)}) ) with an OpenMath object on it. OMGetObject takes precisely one object off \mbox{\texttt{\slshape stream}} and returns it as a GAP object. Both XML and binary OpenMath encoding are
 supported: autodetection is used. This function requires either that the \textsf{GAP} package \textsf{GAPDoc} is available (for XML OpenMath), or that the external program `gpipe',
 included in this package, has been compiled (for both XML and binary
 OpenMath). This may be used to retrieve objects from a file, for example: 
@@ -271,8 +288,7 @@ following commands:
 }\hfill{\scriptsize (function)}}\\
 
 
- OMPutObject writes (appends) the XML OpenMath encoding of the GAP object \mbox{\texttt{\slshape obj}} to output stream \mbox{\texttt{\slshape stream}} (see "ref: OutputTextFile", "ref: OutputTextUser", "ref: OutputTextString",
-"ref: InputOutputLocalProcess" ). 
+ OMPutObject writes (appends) the XML OpenMath encoding of the GAP object \mbox{\texttt{\slshape obj}} to output stream \mbox{\texttt{\slshape stream}} (see \texttt{InputTextFile} (\textbf{Reference: InputTextFile}), \texttt{OutputTextUser} (\textbf{Reference: OutputTextUser}), \texttt{OutputTextString} (\textbf{Reference: OutputTextString}), \texttt{InputOutputLocalProcess} (\textbf{Reference: InputOutputLocalProcess}), \texttt{InputOutputTCPStream} (\textbf{SCSCP: InputOutputTCPStream (for server)}) ). 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
   
   gap> g := [[1,2],[1,0]];;
@@ -304,9 +320,9 @@ following commands:
  }
 
  
-\section{\textcolor{Chapter }{Auxiliary functions}}\label{Auxiliary}
+\section{\textcolor{Chapter }{Utilities}}\label{Utilities}
 \logpage{[ 2, 4, 0 ]}
-\hyperdef{L}{X866E18057EF83F65}{}
+\hyperdef{L}{X7DFC90B87DC503A1}{}
 {
   
 
