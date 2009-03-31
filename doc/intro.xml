@@ -1,0 +1,59 @@
+<!-- $Id$ -->
+
+<Chapter Label="Intro">
+<Heading>Introduction and Installation</Heading>    
+
+The &GAP; package &openmath; provides an &OpenMath; phrasebook for &GAP;: 
+it allows &GAP; users to import and export mathematical objects encoded in 
+&OpenMath;, for the purpose of exchanging them with other applications which 
+are &OpenMath;-enabled. 
+<P/>
+
+For further information about &OpenMath; standard see the &OpenMath; homepage
+<URL>http://www.openmath.org</URL>.
+<P/>
+
+The &openmath; package will be useful only if used in conjunction with any
+other &OpenMath;-enabled application. For the automated exchange of the
+&OpenMath;-encoded data with other compliant applications, we suggest to
+use the &GAP; package &SCSCP; (<Cite Key="SCSCPpkg"/>) which implements
+the Symbolic Computation Software Composability 
+protocol (<Cite Key="SCSCPspec"/>) for the &GAP; system, providing suport
+for &OpenMath; content dictionaries &scscp1; and &scscp2; 
+(<Cite Key="scscp1cd"/>, <Cite Key="scscp2cd"/>).
+<P/>
+
+To use &openmath; package it is required to install the &GAPDoc; package
+<Cite Key="GAPDoc"/> to use &openmath; help system and parse &OpenMath;
+objects in XML encoding.
+<P/>
+
+To install &openmath; package, unpack the archive and place the <File>openmath</File>
+directory in the <File>pkg</File> subdirectory of your &GAP;4.4 installation. 
+When you don't have access to the directory of your main &GAP; 
+installation, you can also install the package 
+<E>outside the &GAP; main directory</E>
+by unpacking it inside a directory <File>MYGAPDIR/pkg</File>. 
+Then to be able to load &openmath; you need to call GAP with the 
+<C>-l ";MYGAPDIR"</C> option.
+<P/>
+
+The package comes together with the program <File>gpipe</File> which should be
+used to parse binary &OpenMath; format. To compile binaries, do the following:
+
+<Example>
+<![CDATA[
+cd pkg/openmath
+cd OMCv1.3c/src/
+./configure
+make
+cd ../../
+./configure ../../
+make
+]]>
+</Example>
+
+However, it is fine to ignore this step if binary &OpenMath; format will not
+be used.
+
+</Chapter>
