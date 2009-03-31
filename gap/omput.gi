@@ -249,6 +249,8 @@ function ( x )
 local noomobj, str, outstream;
 if ValueOption("noomobj") <> fail then
     noomobj := true;
+else
+    noomobj := false;
 fi;
 str := "";
 outstream := OutputTextString( str, true );

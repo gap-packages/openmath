@@ -20,54 +20,65 @@ PackageName := "openmath",
 Subtitle := "OpenMath functionality in GAP",
 
 
-Version := "08.09.12",
-Date := "12/09/2008",
+Version := "09.03.31",
+Date := "31/03/2009",
 
 
 ArchiveURL := Concatenation([
- "http://www-math.science.unitn.it/~costanti/gap_code/openmath/openmath-",
-  ~.Version]),
+ "http://www.cs.st-andrews.ac.uk/~alexk/openmath/openmath-",~.Version]),
 ArchiveFormats := ".tar.gz",
 
 
 Persons := [
   rec(
-  LastName := "Solomon",
-  FirstNames := "Andrew",
-  IsAuthor := true,
-  IsMaintainer := false,
-  Email := "andrew@illywhacker.net",
-  WWWHome := "http://www.illywhacker.net/",
-  PostalAddress := Concatenation( [
+    LastName      := "Costantini",
+    FirstNames    := "Marco",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "costanti@science.unitn.it",
+    WWWHome       := "http://www-math.science.unitn.it/~costanti/",
+    Place         := "Trento",
+    Institution   := "Department of Mathematics, University of Trento"
+  ),
+ 
+  rec(
+    LastName      := "Konovalov",
+    FirstNames    := "Alexander",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "konovalov@member.ams.org",
+    WWWHome       := "http://www.cs.st-andrews.ac.uk/~alexk/",
+    PostalAddress := Concatenation( [
+                     "School of Computer Science\n",
+                     "University of St Andrews\n",
+                     "Jack Cole Building, North Haugh,\n",
+                     "St Andrews, Fife, KY16 9SX, Scotland" ] ),
+    Place         := "St Andrews",
+    Institution   := "University of St Andrews"
+  ),  
+  
+  rec(
+    LastName      := "Solomon",
+    FirstNames    := "Andrew",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "andrew@illywhacker.net",
+    WWWHome       := "http://www.illywhacker.net/",
+    PostalAddress := Concatenation( [
     "Faculty of IT\n",
     "University of Technology, Sydney\n",
     "Broadway, NSW 2007\n",
     "Australia" ] ),
-  Institution := "Faculty of Information Technology, University of Technology, Sydney."
- 
+    Institution   := "Faculty of Information Technology, University of Technology, Sydney."
   ),
-
-  rec(
-  LastName := "Costantini",
-  FirstNames := "Marco",
-  IsAuthor := true,
-  IsMaintainer := true,
-  Email := "costanti@science.unitn.it",
-  WWWHome := "http://www-math.science.unitn.it/~costanti/",
-  Place := "Trento",
-  Institution := "Department of Mathematics, University of Trento"
-  ),
-
 ],
 
 Status := "deposited",
 #CommunicatedBy := "",
 #AcceptDate := "",
 
-
-README_URL := "http://www-math.science.unitn.it/~costanti/gap_code/openmath/README",
-PackageInfoURL :=
- "http://www-math.science.unitn.it/~costanti/gap_code/openmath/PackageInfo.g",
+README_URL := "http://www.cs.st-andrews.ac.uk/~alexk/openmath/README",
+PackageInfoURL := "http://www.cs.st-andrews.ac.uk/~alexk/openmath/PackageInfo.g",
 
 
 AbstractHTML := 
@@ -79,13 +90,13 @@ and export mathematical objects encoded in OpenMath, for the purpose of \
 exchanging them with other applications that are OpenMath enabled.",
 
 
-PackageWWWHome := "http://www-math.science.unitn.it/~costanti/#openmath",
+PackageWWWHome := "http://www.cs.st-andrews.ac.uk/~alexk/openmath.htm",
 
 
 PackageDoc := rec(
   BookName  := "OpenMath",
-  ArchiveURLSubset := ["doc","htm"],
-  HTMLStart := "htm/chapters.htm",
+  ArchiveURLSubset := ["doc"],
+  HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "OpenMath functionality in GAP",
@@ -93,25 +104,18 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4",
-  NeededOtherPackages := [  ],
-  SuggestedOtherPackages := [ [ "GapDoc", ">= 0.99" ] ],
-  # GapDoc provides the function ParseTreeXMLString
-  ExternalConditions := [ "This package can be useful only with other \
-applications that support OpenMath" ]
+  GAP := ">=4.4",
+  NeededOtherPackages := [ [ "GapDoc", ">= 1.2" ]  ],
+  # GapDoc provides the function ParseTreeXMLString 
+  SuggestedOtherPackages := [ [ "SCSCP", ">= 1.0" ] ],
+  ExternalConditions := [ "This package can be useful only with other OpenMath-enabled applications" ]
 ),
 
 AvailabilityTest := ReturnTrue,
 
 Autoload := false,
 
-# the banner
-#BannerString := 
-#"OpenMath package, by Andrew Solomon and Marco Costantini\n",
-
-
 TestFile := "tst/test_new",
-
 
 Keywords := [ "OpenMath", "OpenMath Phrasebook", "Phrasebook" ]
 

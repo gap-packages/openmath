@@ -1,0 +1,54 @@
+
+                           The OpenMath Package
+                           --------------------
+
+The package provides an OpenMath phrasebook for GAP: it allows GAP 
+users to import and export mathematical objects encoded in OpenMath, 
+for the purpose of exchanging them with other applications which are 
+OpenMath enabled. 
+
+Copyright:
+==========
+
+This package is distributed under GPL license and the terms of the GAP
+copyright. Additionally, it contains code developed at INRIA
+(copyright INRIA), under the ESPRIT project number 24969 (OpenMath).
+The user may not use the library in commercial products without seeking
+permission from the &GAP; group (support@gap-system.org) and the 
+CAFE team at INRIA SA (stephane.dalmas@sophia.inria.fr).
+
+This package may be redistributed ``as is'' together with this notice.
+
+Installation:
+=============
+
+This package is installed as a normal Gap package: see Gap reference
+manual, chapter "74 GAP Packages" (and if you don't have write access to
+the Gap installation see also section "9.2 GAP Root Directory"), for
+details.
+
+This package suggests compilation, and the complilation is non-standard:
+see README file for details.
+
+cd pkg/openmath
+
+cd OMCv1.3c/src/
+./configure
+make
+cd ../../
+./configure ../../
+make
+
+
+The part in C language compiles and runs also on Windows with Cygwin 
+(see http://www.cygwin.com/).
+A Windows user may also try to get a precompiled OMC binary from
+ftp://ftp-sop.inria.fr/safir/OM (I didn't try), and thereafter
+
+cd pkg/openmath
+
+./configure ../../
+make
+
+Alexander Konovalov on
+March 2009
