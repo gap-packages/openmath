@@ -107,7 +107,7 @@ Dependencies := rec(
   GAP := ">=4.4",
   NeededOtherPackages := [ [ "GapDoc", ">= 1.2" ]  ],
   # GapDoc provides the function ParseTreeXMLString 
-  SuggestedOtherPackages := [ [ "SCSCP", ">= 1.0" ] ],
+  SuggestedOtherPackages := [ ],
   ExternalConditions := [ "This package can be useful only with other OpenMath-enabled applications" ]
 ),
 
