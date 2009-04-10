@@ -269,6 +269,8 @@ end);
 ## Various methods for OMPut
 
 
+BindGlobal( "OMINT_LIMIT", 2^15936 );
+
 #######################################################################
 ##
 #M  OMPut( <stream>, <int> )  
@@ -278,7 +280,11 @@ end);
 InstallMethod(OMPut, "for an integer", true,
 [IsOutputStream, IsInt],0,
 function(stream, x)
-	OMWriteLine(stream, ["<OMI> ", x, "</OMI>"]);
+    if x >= OMINT_LIMIT then
+  		OMWriteLine(stream, ["<OMI> ", String(x), "</OMI>"]);
+	else
+  		OMWriteLine(stream, ["<OMI> ", x, "</OMI>"]);
+	fi;
 end);
 
 
