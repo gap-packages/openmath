@@ -364,6 +364,7 @@ became its maintainer. The list of major updates is below:
   - added openmatj/gap/buildman.g with utility functions
     to build the manual
   - rewrote the README file which is also the changelog
+  - changed the system of version numbers
   
 Alexander Konovalov
 

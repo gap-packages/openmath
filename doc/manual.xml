@@ -15,7 +15,7 @@
 <TitlePage>
   <Title>&openmath;</Title>
   <Subtitle>&OpenMath; functionality in GAP</Subtitle>
-  <Version>Version 09.03.31</Version>
+  <Version>Version 9.4.0</Version>
 
   <Author>Marco Costantini
           <Email>costanti at science dot unitn dot it</Email>
@@ -48,7 +48,7 @@
           </Address> 
   </Author>
   
-  <Date>31 March 2009</Date>
+  <Date>11 April 2009</Date>
 
 <Abstract>
 

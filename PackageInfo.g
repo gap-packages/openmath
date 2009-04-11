@@ -20,8 +20,8 @@ PackageName := "openmath",
 Subtitle := "OpenMath functionality in GAP",
 
 
-Version := "09.03.31",
-Date := "31/03/2009",
+Version := "9.4.0",
+Date := "04/11/2009",
 
 
 ArchiveURL := Concatenation([
