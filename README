@@ -337,6 +337,8 @@ became its maintainer. The list of major updates is below:
 - commented out method for OMPut( <stream>,  <vector> ) to 
   have the default output as list1.list.
   
+* OMsymTable turned from list of nested lists into a record  
+  
 * New functionality:
   - New function OMPutObjectNoOMOBJtags, a variation of the 
     function OMPutObject to write to the stream the OpenMath

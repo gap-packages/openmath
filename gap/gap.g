@@ -413,180 +413,198 @@ BindGlobal("OMgapNativeOutput",
 ##  Maps a pair ["cd", "name"] to the corresponding OMgap... function
 ##  defined above or immediately in the table
 ##
-InstallValue( OMsymTable, [
+InstallValue( OMsymTable, rec( 
 
-["alg1", [
-	[ "one", 1 ],
-	[ "zero", 0 ]]], 
+alg1 := rec( 
+	one  := 1, 
+	zero := 0
+),
 
-["arith1", [
-    [ "abs", x -> AbsoluteValue(x[1]) ],
-    [ "divide", OMgapDivide],
-    [ "gcd", Gcd ],
- 	[ "lcm", Lcm ],
- 	[ "minus", x -> x[1]-x[2] ],   
-  	[ "plus", OMgapPlus],
-  	[ "power", OMgapPower],
-    [ "product", x -> Product( List( x[1], i -> x[2](i) ) ) ],  
-    [ "root", 
-        function(x) 
-        if x[2]=2 then 
-          return Sqrt(x[1]);
-        elif x[1]=1 then 
-          return E(x[2]);
-        else
-          Error("OpenMath package: the symbol arith1.root \n", 
-                "is supported only for square roots and roots of unity!\n");  
-        fi;  
-        end ],
-    [ "sum", x -> Sum( List( x[1], i -> x[2](i) ) ) ], 	
-	[ "times", OMgapTimes],
-	[ "unary_minus", x -> -x[1] ]]],
-	
-["arith2", [
-	[ "inverse", x -> Inverse(x[1]) ],
-	[ "times", OMgapTimes ]]],   	
-	
-["arith3", [
-	[ "extended_gcd",
+arith1 := rec(
+	abs := x -> AbsoluteValue(x[1]),
+	divide := OMgapDivide,
+	gcd := Gcd,
+	lcm := Lcm,
+	minus := x -> x[1]-x[2],
+	plus := OMgapPlus,
+	power := OMgapPower,
+	product := x -> Product( List( x[1], i -> x[2](i) ) ),
+	root := 
+		function(x) 
+		if x[2]=2 then 
+        	return Sqrt(x[1]);
+      	elif x[1]=1 then 
+        	return E(x[2]);
+      	else
+        	Error("OpenMath package: the symbol arith1.root \n", 
+            	  "is supported only for square roots and roots of unity!\n");  
+      	fi;  
+      	end,
+    sum := x -> Sum( List( x[1], i -> x[2](i) ) ),
+    times := OMgapTimes,
+    unary_minus := x -> -x[1]
+),
+
+arith2 := rec( 
+	inverse := x -> Inverse(x[1]), 
+	times := OMgapTimes
+),
+
+arith3 := rec( 
+	extended_gcd := 
 		function(x)
-		local r;
-		if Length(x)=2 then
+	  	local r;
+	  	if Length(x)=2 then
 			r := Gcdex( x[1], x[2] );
 			return [ r.gcd, r.coeff1, r.coeff2 ];
-		else
-          Error("OpenMath package: the symbol arith3.extended_gcd \n", 
-                "for more than two arguments is not implemented yet!\n");  
-		fi;
-		end ]]],   	
+	  	else
+        	Error("OpenMath package: the symbol arith3.extended_gcd \n", 
+            	  "for more than two arguments is not implemented yet!\n");  
+	  	fi;
+	  	end
+),
 
-[ "calculus1", [
-	[ "defint", ],
-    [ "diff", x -> Derivative(x[1]) ], 
-	[ "int", ],
-    [ "nthdiff", 
-    	function(x)
+calculus1 := rec(
+	defint := fail,
+	diff := x -> Derivative(x[1]),
+	int := fail,
+	nthdiff := 
+		function(x)
         local n, f, i;
         n := x[1];
         f := x[2];
         for i in [ 1 .. n ] do
-          f := Derivative( f );
-          if IsZero(f) then
-            return f;
-          fi;
+        	f := Derivative( f );
+        	if IsZero(f) then
+            	return f;
+          	fi;
         od;
         return f;
-        end ],
-    [ "partialdiff", ]]],
-      
-["combinat1", [
-	[ "Bell", x ->Bell(x[1]) ],
-	[ "binomial", x -> Binomial(x[1],x[2]) ],
-	[ "Fibonacci", x -> Fibonacci(x[1]) ],
-	[ "multinomial", x -> Factorial(x[1]) / Product( List( x{[ 2 .. Length(x) ]}, Factorial ) ) ],
-	[ "Stirling1", x -> Stirling1(x[1],x[2]) ],
-	[ "Stirling2", x -> Stirling2(x[1],x[2]) ]]],        
+        end,
+    partialdiff := fail
+),
 
-[ "field3", [
-    ["field_by_poly", OMgap_field_by_poly]]],
+combinat1 := rec(
+	Bell := x -> Bell(x[1]),
+	binomial := x -> Binomial(x[1],x[2]),
+	Fibonacci := x -> Fibonacci(x[1]),
+	multinomial := x -> Factorial(x[1]) / Product( List( x{[ 2 .. Length(x) ]}, Factorial ) ),
+	Stirling1 := x -> Stirling1(x[1],x[2]),
+	Stirling2 := x -> Stirling2(x[1],x[2])
+),
+
+field3 := rec(
+	field_by_poly := OMgap_field_by_poly
+),
+
     
-[ "field4", [
-     ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
+field4 := rec(
+	field_by_poly_vector := OMgap_field_by_poly_vector
+),
      
-[ "fieldname1", [
-     [ "Q", Rationals ]]],    
-     
-[ "fns1", [
-     [ "lambda", "LAMBDA" ]]],      
-     
-[ "group1", [ 
-	[ "carrier", OMgapElementSet ],      
-	[ "expression" ], # might be useful to embed the result of the 2nd argument into the 1st argument,
-	                  # but single expression from arith1 CD will work too                 
-	[ "group", OMgapGroup ],  
-	[ "identity", x -> One( x[1] ) ],
-	[ "inversion", x -> MappingByFunction( x[1], x[1], a->a^-1, a->a^-1 ) ],  
-	[ "is_commutative", OMgapIsAbelian ],                     
-	[ "is_normal", OMgapIsNormal ],                           
-	[ "is_subgroup", OMgapIsSubgroup ],     
-	[ "monoid", x -> AsMonoid( x[1] ) ],
-	[ "multiplication" ], # represents a unary function, whose argument should be a group G.  
-	                      # It returns the multiplication map on G. We allow for the map to be n-ary. 
-	[ "normal_closure", OMgapNormalClosure ],
-	[ "power" ], # using just arith1 CD will work too   
-	[ "subgroup", x-> Subgroup( x[2], x[1] ) ] ] ],   
+fieldname1 := rec(
+	Q := Rationals
+),
 
-[ "group2", [
-	[ "conjugation", x -> ConjugatorAutomorphism( x[1], x[2] ) ],
-	[ "is_automorphism" ],
-	[ "is_endomorphism" ], 
-	[ "is_homomorphism" ],
-	[ "is_isomorphism" ], 
-	[ "isomorphic" ],
-	[ "left_multiplication" ], 
-	[ "right_inverse_multiplication" ],
-	[ "right_multiplication" ]]],
+fns1 := rec(
+	lambda := "LAMBDA"
+),
+		
+group1 := rec(
+	carrier := OMgapElementSet,
+	expression := fail, # might be useful to embed the result of the 2nd argument into the 1st argument,
+	                    # but single expression from arith1 CD will work too
+	group := OMgapGroup,
+	identity := x -> One( x[1] ),
+	inversion := x -> MappingByFunction( x[1], x[1], a->a^-1, a->a^-1 ),
+	is_commutative := OMgapIsAbelian,
+	is_normal := OMgapIsNormal,
+	is_subgroup := OMgapIsSubgroup,
+	monoid := x -> AsMonoid( x[1] ),
+	multiplication := fail, # represents a unary function, whose argument should be a group G.  
+	                        # It returns the multiplication map on G. We allow for the map to be n-ary. 
+	normal_closure := OMgapNormalClosure,
+	power := fail, # using just arith1 CD will work too   
+	subgroup := x-> Subgroup( x[2], x[1] )
+),
 
-["group3", [ 
-	[ "alternating_group", x -> AlternatingGroup( x[1] ) ],
-	[ "alternatingn", x -> AlternatingGroup( x[1] ) ],
-	[ "automorphism_group", x -> AutomorphismGroup( x[1] ) ], 
-	[ "center", x -> Center( x[1] ) ],
-	[ "centralizer", x -> Centralizer( x[1], x[2] ) ], # 2nd argument as list not supported yet
-	[ "derived_subgroup", OMgapDerivedSubgroup ],      
-	[ "direct_power", x -> DirectProduct( ListWithIdenticalEntries( x[1], x[2] ) ) ],
-	[ "direct_product", x -> DirectProduct( x[1] )  ],
-	[ "free_group", x -> FreeGroup( x[1] ) ],
-	[ "GL" ],
-	[ "GLn", x -> GL( x[1], x[2] ) ],
-	[ "invertibles" ],
-	[ "normalizer", x ->  Normalizer( x[1], x[2] ) ],
-	[ "quotient_group", OMgapQuotientGroup ],     
-	[ "SL" ],
-	[ "SLn", x -> SL( x[1], x[2] ) ],
-	[ "sylow_subgroup", OMgapSylowSubgroup ],
-	[ "symmetric_group", x -> SymmetricGroup( x[1] ) ], 
-	[ "symmetric_groupn", x -> SymmetricGroup( x[1] ) ] ] ],
+group2 := rec(
+	conjugation := x -> ConjugatorAutomorphism( x[1], x[2] ),
+	is_automorphism := fail,
+	is_endomorphism := fail,
+	is_homomorphism := fail,
+	is_isomorphism := fail,
+	isomorphic := fail,
+	left_multiplication := fail, 
+	right_inverse_multiplication := fail,
+	right_multiplication := fail
+),
+
+group3 := rec(
+	alternating_group := x -> AlternatingGroup( x[1] ),
+	alternatingn := x -> AlternatingGroup( x[1] ),
+	automorphism_group := x -> AutomorphismGroup( x[1] ),
+	center := x -> Center( x[1] ),
+	centralizer := x -> Centralizer( x[1], x[2] ), # 2nd argument as list not supported yet
+	derived_subgroup := OMgapDerivedSubgroup,      
+	direct_power := x -> DirectProduct( ListWithIdenticalEntries( x[1], x[2] ) ),
+	direct_product := x -> DirectProduct( x[1] ),
+	free_group := x -> FreeGroup( x[1] ),
+	GL := fail,
+	GLn := x -> GL( x[1], x[2] ),
+	invertibles := fail,
+	normalizer := x ->  Normalizer( x[1], x[2] ),
+	quotient_group := OMgapQuotientGroup,     
+	SL := fail,
+	SLn := x -> SL( x[1], x[2] ),
+	sylow_subgroup := OMgapSylowSubgroup,
+	symmetric_group := x -> SymmetricGroup( x[1] ), 
+	symmetric_groupn := x -> SymmetricGroup( x[1] )
+),
+
+group4 := rec(
+	are_conjugate := fail,
+	conjugacy_class := OMgapConjugacyClass,
+	conjugacy_class_representatives := fail,
+	conjugacy_classes := fail, 
+	left_coset := fail,
+	left_coset_representative := fail, 
+	left_cosets := fail,
+	left_transversal := fail, 
+	right_coset := fail,
+	right_coset_representative := fail,
+	right_cosets := fail,
+	right_transversal := fail 
+),
+
+group5 := rec(
+	homomorphism_by_generators := fail,
+	left_quotient_map := fail,
+	right_quotient_map := fail
+),
 	
-["group4", [ 
-	[ "are_conjugate" ], 
-	[ "conjugacy_class", OMgapConjugacyClass ], 
-	[ "conjugacy_class_representatives" ],
-	[ "conjugacy_classes" ], 
-	[ "left_coset" ], 
-	[ "left_coset_representative" ], 
-	[ "left_cosets" ],
-	[ "left_transversal" ], 
-	[ "right_coset" ], 
-	[ "right_coset_representative" ], 
-	[ "right_cosets" ],
-	[ "right_transversal" ]]],   
-	
-["group5", [ 
-	[ "homomorphism_by_generators" ],
-	[ "left_quotient_map" ],
-	[ "right_quotient_map" ]]],         
-				     
-[ "groupname1", [
-	[ "dihedral_group", x -> DihedralGroup(2*x[1]) ],
-	[ "cyclic_group", x -> CyclicGroup(x[1]) ],
-	[ "generalized_quaternion_group" ],
-	[ "quaternion_group", OMquaternion_group() ]]],     
-	
-[ "integer1", [
-    [ "factorial", x -> Factorial( x[1] ) ],
-    [ "factorof",  x -> IsInt( x[2]/ x[1] ) ],
-    [ "quotient", x -> QuoInt( x[1], x[2] ) ], # is OMgapQuotient now obsolete?
-    [ "remainder", x -> RemInt( x[1], x[2] ) ]]], # is OMgapRem now obsolete?
-	  
-[ "integer2", [
-	[ "class", x -> ZmodnZObj(x[1],x[2]) ],
-	[ "divides", x -> IsInt( x[2]/ x[1] ) ],
-	[ "eqmod", x -> IsInt( (x[1]-x[2])/x[3] ) ],
-	[ "euler", x -> Phi(x[1]) ],
-	[ "modulo_relation", x -> function(a,b) return IsInt( (a-b)/x[1] ); end ],
-	[ "neqmod", x -> not IsInt( (x[1]-x[2])/x[3] ) ],
-	[ "ord", 
+groupname1 := rec(
+	dihedral_group := x -> DihedralGroup(2*x[1]),
+	cyclic_group := x -> CyclicGroup(x[1]),
+	generalized_quaternion_group := fail,
+	quaternion_group := OMquaternion_group()
+),
+
+integer1 := rec(
+	factorial := x -> Factorial( x[1] ),
+    factorof := x -> IsInt( x[2]/ x[1] ),
+    quotient := x -> QuoInt( x[1], x[2] ), # is OMgapQuotient now obsolete?
+    remainder := x -> RemInt( x[1], x[2] ) # is OMgapRem now obsolete?
+),
+
+integer2 := rec(
+	class := x -> ZmodnZObj(x[1],x[2]),
+	divides := x -> IsInt( x[2]/ x[1] ),
+	eqmod := x -> IsInt( (x[1]-x[2])/x[3] ),
+	euler := x -> Phi(x[1]),
+	modulo_relation := x -> function(a,b) return IsInt( (a-b)/x[1] ); end,
+	neqmod := x -> not IsInt( (x[1]-x[2])/x[3] ),
+	ord := 
 		function(x)
 		local i;
 		if not IsInt(x[2]/x[1]) then
@@ -594,149 +612,150 @@ InstallValue( OMsymTable, [
 		else
 			return Number( FactorsInt(x[2]), i -> i=x[1]);
 		fi;	 
-		end ]]],
+		end
+),
 
-[ "interval1", 
-	[[ "integer_interval", x -> [ x[1] .. x[2] ] ]]],
+interval1 := rec(
+	integer_interval := x -> [ x[1] .. x[2] ]
+),
 
-[ "logic1", [
-	["and", OMgapAnd ],
-    [ "equivalent", x -> x[1] and x[2] or not x[1] and not x[2] ],
-   	[ "false", false ],
-    [ "implies", x -> not x[1] or x[2] ],   	
-	[ "not", OMgapNot ],
-	[ "or", OMgapOr ], 
-	[ "true", true ],
-	[ "xor", OMgapXor ]]],
-	
-[ "list1", [
-	[ "list", OMgapList ],
-	[ "map", OMgapMap ],
-	[ "suchthat", OMgapSuchthat ]]],
-	
-[ "nums1", [
-	[ "i", Sqrt(-1) ],
-	[ "infinity", infinity ],
-	[ "NaN" ]]],
-		
-[ "permgp1", [
-    [ "group", OMgapGroup ], # n-ary function  
-    [ "base" ],
-    [ "generators" ],
-    [ "is_in" ],
-    [ "is_primitive", OMgapIsPrimitive ],
-    [ "is_subgroup" ],
-    [ "is_transitive", OMgapIsTransitive ],
-    [ "orbit", OMgapOrbit ],
-    [ "orbits" ],
-    [ "order" ],
-    [ "schreier_tree" ],
-    [ "stabilizer", OMgapStabilizer ], # n-ary function  
-    [ "stabilizer_chain" ],
-    [ "support" ]
-  ]
-],
+logic1 := rec(
+	("and") := OMgapAnd,
+    equivalent := x -> x[1] and x[2] or not x[1] and not x[2],
+   	("false") := false,
+    implies := x -> not x[1] or x[2],   	
+	("not") := OMgapNot,
+	("or") := OMgapOr, 
+	("true") := true,
+	xor := OMgapXor
+),
 
-[ "permgp2", [
-    [ "alternating_group" ],
-    [ "symmetric_group" ],
-    [ "cyclic_group" ],
-    [ "dihedral_group" ],
-    [ "quaternion_group" ],
-    [ "vierer_group" ]
-  ]
-],
+list1 := rec(
+	list := OMgapList,
+	map := OMgapMap,
+	suchthat := OMgapSuchthat
+),
 
-[ "permgrp", [
-    [ "is_primitive" ],
-    [ "is_transitive" ],
-    [ "orbit" ],
-    [ "stabilizer" ]
-  ]
-],
+nums1 := rec(
+	i := Sqrt(-1),
+	infinity := infinity,
+	NaN := fail
+),
 
-[ "permut1", [
-	[ "permutation", OMgapPermutation ] ] ], 
-	
-[ "permutation1", [
-	[ "action" ], 
-	[ "are_distinct" ], 
-	[ "cycle" ], 
-	[ "cycle_type" ], 
-	[ "cycles" ], 
-	[ "domain" ], 
-	[ "endomap" ], 
-	[ "endomap_left_compose" ], 
-	[ "endomap_right_compose" ],
-	[ "fix" ], 
-	[ "inverse" ], 
-	[ "is_bijective" ], 
-	[ "is_endomap" ], 
-	[ "is_list_perm" ], 
-	[ "is_permutation" ], 
-	[ "left_compose" ], 
-	[ "length" ], 
-	[ "list_perm" ],
-	[ "listendomap" ], 
-	[ "order" ], 
-	[ "permutation" ], 
-	[ "permutationsn" ], 
-	[ "right_compose" ], 
-	[ "sign" ], 
-	[ "support" ] 
-  ] 
-],
-		
-[ "polyd1", [
-     ["DMP", OMgap_DMP],
-     ["poly_ring_d", OMgap_poly_ring_d],
-     ["poly_ring_d_named", OMgap_poly_ring_d_named],
-     ["SDMP", OMgap_SDMP],
-	 ["term", OMgap_term]]],
+permgp1 := rec(
+	group := OMgapGroup, # n-ary function  
+    base := fail,
+    generators := fail,
+    is_in := fail,
+    is_primitive := OMgapIsPrimitive,
+    is_subgroup := fail,
+    is_transitive := OMgapIsTransitive,
+    orbit := OMgapOrbit,
+    orbits := fail,
+    order := fail,
+    schreier_tree := fail,
+    stabilizer := OMgapStabilizer, # n-ary function  
+    stabilizer_chain := fail,
+    support := fail
+),
 
-[ "polyu", [
-     ["poly_u_rep", OMgap_poly_u_rep], 
-	 ["term", OMgap_term]]],
-	 
-["relation1", [
-	[ "eq", OMgapEq],
-	[ "neq", OMgapNeq],
-	[ "lt", OMgapLt],
-	[ "leq", OMgapLe],
-	[ "gt", OMgapGt],
-	[ "geq", OMgapGe ]]],
+permgp2 := rec(
+    alternating_group := fail,
+    symmetric_group := fail,
+    cyclic_group := fail,
+    dihedral_group := fail,
+    quaternion_group := fail,
+    vierer_group := fail
+),
+
+permgrp := rec(
+ 	is_primitive := fail,
+    is_transitive := fail,
+    orbit := fail,
+    stabilizer := fail
+),
+
+permut1 := rec(
+	permutation := OMgapPermutation
+),
+
+permutation1 := rec(
+	action := fail,
+	are_distinct := fail, 
+	cycle := fail,
+	cycle_type := fail,
+	cycles := fail,
+	domain := fail,
+	endomap := fail,
+	endomap_left_compose := fail,
+	endomap_right_compose := fail,
+	fix := fail,
+	inverse := fail,
+	is_bijective := fail,
+	is_endomap := fail,
+	is_list_perm := fail,
+	is_permutation := fail,
+	left_compose := fail, 
+	length := fail,
+	list_perm := fail,
+	listendomap := fail, 
+	order := fail,
+	permutation := fail,
+	permutationsn := fail,
+	right_compose := fail,
+	sign := fail,
+	support := fail
+),
+
+polyd1 := rec(
+	DMP := OMgap_DMP,
+	poly_ring_d := OMgap_poly_ring_d,
+	poly_ring_d_named := OMgap_poly_ring_d_named,
+	SDMP := OMgap_SDMP,
+	term := OMgap_term
+),
+
+polyu := rec(
+	poly_u_rep := OMgap_poly_u_rep,
+	term := OMgap_term
+),
+
+relation1 := rec(
+	eq := OMgapEq,
+	neq := OMgapNeq,
+	lt := OMgapLt,
+	leq := OMgapLe,
+	gt := OMgapGt,
+	geq := OMgapGe
+),
+
+set1 := rec(
+	cartesian_product := Cartesian,
+    emptyset := [ ],
+ 	("in") := OMgapIn,
+	intersect := OMgapIntersect,  
+	map := OMgapMap,  
+	notin := x -> not x[1] in x[2],	   
+    notprsubset := x -> not IsSubset( x[2], x[1] ) or IsEqualSet( x[2], x[1] ),	
+    notsubset := x -> not IsSubset( x[2], x[1] ),
+    prsubset := x -> IsSubset( x[2], x[1] ) and not IsEqualSet( x[2], x[1] ),
+	set := OMgapSet,
+	setdiff := OMgapSetDiff,
+	size := x -> Size( x[1] ),
+	subset := x -> IsSubset( x[2], x[1] ),    
+	suchthat := OMgapSuchthat, 
+	union := OMgapUnion
+),	  
 	
-[ "set1", [
-    [ "cartesian_product", Cartesian ],
-    [ "emptyset", [ ] ],
- 	[ "in", OMgapIn ],
-	[ "intersect", OMgapIntersect ],  
-	[ "map", OMgapMap ],  
-	[ "notin", x -> not x[1] in x[2] ],	   
-    [ "notprsubset", x -> not IsSubset( x[2], x[1] ) or IsEqualSet( x[2], x[1] ) ],	
-    [ "notsubset", x -> not IsSubset( x[2], x[1] ) ],
-    [ "prsubset", x -> IsSubset( x[2], x[1] ) and not IsEqualSet( x[2], x[1] ) ],
-	[ "set", OMgapSet ],
-	[ "setdiff", OMgapSetDiff ],
-	[ "size", x -> Size( x[1] ) ],
-	[ "subset", x -> IsSubset( x[2], x[1] ) ],    
-	[ "suchthat", OMgapSuchthat ], 
-	[ "union", OMgapUnion ]]],  
-	
-["setname1", [
-	[ "N", NonnegativeIntegers ],
-	[ "Q", Rationals ],
-	[ "Z", Integers ]]],
-	     	
-["cas", [ # see this CD in openmath/cds directory
-	["quit", OMgapQuit],
-	["assign", OMgapAssign],
-	["retrieve",OMgapRetrieve],
-	["native_statement", OMgapNativeStatement],
-	["native_error", OMgapNativeError],
-	["native_output", OMgapNativeOutput ]]]]);
-	
-	     
+setname1 := rec(
+	N := NonnegativeIntegers,
+	Q := Rationals,
+	Z := Integers
+),
+
+));
+ 
+ 
 ######################################################################
 ##
 #F  OMsymLookup( [<cd>, <name>] )
@@ -745,30 +764,29 @@ InstallValue( OMsymTable, [
 ##  defined above by looking up the symbol table.
 ##
 BindGlobal("OMsymLookup", 
-function(symbol)
-	local cd, sym;
-
-	for cd in OMsymTable do
-		if cd[1] = symbol[1] then	# the cd names are the same
-			for sym in cd[2] do
-				if sym[1] = symbol[2] then
-					if IsBound( sym[2] ) then
-						return sym[2]; # return the function
-					else
-						# a symbol is present in the CD but not implemented
-						# The number, format and sequence of arguments for the three error messages
-						# below is strongly fixed as it is needed in the SCSCP package to return
-						# standard OpenMath errors to the client
-						Error("OpenMathError: ", "unhandled_symbol", " cd=", symbol[1], " name=", symbol[2]);
-					fi;	
-				fi;
-			od;
-			# if we got here, a symbol is not present in the mentioned content dictionary.
-			Error("OpenMathError: ", "unexpected_symbol", " cd=", symbol[1], " name=", symbol[2]);
-		fi;
-	od;
-	# we didn't even find the cd
-	Error("OpenMathError: ", "unsupported_CD", " cd=", symbol[1], " name=", symbol[2]);
+function( symbol )
+local cd, name;
+cd := symbol[1];
+name := symbol[2];
+if IsBound( OMsymTable.(cd) ) then
+  if IsBound( OMsymTable.(cd).(name) ) then
+    if not OMsymTable.(cd).(name) = fail then
+      return OMsymTable.(cd).(name);
+    else
+      # the symbol is present in the CD but not implemented
+	  # The number, format and sequence of arguments for the three error messages
+	  # below is strongly fixed as it is needed in the SCSCP package to return
+	  # standard OpenMath errors to the client
+	  Error("OpenMathError: ", "unhandled_symbol", " cd=", symbol[1], " name=", symbol[2]);
+    fi;
+  else
+    # the symbol is not present in the mentioned content dictionary.
+	Error("OpenMathError: ", "unexpected_symbol", " cd=", symbol[1], " name=", symbol[2]);
+  fi;
+else
+  # we didn't even find the cd
+  Error("OpenMathError: ", "unsupported_CD", " cd=", symbol[1], " name=", symbol[2]);
+fi;  	
 end);
 
 
