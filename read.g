@@ -21,9 +21,9 @@ Revision.("openmath/read.g") :=
 #################################################################
 ## Module 1.2.b
 ## This module converts the OpenMath XML into a tree and parses it;
-## requires the functions OMsymLookup and OMnullarySymbolToGAP
-## (and the function ParseTreeXMLString from package GapDoc) and
-## provides OMgetObjectXMLTree
+## requires the function OMsymLookup (and the function 
+## ParseTreeXMLString from package GapDoc) and provides 
+## the function OMgetObjectXMLTree
 
 if IsBound( ParseTreeXMLString )  then
     ReadPackage("openmath", "/gap/xmltree.gi");

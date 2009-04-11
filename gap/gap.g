@@ -414,6 +414,11 @@ BindGlobal("OMgapNativeOutput",
 ##  defined above or immediately in the table
 ##
 InstallValue( OMsymTable, [
+
+["alg1", [
+	[ "one", 1 ],
+	[ "zero", 0 ]]], 
+
 ["arith1", [
     [ "abs", x -> AbsoluteValue(x[1]) ],
     [ "divide", OMgapDivide],
@@ -488,6 +493,12 @@ InstallValue( OMsymTable, [
 [ "field4", [
      ["field_by_poly_vector", OMgap_field_by_poly_vector]]],
      
+[ "fieldname1", [
+     [ "Q", Rationals ]]],    
+     
+[ "fns1", [
+     [ "lambda", "LAMBDA" ]]],      
+     
 [ "group1", [ 
 	[ "carrier", OMgapElementSet ],      
 	[ "expression" ], # might be useful to embed the result of the 2nd argument into the 1st argument,
@@ -559,8 +570,9 @@ InstallValue( OMsymTable, [
 [ "groupname1", [
 	[ "dihedral_group", x -> DihedralGroup(2*x[1]) ],
 	[ "cyclic_group", x -> CyclicGroup(x[1]) ],
-	[ "generalized_quaternion_group", ]]],     
-     
+	[ "generalized_quaternion_group" ],
+	[ "quaternion_group", OMquaternion_group() ]]],     
+	
 [ "integer1", [
     [ "factorial", x -> Factorial( x[1] ) ],
     [ "factorof",  x -> IsInt( x[2]/ x[1] ) ],
@@ -590,9 +602,11 @@ InstallValue( OMsymTable, [
 [ "logic1", [
 	["and", OMgapAnd ],
     [ "equivalent", x -> x[1] and x[2] or not x[1] and not x[2] ],
+   	[ "false", false ],
     [ "implies", x -> not x[1] or x[2] ],   	
 	[ "not", OMgapNot ],
 	[ "or", OMgapOr ], 
+	[ "true", true ],
 	[ "xor", OMgapXor ]]],
 	
 [ "list1", [
@@ -600,22 +614,11 @@ InstallValue( OMsymTable, [
 	[ "map", OMgapMap ],
 	[ "suchthat", OMgapSuchthat ]]],
 	
-[ "set1", [
-    [ "cartesian_product", Cartesian ],
- 	[ "in", OMgapIn ],
-	[ "intersect", OMgapIntersect ],  
-	[ "map", OMgapMap ],  
-	[ "notin", x -> not x[1] in x[2] ],	   
-    [ "notprsubset", x -> not IsSubset( x[2], x[1] ) or IsEqualSet( x[2], x[1] ) ],	
-    [ "notsubset", x -> not IsSubset( x[2], x[1] ) ],
-    [ "prsubset", x -> IsSubset( x[2], x[1] ) and not IsEqualSet( x[2], x[1] ) ],
-	[ "set", OMgapSet ],
-	[ "setdiff", OMgapSetDiff ],
-	[ "size", x -> Size( x[1] ) ],
-	[ "subset", x -> IsSubset( x[2], x[1] ) ],    
-	[ "suchthat", OMgapSuchthat ], 
-	[ "union", OMgapUnion ]]],       
-
+[ "nums1", [
+	[ "i", Sqrt(-1) ],
+	[ "infinity", infinity ],
+	[ "NaN" ]]],
+		
 [ "permgp1", [
     [ "group", OMgapGroup ], # n-ary function  
     [ "base" ],
@@ -701,15 +704,37 @@ InstallValue( OMsymTable, [
 	[ "lt", OMgapLt],
 	[ "leq", OMgapLe],
 	[ "gt", OMgapGt],
-	[ "geq", OMgapGe]]],	 
-     	
-["cas", # see this CD in openmath/cds directory
-	[["quit", OMgapQuit],
+	[ "geq", OMgapGe ]]],
+	
+[ "set1", [
+    [ "cartesian_product", Cartesian ],
+    [ "emptyset", [ ] ],
+ 	[ "in", OMgapIn ],
+	[ "intersect", OMgapIntersect ],  
+	[ "map", OMgapMap ],  
+	[ "notin", x -> not x[1] in x[2] ],	   
+    [ "notprsubset", x -> not IsSubset( x[2], x[1] ) or IsEqualSet( x[2], x[1] ) ],	
+    [ "notsubset", x -> not IsSubset( x[2], x[1] ) ],
+    [ "prsubset", x -> IsSubset( x[2], x[1] ) and not IsEqualSet( x[2], x[1] ) ],
+	[ "set", OMgapSet ],
+	[ "setdiff", OMgapSetDiff ],
+	[ "size", x -> Size( x[1] ) ],
+	[ "subset", x -> IsSubset( x[2], x[1] ) ],    
+	[ "suchthat", OMgapSuchthat ], 
+	[ "union", OMgapUnion ]]],  
+	
+["setname1", [
+	[ "N", NonnegativeIntegers ],
+	[ "Q", Rationals ],
+	[ "Z", Integers ]]],
+	     	
+["cas", [ # see this CD in openmath/cds directory
+	["quit", OMgapQuit],
 	["assign", OMgapAssign],
 	["retrieve",OMgapRetrieve],
 	["native_statement", OMgapNativeStatement],
 	["native_error", OMgapNativeError],
-	["native_output", OMgapNativeOutput]]]]);
+	["native_output", OMgapNativeOutput ]]]]);
 	
 	     
 ######################################################################
@@ -744,53 +769,6 @@ function(symbol)
 	od;
 	# we didn't even find the cd
 	Error("OpenMathError: ", "unsupported_CD", " cd=", symbol[1], " name=", symbol[2]);
-end);
-
-
-######################################################################
-##
-#F  OMnullarySymbolToGAP( [<cd>, <name>] )
-##
-##  Maps the OM symbol to the GAP value.
-##
-BindGlobal("OMnullarySymbolToGAP",
-function(symbol)
-	local cd, name;
-
-	cd := symbol[1];
-	name := symbol[2];
-	if cd = "alg1" then
-		if name = "zero" then return 0;
-		elif name = "one" then return 1;
-		fi;
-	elif cd = "fns1" then    
-		if name = "lambda" then return "LAMBDA";
-		fi;
-    elif cd = "logic1" then
-        if name = "false" then return false;
-        elif name = "true" then return true;
-        fi;
-	elif cd = "groupname1" then
-		if name = "quaternion_group" then return OMquaternion_group();
-		fi;
-	elif cd = "nums1" or cd = "nums" then 
-		if name = "i" then return Sqrt(-1);
-		elif name = "infinity" then return infinity;
-		elif name = "NaN" then return Float( "NaN" );
-		fi;
-        elif cd = "set1" then
-                if name = "emptyset" then return [];
-                fi;
-        elif cd = "setname1" then
-                if name = "Z" then return Integers;
-                elif name = "N" then return NonnegativeIntegers;
-                elif name = "Q" then return Rationals;
-                fi;
-        elif cd = "fieldname1" then      
-                if name = "Q" then return Rationals;   
-                fi;
-	fi;
-	return OMsymLookup( [ cd, name ] );
 end);
 
 

@@ -319,7 +319,10 @@ gap/omput.gi .
 gap/new.g .
 
 - For converting a nullary symbol OpenMath -> Gap, add code in
-'OMnullarySymbolToGAP', in file gap/gap.g .
+'OMnullarySymbolToGAP', in file gap/gap.g . (Remark: OMnullarySymbolToGAP
+removed by AK in April 2009, now all is done by OMsymLookup function).
+
+
 
 - For a conversion in Yacas, use there OMDef(yacasSymbol, cd, name)
 
@@ -333,7 +336,8 @@ TODO:
 
 * Remove the difference between nullary and n-ary symbols, and use the
 OpenMath roles instead, see the OpenMath Standard, version 2.0, section
-"2.1.4 OpenMath Symbol Roles".
+"2.1.4 OpenMath Symbol Roles". (Remark: OMnullarySymbolToGAP
+removed by AK in April 2009, now all is done by OMsymLookup function).
 
 
 ######################################################################

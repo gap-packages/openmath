@@ -104,8 +104,9 @@ OMsymTable_new := [
 
 
 [ "relation3", [  # TO BE TESTED 
-    [ "equivalence_closure", x -> TransitiveClosureBinaryRelation( SymmetricClosureBinaryRelation(
-ReflexiveClosureBinaryRelation( x[1] ) ) ) ],
+    [ "equivalence_closure", x -> TransitiveClosureBinaryRelation( 
+                                    SymmetricClosureBinaryRelation(
+                                      ReflexiveClosureBinaryRelation( x[1] ) ) ) ],
     [ "transitive_closure", x ->TransitiveClosureBinaryRelation( x[1] ) ],
     [ "reflexive_closure", x ->ReflexiveClosureBinaryRelation( x[1] ) ],
     [ "symmetric_closure", x ->SymmetricClosureBinaryRelation( x[1] ) ],

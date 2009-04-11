@@ -166,8 +166,8 @@ InstallGlobalFunction(OMparseObject, function(stream)
 	# first the basic objects
 
 	if OMnextToken(stream) = OMtokenSymbol then
-		# this is just a nullary symbol which we hope is a GAP object
-		return OMnullarySymbolToGAP(OMgetSymbol(stream));
+		# this is just a nullary symbol 
+		return OMsymLookup(OMgetSymbol(stream));
 	elif OMnextToken(stream) = OMtokenVar then
 		return OMgetVar(stream);
 	elif  OMnextToken(stream) = OMtokenInteger then

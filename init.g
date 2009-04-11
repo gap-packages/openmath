@@ -124,8 +124,7 @@ ReadPackage("openmath", "/gap/test.gd");
 #################################################################
 ## Module 1.1 
 ## This module contains the semantic mappings from parsed openmath
-## symbols to GAP objects; provides the functions OMsymLookup and
-## OMnullarySymbolToGAP
+## symbols to GAP objects and provides the function OMsymLookup
 
 # Frank Luebeck's utility for obtaining view strings.
 ReadPackage("openmath", "/gap/printutil.g");
@@ -137,8 +136,7 @@ ReadPackage("openmath", "/gap/gap.g");
 ## Module 1.2.a
 ## This module reads token/values off the stream and builds GAP objects;
 ## uses the external binary gpipe, 
-## requires the functions OMsymLookup and OMnullarySymbolToGAP and
-## provides OMpipeObject
+## requires the function OMsymLookup and provides OMpipeObject
 ## Directories bin, include, OMCv1.3c, src belongs to this module.
 
 ReadPackage("openmath", "/gap/lex.g");
@@ -154,9 +152,9 @@ fi;
 #################################################################
 ## Module 1.2.b
 ## This module converts the OpenMath XML into a tree and parses it;
-## requires the functions OMsymLookup and OMnullarySymbolToGAP
-## (and the function ParseTreeXMLString from package GapDoc) and
-## provides OMgetObjectXMLTree
+## requires the function OMsymLookup (and the function 
+## ParseTreeXMLString from package GapDoc) and provides 
+## the function OMgetObjectXMLTree
 
 if IsBound( ParseTreeXMLString )  then
     ReadPackage("openmath", "/gap/xmltree.g");

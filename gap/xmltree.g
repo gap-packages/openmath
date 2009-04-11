@@ -70,7 +70,8 @@ BindGlobal( "OMObjects",
 
 
   OMS := function ( node )
-        return OMnullarySymbolToGAP( [ node.attributes.cd, node.attributes.name ] );
+        # this is just a nullary symbol
+        return OMsymLookup( [ node.attributes.cd, node.attributes.name ] );
     end,
 
 
