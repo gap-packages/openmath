@@ -411,9 +411,9 @@ BindGlobal("OMgapNativeOutput",
 ##  The Symbol Table for supported symbols from official OpenMath CDs
 ##
 ##  Maps a pair ["cd", "name"] to the corresponding OMgap... function
-##  defined above or immediately in the table
+##  defined above or immediately in the record
 ##
-InstallValue( OMsymTable, rec( 
+InstallValue( OMsymRecord, rec( 
 
 alg1 := rec( 
 	one  := 1, 
@@ -768,10 +768,10 @@ function( symbol )
 local cd, name;
 cd := symbol[1];
 name := symbol[2];
-if IsBound( OMsymTable.(cd) ) then
-  if IsBound( OMsymTable.(cd).(name) ) then
-    if not OMsymTable.(cd).(name) = fail then
-      return OMsymTable.(cd).(name);
+if IsBound( OMsymRecord.(cd) ) then
+  if IsBound( OMsymRecord.(cd).(name) ) then
+    if not OMsymRecord.(cd).(name) = fail then
+      return OMsymRecord.(cd).(name);
     else
       # the symbol is present in the CD but not implemented
 	  # The number, format and sequence of arguments for the three error messages

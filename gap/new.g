@@ -8,7 +8,7 @@
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
 #Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
 ##
-##    This file contains update to function OMsymTable, according to the
+##    This file contains update to the record OMsymRecord, according to the
 ##    current OpenMath CDs (for converting from OpenMath to GAP),
 ##
 
@@ -30,7 +30,7 @@ BindGlobal("OMgapNthRootOfUnity",
 ## From OpenMath to Gap
 ##
 
-OMsymTable_new := rec(
+OMsymRecord_new := rec(
 
 calculus1 := rec(
 	partialdiff :=
@@ -133,17 +133,17 @@ group1 := rec( # experimental symbols
 
 OM_append := function (  )
     local cd, name;
-    MakeReadWriteGlobal( "OMsymTable" );
-    for cd in RecNames( OMsymTable_new )  do
-    	if IsBound( OMsymTable.(cd) ) then
-    		for name in RecNames( OMsymTable_new.(cd) ) do
-    	    	OMsymTable.(cd).(name) := OMsymTable_new.(cd).(name);
+    MakeReadWriteGlobal( "OMsymRecord" );
+    for cd in RecNames( OMsymRecord_new )  do
+    	if IsBound( OMsymRecord.(cd) ) then
+    		for name in RecNames( OMsymRecord_new.(cd) ) do
+    	    	OMsymRecord.(cd).(name) := OMsymRecord_new.(cd).(name);
     	  	od;
     	else
-    	  	OMsymTable.(cd) := OMsymTable_new.(cd);     
+    	  	OMsymRecord.(cd) := OMsymRecord_new.(cd);     
     	fi;
     od;	   
-    MakeReadOnlyGlobal( "OMsymTable" );
+    MakeReadOnlyGlobal( "OMsymRecord" );
 end;
 
 OM_append();

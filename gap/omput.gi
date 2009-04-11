@@ -836,15 +836,18 @@ function(stream, x)
 end);
 
 
-
+# The method was commented out before OMsymTable was converted into OMsymRecord,
+# however, it was updated it as well to save the changes for a case. Note that
+# the search across all record components is very inefficient.
+# 
 #InstallMethod(OMPut, "for a function", true,
 #[IsOutputStream, IsFunction],0,
 #function ( stream, x )
-#    local i, ii;
-#    for i  in OMsymTable  do
-#        for ii  in i[2]  do
-#            if x = ii[2]  then
-#                OMPutSymbol( stream, i[1], ii[1] );
+#    local cd, name;
+#    for cd in RecNames( OMsymRecord ) do
+#        for  name in RecNames( OMsymRecord.(cd) ) do
+#            if x = OMsymRecord.(cd).(name) then
+#                OMPutSymbol( stream, cd, name );
 #                return;
 #            fi;
 #        od;

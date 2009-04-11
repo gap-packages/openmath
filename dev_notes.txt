@@ -322,8 +322,6 @@ gap/new.g .
 'OMnullarySymbolToGAP', in file gap/gap.g . (Remark: OMnullarySymbolToGAP
 removed by AK in April 2009, now all is done by OMsymLookup function).
 
-
-
 - For a conversion in Yacas, use there OMDef(yacasSymbol, cd, name)
 
 
@@ -333,7 +331,7 @@ TODO:
 
 
 * Convert OMsymTable and related stuff from list to record
-(Remark: done by AK in April 2009).
+(Remark: done by AK in April 2009 with renaming to OMsymRecord).
 
 * Remove the difference between nullary and n-ary symbols, and use the
 OpenMath roles instead, see the OpenMath Standard, version 2.0, section
@@ -374,9 +372,7 @@ both.
 
 TODO:
 
-
 Check the functions OMnextToken and OMinstreamNextByte: they do the same.
-
 
 Some IsHasseDiagram stuff is already defined in main Gap library
 lib/relation.gd:

@@ -173,6 +173,9 @@ For the supported CDs and symbols when converting from OpenMath to
 GAP, see the files gap/gap.g, variables OMsymTable and
 OMnullarySymbolToGAP, and gap/new.g.
 
+/* Remark: from version 9.4.0, OMnullarySymbolToGAP no longer
+exists, and OMsymTable was converted into OMsymRecord */
+
 For the supported CDs and symbols when converting from GAP to
 OpenMath, see the files gap/omput.gi, method for OMPut (and
 hasse/hasse.g for the Hasse diagram).
@@ -337,7 +340,12 @@ became its maintainer. The list of major updates is below:
 - commented out method for OMPut( <stream>,  <vector> ) to 
   have the default output as list1.list.
   
-* OMsymTable turned from list of nested lists into a record  
+* OMsymTable turned from the list of nested lists into a 
+  record and renamed to OMsymRecord.
+
+* Removed OMnullarySymbolToGAP, now all lookup is performed 
+  by OMsymLookup with no distinction between nullary and
+  n-ary OpenMath symbols.
   
 * New functionality:
   - New function OMPutObjectNoOMOBJtags, a variation of the 
