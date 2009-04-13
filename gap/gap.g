@@ -494,20 +494,36 @@ combinat1 := rec(
 ),
 
 field3 := rec(
-	field_by_poly := OMgap_field_by_poly
+	field_by_poly := OMgap_field_by_poly,
+	fraction_field := fail,
+	free_field := fail
 ),
 
     
 field4 := rec(
-	field_by_poly_vector := OMgap_field_by_poly_vector
+	automorphism_group := fail,
+	field_by_poly_map := fail,
+	field_by_poly_vector := OMgap_field_by_poly_vector,
+	homomorphism_by_generators := fail
 ),
      
 fieldname1 := rec(
-	Q := Rationals
+	C := fail,
+	Q := Rationals,
+	R := fail
 ),
 
 fns1 := rec(
-	lambda := "LAMBDA"
+    domain := fail, 
+    domainofapplication := fail, 
+	identity := x -> IdFunc(x[1]),
+	image := fail, 
+    inverse := fail, 
+	lambda := "LAMBDA",
+    left_compose := fail, 
+    left_inverse := fail, 
+    range := fail, 
+    right_inverse := fail
 ),
 		
 group1 := rec(
@@ -584,8 +600,8 @@ group5 := rec(
 ),
 	
 groupname1 := rec(
-	dihedral_group := x -> DihedralGroup(2*x[1]),
 	cyclic_group := x -> CyclicGroup(x[1]),
+	dihedral_group := x -> DihedralGroup(2*x[1]),
 	generalized_quaternion_group := fail,
 	quaternion_group := OMquaternion_group()
 ),
@@ -616,7 +632,12 @@ integer2 := rec(
 ),
 
 interval1 := rec(
-	integer_interval := x -> [ x[1] .. x[2] ]
+	integer_interval := x -> [ x[1] .. x[2] ],
+	interval := fail, 
+	interval_cc := fail, 
+	interval_co := fail, 
+	interval_oc := fail, 
+	interval_oo := fail
 ),
 
 logic1 := rec(
@@ -637,9 +658,14 @@ list1 := rec(
 ),
 
 nums1 := rec(
+	based_integer := fail, 
+	e := fail, 
+	gamma := fail, 
 	i := Sqrt(-1),
 	infinity := infinity,
-	NaN := fail
+	NaN := fail,
+	pi := fail, 
+	rational := OMgapDivide
 ),
 
 permgp1 := rec(
@@ -708,25 +734,37 @@ permutation1 := rec(
 ),
 
 polyd1 := rec(
+	ambient_ring := fail, 
+	anonymous := fail, 
 	DMP := OMgap_DMP,
+	DMPL := fail, 
+	minus := fail, 
+	plus := fail,
 	poly_ring_d := OMgap_poly_ring_d,
 	poly_ring_d_named := OMgap_poly_ring_d_named,
+	power := fail, 
+	rank := fail,
 	SDMP := OMgap_SDMP,
-	term := OMgap_term
+	term := OMgap_term,
+	times := fail, 
+	variables := fail
 ),
 
 polyu := rec(
 	poly_u_rep := OMgap_poly_u_rep,
+	polynomial_ring_u := fail,
+	polynomial_u := fail,
 	term := OMgap_term
 ),
 
 relation1 := rec(
+	approx := fail,
 	eq := OMgapEq,
-	neq := OMgapNeq,
-	lt := OMgapLt,
-	leq := OMgapLe,
+	geq := OMgapGe,	
 	gt := OMgapGt,
-	geq := OMgapGe
+	leq := OMgapLe,		
+	lt := OMgapLt,
+	neq := OMgapNeq
 ),
 
 set1 := rec(
@@ -748,8 +786,11 @@ set1 := rec(
 ),	  
 	
 setname1 := rec(
+	C := fail,
 	N := NonnegativeIntegers,
+	P := fail,
 	Q := Rationals,
+	R := fail,
 	Z := Integers
 ),
 

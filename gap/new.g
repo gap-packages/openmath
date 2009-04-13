@@ -53,14 +53,12 @@ calculus1 := rec(
 ),
 
 complex1 := rec(
+	argument := fail,
 	complex_cartesian := x -> OMgapId([OMgap2ARGS(x), x[1]+E(4)*x[2]])[2],
-    real := x -> OMgapId([OMgap1ARGS(x), x -> (x[1] + ComplexConjugate( x[1] )) / 2])[2], # check this!!!
+	complex_polar := fail,
+    conjugate := x -> OMgapId([OMgap1ARGS(x), x -> ComplexConjugate( x[1] )])[2], # check this!!!
     imaginary := x -> OMgapId([OMgap1ARGS(x), x -> (x[1] - ComplexConjugate( x[1] )) / 2]* -1/2 *E(4))[2], # check this!!!
-    conjugate := x -> OMgapId([OMgap1ARGS(x), x -> ComplexConjugate( x[1] )])[2] # check this!!!
-),
-
-fns1 := rec(
-	identity := x -> IdFunc(x[1]) # check this
+    real := x -> OMgapId([OMgap1ARGS(x), x -> (x[1] + ComplexConjugate( x[1] )) / 2])[2] # check this!!!
 ),
 
 linalg1 := rec(
@@ -81,9 +79,9 @@ linalg1 := rec(
 ),
 
 linalg2 := rec(
+    matrix := OMgapMatrix,
 	matrixrow := OMgapMatrixRow,
-    vector := OMgapMatrixRow,
-    matrix := OMgapMatrix
+    vector := OMgapMatrixRow
 ),
 
 minmax1 := rec(
@@ -91,36 +89,37 @@ minmax1 := rec(
     max := x-> Maximum(x[1])
 ),
 
-nums1 := rec( 
-	rational := OMgapDivide
-),
-
 relation3 := rec( # TO BE TESTED 
+    class := fail, 
+    classes := fail,
     equivalence_closure := x -> TransitiveClosureBinaryRelation( 
                                   SymmetricClosureBinaryRelation(
-                                    ReflexiveClosureBinaryRelation( x[1] ) ) ),
-    transitive_closure := x ->TransitiveClosureBinaryRelation( x[1] ),
-    reflexive_closure := x ->ReflexiveClosureBinaryRelation( x[1] ),
-    symmetric_closure := x ->SymmetricClosureBinaryRelation( x[1] ),
-    is_transitive := x ->IsTransitiveBinaryRelation( x[1] ),
-    is_reflexive := x ->IsReflexiveBinaryRelation( x[1] ),
-    is_symmetric := x ->IsSymmetricBinaryRelation( x[1] ),
-    is_equivalence := x ->IsEquivalenceRelation( x[1] )
+                                    ReflexiveClosureBinaryRelation( x[1] ) ) ),   
+    is_equivalence := x -> IsEquivalenceRelation( x[1] ),
+    is_reflexive := x -> IsReflexiveBinaryRelation( x[1] ),
+	is_relation := fail,
+    is_symmetric := x -> IsSymmetricBinaryRelation( x[1] ),
+    is_transitive := x -> IsTransitiveBinaryRelation( x[1] ),
+    reflexive_closure := x -> ReflexiveClosureBinaryRelation( x[1] ),
+    symmetric_closure := x -> SymmetricClosureBinaryRelation( x[1] ),
+    transitive_closure := x -> TransitiveClosureBinaryRelation( x[1] )
 ),
 
 # experimental CDs and symbols
 
 algnums := rec( # see this CD in openmath/cds directory
-	NthRootOfUnity := OMgapNthRootOfUnity
+	NthRootOfUnity := OMgapNthRootOfUnity,
+	star := fail
 ),
 	
 cas := rec( # see this CD in openmath/cds directory
-	("quit") := OMgapQuit,
 	assign := OMgapAssign,
-	retrieve := OMgapRetrieve,
-	native_statement := OMgapNativeStatement,
 	native_error := OMgapNativeError,
-	native_output := OMgapNativeOutput
+	native_output := OMgapNativeOutput,
+	native_statement := OMgapNativeStatement,
+	referent := fail,
+	retrieve := OMgapRetrieve,
+	("quit") := OMgapQuit,
 ),
 
 group1 := rec( # experimental symbols
