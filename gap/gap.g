@@ -178,15 +178,12 @@ BindGlobal("OMgapPermutation", PermList);
 ##
 ##  Semantic mappings for symbols from group1.cd
 ## 
-BindGlobal("OMgapCharacterTableOfGroup",
-	x->OMgapId([OMgap1ARGS(x), CharacterTable(x[1])])[2]);
 BindGlobal("OMgapConjugacyClass",
 	x->OMgapId([OMgap2ARGS(x), ConjugacyClass(x[1], x[2])])[2]);
 BindGlobal("OMgapDerivedSubgroup",
 	x->OMgapId([OMgap1ARGS(x), DerivedSubgroup(x[1])])[2]);
 BindGlobal("OMgapElementSet",
 	x->OMgapId([OMgap1ARGS(x), Elements(x[1])])[2]);
-BindGlobal("OMgapGroup", Group );
 BindGlobal("OMgapIsAbelian", 
 	x->OMgapId([OMgap1ARGS(x), IsAbelian(x[1])])[2]);
 BindGlobal("OMgapIsNormal", 
@@ -308,103 +305,6 @@ BindGlobal("OMgap_poly_u_rep",
 BindGlobal("OMgap_term",
 	x->x );
 		
-
-######################################################################
-##
-##  Semantic mappings for symbols from cas.cd
-## 
-
-## quit
-BindGlobal("OMgapQuitFunc",
-function()
-	return fail;
-end);
-
-BindGlobal("OMgapQuit",
-	x->OMgapQuitFunc());
-
-
-## assign
-BindGlobal("OMgapAssignFunc",
-function(varname, obj)
-	if IsBoundGlobal(varname) then
-		UnbindGlobal(varname);
-	fi;
-
-	BindGlobal(varname, obj);
-	MakeReadWriteGlobal(varname);
-	return "";
-end);
-
-BindGlobal("OMgapAssign",
-	x->OMgapId([OMgap2ARGS(x), OMgapAssignFunc(x[1],x[2])])[2]);
-
-## retrieve
-BindGlobal("OMgapRetrieveFunc",
-function(varname)
-	if ValueGlobal(varname) = fail then
-		return false;
-	else
-		return ValueGlobal(varname);
-	fi;
-end);
-
-BindGlobal("OMgapRetrieve",
-	x->OMgapId([OMgap1ARGS(x), OMgapRetrieveFunc(x[1])])[2]);
-
-## native_statement and error
-OM_GAP_OUTPUT_STR := "";
-OM_GAP_ERROR_STR := "";
-BindGlobal("OMgapNativeStatementFunc",
-function(statement)
-	local i, result;
-
-	OM_GAP_ERROR_STR := "";
-
-	# if statement has READ, Read, WRITE or Write then it's invalid
-	if (PositionSublist(statement, "READ") <> fail) or
-		(PositionSublist(statement, "Read") <> fail) or
-		(PositionSublist(statement, "WRITE") <> fail) or
-		(PositionSublist(statement, "Write") <> fail) then
-
-		OM_GAP_ERROR_STR := "Invalid Statement";
-		return false;
-	fi;
-
-	i := InputTextString(statement);
-	# want to catch standard out.
-	result := READ_COMMAND(i,false);
-	CloseStream(i);
-	
-	OM_GAP_OUTPUT_STR :=  ViewString(result);
-	# this is the way of indicating an error condition...
-	if (result = fail) then
-		OM_GAP_ERROR_STR := "Unknown Error";
-		return false;
-	fi;
-
- 	return true; 
-end);
-
-BindGlobal("OMgapNativeStatement",
-	x->OMgapId([OMgap1ARGS(x), OMgapNativeStatementFunc(x[1])])[2]);
-
-BindGlobal("OMgapNativeErrorFunc",
-function()
-	return OM_GAP_ERROR_STR; # near as possible to the empty object
-end);
-
-BindGlobal("OMgapNativeError",
-	x->OMgapId(OMgapNativeErrorFunc()));
-
-BindGlobal("OMgapNativeOutputFunc",
-function()
-	return OM_GAP_OUTPUT_STR; # near as possible to the empty object
-end);
-
-BindGlobal("OMgapNativeOutput",
-	x->OMgapId(OMgapNativeOutputFunc()));
-	
 
 #####################################################################
 ##
@@ -598,7 +498,7 @@ group1 := rec(
 	carrier := OMgapElementSet,
 	expression := fail, # might be useful to embed the result of the 2nd argument into the 1st argument,
 	                    # but single expression from arith1 CD will work too
-	group := OMgapGroup,
+	group := fail,      # installed in private/private.g
 	identity := x -> One( x[1] ),
 	inversion := x -> MappingByFunction( x[1], x[1], a->a^-1, a->a^-1 ),
 	is_commutative := OMgapIsAbelian,
@@ -811,7 +711,7 @@ nums1 := rec(
 ),
 
 permgp1 := rec(
-	group := OMgapGroup, # n-ary function  
+	group := fail, # installed in private/private.g
     base := fail,
     generators := fail,
     is_in := fail,

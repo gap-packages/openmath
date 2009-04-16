@@ -8,26 +8,16 @@
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
 #Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
 ##
-##    This file contains update to the record OMsymRecord, according to the
+##    This file contains updates to the record OMsymRecord, according to the
 ##    current OpenMath CDs (for converting from OpenMath to GAP),
 ##
 
 Revision.("openmath/gap/new.g") :=
     "@(#)$Id$";
-    
-## The content of this file is not exhaustively tested!
-
-######################################################################
-##
-##  Semantic mappings for symbols from algnums.cd
-## 
-BindGlobal("OMgapNthRootOfUnity", 
-	x-> OMgapId([OMgap2ARGS(x), E(x[1])^x[2]])[2]);
-	
 
 #######################################################################
 ## 
-## From OpenMath to Gap
+## Conversion from OpenMath to GAP, to be moved into gap.g after tests
 ##
 
 OMsymRecord_new := rec(
@@ -153,32 +143,9 @@ relation4 := rec(
 	eqs := fail
 ),
 
-# experimental CDs and symbols
-
-algnums := rec( # see this CD in openmath/cds directory
-	NthRootOfUnity := OMgapNthRootOfUnity,
-	star := fail
-),
-	
-cas := rec( # see this CD in openmath/cds directory
-	assign := OMgapAssign,
-	native_error := OMgapNativeError,
-	native_output := OMgapNativeOutput,
-	native_statement := OMgapNativeStatement,
-	referent := fail,
-	retrieve := OMgapRetrieve,
-	("quit") := OMgapQuit,
-),
-
-group1 := rec( # experimental symbols
-	CharacterTableOfGroup := OMgapCharacterTableOfGroup,  
-	CharacterTable := OMgapCharacterTableOfGroup
-)
-
 );
 
-
-OM_append := function (  )
+OM_append_new := function (  )
     local cd, name;
     MakeReadWriteGlobal( "OMsymRecord" );
     for cd in RecNames( OMsymRecord_new )  do
@@ -193,9 +160,33 @@ OM_append := function (  )
     MakeReadOnlyGlobal( "OMsymRecord" );
 end;
 
-OM_append();
+OM_append_new();
 
-Unbind( OM_append );
+Unbind( OM_append_new );
+
+OMsymRecord_private := rec();
+
+OM_append_private := function (  )
+    local cd, name;
+    if IsExistingFile( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.g") ) then
+		Read( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.g") );
+    fi;
+    MakeReadWriteGlobal( "OMsymRecord" );
+    for cd in RecNames( OMsymRecord_private )  do
+    	if IsBound( OMsymRecord.(cd) ) then
+    		for name in RecNames( OMsymRecord_private.(cd) ) do
+    	    	OMsymRecord.(cd).(name) := OMsymRecord_private.(cd).(name);
+    	  	od;
+    	else
+    	  	OMsymRecord.(cd) := OMsymRecord_private.(cd);     
+    	fi;
+    od;	   
+    MakeReadOnlyGlobal( "OMsymRecord" );
+end;
+
+OM_append_private();
+
+Unbind( OM_append_private );
 
 
 #############################################################################
