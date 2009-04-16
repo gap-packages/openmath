@@ -84,6 +84,50 @@ linalg2 := rec(
     vector := OMgapMatrixRow
 ),
 
+linalg3 := rec(
+	matrix := fail, 
+	matrixcolumn := fail, 
+	vector := fail
+),
+
+linalg4 := rec(
+	characteristic_eqn :=fail, 
+	columncount :=fail, 
+	eigenvalue :=fail, 
+	eigenvector :=fail, 
+	rank :=fail, 
+	rowcount :=fail, 
+	size := fail
+),
+
+linalg5 := rec(
+	("anti-Hermitian") :=fail, 
+	banded :=fail, 
+	constant :=fail, 
+	diagonal_matrix :=fail, 
+	Hermitian :=fail, 
+	identity :=fail, 
+	("lower-Hessenberg") :=fail, 
+	("lower-triangular") :=fail, 
+	scalar :=fail, 
+	("skew-symmetric") :=fail, 
+	symmetric :=fail, 
+	tridiagonal :=fail, 
+	("upper-Hessenberg") :=fail, 
+	("upper-triangular") :=fail, 
+	zero := fail
+),
+
+linalg6 := rec(
+	matrix_tensor := fail, 
+	vector_tensor := fail
+),	
+
+linalg7 := rec(
+	list_to_matrix := fail, 
+	list_to_vector := fail
+),
+
 minmax1 := rec(
 	min := x -> Minimum(x[1]),
     max := x-> Maximum(x[1])
@@ -103,6 +147,10 @@ relation3 := rec( # TO BE TESTED
     reflexive_closure := x -> ReflexiveClosureBinaryRelation( x[1] ),
     symmetric_closure := x -> SymmetricClosureBinaryRelation( x[1] ),
     transitive_closure := x -> TransitiveClosureBinaryRelation( x[1] )
+),
+
+relation4 := rec(
+	eqs := fail
 ),
 
 # experimental CDs and symbols

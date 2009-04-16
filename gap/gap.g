@@ -464,6 +464,11 @@ arith3 := rec(
 	  	end
 ),
 
+bigfloat1 := rec(
+	bigfloat := fail, # maybe later
+	bigfloatprec := fail
+),	
+
 calculus1 := rec(
 	defint := fail,
 	diff := x -> Derivative(x[1]),
@@ -484,6 +489,10 @@ calculus1 := rec(
     partialdiff := fail
 ),
 
+coercions := rec(
+	 int2flt  := fail # converts an integer to a float
+),
+
 combinat1 := rec(
 	Bell := x -> Bell(x[1]),
 	binomial := x -> Binomial(x[1],x[2]),
@@ -493,12 +502,41 @@ combinat1 := rec(
 	Stirling2 := x -> Stirling2(x[1],x[2])
 ),
 
+field1 := rec(
+	addition := fail, 
+	additive_group := fail, 
+	carrier := fail, 
+	expression := fail, 
+	field := fail, 
+	identity := fail, 
+	inverse := fail, 
+	is_commutative := fail, 
+	is_subfield := fail, 
+	minus := fail, 
+	multiplication := fail, 
+	multiplicative_group := fail, 
+	power := fail, 
+	subfield := fail, 
+	subtraction := fail, 
+	zero := fail
+),
+
+field2 := rec(
+	conjugation := fail, 
+	is_automorphism := fail, 
+	is_endomorphism := fail, 
+	is_homomorphism := fail, 
+	is_isomorphism := fail, 
+	isomorphic := fail, 
+	left_multiplication := fail, 
+	right_multiplication := fail
+),
+
 field3 := rec(
 	field_by_poly := OMgap_field_by_poly,
 	fraction_field := fail,
 	free_field := fail
 ),
-
     
 field4 := rec(
 	automorphism_group := fail,
@@ -513,6 +551,17 @@ fieldname1 := rec(
 	R := fail
 ),
 
+finfield1 := rec(
+	conway_polynomial := fail, 
+	discrete_log := fail, 
+	field_by_conway := fail, 
+	field_by_conway := fail, 
+	is_primitive := fail, 
+	is_primitive_poly := fail, 
+	minimal_polynomial := fail, 
+	primitive_element := fail
+),
+
 fns1 := rec(
     domain := fail, 
     domainofapplication := fail, 
@@ -525,7 +574,26 @@ fns1 := rec(
     range := fail, 
     right_inverse := fail
 ),
-		
+
+graph1 := rec(
+	arrowset := fail, 
+	digraph := fail, 
+	edgeset := fail, 
+	graph := fail, 
+	source := fail, 
+	target := fail, 
+	vertexset := fail
+),
+
+graph2 := rec(
+	automorphism_group := fail, 
+	is_automorphism := fail, 
+	is_endomorphism := fail, 
+	is_homomorphism := fail, 
+	is_isomorphism := fail, 
+	isomorphic := fail
+),
+
 group1 := rec(
 	carrier := OMgapElementSet,
 	expression := fail, # might be useful to embed the result of the 2nd argument into the 1st argument,
@@ -640,6 +708,32 @@ interval1 := rec(
 	interval_oo := fail
 ),
 
+list1 := rec(
+	list := OMgapList,
+	map := OMgapMap,
+	suchthat := OMgapSuchthat
+),
+
+list2 := rec(
+	append := fail, 
+	cons := fail, 
+	first := fail, 
+	("in") := fail, 
+	list_selector := fail, 
+	nil := fail, 
+	rest := fail, 
+	reverse := fail, 
+	size := fail
+),
+
+list3 := rec(
+	difference := fail, 
+	entry := fail, 
+	length := fail, 
+	list_of_lengthn := fail, 
+	select := fail
+),
+
 logic1 := rec(
 	("and") := OMgapAnd,
     equivalent := x -> x[1] and x[2] or not x[1] and not x[2],
@@ -651,10 +745,58 @@ logic1 := rec(
 	xor := OMgapXor
 ),
 
-list1 := rec(
-	list := OMgapList,
-	map := OMgapMap,
-	suchthat := OMgapSuchthat
+monoid1 := rec(
+	carrier := fail, 
+	divisor_of := fail, 
+	expression := fail, 
+	identity := fail, 
+	invertibles := fail, 
+	is_commutative := fail, 
+	is_invertible := fail, 
+	is_submonoid := fail, 
+	monoid := fail, 
+	multiplication := fail, 
+	semigroup := fail, 
+	submonoid := fail
+),
+
+monoid2 := rec(
+	is_automorphism := fail, 
+	is_endomorphism := fail, 
+	is_homomorphism := fail, 	
+	is_isomorphism := fail, 
+	isomorphic := fail, 
+	left_multiplication := fail, 
+	right_multiplication := fail
+),	
+
+monoid3 := rec(
+	automorphism_group := fail, 
+	concatenation := fail, 
+	cyclic_monoid := fail, 
+	direct_power := fail, 
+	direct_product := fail, 
+	emptyword := fail, 
+	free_monoid := fail, 
+	left_regular_representation := fail, 
+	maps_monoid := fail, 
+	strings := fail
+),
+
+multiset1 := rec(
+	cartesian_produc := fail, 
+	emptyset := fail, 
+	("in") := fail, 
+	intersect := fail, 
+	multiset := fail, 
+	notin := fail, 
+	notprsubset := fail, 
+	notsubset := fail, 
+	prsubset := fail, 
+	setdiff := fail, 
+	size := fail, 
+	subset := fail, 
+	union := fail,
 ),
 
 nums1 := rec(
@@ -733,6 +875,26 @@ permutation1 := rec(
 	support := fail
 ),
 
+poly := rec(
+	coefficient := fail, 
+	coefficient_ring := fail, 
+	convert := fail, degree := fail, 
+	degree_wrt := fail, 
+	discriminant := fail, 
+	evaluate := fail, 
+	expand := fail, 
+	factor := fail, 
+	factored := fail, 
+	gcd := fail, 
+	lcm := fail, 
+	leading_coefficient := fail, 
+	partially_factored := fail, 
+	power := fail, 
+	resultant := fail, 
+	squarefree := fail, 
+	squarefreed := fail
+),	
+
 polyd1 := rec(
 	ambient_ring := fail, 
 	anonymous := fail, 
@@ -750,12 +912,73 @@ polyd1 := rec(
 	variables := fail
 ),
 
+polyd3 := rec(
+	collect := fail, 
+	list_to_poly_d := fail, 
+	poly_d_named_to_arith := fail, 
+	poly_d_to_arith := fail
+),
+
+polygb := rec(
+	completely_reduced := fail, 
+	groebner := fail, 
+	groebner_basis := fail, 
+	groebnered := fail, 
+	reduce := fail
+),
+
+polygb2 := rec(
+	extended_in := fail, 
+	("in") := fail, 
+	in_radical := fail, 
+	minimal_groebner_element := fail
+),	
+
+polynomial1 := rec(
+	coefficient := fail, 
+	coefficient_ring := fail, 
+	degree := fail, 
+	expand := fail, 
+	leading_coefficient := fail, 
+	leading_monomial := fail, 
+	leading_term  := fail
+),	
+
+polynomial2 := rec(
+	class := fail, 
+	divides := fail, 
+	eqmod := fail, 
+	modulo_relation := fail, 
+	neqmod := fail
+),
+
+polynomial3 := rec(
+	factors := fail, 
+	gcd := fail, 
+	quotient := fail, 
+	remainder := fail
+),	
+
+# polynomial4 (cf. SVN: na3/protocolx/openmath/polynomial4.ocd) 
+
+polyoperators1 := rec(
+	expand := fail, 
+	factor := fail, 
+	factors := fail, 
+	gcd := fail
+),	
+
 polyu := rec(
 	poly_u_rep := OMgap_poly_u_rep,
 	polynomial_ring_u := fail,
 	polynomial_u := fail,
 	term := OMgap_term
 ),
+
+quant1 := rec(
+	exists := fail, 
+	forall := fail
+),	
 
 relation1 := rec(
 	approx := fail,
@@ -765,6 +988,109 @@ relation1 := rec(
 	leq := OMgapLe,		
 	lt := OMgapLt,
 	neq := OMgapNeq
+),
+
+ring1 := rec(
+	addition := fail, 
+	additive_group := fail, 
+	carrier := fail, 
+	expression := fail, 
+	identity := fail, 
+	is_commutative := fail, 
+	is_subring := fail, 
+	multiplication := fail, 
+	multiplicative_monoid := fail,
+	negation := fail, 
+	power := fail, 
+	ring := fail, 
+	subring := fail, 
+	subtraction := fail, 
+	zero := fail
+),
+
+ring2 := rec(
+	is_automorphism := fail, 
+	is_endomorphism := fail, 
+	is_homomorphism := fail, 
+	is_isomorphism := fail, 
+	isomorphic := fail, 
+	left_multiplication := fail, 
+	right_multiplication := fail
+),
+
+ring3 := rec(
+	direct_power := fail, 
+	direct_product := fail, 
+	free_ring := fail, 
+	ideal := fail, 
+	integers := fail, 
+	invertibles := fail, 
+	is_ideal := fail, 
+	kernel := fail, 
+	m_poly_ring := fail,
+	matrix_ring := fail, 
+	multiplicative_group := fail, 
+	poly_ring := fail, 
+	rincipal_ideal := fail, 
+	quotient_ring := fail
+),
+
+ring4 := rec(
+	is_domain := fail, 
+	is_field := fail, 
+	is_maximal_ideal := fail, 
+	is_prime_ideal := fail, 
+	is_zero_divisor := fail
+),
+
+ring5 := rec(
+	automorphism_group := fail, 
+	homomorphism_by_generators := fail, 
+	quotient_by_poly_map := fail, 
+	quotient_map := fail
+),
+
+ringname1 := rec(
+	quaternions := fail, 
+	Z := fail, 
+	Zm := fail
+),
+
+semigroup1 := rec(
+	carrier := fail, 
+	expression := fail, 
+	factor_of := fail, 
+	is_commutative := fail, 
+	is_subsemigroup := fail, 
+	magma := fail, 
+	multiplication := fail, 
+	semigroup := fail, 
+	subsemigroup := fail
+),
+
+semigroup2 := rec(
+	is_automorphism := fail, 
+	is_endomorphism := fail, 
+	is_homomorphism := fail, 
+	is_isomorphism := fail, 
+	isomorphic := fail, 
+	left_multiplication := fail, 
+	right_multiplication := fail
+),
+
+semigroup3 := rec(
+	automorphism_group := fail, 
+	cyclic_semigroup := fail, 
+	direct_power := fail, 
+	direct_product := fail, 
+	free_semigroup := fail, 
+	left_regular_representation := fail, 
+	maps_semigroup := fail
+),
+
+semigroup4 := rec(
+	automorphism_group := fail, 
+	homomorphism_by_generators := fail
 ),
 
 set1 := rec(
@@ -784,6 +1110,17 @@ set1 := rec(
 	suchthat := OMgapSuchthat, 
 	union := OMgapUnion
 ),	  
+
+set3 := rec(
+	big_intersect := fail, 
+	big_union := fail, 
+	cartesian_power := fail, 
+	k_subsets := fail, 
+	map_with_condition := fail, 
+	map_with_target := fail, 
+	map_with_target_and_condition := fail, 
+	powerset := fail
+),
 	
 setname1 := rec(
 	C := fail,
@@ -793,6 +1130,16 @@ setname1 := rec(
 	R := fail,
 	Z := Integers
 ),
+
+setname2 := rec(
+	A := fail, 
+	Boolean := fail, 
+	GFp := fail, 
+	GFpn := fail, 
+	H := fail, 
+	QuotientField := fail, 
+	Zm := fail
+)
 
 ));
  
