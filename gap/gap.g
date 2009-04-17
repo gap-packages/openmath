@@ -498,7 +498,7 @@ group1 := rec(
 	carrier := OMgapElementSet,
 	expression := fail, # might be useful to embed the result of the 2nd argument into the 1st argument,
 	                    # but single expression from arith1 CD will work too
-	group := fail,      # installed in private/private.g
+	group := fail,      # our private version nstalled in private/private.g
 	identity := x -> One( x[1] ),
 	inversion := x -> MappingByFunction( x[1], x[1], a->a^-1, a->a^-1 ),
 	is_commutative := OMgapIsAbelian,
@@ -711,7 +711,7 @@ nums1 := rec(
 ),
 
 permgp1 := rec(
-	group := fail, # installed in private/private.g
+	group := fail, # our private version installed in private/private.g
     base := fail,
     generators := fail,
     is_in := fail,
