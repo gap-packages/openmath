@@ -183,7 +183,7 @@ BindGlobal( "OMObjects",
  OMR := function ( node )
  		local ref;
         ref := node.attributes.href;
-        return OMTempVars.OMREF.(ref{[ 2 .. Length( ref ) ]});
+        return OMTempVars.OMREF.( ref{[ 2 .. Length( ref ) ]} );
     end
 
 
