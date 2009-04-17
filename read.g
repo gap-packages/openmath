@@ -44,6 +44,7 @@ fi;
 ## OMPutObject and OMPrint
 
 ReadPackage("openmath", "/gap/omput.gi");
+ReadPackage("openmath", "/private/private.gi");
 
 
 #############################################################################
