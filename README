@@ -329,11 +329,11 @@ became its maintainer. The list of major updates is below:
   
 * Extended support of polynomial CDs.
 
-* Extended support of OpenMath references.
+* Fixed and extended support of OpenMath references.
 
 * Fixed error messages for unexpected_symbol, unhandled_symbol, 
   unsupported_CD as required by the 'error' OM CD.
-  
+    
 * Changes in conversion from GAP to OpenMath:
 - introduced OMINT_LIMIT and fixed OMput for integers too 
   large to be printed.
@@ -359,6 +359,17 @@ became its maintainer. The list of major updates is below:
     from GAP.
   - New function OMString to return a string with the 
     OpenMath representation of a GAP object.     
+    
+* Better organising of handling private CDs/symbols:
+  - created directory 'openmath/private' to store implementations 
+    of our private CDs and private/experimental symbols (this is
+    also the place where users may put their code if they will 
+    need to addsupport for their own private CDs)
+  - moved to 'openmath/private/private.g' code for algnums and 
+    cas CDs, for our versions of groups1.group and permgp1.group
+    and groups1.CharacterTable. 
+  - transformed OM_append into two functions OM_append_new and 
+    OM_append_private.
 
 * multiple rearrangements of declaring and assigning global 
   variables and moving of reading *.g files from read.g to 
