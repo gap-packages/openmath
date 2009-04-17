@@ -20,8 +20,8 @@ PackageName := "openmath",
 Subtitle := "OpenMath functionality in GAP",
 
 
-Version := "9.4.0",
-Date := "04/11/2009",
+Version := "10.0.0",
+Date := "17/04/2009",
 
 
 ArchiveURL := Concatenation([
@@ -108,7 +108,7 @@ Dependencies := rec(
   NeededOtherPackages := [ [ "GapDoc", ">= 1.2" ]  ],
   # GapDoc provides the function ParseTreeXMLString 
   SuggestedOtherPackages := [ ],
-  ExternalConditions := [ "This package can be useful only with other OpenMath-enabled applications" ]
+  ExternalConditions := [ ]
 ),
 
 AvailabilityTest := ReturnTrue,
