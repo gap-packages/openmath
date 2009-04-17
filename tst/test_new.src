@@ -1,28 +1,13 @@
 # This is the source of the test file. The test file is produced by:
-# gap -T -A -b < test_new.src
+# gap -T -A -b -r < test_new.src
 # remove the line 'gap> LogTo();' at the end of the generated file.
-
 LogTo("test_new");
-
-# TestFile, by Marco Costantini, of the 'openmath' package.
-
-### Start
-
 START_TEST( "Test of the 'openmath' package" );
 SizeScreen([80]);;
-
-
 ValidatePackageInfo( Filename( DirectoriesPackageLibrary( "openmath", "" ), "PackageInfo.g" ) );
-
-
 LoadPackage("openmath");
 
-
-
 ### Some examples from file openmath/examples
-
-
-## Example 1:
 
 stream := InputTextFile(Filename(
         DirectoriesPackageLibrary("openmath","tst"),"test3.omt"));;
@@ -36,11 +21,7 @@ OMGetObject(stream);
 OMGetObject(stream);
 OMGetObject(stream);
 OMGetObject(stream);
-
-OMGetObject(stream);
-OMGetObject(stream);
 CloseStream( stream );
-
 
 # similar, for file tst/test3.bin: binary encoding
 
@@ -56,11 +37,7 @@ OMGetObject(stream);
 OMGetObject(stream);
 OMGetObject(stream);
 OMGetObject(stream);
-
-OMGetObject(stream);
-OMGetObject(stream);
 CloseStream( stream );
-
 
 # similar, for file tst/test4.out: gpipe encoding
 
@@ -70,13 +47,11 @@ OMgetObjectByteStream(stream);
 OMgetObjectByteStream(stream);
 CloseStream( stream );
 
-
 # similar, for file tst/test5.omt
 
 stream := InputTextFile(Filename(DirectoriesPackageLibrary("openmath","tst"),"test5.omt"));;
 OMGetObject(stream);
 CloseStream( stream );
-
 
 # similar, for file tst/test6.omt
 
@@ -92,7 +67,6 @@ OMGetObject(stream); OM_GAP_OUTPUT_STR; OM_GAP_ERROR_STR;
 OMGetObject(stream); OM_GAP_OUTPUT_STR; OM_GAP_ERROR_STR;
 # there are some objects left on stream, but they are character table examples
 CloseStream( stream );
-
 
 # similar, for file tst/test_new.omt
 
@@ -111,16 +85,9 @@ OMGetObject(stream);
 OMGetObject(stream);
 OMGetObject(stream);
 OMGetObject(stream);
-OMGetObject(stream);
-OMGetObject(stream);
-OMGetObject(stream);
-OMGetObject(stream);
-OMGetObject(stream);
-
 CloseStream( stream );
 
-
-## Example 2:
+## Tests of conversion from GAP to OpenMath
 
 g := SymmetricGroup(5);
 t := "";
@@ -133,16 +100,11 @@ g2 := OMGetObject(s);
 CloseStream(s);
 g2 = g;
 
-
-## Example 4:
-
 g := SymmetricGroup(5);
 OMPrint(g);
 
 
-
 ### test with the different kinds of stream
-
 
 ## OutputTextFile, InputTextFile
 
@@ -160,14 +122,11 @@ CloseStream( s );
 
 RemoveFile( Filename( OMDirectoryTemporary, "test" ) );
 
-
 ## OutputTextUser,  InputTextUser
-
 
 # how do one tests OutputTextUser?
 
 # how do one tests InputTextUser?
-
 
 ## OutputTextString, InputTextString
 
@@ -187,19 +146,12 @@ OMGetObject( s );
 OMGetObject( s );
 CloseStream( s );
 
-
-## OutputTextNone, InputTextNone
+## OutputTextNone
 
 s := OutputTextNone(  );
 OMPutObject( s, 123 );
 OMPutObject( s, false );
-OMPutObject( s, "OutputTextNone, InputTextNone" );
-CloseStream( s );
-
-s := InputTextNone(  );
-OMGetObject( s );
-OMGetObject( s );
-OMGetObject( s );
+OMPutObject( s, "OutputTextNone" );
 CloseStream( s );
 
 ## InputOutputLocalProcess (doesn't work with Gap 4.2 or earlier)
@@ -232,8 +184,6 @@ OMGetObject( s );
 OMGetObject( s );
 CloseStream( s );
 
-
-
 ### miscellaneous tests
 
 # test with binary encoding and InputTextString
@@ -250,18 +200,15 @@ s := InputTextString( gpipe_string );
 OMgetObjectByteStream(s);
 CloseStream(s);
 
-
 # test of a long object
 
 OMTest(10^4000);
-
 
 # test of a hexadecimal encoded integer
 
 s := InputTextString( "<OMOBJ><OMI>x10ab2937fed2837a028374</OMI></OMOBJ>" );
 OMGetObject(s);
 CloseStream(s);
-
 
 # test of escaped XML chars
 
@@ -273,15 +220,12 @@ CloseStream(s);
 
 OMTest( List( Union( [4..42], [44..127] ), CHAR_INT ) );
 
-
 # test that the strings are returned in string representation
 
 stream := InputTextString( "<OMOBJ><OMSTR></OMSTR></OMOBJ> <OMOBJ><OMSTR>ciao</OMSTR></OMOBJ>" );;
 IsStringRep( OMGetObject( stream ) );
 IsStringRep( OMGetObject( stream ) );
 CloseStream(stream);
-
-
 
 ### test of Hasse (there was a bug)
 
@@ -304,8 +248,6 @@ h := HasseDiagram(p);
 
 # the bug was here.
 Elements(UnderlyingRelation(h));
-
-
 
 ### test for the various supported objects
 
@@ -419,13 +361,6 @@ OMTest(floats);
 floats := List( [ 11^7, 11^-7, -11^7, -11^-7, "nan" ], Float );
 OMPrint(floats);
 
-
-
-
-### end of test file
-
 STOP_TEST( "test", 10000 );
-
 LogTo();
 quit;
-

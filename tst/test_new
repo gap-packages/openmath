@@ -1,25 +1,11 @@
-gap> 
-gap> # TestFile, by Marco Costantini, of the 'openmath' package.
-gap> 
-gap> ### Start
-gap> 
 gap> START_TEST( "Test of the 'openmath' package" );
 gap> SizeScreen([80]);;
-gap> 
-gap> 
 gap> ValidatePackageInfo( Filename( DirectoriesPackageLibrary( "openmath", "" ), "PackageInfo.g" ) );
 true
-gap> 
-gap> 
 gap> LoadPackage("openmath");
 true
 gap> 
-gap> 
-gap> 
 gap> ### Some examples from file openmath/examples
-gap> 
-gap> 
-gap> ## Example 1:
 gap> 
 gap> stream := InputTextFile(Filename(
 >         DirectoriesPackageLibrary("openmath","tst"),"test3.omt"));;
@@ -43,13 +29,7 @@ gap> OMGetObject(stream);
 Group([ (1,2,3) ])
 gap> OMGetObject(stream);
 (1,2,3)
-gap> 
-gap> OMGetObject(stream);
-Error, OpenMath object not retrieved
-gap> OMGetObject(stream);
-Error, end of stream
 gap> CloseStream( stream );
-gap> 
 gap> 
 gap> # similar, for file tst/test3.bin: binary encoding
 gap> 
@@ -75,13 +55,7 @@ gap> OMGetObject(stream);
 Group([ (1,2,3) ])
 gap> OMGetObject(stream);
 (1,2,3)
-gap> 
-gap> OMGetObject(stream);
-Error, OpenMath object not retrieved
-gap> OMGetObject(stream);
-Error, end of stream
 gap> CloseStream( stream );
-gap> 
 gap> 
 gap> # similar, for file tst/test4.out: gpipe encoding
 gap> 
@@ -93,14 +67,12 @@ gap> OMgetObjectByteStream(stream);
 E(4)
 gap> CloseStream( stream );
 gap> 
-gap> 
 gap> # similar, for file tst/test5.omt
 gap> 
 gap> stream := InputTextFile(Filename(DirectoriesPackageLibrary("openmath","tst"),"test5.omt"));;
 gap> OMGetObject(stream);
 CharacterTable( Alt( [ 1 .. 3 ] ) )
 gap> CloseStream( stream );
-gap> 
 gap> 
 gap> # similar, for file tst/test6.omt
 gap> 
@@ -140,7 +112,6 @@ gap> OMGetObject(stream); OM_GAP_OUTPUT_STR; OM_GAP_ERROR_STR;
 gap> # there are some objects left on stream, but they are character table examples
 gap> CloseStream( stream );
 gap> 
-gap> 
 gap> # similar, for file tst/test_new.omt
 gap> 
 gap> stream := InputTextFile(Filename(DirectoriesPackageLibrary("openmath","tst"),"test_new.omt"));;
@@ -172,21 +143,9 @@ gap> OMGetObject(stream);
 true
 gap> OMGetObject(stream);
 10/9
-gap> OMGetObject(stream);
-Error, unknown OpenMath cd, cd=setname1 name=C
-gap> OMGetObject(stream);
-Error, unknown OpenMath symbol, cd=arith1 name=plurse
-gap> OMGetObject(stream);
-Error, unknown OpenMath cd, cd=specfun1 name=BesselJ
-gap> OMGetObject(stream);
-Error, unknown OpenMath cd, cd=not_existing_cd name=xyz
-gap> OMGetObject(stream);
-Error, unknown OpenMath symbol, cd=logic1 name=not_existing_symbol
-gap> 
 gap> CloseStream( stream );
 gap> 
-gap> 
-gap> ## Example 2:
+gap> ## Tests of conversion from GAP to OpenMath
 gap> 
 gap> g := SymmetricGroup(5);
 Sym( [ 1 .. 5 ] )
@@ -205,17 +164,14 @@ gap> CloseStream(s);
 gap> g2 = g;
 true
 gap> 
-gap> 
-gap> ## Example 4:
-gap> 
 gap> g := SymmetricGroup(5);
 Sym( [ 1 .. 5 ] )
 gap> OMPrint(g);
 <OMOBJ>
 	<OMA>
-		<OMS cd="group1" name="Group"/>
+		<OMS cd="group1" name="group"/>
 		<OMA>
-			<OMS cd="permut1" name="Permutation"/>
+			<OMS cd="permut1" name="permutation"/>
 			<OMI> 2</OMI>
 			<OMI> 3</OMI>
 			<OMI> 4</OMI>
@@ -223,7 +179,7 @@ gap> OMPrint(g);
 			<OMI> 1</OMI>
 		</OMA>
 		<OMA>
-			<OMS cd="permut1" name="Permutation"/>
+			<OMS cd="permut1" name="permutation"/>
 			<OMI> 2</OMI>
 			<OMI> 1</OMI>
 		</OMA>
@@ -231,9 +187,7 @@ gap> OMPrint(g);
 </OMOBJ>
 gap> 
 gap> 
-gap> 
 gap> ### test with the different kinds of stream
-gap> 
 gap> 
 gap> ## OutputTextFile, InputTextFile
 gap> 
@@ -255,14 +209,11 @@ gap>
 gap> RemoveFile( Filename( OMDirectoryTemporary, "test" ) );
 true
 gap> 
-gap> 
 gap> ## OutputTextUser,  InputTextUser
-gap> 
 gap> 
 gap> # how do one tests OutputTextUser?
 gap> 
 gap> # how do one tests InputTextUser?
-gap> 
 gap> 
 gap> ## OutputTextString, InputTextString
 gap> 
@@ -291,24 +242,13 @@ gap> OMGetObject( s );
 "OutputTextString, InputTextString"
 gap> CloseStream( s );
 gap> 
-gap> 
-gap> ## OutputTextNone, InputTextNone
+gap> ## OutputTextNone
 gap> 
 gap> s := OutputTextNone(  );
 OutputTextNone()
 gap> OMPutObject( s, 123 );
 gap> OMPutObject( s, false );
-gap> OMPutObject( s, "OutputTextNone, InputTextNone" );
-gap> CloseStream( s );
-gap> 
-gap> s := InputTextNone(  );
-InputTextNone()
-gap> OMGetObject( s );
-Error, end of stream
-gap> OMGetObject( s );
-Error, end of stream
-gap> OMGetObject( s );
-Error, end of stream
+gap> OMPutObject( s, "OutputTextNone" );
 gap> CloseStream( s );
 gap> 
 gap> ## InputOutputLocalProcess (doesn't work with Gap 4.2 or earlier)
@@ -349,8 +289,6 @@ gap> OMGetObject( s );
 "InputOutputLocalProcess, binary encoding"
 gap> CloseStream( s );
 gap> 
-gap> 
-gap> 
 gap> ### miscellaneous tests
 gap> 
 gap> # test with binary encoding and InputTextString
@@ -371,12 +309,10 @@ gap> OMgetObjectByteStream(s);
 9
 gap> CloseStream(s);
 gap> 
-gap> 
 gap> # test of a long object
 gap> 
 gap> OMTest(10^4000);
 true
-gap> 
 gap> 
 gap> # test of a hexadecimal encoded integer
 gap> 
@@ -385,7 +321,6 @@ InputTextString(0,49)
 gap> OMGetObject(s);
 20151098133805576518534004
 gap> CloseStream(s);
-gap> 
 gap> 
 gap> # test of escaped XML chars
 gap> 
@@ -400,7 +335,6 @@ gap>
 gap> OMTest( List( Union( [4..42], [44..127] ), CHAR_INT ) );
 true
 gap> 
-gap> 
 gap> # test that the strings are returned in string representation
 gap> 
 gap> stream := InputTextString( "<OMOBJ><OMSTR></OMSTR></OMOBJ> <OMOBJ><OMSTR>ciao</OMSTR></OMOBJ>" );;
@@ -409,8 +343,6 @@ true
 gap> IsStringRep( OMGetObject( stream ) );
 true
 gap> CloseStream(stream);
-gap> 
-gap> 
 gap> 
 gap> ### test of Hasse (there was a bug)
 gap> 
@@ -442,8 +374,6 @@ gap> # the bug was here.
 gap> Elements(UnderlyingRelation(h));
 [ Tuple( [ 0, a ] ), Tuple( [ 0, b ] ), Tuple( [ 0, c ] ), Tuple( [ a, 1 ] ), 
   Tuple( [ b, 1 ] ), Tuple( [ c, 1 ] ) ]
-gap> 
-gap> 
 gap> 
 gap> ### test for the various supported objects
 gap> 
@@ -516,9 +446,9 @@ gap>
 gap> OMPrint(AlternatingGroup(6));
 <OMOBJ>
 	<OMA>
-		<OMS cd="group1" name="Group"/>
+		<OMS cd="group1" name="group"/>
 		<OMA>
-			<OMS cd="permut1" name="Permutation"/>
+			<OMS cd="permut1" name="permutation"/>
 			<OMI> 2</OMI>
 			<OMI> 3</OMI>
 			<OMI> 4</OMI>
@@ -526,7 +456,7 @@ gap> OMPrint(AlternatingGroup(6));
 			<OMI> 1</OMI>
 		</OMA>
 		<OMA>
-			<OMS cd="permut1" name="Permutation"/>
+			<OMS cd="permut1" name="permutation"/>
 			<OMI> 1</OMI>
 			<OMI> 2</OMI>
 			<OMI> 3</OMI>
@@ -597,7 +527,7 @@ gap>
 gap> OMPrint([1,2,3]);
 <OMOBJ>
 	<OMA>
-		<OMS cd="linalg2" name="vector"/>
+		<OMS cd="list1" name="list"/>
 		<OMI> 1</OMI>
 		<OMI> 2</OMI>
 		<OMI> 3</OMI>
@@ -690,7 +620,7 @@ gap>
 gap> OMPrint((1,3,5));
 <OMOBJ>
 	<OMA>
-		<OMS cd="permut1" name="Permutation"/>
+		<OMS cd="permut1" name="permutation"/>
 		<OMI> 3</OMI>
 		<OMI> 2</OMI>
 		<OMI> 5</OMI>
@@ -811,11 +741,6 @@ gap> OMPrint(floats);
 	</OMA>
 </OMOBJ>
 gap> 
-gap> 
-gap> 
-gap> 
-gap> ### end of test file
-gap> 
 gap> STOP_TEST( "test", 10000 );
 Test of the 'openmath' package
-GAP4stones: 11
+GAP4stones: 8
