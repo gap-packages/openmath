@@ -598,3 +598,23 @@ How to produce binary test files:
 
 ../OMCv1.3c/src/tpipe -xb test4.omt test4.bin
 ../bin/i686-apple-darwin9.6.0-gcc/gpipe -b test4.bin test4.out
+
+######################################################################
+
+GAPDoc manual HOW-TO:
+
+ReadPackage("openmath/gap/buildman.g");
+
+then
+
+OPENMATHBuildManual();
+
+or 
+
+OPENMATHBuildManualHTML();
+
+######################################################################
+
+TODO:
+
+* cleanup in the cds directory.
