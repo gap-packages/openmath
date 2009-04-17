@@ -535,11 +535,89 @@ Best regards,
    
     Stéphane.
 
+The home-page of Olivier Arsac is now http://www.arsac.org/olivier/
+
+######################################################################
+
+Descriptions of utilities:
+
+omproxy 
+   OpenMath proxy.
+   Repeats an incoming stream.
+   (stream may be socket or file).
+   when going through, OpenMath objects may be traced.
+
+   eg: omproxy -o received.om
+   eg: omproxy -i tosend.om -h server.com -p 8000
+   eg: omproxy -l 8000 -d routed.om -h server.com -p 8000
+   eg: omproxy -i in.om -o out.om -v3
+
+   -l --inport: int (7007)
+      port to listen to for connection to proxy.
+   -p --outport: int (7007)
+      port to use for host connection.
+   -h --host: string (res08-obk1.resnet.st-andrews.ac.uk)
+      host to connect to.
+   -i --infile: string
+      file to read from (instead of socket).
+   -o --outfile: string
+      file to write to (instead of socket).
+   -d --dupfile: string
+      duplicate output into this file.
+   -e --encoding: string (mimic)
+      encoding used for output. (mimic, binary or xml)
+   --tracefile: string
+      file to write log to (default is stdout).
+   -v --verbosity: int (0)
+      verbosity level (0 nothing, 1 only tokens, 2 tokens+time, 3 2+values).
 
 
+tenc -[bt] -[swad]
+   Test some encode/decode functions,
+   in binary or text mode depending on option switch -b or -t).
+   -s for string utf7 encoding.
+   -w for wide char string utf7 encoding.
+   -a for byte arrays encoding.
+   -d for portable double encoding.
+   Exit status is 0 if test has run smoothly, 1 otherwise.
 
-The home-page of Olivier Arsac is now
 
-http://www.arsac.org/olivier/
+tpipe -[ubx][bx] inFile outFile
+   Pipe OpenMath inFile into OpenMath outFile
+   in/outFile may be replaced by - for stdin/out.
+   Used mainly for tests or sample purpose
+   May also be used as a conversion tool,
+   or as a basic pretty printer for XML OpenMath files.
+   u/b/x means unknown/binary/xml encoding.
+   u: creates an input device that will try to autodetect its encoding type.
+   eg: tpipe -bx A B
+         Converts binary file A into XML text file B.
+         (pretty printing it by the way).
+       tpipe -ub A B
+         Converts an unknown encoding type OpenMath file A into a binary file B.
 
 
+gpipe -[ubx] inFile outFile
+   Pipe OpenMath inFile into GAP-stream outFile
+   in/outFile may be replaced by - for stdin/out.
+   Used mainly for tests or sample purpose
+   May also be used as a conversion tool,
+   or as a basic pretty printer for XML OpenMath files.
+   u/b/x means unknown/binary/xml encoding.
+   u: creates an input device that will try to autodetect its encoding type.
+   eg: tpipe -b A B
+         Converts binary file A into GAP input file B.
+       tpipe -u A B
+         Converts an unknown encoding type OpenMath file A into a GAP input file B.
+
+######################################################################
+
+How to produce binary test files:
+
+1) *.bin is the binary file produced by tpipe, for example:
+
+../OMCv1.3c/src/tpipe -xb test4.omt test4.bin
+
+2) *.out is the output file produced from *.bin by gpipe, for example:
+
+../bin/i686-apple-darwin9.6.0-gcc/gpipe -b test4.bin test4.out
