@@ -57,7 +57,7 @@
 The &openmath; package provides an &OpenMath; phrasebook for &GAP;: 
 it allows &GAP; users to import and export mathematical objects 
 encoded in OpenMath, for the purpose of exchanging them with other 
-applications which are &OpenMath;-enabled. 
+&OpenMath;-enabled applications. 
 </Abstract>
 
 <Copyright>
@@ -69,7 +69,7 @@ the Free Software Foundation; either version 2 of the License, or
 <URL>http://www.gnu.org/licenses/gpl.html</URL>.
 <P/>
 
-Additionally, The &openmath; package contains code developed at INRIA
+Additionally, the &openmath; package contains code developed at INRIA
 (copyright INRIA), under the ESPRIT project number 24969 (OpenMath).
 The user may not use the library in commercial products without seeking
 permission from the &GAP; group (support@gap-system.org) and the 
@@ -82,7 +82,8 @@ On various stages the development of the &openmath; package was supported by:
 <List>
   <Item>European Commission through ESPRIT grant EP 24969 
   <Q>Accessing and Using Mathematical Information Electronically</Q>
-  (see <URL>http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html</URL>).</Item>
+  (see <P/>
+  <URL>http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html</URL>).</Item>
   <Item>EU FP6 Programme project 026133 
   <Q>SCIEnce - Symbolic Computation Infrastructure for Europe</Q>
   (see <URL>http://www.symbolic-computation.org/</URL>).</Item>
@@ -98,6 +99,7 @@ We acknowledge with gratitude this support.<P/>
 
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "openmath.xml">
+<#Include SYSTEM "extend.xml">
 
 </Body>
 

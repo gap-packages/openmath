@@ -1,0 +1,105 @@
+<!-- $Id$ -->
+
+<Chapter Label="ExtendingOpenMath">
+<Heading>Extending the &openmath; package</Heading>    
+
+<Section Label="Available">
+<Heading>Exploring supported symbols</Heading>
+
+The &openmath; package supports such basic &OpenMath; objects
+as integers ( &lt;OMI> ), character strings ( &lt;OMSTR> ) and
+variables ( &lt;OMVAR> ). Besides that, it supports a number
+of &OpenMath; content dictionaries (some of them only partially,
+dependently on their relevance to &GAP;). 
+
+To see which symbols from which content dictionaries are supported
+for the conversion from &OpenMath; to &GAP;, explore the global record
+<C>OMsymRecord</C>. Its components have names of appropriate CDs,
+and subcomponents of each component have names of symbols from the
+corresponding CD. If the value of the component is not equal to
+<K>fail</K>, then it contains the function or the object which is used 
+for conversion. The following example of the entry for the nums1 CD
+demonstrates a combination of all possible cases:
+
+<Example>
+<![CDATA[
+gap> Print(OMsymRecord.nums1,"\n");
+rec(
+  e := fail,
+  i := E(4),
+  pi := fail,
+  based_integer := fail,
+  gamma := fail,
+  infinity := infinity,
+  NaN := fail,
+  rational := function ( x )
+        return OMgapId( [ OMgap2ARGS( x ), x[1] / x[2] ] )[2];
+    end )
+]]>
+</Example>
+
+<C>OMsymRecord</C> contains all symbols for which conversion from 
+&OpenMath; to &GAP; is supported except some special symbols related
+with errors and special procedures from the &SCSCP; package which
+are threated separately. 
+<P/>
+
+The main tool for the conversion from &GAP; to &OpenMath; is 
+<C>OMPut( &lt;stream>, &lt;object> )</C>. A number of methods for
+<C>OMPut</C> are installed in the file <File>openmath/gap/omput.gi</File>.
+<P/>
+
+To check quickly whether the object may be converted to &OpenMath;,
+call <C>OMprint</C> for that object, for example:
+
+<Example>
+<![CDATA[
+gap> OMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );                
+<OMOBJ>
+	<OMA>
+		<OMS cd="list1" name="list"/>
+		<OMA>
+			<OMS cd="interval1" name="integer_interval"/>
+			<OMI> 1</OMI>
+			<OMI> 10</OMI>
+		</OMA>
+		<OMA>
+			<OMS cd="integer2" name="class"/>
+			<OMI> 2</OMI>
+			<OMI> 6</OMI>
+		</OMA>
+		<OMA>
+			<OMS cd="permut1" name="permutation"/>
+			<OMI> 2</OMI>
+			<OMI> 1</OMI>
+		</OMA>
+	</OMA>
+</OMOBJ>
+]]>
+</Example>
+
+The package is in the continuous development and will support even more symbols in the future.
+In the meantime, if you will have any requests for the support for particular symbols, please
+write to Alexander Konovalov who currently develops and maintains the package.
+
+</Section>
+
+<Section Label="Private">
+<Heading>Adding support for private content dictionaries and symbols</Heading>
+
+There is also a way for the user to extend the package adding support for private
+and experimental CDs or separate symbols. We allocated the directory <File>openmath/private</File>
+for this purposes, and currently it contain the file <File>private.g</File> for conversions
+from &OpenMath; to &GAP; and the file <File>private.gi</File> for conversions from &GAP;
+to &OpenMath; for some symbols from private CDs contained in the <File>openmath/cds</File> directory.
+<P/>
+
+The file <File>private.g</File> is loaded in <File>openmath/gap/new.g</File>, 
+and the <File>private.gi</File> is loaded from <File>openmath/gap/read.g</File>.
+If the user would like to add own code, this may be done either by adding it
+to these files or by placing additional files in <File>openmath/private</File>
+directory and load them similarly to <File>private.g</File> and <File>private.gi</File>.
+
+</Section>
+
+</Chapter>
