@@ -281,9 +281,9 @@ InstallMethod(OMPut, "for an integer", true,
 [IsOutputStream, IsInt],0,
 function(stream, x)
     if x >= OMINT_LIMIT then
-  		OMWriteLine(stream, ["<OMI> ", String(x), "</OMI>"]);
+  		OMWriteLine(stream, ["<OMI>", String(x), "</OMI>"]);
 	else
-  		OMWriteLine(stream, ["<OMI> ", x, "</OMI>"]);
+  		OMWriteLine(stream, ["<OMI>", x, "</OMI>"]);
 	fi;
 end);
 
