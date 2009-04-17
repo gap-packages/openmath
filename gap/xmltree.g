@@ -95,7 +95,7 @@ BindGlobal( "OMObjects",
             head := OMParseXmlObj( node.content[1] );
         fi;
         # extra check to achieve compatibility with SCSCP
-        if node.content[1].attributes.cd="scscp2" and 
+        if IsBound(node.content[1].attributes.cd) and node.content[1].attributes.cd="scscp2" and 
           node.content[1].attributes.name in [ "get_signature", "is_allowed_head" ] then
             return head( [ node.content[2].attributes.cd, node.content[2].attributes.name ] );
         else
@@ -181,7 +181,9 @@ BindGlobal( "OMObjects",
 
 
  OMR := function ( node )
-        return OMTempVars.OMREF.( node.attributes.href );
+ 		local ref;
+        ref := node.attributes.href;
+        return OMTempVars.OMREF.(ref{[ 2 .. Length( ref ) ]});
     end
 
 
