@@ -44,7 +44,9 @@ fi;
 ## OMPutObject and OMPrint
 
 ReadPackage("openmath", "/gap/omput.gi");
-ReadPackage("openmath", "/private/private.gi");
+if IsExistingFile( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.gi") ) then
+	Read( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.gi") );
+fi;
 
 
 #############################################################################
