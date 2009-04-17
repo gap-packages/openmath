@@ -1,7 +1,7 @@
-Development notes file, by Marco Costantini
+Development notes file, by Marco Costantini with updated by Alexander Konovalov
 
-This file contains notes for development and for releasing a new
-version; it is not useful for the user.
+This file contains notes for development and for releasing a new version; 
+it is not intended to be a part of the release.
 
 ######################################################################
 
@@ -134,28 +134,12 @@ chmod -x tst/test5.omt
 ?OMTest
 ReadTest( Filename( DirectoriesPackageLibrary( "openmath", "tst" ), "test_new" ) );
 
-* Send a mail about the new release, now the person that takes care of
-this is Bjoern Assmann:
-
-to:
-Bjoern Assmann <bjoern@mcs.st-andrews.ac.uk>
-
-subject:
-package openmath, new version
-
-Dear Bjoern,
-a new version of the package openmath is ready; 
-the PackageInfo.g file is at
-http://www-math.science.unitn.it/~costanti/gap_code/openmath/PackageInfo.g
-(the same as before).
-Would you please include in the Gap site?
-Best wishes,
-Marco
+* Send a mail about the new release to the GAP Support to include it in the
+  next update of the packages archive
 
 * check that the new version is uploaded on the Gap site.
 
 * advertise the new version
-
 
 
 ######################################################################
@@ -290,19 +274,11 @@ stream := InputTextUser(); g := OMGetObject(stream);CloseStream(stream);
 <!-- ... -->
 <? .
 
-
-* Conversion from OpenMath to Gap of a string containing '+' doesn't work.
-
-OMTest("+");
-
-
 * OMPut: for a Hasse diagram creates OpenMath variables like <OMV name="1"/>
 which are invalid OpenMath variables names.
 
-
 * Having different compiled versions of the OMCv1.3c library for
 different architectures is not supported.
-
 
 ######################################################################
 
@@ -539,7 +515,7 @@ The home-page of Olivier Arsac is now http://www.arsac.org/olivier/
 
 ######################################################################
 
-Descriptions of utilities:
+Descriptions of utilities (copied from their output):
 
 omproxy 
    OpenMath proxy.
@@ -616,8 +592,9 @@ How to produce binary test files:
 
 1) *.bin is the binary file produced by tpipe, for example:
 
-../OMCv1.3c/src/tpipe -xb test4.omt test4.bin
+../OMCv1.3c/src/tpipe -xb test3.omt test3.bin
 
 2) *.out is the output file produced from *.bin by gpipe, for example:
 
+../OMCv1.3c/src/tpipe -xb test4.omt test4.bin
 ../bin/i686-apple-darwin9.6.0-gcc/gpipe -b test4.bin test4.out
