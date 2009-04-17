@@ -2,9 +2,9 @@
 	<OMA>
 		<OMS cd="group1" name="CharacterTableOfGroup"/>
 		<OMA>
-			<OMS cd="group1" name="Group"/>
+			<OMS cd="group1" name="group"/>
 			<OMA>
-				<OMS cd="permut1" name="Permutation"/>
+				<OMS cd="permut1" name="permutation"/>
 				<OMI> 2 </OMI>
 				<OMI> 3 </OMI>
 				<OMI> 1 </OMI>

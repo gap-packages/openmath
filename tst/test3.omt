@@ -1,28 +1,22 @@
 <OMOBJ>
-	<OMI>
-	912873912381273891
-	</OMI>
-</OMOBJ>
-
-
-<OMOBJ>
-	<OMS cd="nums" name="i" />
+  <OMI>912873912381273891</OMI>
 </OMOBJ>
 
 <OMOBJ>
-	<OMS cd="nums" name="true" />
+	<OMS cd="nums1" name="i" />
 </OMOBJ>
-
 
 <OMOBJ>
-	<OMS cd="nums" name="false" />
+	<OMS cd="logic1" name="true" />
 </OMOBJ>
-
 
 <OMOBJ>
-  <OMS cd="fns" name="lambda" />
+	<OMS cd="logic1" name="false" />
 </OMOBJ>
 
+<OMOBJ>
+  <OMS cd="fns1" name="lambda" />
+</OMOBJ>
 
 <OMOBJ>
   <OMV name="dummy1" />
@@ -34,7 +28,7 @@
 
 <OMOBJ>
 	<OMA>
-		<OMS cd="permut1" name="Permutation"/>
+		<OMS cd="permut1" name="permutation"/>
 		<OMI> 2 </OMI>
 		<OMI> 3 </OMI>
 		<OMI> 1 </OMI>
@@ -43,9 +37,9 @@
 
 <OMOBJ>
 	<OMA>
-		<OMS cd="group1" name="Group"/>
+		<OMS cd="group1" name="group"/>
 		<OMA>
-			<OMS cd="permut1" name="Permutation"/>
+			<OMS cd="permut1" name="permutation"/>
 			<OMI> 2 </OMI>
 			<OMI> 3 </OMI>
 			<OMI> 1 </OMI>
@@ -56,20 +50,14 @@
 <OMOBJ>
 	<OMATTR>
 		<OMATP>
-			<OMS cd="nums" name="true"/>
+			<OMS cd="logic1" name="true" />
 			<OMI> 1 </OMI>
 		</OMATP>
-
 		<OMA>
-      <OMS cd="permut1" name="Permutation"/>
+      <OMS cd="permut1" name="permutation"/>
       <OMI> 2 </OMI>
       <OMI> 3 </OMI>
       <OMI> 1 </OMI>
     </OMA>
 	</OMATTR>
 </OMOBJ>
-
-
-
-
-

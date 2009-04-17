@@ -285,7 +285,7 @@ symbol: it is an attribution, of the form
     <OMA>
        <OMS cd="arith1" name="plus"/>
        <OMI>1</OMI>
-       <OMR href="foo"/>
+       <OMR href="#foo"/>
     </OMA>
   </OMA>
 </OMOBJ>
@@ -293,9 +293,7 @@ symbol: it is an attribution, of the form
 
 
 
-<!-- the following are supposed to generate errors -->
-
-
+<!-- the following examples are supposed to generate errors 
 
 <OMOBJ>
   <OME>
@@ -334,7 +332,7 @@ symbol: it is an attribution, of the form
         <OMS cd="logic1" name="not_existing_symbol"/>
 </OMOBJ>
 
-
+-->
 
 
 <!-- end of file -->
