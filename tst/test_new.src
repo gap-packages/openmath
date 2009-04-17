@@ -216,9 +216,9 @@ s := InputTextString( "<OMOBJ> <OMSTR>&lt;&amp;&gt;&quot;&apos;</OMSTR> </OMOBJ>
 OMGetObject(s);
 CloseStream(s);
 
-# test of a strings with all the chars (but '+' is not supported)
+# test of a strings with all the chars
 
-OMTest( List( Union( [4..42], [44..127] ), CHAR_INT ) );
+OMTest( List( [4..127], CHAR_INT ) );
 
 # test that the strings are returned in string representation
 

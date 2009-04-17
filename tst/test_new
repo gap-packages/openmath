@@ -157,7 +157,7 @@ gap> OMPutObject(s, g);
 gap> CloseStream(s);
 gap> 
 gap> s := InputTextString(t);
-InputTextString(0,303)
+InputTextString(0,296)
 gap> g2 := OMGetObject(s);
 Group([ (1,2,3,4,5), (1,2) ])
 gap> CloseStream(s);
@@ -172,16 +172,16 @@ gap> OMPrint(g);
 		<OMS cd="group1" name="group"/>
 		<OMA>
 			<OMS cd="permut1" name="permutation"/>
-			<OMI> 2</OMI>
-			<OMI> 3</OMI>
-			<OMI> 4</OMI>
-			<OMI> 5</OMI>
-			<OMI> 1</OMI>
+			<OMI>2</OMI>
+			<OMI>3</OMI>
+			<OMI>4</OMI>
+			<OMI>5</OMI>
+			<OMI>1</OMI>
 		</OMA>
 		<OMA>
 			<OMS cd="permut1" name="permutation"/>
-			<OMI> 2</OMI>
-			<OMI> 1</OMI>
+			<OMI>2</OMI>
+			<OMI>1</OMI>
 		</OMA>
 	</OMA>
 </OMOBJ>
@@ -228,12 +228,12 @@ gap> OMPutObject( s, "OutputTextString, InputTextString" );
 gap> CloseStream( s );
 gap> 
 gap> test_string;
-"<OMOBJ>\n\t<OMI> 123</OMI>\n</OMOBJ>\n<OMOBJ>\n\t<OMS cd=\"logic1\" name=\"fa\
-lse\"/>\n</OMOBJ>\n<OMOBJ>\n\t<OMSTR>OutputTextString, InputTextString</OMSTR>\
+"<OMOBJ>\n\t<OMI>123</OMI>\n</OMOBJ>\n<OMOBJ>\n\t<OMS cd=\"logic1\" name=\"fal\
+se\"/>\n</OMOBJ>\n<OMOBJ>\n\t<OMSTR>OutputTextString, InputTextString</OMSTR>\
 \n</OMOBJ>\n"
 gap> 
 gap> s := InputTextString( test_string );
-InputTextString(0,151)
+InputTextString(0,150)
 gap> OMGetObject( s );
 123
 gap> OMGetObject( s );
@@ -330,9 +330,9 @@ gap> OMGetObject(s);
 "<&>\"'"
 gap> CloseStream(s);
 gap> 
-gap> # test of a strings with all the chars (but '+' is not supported)
+gap> # test of a strings with all the chars
 gap> 
-gap> OMTest( List( Union( [4..42], [44..127] ), CHAR_INT ) );
+gap> OMTest( List( [4..127], CHAR_INT ) );
 true
 gap> 
 gap> # test that the strings are returned in string representation
@@ -403,8 +403,8 @@ gap> OMPrint([3..10]);
 <OMOBJ>
 	<OMA>
 		<OMS cd="interval1" name="integer_interval"/>
-		<OMI> 3</OMI>
-		<OMI> 10</OMI>
+		<OMI>3</OMI>
+		<OMI>10</OMI>
 	</OMA>
 </OMOBJ>
 gap> OMTest([3..10]);
@@ -418,13 +418,13 @@ gap> OMPrint([[11,12],[21,22]]);
 		<OMS cd="linalg2" name="matrix"/>
 		<OMA>
 			<OMS cd="linalg2" name="matrixrow"/>
-			<OMI> 11</OMI>
-			<OMI> 12</OMI>
+			<OMI>11</OMI>
+			<OMI>12</OMI>
 		</OMA>
 		<OMA>
 			<OMS cd="linalg2" name="matrixrow"/>
-			<OMI> 21</OMI>
-			<OMI> 22</OMI>
+			<OMI>21</OMI>
+			<OMI>22</OMI>
 		</OMA>
 	</OMA>
 </OMOBJ>
@@ -449,20 +449,20 @@ gap> OMPrint(AlternatingGroup(6));
 		<OMS cd="group1" name="group"/>
 		<OMA>
 			<OMS cd="permut1" name="permutation"/>
-			<OMI> 2</OMI>
-			<OMI> 3</OMI>
-			<OMI> 4</OMI>
-			<OMI> 5</OMI>
-			<OMI> 1</OMI>
+			<OMI>2</OMI>
+			<OMI>3</OMI>
+			<OMI>4</OMI>
+			<OMI>5</OMI>
+			<OMI>1</OMI>
 		</OMA>
 		<OMA>
 			<OMS cd="permut1" name="permutation"/>
-			<OMI> 1</OMI>
-			<OMI> 2</OMI>
-			<OMI> 3</OMI>
-			<OMI> 5</OMI>
-			<OMI> 6</OMI>
-			<OMI> 4</OMI>
+			<OMI>1</OMI>
+			<OMI>2</OMI>
+			<OMI>3</OMI>
+			<OMI>5</OMI>
+			<OMI>6</OMI>
+			<OMI>4</OMI>
 		</OMA>
 	</OMA>
 </OMOBJ>
@@ -473,8 +473,8 @@ gap> #I  Method 8: ``OMPut: for an integer'', value: 20
 gap> 
 gap> OMPrint(10^72);
 <OMOBJ>
-	<OMI> 10000000000000000000000000000000000000000000000000000000000000000000000\
-00</OMI>
+	<OMI>100000000000000000000000000000000000000000000000000000000000000000000000\
+0</OMI>
 </OMOBJ>
 gap> OMTest(10^72);
 true
@@ -485,8 +485,8 @@ gap> OMPrint(10/72);
 <OMOBJ>
 	<OMA>
 		<OMS cd="nums1" name="rational"/>
-		<OMI> 5</OMI>
-		<OMI> 36</OMI>
+		<OMI>5</OMI>
+		<OMI>36</OMI>
 	</OMA>
 </OMOBJ>
 gap> OMTest(10/72);
@@ -509,13 +509,13 @@ gap> OMPrint(2/3+5/4*E(4));
 		<OMS cd="complex1" name="complex_cartesian"/>
 		<OMA>
 			<OMS cd="nums1" name="rational"/>
-			<OMI> 2</OMI>
-			<OMI> 3</OMI>
+			<OMI>2</OMI>
+			<OMI>3</OMI>
 		</OMA>
 		<OMA>
 			<OMS cd="nums1" name="rational"/>
-			<OMI> 5</OMI>
-			<OMI> 4</OMI>
+			<OMI>5</OMI>
+			<OMI>4</OMI>
 		</OMA>
 	</OMA>
 </OMOBJ>
@@ -528,9 +528,9 @@ gap> OMPrint([1,2,3]);
 <OMOBJ>
 	<OMA>
 		<OMS cd="list1" name="list"/>
-		<OMI> 1</OMI>
-		<OMI> 2</OMI>
-		<OMI> 3</OMI>
+		<OMI>1</OMI>
+		<OMI>2</OMI>
+		<OMI>3</OMI>
 	</OMA>
 </OMOBJ>
 gap> OMTest([1,2,3]);
@@ -621,11 +621,11 @@ gap> OMPrint((1,3,5));
 <OMOBJ>
 	<OMA>
 		<OMS cd="permut1" name="permutation"/>
-		<OMI> 3</OMI>
-		<OMI> 2</OMI>
-		<OMI> 5</OMI>
-		<OMI> 4</OMI>
-		<OMI> 1</OMI>
+		<OMI>3</OMI>
+		<OMI>2</OMI>
+		<OMI>5</OMI>
+		<OMI>4</OMI>
+		<OMI>1</OMI>
 	</OMA>
 </OMOBJ>
 gap> OMTest((1,3,5));
@@ -685,15 +685,15 @@ gap> OMPrint([ [ 1 .. 10 ], Rationals, false, true, infinity, 1, 0 ]);
 		<OMS cd="list1" name="list"/>
 		<OMA>
 			<OMS cd="interval1" name="integer_interval"/>
-			<OMI> 1</OMI>
-			<OMI> 10</OMI>
+			<OMI>1</OMI>
+			<OMI>10</OMI>
 		</OMA>
 		<OMS cd="setname1" name="Q"/>
 		<OMS cd="logic1" name="false"/>
 		<OMS cd="logic1" name="true"/>
 		<OMS cd="nums1" name="infinity"/>
-		<OMI> 1</OMI>
-		<OMI> 0</OMI>
+		<OMI>1</OMI>
+		<OMI>0</OMI>
 	</OMA>
 </OMOBJ>
 gap> OMTest([ [ 1 .. 10 ], Rationals, false, true, infinity, 1, 0 ]);
