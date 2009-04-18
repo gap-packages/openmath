@@ -72,7 +72,9 @@ end);
 ##
 #M  OMPut( <stream>, <group> )  
 ##
-##  Printing for groups: specified in group1.ocd 
+##  Printing for groups as specified in openmath/cds/group1.ocd 
+##  (Note that it differs from definitions in group1 and permgp1 
+##  CDs from http://www.openmath.org) 
 ## 
 InstallMethod(OMPut, "for a group", true,
 [IsOutputStream, IsGroup],0,
@@ -301,7 +303,7 @@ function(stream, c)
 
   OMWriteLine(stream, ["<OMA>"]);
   OMIndent := OMIndent +1;
-    OMPutSymbol( stream, "group1", "CharacterTable" );
+    OMPutSymbol( stream, "group1", "character_table" );
 		OMPutList(stream, classnames);
 		OMPutList(stream, centralizersizes);
 		OMPutList(stream, centralizerprimes);

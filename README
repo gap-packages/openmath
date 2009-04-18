@@ -367,7 +367,7 @@ became its maintainer. The list of major updates is below:
     need to addsupport for their own private CDs)
   - moved to 'openmath/private/private.g' code for algnums and 
     cas CDs, for our versions of groups1.group and permgp1.group
-    and groups1.CharacterTable. 
+    and groups1.character_table, groups1.character_table_of_group
   - transformed OM_append into two functions OM_append_new and 
     OM_append_private.
 

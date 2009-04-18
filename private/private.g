@@ -156,11 +156,11 @@ cas := rec( # see this CD in openmath/cds directory
 	("quit") := OMgapQuit,
 ),
 
-group1 := rec( # experimental symbols
-	group := OMgapGroup, # we take just list of generators
-	                     # unlike in the official CD
-	CharacterTableOfGroup := OMgapCharacterTableOfGroup,  
-	CharacterTable := OMgapCharacterTableOfGroup
+group1 := rec(           # experimental symbols
+	group := OMgapGroup, # we take just list of generators unlike 
+	                     # in the official group1 CDs
+	character_table_of_group := OMgapCharacterTableOfGroup,  
+	character_table := OMgapCharacterTableOfGroup
 ),
 
 permgp1 := rec(
