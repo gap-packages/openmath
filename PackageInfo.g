@@ -21,7 +21,7 @@ Subtitle := "OpenMath functionality in GAP",
 
 
 Version := "10.0.0",
-Date := "17/04/2009",
+Date := "18/04/2009",
 
 
 ArchiveURL := Concatenation([
