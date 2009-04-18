@@ -20,7 +20,7 @@ Revision.("openmath/hasse/config.g") :=
 ##########################################################################
 # Some System dependent defitions
 ##
-BROWSER_COMMAND := "netscape-navigator";
+BROWSER_COMMAND := "open"; # "netscape-navigator";
 
 
 # the location of the server+servlet - a "factory setting"
@@ -30,6 +30,9 @@ BROWSER_COMMAND := "netscape-navigator";
 # or search HasseDiagramServlet with  http://www.koders.com/ :
 # http://www.koders.com/java/fid92C29A57EB2099CDDB9FBFC932F7AD969D97CE8B.aspx
 SERVLET := "http://dev.camel.math.ca/hasse_diagram/servlet/HasseDiagramServlet";
+# see also "Constructing Mathlets using JavaMath" by Alan Cooper, Stephen Linton
+# and Andrew Solomon: http://mathdl.maa.org/mathDL/55/?pa=content&sa=viewDocument&nodeId=485
+# and JavaMath at http://sourceforge.net/project/showfiles.php?group_id=12766
 
 
 ###########################################################################
