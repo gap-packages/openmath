@@ -279,10 +279,15 @@ OMPrint(NonnegativeIntegers);
 OMTest(NonnegativeIntegers);
 
 #I  Method 6: ``OMPut: for a character table'', value: 23
-#I  Method 7: ``OMPut: for a group'', value: 23
+#I  Method 7: ``OMPut: for a permutation group'', value: 23
 
 OMPrint(AlternatingGroup(6));
 OMTest(AlternatingGroup(6));
+
+#I  Method: ``OMPut: for a group''
+
+OMPrint( Group( [[0,1],[-1,0]],[[1,1],[0,1]] ) );
+OMTest( Group( [[0,1],[-1,0]],[[1,1],[0,1]] ) );
 
 #I  Method 8: ``OMPut: for an integer'', value: 20
 

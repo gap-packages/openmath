@@ -374,9 +374,9 @@ became its maintainer. The list of major updates is below:
     of our private CDs and private/experimental symbols (this is
     also the place where users may put their code if they will 
     need to addsupport for their own private CDs)
-  - moved to 'openmath/private/private.g' code for algnums and 
-    cas CDs, for our versions of groups1.group and 
-    groups1.character_table, groups1.character_table_of_group
+  - moved to 'openmath/private/private.{g,gi}' code for algnums 
+    and cas CDs and for private symbols groups1.group_by_generators,
+    groups1.character_table and groups1.character_table_of_group
   - transformed OM_append into two functions OM_append_new and 
     OM_append_private.
 

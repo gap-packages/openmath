@@ -23,6 +23,7 @@
 <CDComment>
 Written by A. Solomon on 1998-11-19
 Modified by David Carlisle 1998-04-28
+Modified by Alexander Konovalov 2009-04-18 (replaced group1.group by group1.group_by_generators)
 </CDComment>
 
 <CDDefinition>
@@ -161,7 +162,7 @@ Every element of a group has an inverse.
       <OMV name="G"/>
       <OMA>
         <OMS cd="fns2" name="apply_to_list"/>
-        <OMS cd="group1" name="group"/>
+        <OMS cd="group1" name="group_by_generators"/>
         <OMV name="listofgens"/>
       </OMA>
     </OMA>
@@ -231,7 +232,7 @@ Every element of a group has an inverse.
       <OMV name="G"/>
       <OMA>
         <OMS cd="fns2" name="apply_to_list"/>
-        <OMS cd="group1" name="group"/>
+        <OMS cd="group1" name="group_by_generators"/>
         <OMV name="listofgens"/>
       </OMA>
     </OMA>
@@ -304,7 +305,7 @@ Every element of a group has an inverse.
       <OMV name="G"/>
       <OMA>
         <OMS cd="fns2" name="apply_to_list"/>
-        <OMS cd="group1" name="group"/>
+        <OMS cd="group1" name="group_by_generators"/>
         <OMV name="listofgens"/>
       </OMA>
     </OMA>
@@ -373,7 +374,7 @@ Every element of a group has an inverse.
       <OMV name="G"/>
       <OMA>
         <OMS cd="fns2" name="apply_to_list"/>
-        <OMS cd="group1" name="group"/>
+        <OMS cd="group1" name="group_by_generators"/>
         <OMV name="listofgens"/>
       </OMA>
     </OMA>
@@ -832,10 +833,8 @@ e.g CharacterTable(G)
 This is the constructor for a character table.
 Usage:
 
-CharacterTable(class_names, 
-centralizer_sizes, centralizer_primes, centralizer_indices,
-power_map, 
-class_sizes, orders_class_reps, 
+CharacterTable(class_names, centralizer_sizes, centralizer_primes, 
+centralizer_indices, power_map, class_sizes, orders_class_reps, 
 irreducibles_matrix, irreducible_values)
 
 If G has n conjugacy classes then:
@@ -851,11 +850,9 @@ of the kth conjugacy class.
 the pi are precisely the primes which divide the 
 centralizer_sizes[k].
 
-
 * centralizer_indices is of the form 
 [[i11, ...,i1k] ... [in1,...ink]]
 so the centralizer of class 1 has order p1^i11 ... pk^i1k etc
-
 
 * class_sizes - sizes of the conjugacy classes
 
@@ -873,7 +870,6 @@ values may be expressions involving variables.
 * irreducibles_values: a list of pairs of the form (var = val) where
 val is an  irrational cyclotomic and var appears in expressions for 
 values in the irreducibles_matrix.
-
 
 </Description>
 </CDDefinition>

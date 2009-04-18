@@ -157,7 +157,7 @@ gap> OMPutObject(s, g);
 gap> CloseStream(s);
 gap> 
 gap> s := InputTextString(t);
-InputTextString(0,296)
+InputTextString(0,345)
 gap> g2 := OMGetObject(s);
 Group([ (1,2,3,4,5), (1,2) ])
 gap> CloseStream(s);
@@ -169,7 +169,8 @@ Sym( [ 1 .. 5 ] )
 gap> OMPrint(g);
 <OMOBJ>
 	<OMA>
-		<OMS cd="group1" name="group"/>
+		<OMS cd="permgp1" name="group"/>
+		<OMS cd="permutation1" name="right_compose"/>
 		<OMA>
 			<OMS cd="permut1" name="permutation"/>
 			<OMI>2</OMI>
@@ -441,12 +442,13 @@ gap> OMTest(NonnegativeIntegers);
 true
 gap> 
 gap> #I  Method 6: ``OMPut: for a character table'', value: 23
-gap> #I  Method 7: ``OMPut: for a group'', value: 23
+gap> #I  Method 7: ``OMPut: for a permutation group'', value: 23
 gap> 
 gap> OMPrint(AlternatingGroup(6));
 <OMOBJ>
 	<OMA>
-		<OMS cd="group1" name="group"/>
+		<OMS cd="permgp1" name="group"/>
+		<OMS cd="permutation1" name="right_compose"/>
 		<OMA>
 			<OMS cd="permut1" name="permutation"/>
 			<OMI>2</OMI>
@@ -467,6 +469,43 @@ gap> OMPrint(AlternatingGroup(6));
 	</OMA>
 </OMOBJ>
 gap> OMTest(AlternatingGroup(6));
+true
+gap> 
+gap> #I  Method: ``OMPut: for a group''
+gap> 
+gap> OMPrint( Group( [[0,1],[-1,0]],[[1,1],[0,1]] ) );
+<OMOBJ>
+	<OMA>
+		<OMS cd="group1" name="group_by_generators"/>
+		<OMA>
+			<OMS cd="linalg2" name="matrix"/>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>0</OMI>
+				<OMI>1</OMI>
+			</OMA>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>-1</OMI>
+				<OMI>0</OMI>
+			</OMA>
+		</OMA>
+		<OMA>
+			<OMS cd="linalg2" name="matrix"/>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>1</OMI>
+				<OMI>1</OMI>
+			</OMA>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>0</OMI>
+				<OMI>1</OMI>
+			</OMA>
+		</OMA>
+	</OMA>
+</OMOBJ>
+gap> OMTest( Group( [[0,1],[-1,0]],[[1,1],[0,1]] ) );
 true
 gap> 
 gap> #I  Method 8: ``OMPut: for an integer'', value: 20

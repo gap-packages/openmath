@@ -1,3 +1,4 @@
-This directory contains Content Dictionaries which are required 
-above and beyond the MathML 2 group (see http://www.openmath.org).
+This directory contains private OpenMath content dictionaries 
+which are required by the package. 
 
+For other content dictionaries see http://www.openmath.org/

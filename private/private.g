@@ -125,9 +125,6 @@ BindGlobal("OMgapNativeOutput",
 ##
 ##  Semantic mappings for private symbols from group1.cd
 ## 
-## Our versions of group1.group and permgp1.group take list
-## of generators unlike defined in official CDs.
-
 BindGlobal("OMgapCharacterTableOfGroup",
 	x->OMgapId([OMgap1ARGS(x), CharacterTable(x[1])])[2]);
 	
@@ -154,9 +151,9 @@ cas := rec( # see this CD in openmath/cds directory
 	("quit") := OMgapQuit,
 ),
 
-group1 := rec(           # experimental symbols, see openmath/cds/group1
-	group := Group,      # we take just list of generators unlike 
-	                     # in the official group1 CDs
+group1 := rec(                    # experimental symbols, see openmath/cds/group1
+	group_by_generators := Group, # we take just list of generators unlike in
+	                              # group1.group from the official group1 CDs
 	character_table_of_group := OMgapCharacterTableOfGroup,  
 	character_table := OMgapCharacterTableOfGroup
 ),

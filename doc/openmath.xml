@@ -81,7 +81,7 @@ gap> OMPrint(x^2+1);
 gap> OMPrint( Group(1,2,3) );
 <OMOBJ>
 	<OMA>
-		<OMS cd="group1" name="group"/>
+		<OMS cd="group1" name="group_by_generators"/>
 		<OMA>
 			<OMS cd="permut1" name="permutation"/>
 			<OMI>2</OMI>

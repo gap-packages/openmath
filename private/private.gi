@@ -72,13 +72,13 @@ end);
 #M  OMPut( <stream>, <group> )  
 ##
 ##  Printing for groups as in openmath/cds/group1.ocd (Note that it 
-##  differs from definitions in group1 CD from http://www.openmath.org,
-##  since we just output the list of generators
+##  differs from group1.group from the group1 CD at http://www.openmath.org,
+##  since we just output the list of generators)
 ## 
 InstallMethod(OMPut, "for a group", true,
 [IsOutputStream, IsGroup],0,
 function(stream, x)
-	OMPutApplication( stream, "group1", "group", 
+	OMPutApplication( stream, "group1", "group_by_generators", 
 		GeneratorsOfGroup(x) );
 end);
  

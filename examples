@@ -63,7 +63,7 @@ stream := InputTextUser(); g := OMGetObject(stream); CloseStream(stream);
 
 <OMOBJ>
         <OMA>
-                <OMS cd="group1" name="group"/>
+                <OMS cd="group1" name="group_by_generators"/>
                 <OMA>
                         <OMS cd="permut1" name="permutation"/>
                         <OMI> 2 </OMI>
