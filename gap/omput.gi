@@ -596,6 +596,28 @@ function ( stream, x )
 end);
 
 
+#######################################################################
+##
+#M  OMPut( <stream>, <group> )  
+##
+##  Printing permutation group as specified in permgp1.group symbol
+## 
+InstallMethod(OMPut, "for a permutation group", true,
+[IsOutputStream, IsPermGroup],0,
+function(stream, x)
+	local g;
+    OMWriteLine(stream, ["<OMA>"]);
+    OMIndent := OMIndent +1;
+    OMPutSymbol( stream, "permgp1", "group" );
+    OMPutSymbol( stream, "permutation1", "right_compose" );
+	for g in GeneratorsOfGroup(x) do
+		OMPut( stream, g );
+	od;
+    OMIndent := OMIndent -1;
+    OMWriteLine(stream, ["</OMA>"]);
+end); 
+
+
 #############################################################################
 #
 # OMPut for a polynomial ring (polyd1.poly_ring_d_named / polyd1.poly_ring_d)

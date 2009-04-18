@@ -92,9 +92,8 @@ and experimental CDs or separate symbols. We allocated the directory <File>openm
 for this purposes, and currently it contain the file <File>private.g</File> for conversions
 from &OpenMath; to &GAP; and the file <File>private.gi</File> for conversions from &GAP;
 to &OpenMath; for some symbols from private CDs contained in the <File>openmath/cds</File> directory.
-In particular, we use slightly different definitions of <C>group1.group</C> and <C>permgp1.group</C>,
-and they allow us to input and output groups given by their generators, which is one of the natural
-ways to create groups in &GAP;
+In particular, we use slightly different definition of <C>group1.group</C> and it allows us to input 
+and output groups given by their generators, which is one of the natural ways to create groups in &GAP;
 <P/>
 
 The file <File>private.g</File> is loaded from <File>openmath/gap/new.g</File>, 

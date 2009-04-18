@@ -66,15 +66,14 @@ function(stream, x)
     fi;
 end);
 
-  
 
 #######################################################################
 ##
 #M  OMPut( <stream>, <group> )  
 ##
-##  Printing for groups as specified in openmath/cds/group1.ocd 
-##  (Note that it differs from definitions in group1 and permgp1 
-##  CDs from http://www.openmath.org) 
+##  Printing for groups as in openmath/cds/group1.ocd (Note that it 
+##  differs from definitions in group1 CD from http://www.openmath.org,
+##  since we just output the list of generators
 ## 
 InstallMethod(OMPut, "for a group", true,
 [IsOutputStream, IsGroup],0,
@@ -84,8 +83,7 @@ function(stream, x)
 end);
  
 
-
-#############################################################################
+#######################################################################
 ## 
 ## Experimental methods for OMPut for character tables"
 ##

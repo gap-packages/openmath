@@ -711,7 +711,19 @@ nums1 := rec(
 ),
 
 permgp1 := rec(
-	group := fail, # our private version installed in private/private.g
+	group := 
+		function(x)
+		local i;
+		if x[1] = "left_compose" then
+			Error( "GAP does not accept permutation groups with permutation1.left_compose multiplication \n" );
+		elif not x[1] = "right_compose" then
+			if not IsPerm(x[1]) then
+				Error( "The first argument must be permutation1.left_compose or permutation1.right_compose \n" ); 
+			fi;
+		else
+			return Group( x{ [ 2 .. Length(x) ] } );
+		fi;	 
+		end,
     base := fail,
     generators := fail,
     is_in := fail,
@@ -763,14 +775,14 @@ permutation1 := rec(
 	is_endomap := fail,
 	is_list_perm := fail,
 	is_permutation := fail,
-	left_compose := fail, 
+	left_compose := "left_compose",   # string to analyse in permgp1.group
 	length := fail,
 	list_perm := fail,
 	listendomap := fail, 
 	order := fail,
 	permutation := fail,
 	permutationsn := fail,
-	right_compose := fail,
+	right_compose := "right_compose", # string to analyse in permgp1.group
 	sign := fail,
 	support := fail
 ),
