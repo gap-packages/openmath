@@ -167,7 +167,7 @@ function(h)
 
 	local output, filename;
 
-	filename := Filename( OMDirectoryTemporary, "nsinput" );
+	filename := Filename( OMDirectoryTemporary, "nsinput.html" );
 	RemoveFile( filename );
 
 	output := OutputTextFile( filename, false ); #append
