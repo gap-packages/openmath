@@ -3,7 +3,7 @@
 <Chapter Label="Intro">
 <Heading>Introduction and installation</Heading>    
 
-The &GAP; package &openmath; provides an &OpenMath; phrasebook for &GAP;: 
+The &GAP; package &OpenMath; provides an &OpenMath; phrasebook for &GAP;: 
 it allows &GAP; users to import and export mathematical objects encoded in 
 &OpenMath; for the purpose of exchanging them with other &OpenMath;-enabled
 applications. 
@@ -13,7 +13,7 @@ For further information about &OpenMath; standard see the &OpenMath; homepage
 <URL>http://www.openmath.org</URL>.
 <P/>
 
-The &openmath; package will be most useful if used in conjunction with the
+The &OpenMath; package will be most useful if used in conjunction with the
 &GAP; package &SCSCP; (<Cite Key="SCSCPpkg"/>) which implements the Symbolic 
 Computation Software Composability protocol (<Cite Key="SCSCPspec"/>). This
 protocol specifies an &OpenMath;-based remote procedure call framework, in which
@@ -28,18 +28,18 @@ will go into seamless manner with &GAP;/&OpenMath; conversion going in the
 background.
 <P/>
 
-To use the &openmath; package it is required to install the &GAPDoc; package
+To use the &OpenMath; package it is required to install the &GAPDoc; package
 <Cite Key="GAPDoc"/> to use the help system and parse &OpenMath; objects 
 in XML format.
 <P/>
 
-To install the &openmath; package, unpack the archive and place the <File>openmath</File>
+To install the &OpenMath; package, unpack the archive and place the <File>openmath</File>
 directory in the <File>pkg</File> subdirectory of your &GAP;4.4 installation. 
 When you don't have access to the directory of your main &GAP; 
 installation, you can also install the package 
 <E>outside the &GAP; main directory</E>
 by unpacking it inside a directory <File>MYGAPDIR/pkg</File>. 
-Then to be able to load &openmath; you need to call GAP with the 
+Then to be able to load &OpenMath; you need to call GAP with the 
 <C>-l ";MYGAPDIR"</C> option.
 <P/>
 

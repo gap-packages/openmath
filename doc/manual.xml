@@ -4,7 +4,6 @@
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
 [<!ENTITY IO "<Package>IO</Package>">]
-[<!ENTITY openmath "<Package>openmath</Package>">]
 [<!ENTITY OpenMath "<Package>OpenMath</Package>">]
 [<!ENTITY scscp1 "<Package>scscp1</Package>">]
 [<!ENTITY scscp2 "<Package>scscp2</Package>">]
@@ -13,7 +12,7 @@
 <Book Name="openmath">
 
 <TitlePage>
-  <Title>&openmath;</Title>
+  <Title>&OpenMath;</Title>
   <Subtitle>&OpenMath; functionality in GAP</Subtitle>
   <Version>Version 10.0.0</Version>
 
@@ -52,16 +51,16 @@
 
 <Abstract>
 
-<Index Key="SCSCP package">&openmath; package</Index> 
+<Index Key="SCSCP package">&OpenMath; package</Index> 
 
-The &openmath; package provides an &OpenMath; phrasebook for &GAP;: 
+The &OpenMath; package provides an &OpenMath; phrasebook for &GAP;: 
 it allows &GAP; users to import and export mathematical objects 
 encoded in OpenMath, for the purpose of exchanging them with other 
 &OpenMath;-enabled applications. 
 </Abstract>
 
 <Copyright>
-The &openmath; package is free software; 
+The &OpenMath; package is free software; 
 you can redistribute it and/or modify it 
 under the terms of the GNU General Public License as published by 
 the Free Software Foundation; either version 2 of the License, or 
@@ -69,7 +68,7 @@ the Free Software Foundation; either version 2 of the License, or
 <URL>http://www.gnu.org/licenses/gpl.html</URL>.
 <P/>
 
-Additionally, the &openmath; package contains code developed at INRIA
+Additionally, the &OpenMath; package contains code developed at INRIA
 (copyright INRIA), under the ESPRIT project number 24969 (OpenMath).
 The user may not use the library in commercial products without seeking
 permission from the &GAP; group (support@gap-system.org) and the 
@@ -78,7 +77,7 @@ CAFE team at INRIA SA (stephane.dalmas@sophia.inria.fr).
 </Copyright>
   
 <Acknowledgements>
-On various stages the development of the &openmath; package was supported by:
+On various stages the development of the &OpenMath; package was supported by:
 <List>
   <Item>European Commission through ESPRIT grant EP 24969 
   <Q>Accessing and Using Mathematical Information Electronically</Q>

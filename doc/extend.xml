@@ -1,12 +1,12 @@
 <!-- $Id$ -->
 
 <Chapter Label="ExtendingOpenMath">
-<Heading>Extending the &openmath; package</Heading>    
+<Heading>Extending the &OpenMath; package</Heading>    
 
 <Section Label="Available">
 <Heading>Exploring supported symbols</Heading>
 
-The &openmath; package supports such basic &OpenMath; objects
+The &OpenMath; package supports such basic &OpenMath; objects
 as integers ( &lt;OMI> ), character strings ( &lt;OMSTR> ) and
 variables ( &lt;OMVAR> ). Besides that, it supports a number
 of &OpenMath; content dictionaries (some of them only partially,
@@ -92,9 +92,12 @@ and experimental CDs or separate symbols. We allocated the directory <File>openm
 for this purposes, and currently it contain the file <File>private.g</File> for conversions
 from &OpenMath; to &GAP; and the file <File>private.gi</File> for conversions from &GAP;
 to &OpenMath; for some symbols from private CDs contained in the <File>openmath/cds</File> directory.
+In particular, we use slightly different definitions of <C>group1.group</C> and <C>permgp1.group</C>,
+and they allow us to input and output groups given by their generators, which is one of the natural
+ways to create groups in &GAP;
 <P/>
 
-The file <File>private.g</File> is loaded in <File>openmath/gap/new.g</File>, 
+The file <File>private.g</File> is loaded from <File>openmath/gap/new.g</File>, 
 and the <File>private.gi</File> is loaded from <File>openmath/gap/read.g</File>.
 If the user would like to add own code, this may be done either by adding it
 to these files or by placing additional files in <File>openmath/private</File>

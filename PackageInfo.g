@@ -16,7 +16,7 @@ Revision.("openmath/PackageInfo.g") :=
 
 
 SetPackageInfo( rec(
-PackageName := "openmath",
+PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
 
