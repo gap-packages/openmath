@@ -618,3 +618,6 @@ OPENMATHBuildManualHTML();
 TODO:
 
 * cleanup in the cds directory.
+* fill placeholders in OMsymRecord with more symbols where appropriate
+* test and move entries from OMsymRecord_new in new.g to gap.g
+* implement more private CDs from the SCIEnce project
