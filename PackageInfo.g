@@ -26,7 +26,7 @@ Date := "21/04/2009",
 
 ArchiveURL := Concatenation([
  "http://www.cs.st-andrews.ac.uk/~alexk/openmath/openmath-",~.Version]),
-ArchiveFormats := ".tar.gz",
+ArchiveFormats := ".tar.gz .tar.bz2",
 
 
 Persons := [
