@@ -705,7 +705,7 @@ nums1 := rec(
 	gamma := fail, 
 	i := E(4),
 	infinity := infinity,
-	NaN := fail,
+	NaN := "nan",
 	pi := fail, 
 	rational := OMgapDivide
 ),

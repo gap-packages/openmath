@@ -750,13 +750,13 @@ gap>
 gap> #I  Method 19: ``OMPut: for a float'', value: 3
 gap> 
 gap> floats := List( [ 0, "-0", 1, 1/2, -1, "inf", "-inf" ], Float );
-[ 0, -0, 1, 0.5, -1, inf, -inf ]
+[ 0, 0, 1, 0.5, -1, inf, -inf ]
 gap> OMPrint(floats);
 <OMOBJ>
 	<OMA>
 		<OMS cd="list1" name="list"/>
 		<OMF dec="0"/>
-		<OMF dec="-0"/>
+		<OMF dec="0"/>
 		<OMF dec="1"/>
 		<OMF dec="0.5"/>
 		<OMF dec="-1"/>
