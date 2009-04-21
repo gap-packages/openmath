@@ -39,10 +39,12 @@ manual, chapter "74 GAP Packages" (and if you don't have write access to
 the Gap installation see also section "9.2 GAP Root Directory"), for
 details.
 
-This package suggests compilation, and the complilation is non-standard:
-see README file for details.
+The binaries should be compiled in two stages:
+- compilation of the OpenMath C library from INRIA
+- compilation of the 'gpipe' program
 
-cd pkg/openmath
+To do this, change to the package directory gap4r4/pkg/openmath
+and perform the following commands:
 
 cd OMCv1.3c/src/
 ./configure

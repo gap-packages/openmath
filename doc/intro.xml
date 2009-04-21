@@ -43,12 +43,14 @@ Then to be able to load &OpenMath; you need to call GAP with the
 <C>-l ";MYGAPDIR"</C> option.
 <P/>
 
-The package comes together with the program <File>gpipe</File> which should be
-used to parse binary &OpenMath; format. To compile binaries, do the following:
+The package comes together with the &OpenMath; C library developed at INRIA
+and the program <File>gpipe</File> which should be compiled to parse binary &OpenMath; 
+format. This is performed in two stages: first the INRIA 
+library, and then <File>gpipe</File>. To do this, change to the package 
+directory <File>gap4r4/pkg/openmath</File> and enter the following commands:
 
 <Example>
 <![CDATA[
-cd pkg/openmath
 cd OMCv1.3c/src/
 ./configure
 make
