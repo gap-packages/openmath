@@ -14,11 +14,11 @@
 <TitlePage>
   <Title>&OpenMath;</Title>
   <Subtitle>&OpenMath; functionality in GAP</Subtitle>
-  <Version>Version 10.0.0</Version>
+  <Version>Version 10.0.1</Version>
 
   <Author>Marco Costantini
           <Email>costanti at science dot unitn dot it</Email>
-	      <Homepage>http://www-math.science.unitn.it/&tilde;costanti/</Homepage>
+	      <!-- <Homepage>http://www-math.science.unitn.it/&tilde;costanti/</Homepage> -->
 	      <Address>
             Department of Mathematics<Br/>
             University of Trento<Br/>
@@ -47,7 +47,7 @@
           </Address> 
   </Author>
   
-  <Date>18 April 2009</Date>
+  <Date>21 April 2009</Date>
 
 <Abstract>
 

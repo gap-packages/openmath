@@ -20,8 +20,8 @@ PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
 
-Version := "10.0.0",
-Date := "18/04/2009",
+Version := "10.0.1",
+Date := "21/04/2009",
 
 
 ArchiveURL := Concatenation([
@@ -36,7 +36,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "costanti@science.unitn.it",
-    WWWHome       := "http://www-math.science.unitn.it/~costanti/",
+    # WWWHome       := "http://www-math.science.unitn.it/~costanti/",
     Place         := "Trento",
     Institution   := "Department of Mathematics, University of Trento"
   ),

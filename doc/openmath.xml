@@ -12,8 +12,8 @@ The package is loaded as shown below (possibly loading required packages at the 
 <![CDATA[
 gap> LoadPackage("openmath");
 -----------------------------------------------------------------------------
-Loading  openmath 10.0.0 (OpenMath functionality in GAP)
-by Marco Costantini (http://www-math.science.unitn.it/~costanti/),
+Loading  openmath 10.0.1 (OpenMath functionality in GAP)
+by Marco Costantini (costanti@science.unitn.it),
    Alexander Konovalov (http://www.cs.st-andrews.ac.uk/~alexk/), and
    Andrew Solomon (http://www.illywhacker.net/).
 -----------------------------------------------------------------------------

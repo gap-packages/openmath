@@ -20,9 +20,9 @@ protocol specifies an &OpenMath;-based remote procedure call framework, in which
 all messages (procedure calls and returns of results of successful comutation
 or error messages) are encoded in &OpenMath; using content dictionaries 
 &scscp1; and &scscp2; (<Cite Key="scscp1cd"/>, <Cite Key="scscp2cd"/>).
-Using the &SCSCP; package, GAP can communicate locally or remotely with any 
+Using the &SCSCP; package, &GAP; can communicate locally or remotely with any 
 other &OpenMath;-enabled &SCSCP;-compliant application which may be not only 
-another computer algebra system but also another instance of the GAP system
+another computer algebra system but also another instance of the &GAP; system
 or even, for example, an external C/C++ or Java application. Such communication
 will go into seamless manner with &GAP;/&OpenMath; conversion going in the
 background.
