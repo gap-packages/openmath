@@ -401,6 +401,9 @@ became its maintainer. The list of major updates is below:
     to build the manual
   - rewrote the README file which is also the changelog
   - changed the system of version numbers
+  - removed printutil.g since now GAPDoc has printutil.{gd,gi}
+    and replaced in private.g ViewString by StringView as it
+    was renamed in printutil.*
   
 Alexander Konovalov
 

@@ -64,17 +64,25 @@ PREPARING A NEW RELEASE:
 version of Gap.
 
 * modify date and version number in file PackageInfo.g 
-and version number in files doc/manual.tex and init.g
+and version number in files doc/manual.xml and init.g
 
 * test the PackageInfo.g, and that the documentation is available in Gap:
 
 ValidatePackageInfo( Filename( DirectoriesPackageLibrary( "openmath", "" ), "PackageInfo.g" ) );
 ?OMPrint
 
-* commit PackageInfo.g and doc/manual.tex
+* commit PackageInfo.g and doc/manual.xml
 
-* remove the various *.bak, *~ and files from compilation, otherwise get
-a fresh copy from CVS repository.
+* copy the package directory to some place to create the tarball
+
+* remove "phantom" directories:
+
+rm -rf OMlib bin protos
+
+* remove the various *.bak, *~ and files from compilation doing make clean in both
+locations, otherwise get a fresh copy from CVS repository
+
+* remove possibly hidden files left e.g. '.DS_Store' left by Mac OS
 
 * do chmod -x:
 cd /usr/local/gap_dev/4.0/pkg/openmath
@@ -82,9 +90,8 @@ chmod -x tst/test5.omt
 
 * compile the documentation:
 
-cd doc
-./make_doc
-cd ..
+ReadPackage("openmath/gap/buildman.g");
+OPENMATHBuildManual();
 
 * remove CVS subdirectories:
 rm -r CVS/ */CVS/ */*/CVS/
