@@ -14,7 +14,7 @@
 <TitlePage>
   <Title>&OpenMath;</Title>
   <Subtitle>&OpenMath; functionality in GAP</Subtitle>
-  <Version>Version 10.0.1</Version>
+  <Version>Version 10.0.2</Version>
 
   <Author>Marco Costantini
           <Email>costanti at science dot unitn dot it</Email>
@@ -47,7 +47,7 @@
           </Address> 
   </Author>
   
-  <Date>21 April 2009</Date>
+  <Date>22 April 2009</Date>
 
 <Abstract>
 
@@ -55,7 +55,7 @@
 
 The &OpenMath; package provides an &OpenMath; phrasebook for &GAP;: 
 it allows &GAP; users to import and export mathematical objects 
-encoded in OpenMath, for the purpose of exchanging them with other 
+encoded in &OpenMath;, for the purpose of exchanging them with other 
 &OpenMath;-enabled applications. 
 </Abstract>
 
@@ -69,7 +69,7 @@ the Free Software Foundation; either version 2 of the License, or
 <P/>
 
 Additionally, the &OpenMath; package contains code developed at INRIA
-(copyright INRIA), under the ESPRIT project number 24969 (OpenMath).
+(copyright INRIA), under the ESPRIT project number 24969 (&OpenMath;).
 The user may not use the library in commercial products without seeking
 permission from the &GAP; group (support@gap-system.org) and the 
 CAFE team at INRIA SA (stephane.dalmas@sophia.inria.fr).

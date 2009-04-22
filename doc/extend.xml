@@ -41,7 +41,7 @@ rec(
 <C>OMsymRecord</C> contains all symbols for which conversion from 
 &OpenMath; to &GAP; is supported except some special symbols related
 with errors and special procedures from the &SCSCP; package which
-are threated separately. 
+are treated separately. 
 <P/>
 
 The main tool for the conversion from &GAP; to &OpenMath; is 
@@ -92,7 +92,7 @@ and experimental CDs or separate symbols. We allocated the directory <File>openm
 for this purposes, and currently it contain the file <File>private.g</File> for conversions
 from &OpenMath; to &GAP; and the file <File>private.gi</File> for conversions from &GAP;
 to &OpenMath; for some symbols from private CDs contained in the <File>openmath/cds</File> directory.
-In particular, insted of using <C>group1.group</C> we introduced the private symbol 
+In particular, instead of using <C>group1.group</C> we introduced the private symbol 
 <C>group1.group_by_generators</C> which allows us to input and output groups given by their generators
 as this is a natural ways to create groups in &GAP;
 <P/>
@@ -102,6 +102,10 @@ and the <File>private.gi</File> is loaded from <File>openmath/gap/read.g</File>.
 If the user would like to add own code, this may be done either by adding it
 to these files or by placing additional files in <File>openmath/private</File>
 directory and load them similarly to <File>private.g</File> and <File>private.gi</File>.
+
+We will welcome user's contributions in the form of the code to support existing content
+dictionaries from the &OpenMath; web site or private content dictionaries, if they may
+be interesting for a wider community.
 
 </Section>
 

@@ -12,7 +12,7 @@ The package is loaded as shown below (possibly loading required packages at the 
 <![CDATA[
 gap> LoadPackage("openmath");
 -----------------------------------------------------------------------------
-Loading  openmath 10.0.1 (OpenMath functionality in GAP)
+Loading  openmath 10.0.2 (OpenMath functionality in GAP)
 by Marco Costantini (costanti@science.unitn.it),
    Alexander Konovalov (http://www.cs.st-andrews.ac.uk/~alexk/), and
    Andrew Solomon (http://www.illywhacker.net/).
@@ -24,13 +24,13 @@ true
 </Section>
 
 <Section Label="ViewOpenMath">
-<Heading>Viewing OpenMath representation of an object</Heading>
+<Heading>Viewing &OpenMath; representation of an object</Heading>
 
 <ManSection>
     <Func Name="OMPrint" 
            Arg="obj" />
  <Description>
-OMPrint writes the default XML OpenMath encoding of GAP object <A>obj</A> to the standard output.
+OMPrint writes the default XML &OpenMath; encoding of &GAP; object <A>obj</A> to the standard output.
 <Example>
 <![CDATA[
 gap> OMPrint( [ 1, 1/2 ] );     
@@ -99,7 +99,7 @@ gap> OMPrint( Group(1,2,3) );
     <Func Name="OMString" 
            Arg="obj" />
  <Description>
-OMString returns a string with the default XML OpenMath encoding of GAP object <A>obj</A>.
+OMString returns a string with the default XML &OpenMath; encoding of &GAP; object <A>obj</A>.
 If used with the <K>noomobj</K> option, then initial and final &lt;OMOBJ> tags will be omitted.
 <Example>
 <![CDATA[
@@ -115,27 +115,28 @@ gap> OMString((1,2):noomobj);
 </Section>
 
 <Section Label="ExchangeOpenMath">
-<Heading>Writing and reading OpenMath code to/from streams</Heading>
+<Heading>Writing and reading &OpenMath; code to/from streams</Heading>
+
 
 <ManSection>
     <Func Name="OMGetObject" 
            Arg="stream" />
- <Description>
+<Description>
 <A>stream</A> is an input stream (see 
 <Ref BookName="ref" Oper="InputTextFile" />, 
 <Ref BookName="ref" Oper="InputTextUser" />, 
 <Ref BookName="ref" Oper="InputTextString" />, 
 <Ref BookName="ref" Oper="InputOutputLocalProcess" />, 
 <Ref BookName="scscp" Oper="InputOutputTCPStream" Label="for client" /> )
-with an OpenMath object on it.
-OMGetObject takes precisely one object off <A>stream</A> 
+with an &OpenMath; object on it.
+<Ref Func="OMGetObject" /> takes precisely one object off <A>stream</A> 
 and returns it as a GAP object.
-Both XML and binary OpenMath encoding are supported: autodetection
+Both XML and binary &OpenMath; encoding are supported: autodetection
 is used.
 This function requires either that the &GAP; package &GAPDoc; is
-available (for XML OpenMath), or that the external program `gpipe',
+available (for XML &OpenMath;), or that the external program <File>gpipe</File>,
 included in this package, has been compiled (for both XML and binary
-OpenMath).
+&OpenMath;).
 
 This may be used to retrieve objects from a file,
 for example:
@@ -153,7 +154,7 @@ gap> CloseStream(stream);
 </Example>
 
 or it can be used to retrieve them from standard input -
-one may paste an OpenMath object directly into standard input
+one may paste an &OpenMath; object directly into standard input
 after issuing GAP with the following commands:
 
 <Example>
@@ -222,7 +223,7 @@ into the output (this explains its name) without decorating it with &lt;OMSTR> t
 It is assumed that &OpenMath; plain string contains valid &OpenMath; code; and no 
 actual validation is performed during its creation. Such functionality may be useful
 to compose some &OpenMath; code from GAP to communicate it to the other system, in
-particular, to send there symbols which are not suported by &GAP;, for example:
+particular, to send there symbols which are not supported by &GAP;, for example:
 
 <Example>
 <![CDATA[
@@ -250,9 +251,9 @@ gap> OMPrint(s);
     <Func Name="OMTest" 
            Arg="obj" />
 <Description>
-Converts <A>obj</A> to OpenMath and back. Returns true iff <A>obj</A> is unchanged
-(as a GAP object) by this operation. The OpenMath standard does not 
-stipulate that converting to and from OpenMath should be the identity
+Converts <A>obj</A> to &OpenMath; and back. Returns true iff <A>obj</A> is unchanged
+(as a GAP object) by this operation. The &OpenMath; standard does not 
+stipulate that converting to and from &OpenMath; should be the identity
 function so this is a useful diagnostic tool. 
 
 <Example>
