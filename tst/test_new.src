@@ -1,6 +1,6 @@
 # This is the source of the test file. The test file is produced by:
 # gap -T -A -b -r < test_new.src
-# remove the line 'gap> LogTo();' at the end of the generated file.
+# remove the lines after STOP_TEST( "test", 10000 ); at the end of the generated file.
 LogTo("test_new");
 START_TEST( "Test of the 'openmath' package" );
 SizeScreen([80]);;
