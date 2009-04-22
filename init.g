@@ -126,9 +126,6 @@ ReadPackage("openmath", "/gap/test.gd");
 ## This module contains the semantic mappings from parsed openmath
 ## symbols to GAP objects and provides the function OMsymLookup
 
-# Frank Luebeck's utility for obtaining view strings.
-ReadPackage("openmath", "/gap/printutil.g");
-
 ReadPackage("openmath", "/gap/gap.g");
 
 

@@ -91,7 +91,7 @@ function(statement)
 	result := READ_COMMAND(i,false);
 	CloseStream(i);
 	
-	OM_GAP_OUTPUT_STR :=  ViewString(result);
+	OM_GAP_OUTPUT_STR :=  StringView(result);
 	# this is the way of indicating an error condition...
 	if (result = fail) then
 		OM_GAP_ERROR_STR := "Unknown Error";
