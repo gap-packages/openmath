@@ -5,6 +5,7 @@
 
 <Section Label="Available">
 <Heading>Exploring supported symbols</Heading>
+<Index Key="OMsymRecord"><C>OMsymRecord</C></Index>
 
 The &OpenMath; package supports such basic &OpenMath; objects
 as integers ( &lt;OMI> ), character strings ( &lt;OMSTR> ) and
