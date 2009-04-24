@@ -82,6 +82,8 @@ rm -rf OMlib bin protos
 * remove the various *.bak, *~ and files from compilation doing make clean in both
 locations, otherwise get a fresh copy from CVS repository
 
+* remove dev_notes.txt and Makefile from the package's root directory
+
 * remove possibly hidden files left e.g. '.DS_Store' left by Mac OS
 
 * do chmod -x:
