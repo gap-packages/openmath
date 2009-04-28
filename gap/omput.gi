@@ -339,6 +339,34 @@ fi;
 
 #######################################################################
 ##
+#M  OMPut( <stream>, <float> )
+##
+##  Printing for floats: specified in the standard
+##
+if IsBound( IS_MACFLOAT )  then
+InstallMethod(OMPut, "for a float", true,
+[IsOutputStream, IS_MACFLOAT],0,
+function(stream, x)
+    local  string;
+    # treatment of x=0 separately was added when discovered
+    # that Float("-0") returns -0, but it is also faster.
+    if IsZero(x) then
+    	OMWriteLine( stream, [ "<OMF dec=\"0\"/>" ] );
+    else
+    	string := String( x );
+    	# the OpenMath standard requires floats encoded in this way, see
+    	# section 3.1.2
+    	string := ReplacedString( string, "e+", "e" );
+    	string := ReplacedString( string, "inf", "INF" );
+    	string := ReplacedString( string, "nan", "NaN" );
+    	OMWriteLine( stream, [ "<OMF dec=\"", string, "\"/>" ] );
+	fi;
+end);
+fi;
+
+
+#######################################################################
+##
 #M  OMPut( <stream>, <bool> )  
 ##
 ##  Printing for booleans: specified in CD nums # now logic1

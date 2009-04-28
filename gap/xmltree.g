@@ -44,7 +44,11 @@ BindGlobal( "OMObjects",
         if not IsBound( node.attributes.dec )  then
             Error( "hexadecimal encoding of floats is not supported" );
         fi;
-        return Float( node.attributes.dec );
+        if VERSION="4.dev" then
+        	return MACFLOAT_STRING( node.attributes.dec );
+        else
+        	return Float( node.attributes.dec );
+        fi;
     end,
 
 
