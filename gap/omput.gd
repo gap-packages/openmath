@@ -15,6 +15,7 @@
 Revision.("openmath/gap/omput.gd") := 
     "@(#)$Id$";
 
+DeclareGlobalVariable("OpenMathRealRandomSource");
 
 #######################################################################
 ##

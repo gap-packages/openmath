@@ -32,22 +32,30 @@ if not CompareVersionNumbers( VERSION, "4.4.7" )  then
     end);
 fi;
 
+
 #############################################################################
 #
 # This function generates a random string of the length n
-# It is needed to create references
-#
-
-BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
+# It is needed in particular to create references, 
+# and also used in SCSCP package to generate random call identifiers
+# Creation of OpenMathRealRandomSource is placed inside the function
+# to avoid its early call when IO is not fully loaded (Error happens 
+# if GAP is started with "gap -r -A" and then LoadPackage("scscp");
+# is entered.
 
 BIND_GLOBAL( "RandomString",
     function( n )
     local symbols, i;
     symbols := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-    return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
+    if IsBound( OpenMathRealRandomSource ) then
+        return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
+    else
+        BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
+        return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
+    fi;
     end);
-
-
+    
+    
 #######################################################################
 ##  
 #F  OMWriteLine( <stream>, <list> )
