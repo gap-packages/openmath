@@ -105,8 +105,9 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.4",
-  NeededOtherPackages := [ [ "GapDoc", ">= 1.2" ]  ],
-  # GapDoc provides the function ParseTreeXMLString 
+  NeededOtherPackages := [ [ "GapDoc", ">= 1.2" ], [ "IO", ">= 3.0"] ],
+  # GapDoc provides the function ParseTreeXMLString
+  # IO is needed to generate random string from really random source 
   SuggestedOtherPackages := [ ],
   ExternalConditions := [ ]
 ),
