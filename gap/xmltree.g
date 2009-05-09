@@ -27,6 +27,9 @@ MakeReadWriteGlobal("OMTempVars");
 BindGlobal( "OMIsNotDummyLeaf", 
     node -> not node.name = "PCDATA" and not node.name = "XMLCOMMENT");
     
+if VERSION <> "4.dev" then 
+    MACFLOAT_STRING:=Float;
+fi;
 
 BindGlobal( "OMObjects",
 
