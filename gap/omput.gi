@@ -43,16 +43,19 @@ fi;
 # if GAP is started with "gap -r -A" and then LoadPackage("scscp");
 # is entered.
 
-BIND_GLOBAL( "RandomString",
+BindGlobal( "RandomString",
     function( n )
     local symbols, i;
     symbols := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-    if IsBound( OpenMathRealRandomSource ) then
-        return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
-    else
-        BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
-        return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
+    if IsBound( OpenMathRealRandomSource ) then 
+        if IsRandomSource( OpenMathRealRandomSource ) then
+            return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
+        fi;    
     fi;
+    MakeReadWriteGlobal( "OpenMathRealRandomSource" );
+    UnbindGlobal( "OpenMathRealRandomSource" );
+    BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
+    return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
     end);
     
     
