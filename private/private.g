@@ -158,6 +158,20 @@ group1 := rec(                    # experimental symbols, see openmath/cds/group
 	character_table := OMgapCharacterTableOfGroup
 ),
 
+monoid1 := rec(                
+	monoid_by_generators := Monoid # we take just list of generators unlike in
+	                               # semigroup1.semigroup from the official group1 CDs
+),
+
+semigroup1 := rec(                
+	semigroup_by_generators := Semigroup # we take just list of generators unlike in
+	                                     # semigroup1.semigroup from the official group1 CDs
+),
+
+transform1 := rec(                # TODO: document it
+	transformation := Transformation
+),
+
 );
 
 #############################################################################

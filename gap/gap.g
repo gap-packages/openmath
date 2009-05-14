@@ -172,7 +172,7 @@ BindGlobal("OMgapMatrix", OMgapId);
 ##
 ##  Semantic mappings for symbols from permut1.cd
 ## 
-BindGlobal("OMgapPermutation", PermList);
+BindGlobal("OMgapPermutation", PermList );
 
 ######################################################################
 ##
@@ -498,7 +498,7 @@ group1 := rec(
 	carrier := OMgapElementSet,
 	expression := fail, # might be useful to embed the result of the 2nd argument into the 1st argument,
 	                    # but single expression from arith1 CD will work too
-	group := fail,      # our private version of group1.group_by_generators is installed in private/private.g
+	group := fail,      # our private symbol group1.group_by_generators is installed in private/private.g
 	identity := x -> One( x[1] ),
 	inversion := x -> MappingByFunction( x[1], x[1], a->a^-1, a->a^-1 ),
 	is_commutative := OMgapIsAbelian,
@@ -654,7 +654,7 @@ monoid1 := rec(
 	is_commutative := fail, 
 	is_invertible := fail, 
 	is_submonoid := fail, 
-	monoid := fail, 
+	monoid := fail, # our private symbol monoid1.monoid_by_generators is installed in private/private.g
 	multiplication := fail, 
 	semigroup := fail, 
 	submonoid := fail
@@ -976,7 +976,8 @@ semigroup1 := rec(
 	is_subsemigroup := fail, 
 	magma := fail, 
 	multiplication := fail, 
-	semigroup := fail, 
+	semigroup := fail, # our private symbol semigroup1.semiroup_by_generators 
+	                   # is installed in private/private.g
 	subsemigroup := fail
 ),
 
@@ -991,7 +992,7 @@ semigroup2 := rec(
 ),
 
 semigroup3 := rec(
-	automorphism_group := fail, 
+	automorphism_group := AutomorphismGroup, # requires MONOID package and GRAPE, duplicated in semigroup4 CD
 	cyclic_semigroup := fail, 
 	direct_power := fail, 
 	direct_product := fail, 
@@ -1001,8 +1002,13 @@ semigroup3 := rec(
 ),
 
 semigroup4 := rec(
-	automorphism_group := fail, 
-	homomorphism_by_generators := fail
+	automorphism_group := AutomorphismGroup, # requires MONOID package and GRAPE, duplicated in semigroup3 CD
+	homomorphism_by_generators :=            # requires MONOID
+        function(x)
+        local g;
+        # we use NC method trusting that the client send valid input (this must be the case for the GAP client)
+        return SemigroupHomomorphismByImagesOfGensNC( x[1], x[2], List( x[3], g -> g[2] ) );
+        end
 ),
 
 set1 := rec(

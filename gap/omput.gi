@@ -663,6 +663,32 @@ function(stream, x)
 end); 
 
 
+#######################################################################
+##
+#M  OMPut( <stream>, <semigrouphom> )  
+##
+## 
+InstallMethod(OMPut, "for a semigroup homomorphism given by images of generators", true,
+[IsOutputStream, IsSemigroupHomomorphism and IsSemigroupHomomorphismByImagesOfGensRep],0,
+function(stream, x)
+    local g;
+    OMWriteLine(stream, ["<OMA>"]);
+	OMIndent := OMIndent+1;
+	OMPutSymbol( stream, "semigroup4", "homomorphism_by_generators" );
+	OMPut(stream, Source(x) );
+	OMPut(stream, Range(x) ); 
+	if IsMonoid( Source(x) ) then
+        OMPut(stream, List( GeneratorsOfMonoid( Source( x ) ), g -> [ g, g^x ] ) );
+    elif IsSemigroup( Source(x) ) then
+        OMPut(stream, List( GeneratorsOfSemigroup( Source( x ) ), g -> [ g, g^x ] ) );
+    else
+        Error( "OMPut for a semigroup homomorphism given by images of generators: can not output ", x );  
+    fi;        
+	OMIndent := OMIndent-1;
+    OMWriteLine(stream, ["</OMA>"]);
+end);
+
+
 #############################################################################
 #
 # OMPut for a univariate polynomial (polyu.poly_u_rep)
@@ -979,7 +1005,6 @@ end);
 InstallMethod(OMPut, "for a permutation", true,
 [IsOutputStream, IsPerm],0,
 function(stream, x)
-
 	OMPutApplication( stream, "permut1", "permutation", ListPerm(x) );
 end);
 

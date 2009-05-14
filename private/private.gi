@@ -69,6 +69,44 @@ end);
 
 #######################################################################
 ##
+#M  OMPut( <stream>, <transformation> )  
+##
+##  Printing for transformations : specified in permut1.ocd 
+## 
+InstallMethod(OMPut, "for a transformation", true,
+[IsOutputStream, IsTransformation],0,
+function(stream, x)
+	OMPutApplication( stream, "transform1", "transformation", ImageListOfTransformation(x) );
+end);
+
+
+#######################################################################
+##
+#M  OMPut( <stream>, <semigroup> )  
+##
+InstallMethod(OMPut, "for a semigroup", true,
+[IsOutputStream, IsSemigroup],0,
+function(stream, x)
+	OMPutApplication( stream, "semigroup1", "semigroup_by_generators", 
+		GeneratorsOfSemigroup(x) );
+end);
+
+
+#######################################################################
+##
+#M  OMPut( <stream>, <monoid> )  
+##
+## 
+InstallMethod(OMPut, "for a monoid", true,
+[IsOutputStream, IsMonoid],0,
+function(stream, x)
+	OMPutApplication( stream, "monoid1", "monoid_by_generators", 
+		GeneratorsOfMonoid(x) );
+end);
+
+
+#######################################################################
+##
 #M  OMPut( <stream>, <group> )  
 ##
 ##  Printing for groups as in openmath/cds/group1.ocd (Note that it 
@@ -81,7 +119,7 @@ function(stream, x)
 	OMPutApplication( stream, "group1", "group_by_generators", 
 		GeneratorsOfGroup(x) );
 end);
- 
+
 
 #######################################################################
 ## 
