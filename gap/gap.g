@@ -1002,13 +1002,8 @@ semigroup3 := rec(
 ),
 
 semigroup4 := rec(
-	automorphism_group := AutomorphismGroup, # requires MONOID package and GRAPE, duplicated in semigroup3 CD
-	homomorphism_by_generators :=            # requires MONOID
-        function(x)
-        local g;
-        # we use NC method trusting that the client send valid input (this must be the case for the GAP client)
-        return SemigroupHomomorphismByImagesOfGensNC( x[1], x[2], List( x[3], g -> g[2] ) );
-        end
+	automorphism_group := fail,
+	homomorphism_by_generators := fail
 ),
 
 set1 := rec(
@@ -1061,6 +1056,18 @@ setname2 := rec(
 
 ));
  
+if LoadPackage("monoid") <> fail then
+
+OMsymRecord.semigroup4 := rec(
+	automorphism_group := AutomorphismGroup, # requires MONOID package and GRAPE, duplicated in semigroup3 CD
+	homomorphism_by_generators :=            # requires MONOID
+        function(x)
+        local g;
+        # we use NC method trusting that the client send valid input (this must be the case for the GAP client)
+        return SemigroupHomomorphismByImagesOfGensNC( x[1], x[2], List( x[3], g -> g[2] ) );
+        end);
+
+fi; 
  
 ######################################################################
 ##

@@ -662,6 +662,7 @@ function(stream, x)
     OMWriteLine(stream, ["</OMA>"]);
 end); 
 
+if LoadPackage("monoid") <> fail then
 
 #######################################################################
 ##
@@ -688,6 +689,7 @@ function(stream, x)
     OMWriteLine(stream, ["</OMA>"]);
 end);
 
+fi;
 
 #############################################################################
 #
