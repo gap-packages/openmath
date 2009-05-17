@@ -107,6 +107,41 @@ end);
 
 #######################################################################
 ##
+#M  OMPut( <stream>, <record> )  
+##
+##  There is no OpenMath representation for records, though this might
+##  be done within standard using OMATTR. However, for better efficiency
+##  we introduce private symbol for the record, as records are native
+##  objects in many programming languages. 
+##
+##  To minimise the number of OM tags in the resulting OM code, the
+##  record with N components will be encoded as a list of the length 
+##  2*N where strings with component names will be on odd places and
+##  corresponding values will be on even ones.
+##
+##  As a practical application of this, we consider transmitting 
+##  graphs given as records in the Grape package format, which stores
+##  extra information not included in the default OpenMath encoding
+##  for graphs.
+##   
+InstallMethod(OMPut, "for a record", true,
+[IsOutputStream, IsRecord], 0 ,
+function(stream, x )
+    local r;
+	OMWriteLine(stream, ["<OMA>"]);
+	OMIndent := OMIndent+1;
+	OMPutSymbol( stream, "record1", "record" );
+	for r in RecNames(x) do
+	   OMPut( stream, r );
+	   OMPut( stream, x.(r) );
+	od;
+	OMIndent := OMIndent-1;
+	OMWriteLine(stream, ["</OMA>"]);	   
+end);
+
+
+#######################################################################
+##
 #M  OMPut( <stream>, <group> )  
 ##
 ##  Printing for groups as in openmath/cds/group1.ocd (Note that it 

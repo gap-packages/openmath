@@ -163,6 +163,17 @@ monoid1 := rec(
 	                               # semigroup1.semigroup from the official group1 CDs
 ),
 
+record1 := rec(
+    record := function( x )
+    local i, r;
+    r := rec();
+    for i in [ 2, 4 .. Length(x) ] do
+        r.(x[i-1]) := x[i];
+    od;
+    return r;    
+    end,
+),
+
 semigroup1 := rec(                
 	semigroup_by_generators := Semigroup # we take just list of generators unlike in
 	                                     # semigroup1.semigroup from the official group1 CDs

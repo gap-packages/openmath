@@ -418,3 +418,5 @@ April 2009
   transform1.transformation to support two-sided conversion of
   transformations, transformation semigroups and their automorphism 
   groups.    
+
+* Introduced private symbol record1.record for records.
