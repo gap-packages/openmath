@@ -67,13 +67,17 @@ BindGlobal( "OMObjects",
         fi;
     end,
 
-
-  OMSTR := function ( node )
+  
+OMSTR := function ( node )
         local  string;
-        string := Concatenation( List( node.content, x -> x.content ) );
-        ConvertToStringRep( string );
+		if node.content <> 0 then
+	        string := Concatenation( List( node.content, x -> x.content ) );
+	        ConvertToStringRep( string );
+		else
+			string := "";
+		fi;
         return string;
-    end,
+   end,    
 
 
   OMS := function ( node )
