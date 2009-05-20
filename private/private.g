@@ -163,6 +163,10 @@ monoid1 := rec(
 	                               # semigroup1.semigroup from the official group1 CDs
 ),
 
+pcgroup1 := rec(
+    pcgroup_by_pcgscode := x -> PcGroupCode( x[1], x[2] )
+),
+
 record1 := rec(
     record := function( x )
     local i, r;

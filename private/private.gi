@@ -157,6 +157,29 @@ end);
 
 
 #######################################################################
+##
+#M  OMPut( <stream>, <pcgroup> )  
+##
+##  Printing for pcgroups as pcgroup1.pcgroup_by_pcgscode:
+##  the 1st argument is pcgs code of the group, the 2nd is
+##  its order. Note that OMTest will return fail in this
+##  case, since the result of parsing the output will be
+##  an isomorphic group but not equal to the original one.
+## 
+InstallMethod(OMPut, "for a pcgroup", true,
+[IsOutputStream, IsPcGroup],0,
+function(stream, x)
+	OMWriteLine(stream, ["<OMA>"]);
+	OMIndent := OMIndent+1;
+	OMPutSymbol( stream, "pcgroup1", "pcgroup_by_pcgscode" );
+    OMPut( stream, CodePcGroup(x) );
+	OMPut( stream, Size(x) );
+	OMIndent := OMIndent-1;
+	OMWriteLine(stream, ["</OMA>"]);	
+end);
+
+
+#######################################################################
 ## 
 ## Experimental methods for OMPut for character tables"
 ##
