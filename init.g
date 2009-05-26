@@ -30,7 +30,7 @@ fi;
 if not CompareVersionNumbers( VERSION, "4.4" )  then
 
     # announce the package version and test for the existence of the binary
-    DeclarePackage( "openmath", "10.0.3", ReturnTrue );
+    DeclarePackage( "openmath", "10.0.4", ReturnTrue );
 
     # install the documentation
     DeclarePackageDocumentation( "openmath", "doc" );

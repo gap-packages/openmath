@@ -63,8 +63,8 @@ PREPARING A NEW RELEASE:
 * check the functionality, also with gpipe method, and with an older
 version of Gap.
 
-* modify date and version number in file PackageInfo.g 
-and version number in files doc/manual.xml and init.g
+* modify date and version number in file PackageInfo.g and version 
+number in files doc/manual.xml, doc/openmath.xml and init.g
 
 * test the PackageInfo.g, and that the documentation is available in Gap:
 

@@ -4,7 +4,7 @@
 <Heading>Extending the &OpenMath; package</Heading>    
 
 <Section Label="Available">
-<Heading>Exploring supported symbols</Heading>
+<Heading>Exploring the range of supported symbols</Heading>
 <Index Key="OMsymRecord"><C>OMsymRecord</C></Index>
 
 The &OpenMath; package supports such basic &OpenMath; objects
@@ -44,6 +44,17 @@ rec(
 with errors and special procedures from the &SCSCP; package which
 are treated separately. 
 <P/>
+
+To check quickly if &GAP; can parse a given &OpenMath; object,
+copy the &OpenMath; code and paste it directly into standard input
+after the following commands:
+
+<Example>
+<![CDATA[
+gap> stream := InputTextUser();;
+gap> g := OMGetObject(stream);CloseStream(stream);
+]]>
+</Example>
 
 The main tool for the conversion from &GAP; to &OpenMath; is 
 <C>OMPut( &lt;stream>, &lt;object> )</C>. A number of methods for
@@ -93,10 +104,30 @@ and experimental CDs or separate symbols. We allocated the directory <File>openm
 for this purposes, and currently it contain the file <File>private.g</File> for conversions
 from &OpenMath; to &GAP; and the file <File>private.gi</File> for conversions from &GAP;
 to &OpenMath; for some symbols from private CDs contained in the <File>openmath/cds</File> directory.
-In particular, instead of using <C>group1.group</C> we introduced the private symbol 
-<C>group1.group_by_generators</C> which allows us to input and output groups given by their generators
-as this is a natural ways to create groups in &GAP;
 <P/>
+
+In particular, we extended the package with the following private &OpenMath; symbols:
+<List>
+<Item>
+<C>group1.group_by_generators</C> which allows us to input and output groups given by 
+their generators as this is a natural way to create groups in &GAP;;
+</Item>
+<Item>
+<C>semigroup1.semigroup_by_generators</C> and <C>monoid1.monoid_by_generators</C>
+following the same considerations for semigroups and monoids;
+</Item>
+<Item>
+<C>pcgroup1.pcgroup_by_pcgscode</C> for PcGroups given by their pcgs code and order;
+</Item>
+<Item>
+<C>record1.record</C> for records as they are important data structures which we want
+to pass in a straightforward manner between different &GAP; instances;
+</Item>
+<Item>
+<C>transform1.transformation</C> to support transformations, transformation semigroups 
+and their automorphism groups.
+</Item>
+</List>
 
 The file <File>private.g</File> is loaded from <File>openmath/gap/new.g</File>, 
 and the <File>private.gi</File> is loaded from <File>openmath/gap/read.g</File>.

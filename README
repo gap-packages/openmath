@@ -405,18 +405,16 @@ became its maintainer. The list of major updates is below:
     and replaced in private.g ViewString by StringView as it
     was renamed in printutil.*
   
-Alexander Konovalov
-
-April 2009  
+Alexander Konovalov                               April 2009  
       
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 
 10.0.4 (May 2009):
+
 * Added official symbols semigroup4.automorphism_group and 
   semigroup4.homomorphism_by_generators, and and private 
   monoid1.monoid_by_generators, semigroup1.semigroup_by_generators,
   transform1.transformation to support two-sided conversion of
   transformations, transformation semigroups and their automorphism 
-  groups.    
-
-* Introduced private symbol record1.record for records.
+  groups; private symbols record1.record for records and 
+  pcgroup1.pcgroup_by_pcgscode for PcGroups

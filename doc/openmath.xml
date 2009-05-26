@@ -12,7 +12,7 @@ The package is loaded as shown below (possibly loading required packages at the 
 <![CDATA[
 gap> LoadPackage("openmath");
 -----------------------------------------------------------------------------
-Loading  openmath 10.0.2 (OpenMath functionality in GAP)
+Loading  openmath 10.0.4 (OpenMath functionality in GAP)
 by Marco Costantini (costanti@science.unitn.it),
    Alexander Konovalov (http://www.cs.st-andrews.ac.uk/~alexk/), and
    Andrew Solomon (http://www.illywhacker.net/).
@@ -127,7 +127,8 @@ gap> OMString((1,2):noomobj);
 <Ref BookName="ref" Oper="InputTextUser" />, 
 <Ref BookName="ref" Oper="InputTextString" />, 
 <Ref BookName="ref" Oper="InputOutputLocalProcess" />, 
-<Ref BookName="scscp" Oper="InputOutputTCPStream" Label="for client" /> )
+<Ref BookName="scscp" Oper="InputOutputTCPStream" Label="for client" />,
+<Ref BookName="scscp" Oper="InputOutputTCPStream" Label="for server" />)
 with an &OpenMath; object on it.
 <Ref Func="OMGetObject" /> takes precisely one object off <A>stream</A> 
 and returns it as a GAP object.
@@ -177,8 +178,8 @@ object <A>obj</A> to output stream <A>stream</A>
 (see <Ref BookName="ref" Oper="InputTextFile" />, 
 <Ref BookName="ref" Oper="OutputTextUser" />, 
 <Ref BookName="ref" Oper="OutputTextString" />, 
-<Ref BookName="ref" Oper="InputOutputLocalProcess" />, 
-<Ref BookName="scscp" Oper="InputOutputTCPStream" Label="for server" /> ).
+<Ref BookName="scscp" Oper="InputOutputTCPStream" Label="for client" />,
+<Ref BookName="scscp" Oper="InputOutputTCPStream" Label="for server" />).
 
 <Example>
 <![CDATA[
@@ -220,10 +221,10 @@ but <Ref Func="OMPutObject" /> threat it in a different way: instead of converti
 it into a &lt;OMSTR> object, an &OpenMath; plain string will be plainly substituted
 into the output (this explains its name) without decorating it with &lt;OMSTR> tags.
 <P/>
-It is assumed that &OpenMath; plain string contains valid &OpenMath; code; and no 
+It is assumed that &OpenMath; plain string contains valid &OpenMath; code; no 
 actual validation is performed during its creation. Such functionality may be useful
-to compose some &OpenMath; code from GAP to communicate it to the other system, in
-particular, to send there symbols which are not supported by &GAP;, for example:
+to compose some &OpenMath; code at the &GAP; level to communicate it to the other 
+system, in particular, to send there symbols which are not supported by &GAP;, for example:
 
 <Example>
 <![CDATA[
