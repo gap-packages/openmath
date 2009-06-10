@@ -107,6 +107,48 @@ end);
 
 #######################################################################
 ##
+#M  OMPut( <stream>, <free group> )  
+##
+## 
+InstallMethod(OMPut, "for a free group", true,
+[IsOutputStream, IsFreeGroup],0,
+function(stream, f)
+#	SetOMReference( f, Concatenation("freegroup", RandomString(16) ) );
+#	OMWriteLine( stream, [ "<OMA id=\"", OMReference( f ), "\" >" ] );
+	OMWriteLine( stream, [ "<OMA>" ] );
+	OMIndent := OMIndent+1;
+	OMPutSymbol( stream, "fpgroup1", "free_groupn" );
+	OMPut( stream, Rank( f ) );
+	OMIndent := OMIndent-1;
+	OMWriteLine(stream, ["</OMA>"]);
+end);
+
+
+#######################################################################
+##
+#M  OMPut( <stream>, <FpGroup> )  
+##
+## 
+InstallMethod(OMPut, "for an FpGroup", true,
+[IsOutputStream, IsFpGroup],0,
+function(stream, g)
+	local x;
+#	SetOMReference( g, Concatenation( "fpgroup", RandomString(16) ) );
+#	OMWriteLine( stream, [ "<OMA id=\"", OMReference( g ), "\" >" ] );
+	OMWriteLine( stream, [ "<OMA>" ] );
+		OMIndent := OMIndent+1;
+		OMPutSymbol( stream, "fpgroup1", "fpgroup" );
+		OMPutReference( stream, FreeGroupOfFpGroup( g ) );
+		for x in RelatorsOfFpGroup( g ) do
+			OMPut( stream, ExtRepOfObj( x ) );
+		od;
+		OMIndent := OMIndent-1;
+	OMWriteLine(stream, ["</OMA>"]);
+end);
+
+
+#######################################################################
+##
 #M  OMPut( <stream>, <record> )  
 ##
 ##  There is no OpenMath representation for records, though this might

@@ -151,6 +151,20 @@ cas := rec( # see this CD in openmath/cds directory
 	("quit") := OMgapQuit,
 ),
 
+fpgroup1 := rec(                    # experimental symbols, see openmath/cds/group1
+	fpgroup := function( x )
+	local f, fam, rels, i;
+	f := x[1];
+	fam := FamilyObj( One(f) );
+	rels := [];
+	for i in [2..Length(x)] do
+		Add( rels, ObjByExtRep( fam, x[i] ) );
+	od;	
+	return f/rels;
+	end,
+	free_groupn := x -> FreeGroup( x[1] )
+),
+
 group1 := rec(                    # experimental symbols, see openmath/cds/group1
 	group_by_generators := Group, # we take just list of generators unlike in
 	                              # group1.group from the official group1 CDs
