@@ -101,18 +101,25 @@ OMSTR := function ( node )
 
 
   OMA := function ( node )
-        local  head;
+        local  head, headfun;
         if node.content[1].name = "OMS"  then
             head := OMsymLookup( [ node.content[1].attributes.cd, node.content[1].attributes.name ] );
         else
             head := OMParseXmlObj( node.content[1] );
         fi;
+        # check if the head is not a function (e.f. when permutation1.endomap 
+        # (evaluated in GAP as Transformation) is be used a head
+        if not IsFunction(head) then
+        	headfun := function(x) return x[1]^head; end;
+        else
+        	headfun := head;	
+        fi;
         # extra check to achieve compatibility with SCSCP
         if IsBound(node.content[1].attributes.cd) and node.content[1].attributes.cd="scscp2" and 
           node.content[1].attributes.name in [ "get_signature", "is_allowed_head" ] then
-            return head( [ node.content[2].attributes.cd, node.content[2].attributes.name ] );
+            return headfun( [ node.content[2].attributes.cd, node.content[2].attributes.name ] );
         else
-            return head( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ) );
+            return headfun( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ) );
         fi;
     end,
 
