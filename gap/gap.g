@@ -760,31 +760,130 @@ permut1 := rec(
 ),
 
 permutation1 := rec(
-	action := fail,
-	are_distinct := fail, 
-	cycle := fail,
-	cycle_type := fail,
+	action := 
+		function(x)
+			return x[2]^x[1];
+		end,
+	are_distinct := 
+		function(x)
+			return Length(x)=Length(Set(x));
+		end,		
+	cycle := 
+		function(x)
+			local img;
+		    img := x{[2..Length(x)]};
+		    Add( img, x[1] );
+			return MappingPermListList( x, img );
+		end,
+	cycle_type := 
+		function(x)
+		local c, r, t, i, j;
+		r:=[];
+		c := CycleStructurePerm( x[1] );
+		for i in [1..Length(c)] do
+		  if IsBound(c[i]) then
+		    t := i+1;
+		    Append( r, List([1..c[i]], j -> t ) );
+		  fi;
+		od;
+		return r;
+		end,
 	cycles := fail,
-	domain := fail,
-	endomap := fail,
-	endomap_left_compose := fail,
-	endomap_right_compose := fail,
-	fix := fail,
-	inverse := fail,
-	is_bijective := fail,
-	is_endomap := fail,
-	is_list_perm := fail,
-	is_permutation := fail,
+	domain := x -> [ 1 .. DegreeOfTransformation( x[1] ) ],
+	endomap := Transformation,
+	endomap_left_compose := x -> x[2]*x[1],
+	endomap_right_compose := x -> x[1]*x[2],
+	fix := fail, # permutation1.support refers to permutations,
+	             # but permutation1.fix refers to endomaps in terms
+	             # of their support, and also contains a typo. We
+	             # do not support it, and the fixed points of a
+	             # permutation can be easily computed anyway.
+	inverse := x -> x[1]^-1,
+	is_bijective := 
+		function(x)
+			if IsTransformation(x[1]) then
+				return DegreeOfTransformation(x[1]) = RankOfTransformation(x[1]);
+			else
+				# the example in the CD is_bijective(endomap(2,3,5)) contradicts to the endomap definition
+				Error( "permutation1.is_bijective: the argument must be a transformation!!!!\n" );
+			fi;		
+		end,
+	is_endomap := 
+		function(x)
+		local len;
+		if IsList(x) then
+			if ForAll( x, IsPosInt ) then
+				len := Length(x);
+				if ForAll( x, t -> t <= len ) then
+					return true;
+				fi;
+			fi;
+		fi;
+		return false;					
+		end,	
+	is_list_perm := 
+		function(x)
+		local len;
+		if IsList(x) then
+			if ForAll( x, IsPosInt ) then
+				len := Length(x);
+				if ForAll( x, t -> t <= len ) then
+					if Length(Set(x)) = len then
+						return true;
+					fi;
+				fi;
+			fi;
+		fi;
+		return false;					
+		end,
+	is_permutation := 
+		function( x )
+			local t,c,i;
+			if ForAll( x[1], IsPerm ) then
+				for t in x[1] do
+					c := CycleStructurePerm(t);
+					if ForAny( [ 1 .. Length(c)-1 ], i -> IsBound(c[i])) then
+						return false;
+					elif c[Length(c)]>1 then
+						return false;
+					fi;	
+				od;
+				if Length(x[1]) > 1 and Intersection( List( x[1], MovedPoints ) ) <> [] then
+					return false;
+				else
+					return true;
+				fi;	
+			fi;	
+			return false;
+		end,
 	left_compose := "left_compose",   # string to analyse in permgp1.group
-	length := fail,
-	list_perm := fail,
-	listendomap := fail, 
-	order := fail,
-	permutation := fail,
-	permutationsn := fail,
+	length :=
+		function(x)
+			local c, i;
+			c := CycleStructurePerm( x[1] );
+			if ForAny( [ 1 .. Length(c)-1 ], i -> IsBound(c[i])) then
+				Error( "permutation1.lenght requires a cycle, not a product of cycles!!!\n");
+			else
+				return Length(c)+1;
+			fi;
+		end,
+	list_perm := PermList,
+	listendomap := x -> ListPerm( x[1] ), 
+	order := x -> Order( x[1] ),
+	permutation := 
+		function( x )
+			if Length( x ) = 0 then
+				return ();
+			elif ForAll( x, IsPerm ) then
+				return Product( x );
+			else
+				Error( "permutation1.permutation requires a list of cycles!!!\n");
+			fi;	
+		end,
+	permutationsn := x -> AsList( SymmetricGroup(x[1]) ),
 	right_compose := "right_compose", # string to analyse in permgp1.group
-	sign := fail,
-	support := fail
+	sign := x -> SignPerm( x[1] ),
+	support := x -> MovedPoints( x[1] )
 ),
 
 poly := rec(
