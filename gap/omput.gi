@@ -54,7 +54,7 @@ BindGlobal( "RandomString",
     fi;
     MakeReadWriteGlobal( "OpenMathRealRandomSource" );
     UnbindGlobal( "OpenMathRealRandomSource" );
-    BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "random" ));
+    BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "urandom" ));
     return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
     end);
     
