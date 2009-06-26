@@ -222,6 +222,137 @@ end);
 
 
 #######################################################################
+##
+#M  OMPut( <stream>, <subgroup lattice> )  
+##
+## 
+InstallMethod(OMPut, "for a lattice of subgroups", true,
+[IsOutputStream, IsLatticeSubgroupsRep],0,
+function(stream, L)
+  local cls, sz, len, i, levels, j, class, max, levelnr, rep, k, z, t, 
+        nr, class_size;
+	
+  cls:=ConjugacyClassesSubgroups(L);
+  # set of orders of subgroups that appear in the group
+  sz:=[];
+  len:=[];
+  for i in cls do
+    Add(len,Size(i));
+    AddSet(sz,Size(Representative(i)));
+  od;
+  # reverse it so G comes first, {1} last
+  sz:=Reversed(sz);
+   
+  # create a list of records describing levels 
+  levels := [];
+  for i in [ 1 .. Length(sz) ] do
+    levels[i] := rec( index := sz[1]/sz[i], classes:=rec() );
+  od;
+
+  # populate levels with classes
+  for i in [1..Length(cls)] do
+    class := rec( number := i, vertices := List( [1..len[i]], j -> [] ) );
+	levels[ Position(sz,Size(Representative(cls[i]))) ].classes.(Concatenation("nr",String(i))) := class;
+  od;
+  
+#  label:=0;
+#  # assign labels
+# for i in [ Length(sz), Length(sz)-1  .. 2 ] do
+#   for nr in RecNames( levels[i].classes ) do
+#     levels[i].classes.(nr).labels:=[];
+#     for j in [ 1 .. Length( levels[i].classes.(nr).vertices) ] do
+#       label:=label+1;   
+#       Add( levels[i].classes.(nr).labels, String(label) );
+#      od; 
+#   od;
+# od;   
+# levels[1].classes.(RecNames( levels[1].classes )[1]).labels:=["G"];
+  
+  max:=MaximalSubgroupsLattice(L);
+  for i in [1..Length(cls)] do
+    levelnr := Position(sz,Size(Representative(cls[i])));
+    for j in max[i] do
+      rep:=ClassElementLattice(cls[i],1);
+      for k in [1..len[i]] do
+	    if k=1 then
+	      z:=j[2];
+	    else
+	      t:=cls[i]!.normalizerTransversal[k];
+	      z:=ClassElementLattice(cls[j[1]],1); # force computation of transv.
+	      z:=cls[j[1]]!.normalizerTransversal[j[2]]*t;
+	      z:=PositionCanonical(cls[j[1]]!.normalizerTransversal,z);
+	    fi;
+	    Add( levels[levelnr].classes.(Concatenation("nr",String(i))).vertices[k], [ j[1], z ] );
+      od;
+    od;
+  od;
+	
+  OMWriteLine(stream, ["<OMA>"]);
+  OMIndent := OMIndent+1;
+  OMPutSymbol( stream, "poset1", "poset_diagram" );
+    for i in [ 1 .. Length(levels) ] do
+      OMWriteLine(stream, ["<OMA>"]);
+      OMIndent := OMIndent+1;
+      OMPutSymbol( stream, "poset1", "level" );
+      OMPut( stream, levels[i].index );
+      OMWriteLine(stream, ["<OMA>"]);
+      OMIndent := OMIndent+1;     
+      OMPutSymbol( stream, "list1", "list" );         
+      for nr in RecNames( levels[i].classes ) do
+        OMWriteLine(stream, ["<OMA>"]);
+        OMIndent := OMIndent+1;     
+        OMPutSymbol( stream, "poset1", "class" );     
+        OMWriteLine(stream, ["<OMA>"]);
+        OMIndent := OMIndent+1;     
+        OMPutSymbol( stream, "list1", "list" );   
+        class_size := Length( levels[i].classes.(nr).vertices );
+        for j in [ 1 .. class_size ] do
+          OMWriteLine(stream, ["<OMA>"]);
+          OMIndent := OMIndent+1;     
+          OMPutSymbol( stream, "poset1", "vertex" );  
+          if i = 1 then
+            OMPut( stream, "G" );
+          elif class_size = 1 then
+            OMPut( stream, String( levels[i].classes.(nr).number ) );    
+          else
+            OMPut( stream, Concatenation( String( levels[i].classes.(nr).number ), ".", String(j) ) );    
+          fi;
+          if Length( levels[i].classes.(nr).vertices[j] ) > 0 then
+            OMWriteLine(stream, ["<OMA>"]);
+            OMIndent := OMIndent+1;     
+            OMPutSymbol( stream, "list1", "list" );  
+            for k in levels[i].classes.(nr).vertices[j] do
+              if len[k[1]] = 1 then
+                OMPut( stream, String( k[1] ) );    
+              else
+                OMPut( stream, Concatenation( String( k[1] ), ".", String( k[2] ) ) );    
+              fi;            
+            od;
+            OMIndent := OMIndent-1;
+            OMWriteLine(stream, ["</OMA>"]);    
+          else
+          	OMPutSymbol( stream, "set1", "emptyset" );  
+          fi;       
+          OMIndent := OMIndent-1;
+          OMWriteLine(stream, ["</OMA>"]);            
+        od;
+        OMIndent := OMIndent-1;
+        OMWriteLine(stream, ["</OMA>"]);        
+        OMIndent := OMIndent-1;
+        OMWriteLine(stream, ["</OMA>"]);
+      od;
+      OMIndent := OMIndent-1;
+      OMWriteLine(stream, ["</OMA>"]);
+      OMIndent := OMIndent-1;
+      OMWriteLine(stream, ["</OMA>"]);
+    od;
+  OMIndent := OMIndent-1;
+  OMWriteLine(stream, ["</OMA>"]);
+	
+end);
+
+
+#######################################################################
 ## 
 ## Experimental methods for OMPut for character tables"
 ##
