@@ -258,10 +258,11 @@ BindGlobal("OMgap_DMP",
     # The first argument is the polynomial ring containing the polynomial 
     # and the second is a "SDMP"
 	function( x )
-	local polyring, terms, fam, ext, t, term, i, poly;
+	local one, polyring, terms, fam, ext, t, term, i, poly;
 	polyring := x[1];
+	one := One( CoefficientsRing( polyring ) );
 	terms := x[2];
-	fam:=RationalFunctionsFamily( FamilyObj( One( CoefficientsRing( polyring ))));
+	fam:=RationalFunctionsFamily( FamilyObj( one ) );
 	ext := [];
 	for t in terms do
 	  term := [];
@@ -271,7 +272,7 @@ BindGlobal("OMgap_DMP",
 	    fi;
 	  od;
 	  Add( ext, term );
-	  Add( ext, t[1] );
+	  Add( ext, one*t[1] );
 	od;
     poly := PolynomialByExtRep( fam, ext );	
 	return poly;
@@ -452,14 +453,20 @@ fieldname1 := rec(
 ),
 
 finfield1 := rec(
-	conway_polynomial := fail, 
-	discrete_log := fail, 
-	field_by_conway := fail, 
-	field_by_conway := fail, 
-	is_primitive := fail, 
-	is_primitive_poly := fail, 
-	minimal_polynomial := fail, 
-	primitive_element := fail
+	conway_polynomial := x -> ConwayPolynomial( x[1], x[2] ), 
+	discrete_log := x -> LogFFE( x[2], x[1] ), 
+	field_by_conway := x -> GF( x[1], x[2] ), 
+	is_primitive := x -> x[1] = PrimitiveRoot( DefaultField( x[1] ) ), 
+	is_primitive_poly := fail,  # see IsPrimitivePolynomial
+	minimal_polynomial := fail, # see MinimalPolynomial
+	primitive_element := 
+		function(x)
+		if IsBound(x[2]) then
+			Error("OpenMath: 2-argument version of finfield1.primitive_element is not supported \n");
+		else
+			return Z(x[1]);
+		fi;	 
+		end
 ),
 
 fns1 := rec(
@@ -1135,22 +1142,36 @@ set3 := rec(
 ),
 	
 setname1 := rec(
-	C := fail,
+	C := fail, # the set of complex numbers
 	N := NonnegativeIntegers,
-	P := fail,
+	P := fail, # the set of positive prime numbers
 	Q := Rationals,
-	R := fail,
+	R := fail, # the set of real numbers
 	Z := Integers
 ),
 
 setname2 := rec(
-	A := fail, 
-	Boolean := fail, 
-	GFp := fail, 
-	GFpn := fail, 
-	H := fail, 
-	QuotientField := fail, 
-	Zm := fail
+	A := fail, # the set of algebraic numbers
+	Boolean := [ true, false ], 
+	GFp := 
+		function( x )
+		if not IsPrimeInt( x[1] ) then
+			Error( "OpenMath : the argument of setname2.GFp must be a prime integer \n");
+		else
+			return GF( x[1] );	
+		fi;	
+		end, 
+	GFpn := 
+		function( x )
+		if not IsPrimeInt( x[1] ) then
+			Error( "OpenMath : the 1st argument of setname2.GFpn must be a prime integer \n");
+		else
+			return GF( x[1]^x[2] );	
+		fi;	
+		end,	
+	H := fail, # the set of quaternions (over reals?)
+	QuotientField := fail, # the quotient field of any integral domain
+	Zm := x -> Integers mod x[1]
 )
 
 ));
