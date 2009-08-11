@@ -240,12 +240,17 @@ end);
 ##
 ##
 InstallGlobalFunction( OMPrint,
-function(x)
+function( arg )
 	local str, outstream;
-
 	str := "";
 	outstream := OutputTextString(str, true);
-	OMPutObject(outstream, x);
+	if Length( arg ) = 1 then
+		OMPut(outstream, arg[1] );
+	elif Length( arg ) = 2 then
+		OMPut(outstream, arg[1], arg[2] );
+	else
+		Error("OpenMath : OMPrint accepts only 1 or 2 arguments!!!\n");
+	fi;
 	CloseStream(outstream);
 	Print(str);
 end);
