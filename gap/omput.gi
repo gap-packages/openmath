@@ -997,6 +997,72 @@ OMIndent := OMIndent - 1;
 OMWriteLine( stream, [ "</OMA>" ] );  
 end); 
 
+#############################################################################
+#
+# OMPut for a finite field element using finfield1 CD
+#
+InstallMethod( OMPut, 
+"for for a finite field element using finfield1 CD", 
+true,
+[ IsOutputStream, IsFFE ],
+0,
+function( stream, a )
+local f;
+f := DefaultField( a );
+if IsZero(a) then
+	OMWriteLine( stream, [ "<OMA>" ] );
+		OMIndent := OMIndent + 1;
+		OMPutSymbol( stream, "arith1", "times" );
+		OMWriteLine( stream, [ "<OMA>" ] );
+			OMIndent := OMIndent + 1;
+			OMPutSymbol( stream, "finfield1", "primitive_element" );
+			OMPut( stream, Size( f ) );
+			OMIndent := OMIndent - 1;
+		OMWriteLine( stream, [ "</OMA>" ] );  
+		OMPut( stream, 0 );
+		OMIndent := OMIndent - 1;
+	OMWriteLine( stream, [ "</OMA>" ] );  
+else
+	OMWriteLine( stream, [ "<OMA>" ] );
+		OMIndent := OMIndent + 1;
+		OMPutSymbol( stream, "arith1", "power" );
+		OMWriteLine( stream, [ "<OMA>" ] );
+			OMIndent := OMIndent + 1;
+			OMPutSymbol( stream, "finfield1", "primitive_element" );
+			OMPut( stream, Size( f ) );
+			OMIndent := OMIndent - 1;
+		OMWriteLine( stream, [ "</OMA>" ] );  
+		OMPut( stream, LogFFE( a, PrimitiveRoot( f ) ) );
+		OMIndent := OMIndent - 1;
+	OMWriteLine( stream, [ "</OMA>" ] );  
+fi;
+end); 
+
+
+#############################################################################
+#
+# OMPut for a finite field using setname2.{GFp,GFpn}
+#
+InstallMethod( OMPut, 
+"for for a finite field using setname2.GFp or setname2.GFpn", 
+true,
+[ IsOutputStream, IsField ],
+0,
+function( stream, f )
+OMWriteLine( stream, [ "<OMA>" ] );
+	OMIndent := OMIndent + 1;
+	if IsPrimeInt( Size( f ) ) then
+		OMPutSymbol( stream, "setname2", "GFp" );
+  		OMPut( stream, Size( f ) );
+	else
+		OMPutSymbol( stream, "setname2", "GFpn" );
+  		OMPut( stream, Characteristic( f ) );
+  		OMPut( stream, DegreeOverPrimeField( f ) );
+	fi;
+	OMIndent := OMIndent - 1;
+OMWriteLine( stream, [ "</OMA>" ] );  
+end); 
+
 
 #######################################################################
 ##
