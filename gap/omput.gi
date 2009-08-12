@@ -908,7 +908,25 @@ end);
 
 #############################################################################
 #
-# OMPut for a (uni/multivariate) polynomial in the default ring (polyd1.DMP) 
+#  OpenMathDefaultPolynomialRing and tools for its resetting
+#
+BindGlobal( "OpenMathDefaultPolynomialRing", [ ] );
+
+BindGlobal( "SetOpenMathDefaultPolynomialRing",
+    function( R )
+    if not IsPolynomialRing(R) then
+    	Error("The argument must be a polynomial ring\n");
+    fi;
+   	MakeReadWriteGlobal( "OpenMathDefaultPolynomialRing" );
+   	OpenMathDefaultPolynomialRing := R;
+   	MakeReadOnlyGlobal( "OpenMathDefaultPolynomialRing" );
+    end);
+    
+
+#############################################################################
+#
+# OMPut for a (uni/multivariate) polynomial in the default ring or 
+# in OpenMathDefaultPolynomialRing, using polyd1.DMP 
 #
 InstallMethod( OMPut, 
 "for a (uni- or multivariate) polynomial in the default ring (polyd1.DMP)", 
@@ -916,7 +934,15 @@ true,
 [ IsOutputStream, IsPolynomial ],
 0,
 function( stream, f )
-OMPut( stream, DefaultRing( f ), f );
+if f in OpenMathDefaultPolynomialRing then
+	OMPut( stream, OpenMathDefaultPolynomialRing, f );
+else
+	Print("#I  Warning : polynomial will be printed using its default ring \n",
+	      "#I  because the default OpenMath polynomial ring is not specified \n",
+	      "#I  or it is not contained in the default OpenMath polynomial ring.\n", 
+	      "#I  You may ignore this or call SetOpenMathDefaultPolynomialRing to fix it.\n");
+	OMPut( stream, DefaultRing( f ), f );
+fi;	
 end);
 
 
