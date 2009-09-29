@@ -245,9 +245,9 @@ function( arg )
 	str := "";
 	outstream := OutputTextString(str, true);
 	if Length( arg ) = 1 then
-		OMPut(outstream, arg[1] );
+		OMPutObject(outstream, arg[1] );
 	elif Length( arg ) = 2 then
-		OMPut(outstream, arg[1], arg[2] );
+		OMPutObject(outstream, arg[1], arg[2] );
 	else
 		Error("OpenMath : OMPrint accepts only 1 or 2 arguments!!!\n");
 	fi;
