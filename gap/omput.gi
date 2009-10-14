@@ -839,12 +839,15 @@ true,
 [ IsOutputStream, IsPolynomialRing, IsPolynomial ],
 0,
 function( stream, r, f )
-local coeffs, deg, nr, coeffring, nrindet, extrep, term, nvars, pows, i, pos;
+local coeffs, deg, nr, coeffring, nrindet, extrep, nvars, pows, i, pos;
 
 if not f in r then
   Error( "OMPut : the polynomial ", f, " is not in the polynomial ring ", r, "\n" );
 fi;
 
+coeffring := CoefficientsRing( r );
+ 
+ 
 if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
 
   OMWriteLine( stream, [ "<OMA>" ] );
@@ -858,11 +861,37 @@ if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
   deg := DegreeOfLaurentPolynomial( f );
   # The zero polynomial is represented by an SDMP with no terms.
   if deg<>infinity then
-    for nr in [ deg+1, deg .. 1 ] do
-      if coeffs[nr] <> 0 then
-        OMPutApplication( stream, "polyd1", "term", [ coeffs[nr], nr-1 ] );
-      fi;
-    od; 
+    if IsField(coeffring) and IsFinite(coeffring) then
+    
+      # The part for polynomials over finite fields
+      # to tell which field to use. To speed up, the 
+      # check is outside the loop
+      for nr in [ deg+1, deg .. 1 ] do
+        if coeffs[nr] <> 0 then
+          OMWriteLine( stream, [ "<OMA>" ] );
+          OMIndent := OMIndent + 1;
+          OMPutSymbol( stream, "polyd1", "term" );
+          OMPut( stream, coeffring, coeffs[nr] );
+          OMPut( stream, nr-1 );
+          OMIndent := OMIndent - 1;   
+          OMWriteLine( stream, [ "</OMA>" ] );     
+        fi;
+      od; 
+      
+    else
+    
+      for nr in [ deg+1, deg .. 1 ] do
+        if coeffs[nr] <> 0 then
+          OMWriteLine( stream, [ "<OMA>" ] );
+          OMIndent := OMIndent + 1;
+          OMPutSymbol( stream, "polyd1", "term" );
+          OMPut( stream, coeffs[nr] );
+          OMPut( stream, nr-1 );
+          OMIndent := OMIndent - 1;   
+          OMWriteLine( stream, [ "</OMA>" ] );     
+        fi;
+      od;       
+    fi;  
   fi;
   OMIndent := OMIndent - 1;
   OMWriteLine( stream, [ "</OMA>" ] );
@@ -871,7 +900,6 @@ if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
 
 else
 
-  coeffring := CoefficientsRing( r );
   nrindet := Length(IndeterminatesOfPolynomialRing( r ) );
 
   OMWriteLine( stream, [ "<OMA>" ] );
@@ -882,20 +910,53 @@ else
   OMIndent := OMIndent + 1;
   OMPutSymbol( stream, "polyd1", "SDMP" );
   extrep := ExtRepPolynomialRatFun( f );
-  for nr in [ 1, 3 .. Length(extrep)-1 ] do
-    term := [ extrep[nr+1] ];
-    nvars := extrep[nr]{[1,3..Length(extrep[nr])-1]};
-    pows := extrep[nr]{[2,4..Length(extrep[nr])]};
-    for i in [1..nrindet] do
-      pos := Position( nvars, i );
-      if pos=fail then
-        Add( term, 0 );
-      else
-        Add( term, pows[pos] ); 
-      fi;  
-    od;
-    OMPutApplication( stream, "polyd1", "term", term );
-  od; 
+
+  if IsField(coeffring) and IsFinite(coeffring) then
+  
+    # The part for polynomials over finite fields
+    # to tell which field to use
+    for nr in [ 1, 3 .. Length(extrep)-1 ] do
+      OMWriteLine( stream, [ "<OMA>" ] );
+      OMIndent := OMIndent + 1;
+      OMPutSymbol( stream, "polyd1", "term" );
+      OMPut( stream, coeffring, extrep[nr+1] ); # the coefficient
+      nvars := extrep[nr]{[1,3..Length(extrep[nr])-1]};
+      pows := extrep[nr]{[2,4..Length(extrep[nr])]};
+      for i in [1..nrindet] do
+        pos := Position( nvars, i );
+        if pos=fail then
+          OMPut( stream, 0 );
+        else
+          OMPut( stream, pows[pos] );
+        fi;  
+      od;
+      OMIndent := OMIndent - 1;   
+      OMWriteLine( stream, [ "</OMA>" ] ); 
+    od; 
+    
+  else
+  
+    for nr in [ 1, 3 .. Length(extrep)-1 ] do
+      OMWriteLine( stream, [ "<OMA>" ] );
+      OMIndent := OMIndent + 1;
+      OMPutSymbol( stream, "polyd1", "term" );
+      OMPut( stream, extrep[nr+1] ); # the coefficient
+      nvars := extrep[nr]{[1,3..Length(extrep[nr])-1]};
+      pows := extrep[nr]{[2,4..Length(extrep[nr])]};
+      for i in [1..nrindet] do
+        pos := Position( nvars, i );
+        if pos=fail then
+          OMPut( stream, 0 );
+        else
+          OMPut( stream, pows[pos] );
+        fi;  
+      od;
+      OMIndent := OMIndent - 1;   
+      OMWriteLine( stream, [ "</OMA>" ] ); 
+    od; 
+    
+  fi;
+    
   OMIndent := OMIndent - 1;
   OMWriteLine( stream, [ "</OMA>" ] );
   OMIndent := OMIndent - 1;
@@ -1028,18 +1089,17 @@ OMIndent := OMIndent - 1;
 OMWriteLine( stream, [ "</OMA>" ] );  
 end); 
 
+
 #############################################################################
 #
-# OMPut for a finite field element using finfield1 CD
+# OMPut for a finite field and its element using finfield1 CD
 #
-InstallMethod( OMPut, 
+InstallOtherMethod( OMPut, 
 "for for a finite field element using finfield1 CD", 
 true,
-[ IsOutputStream, IsFFE ],
+[ IsOutputStream, IsField and IsFinite, IsFFE ],
 0,
-function( stream, a )
-local f;
-f := DefaultField( a );
+function( stream, f, a )
 if IsZero(a) then
 	OMWriteLine( stream, [ "<OMA>" ] );
 		OMIndent := OMIndent + 1;
@@ -1067,6 +1127,20 @@ else
 		OMIndent := OMIndent - 1;
 	OMWriteLine( stream, [ "</OMA>" ] );  
 fi;
+end); 
+
+
+#############################################################################
+#
+# OMPut for a finite field element in its default field
+#
+InstallMethod( OMPut, 
+"for for a finite field element using finfield1 CD", 
+true,
+[ IsOutputStream, IsFFE ],
+0,
+function( stream, a )
+	OMPut( stream, DefaultField( a ), a );
 end); 
 
 
