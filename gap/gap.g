@@ -1176,7 +1176,6 @@ setname2 := rec(
 
 ));
  
-if LoadPackage("monoid") <> fail then
 
 OMsymRecord.semigroup4 := rec(
 	automorphism_group := AutomorphismGroup, # requires MONOID package and GRAPE, duplicated in semigroup3 CD
@@ -1187,7 +1186,6 @@ OMsymRecord.semigroup4 := rec(
         return SemigroupHomomorphismByImagesOfGensNC( x[1], x[2], List( x[3], g -> g[2] ) );
         end);
 
-fi; 
  
 ######################################################################
 ##
