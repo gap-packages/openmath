@@ -130,6 +130,23 @@ OMIndent := 0;
 
 #############################################################################
 #
+# Declarations for OpenMathWriter
+#
+DeclareCategory( "IsOpenMathWriter", IsObject );
+DeclareCategory( "IsOpenMathXMLWriter", IsOpenMathWriter );
+DeclareCategory( "IsOpenMathBinaryWriter", IsOpenMathWriter );
+OpenMathWritersFamily := NewFamily( "OpenMathWritersFamily" );
+DeclareGlobalFunction ( "OpenMathBinaryWriter" );
+DeclareGlobalFunction ( "OpenMathXMLWriter" );
+DeclareRepresentation( "IsOpenMathWriterRep", IsPositionalObjectRep, [ ] );
+OpenMathBinaryWriterType := NewType( OpenMathWritersFamily, 
+                              IsOpenMathWriterRep and IsOpenMathBinaryWriter );
+OpenMathXMLWriterType    := NewType( OpenMathWritersFamily, 
+                              IsOpenMathWriterRep and IsOpenMathXMLWriter );                                
+                            
+                                
+#############################################################################
+#
 # Declarations for OMPlainString objects
 #
 DeclareCategory( "IsOMPlainString", IsObject );
@@ -137,7 +154,8 @@ OMPlainStringsFamily := NewFamily( "OMPlainStringsFamily" );
 DeclareGlobalFunction ( "OMPlainString" );
 DeclareRepresentation( "IsOMPlainStringRep", IsPositionalObjectRep, [ ] );
 OMPlainStringDefaultType := NewType( OMPlainStringsFamily, 
-                                IsOMPlainStringRep and IsOMPlainString );
+                                IsOMPlainStringRep and IsOMPlainString );                                
+
 
 #############################################################################
 #E

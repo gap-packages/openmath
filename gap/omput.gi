@@ -1242,11 +1242,55 @@ end);
 
 #############################################################################
 #
+# Functions and methods for OpenMathWriter
+#
+InstallGlobalFunction( OpenMathBinaryWriter,
+function( stream )
+if IsStream( stream ) then
+    return Objectify( OpenMathBinaryWriterType, [ stream ] );
+else
+    Error( "The argument of OpenMathBinaryWriter must be a stream" );
+fi;                    
+end);
+
+InstallGlobalFunction( OpenMathXMLWriter,
+function( stream )
+if IsStream( stream ) then
+    return Objectify( OpenMathXMLWriterType, [ stream ] );
+else
+    Error( "The argument of OpenMathXMLWriter must be a stream" );
+fi;                    
+end);
+
+
+#############################################################################
+##
+#M  PrintObj( <IsOpenMathBinaryWriter> )
+##
+InstallMethod( PrintObj, "for IsOpenMathBinaryWriter",
+[ IsOpenMathBinaryWriter ],
+function( obj )
+    Print( "<OpenMath binary writer to ", obj![1], ">" );
+end);
+
+
+#############################################################################
+##
+#M  PrintObj( <IsOpenMathXMLWriter> )
+##
+InstallMethod( PrintObj, "for IsOpenMathXMLWriter",
+[ IsOpenMathXMLWriter ],
+function( obj )
+    Print( "<OpenMath XML writer to ", obj![1], ">" );
+end);
+
+
+#############################################################################
+#
 # Functions and methods for OMPlainString
 #
 InstallGlobalFunction( OMPlainString,
 function( string )
-local pos;
 if IsString( string ) then
     # note that we do not validate the string!
     return Objectify( OMPlainStringDefaultType, [ string ] );
