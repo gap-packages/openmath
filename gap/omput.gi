@@ -93,11 +93,11 @@ end);
 ##  Input : name as string
 ##  Output: <OMV name="<name>" />
 ##
-InstallGlobalFunction(OMPutVar,
-function(stream, name)
-  OMWriteLine(stream, ["<OMV name=\"", name, "\"/>"]);
+InstallMethod( OMPutVar, "to write OMV in XML OpenMath", true,
+[ IsOpenMathXMLWriter, IsString ],0,
+function( writer, name )
+  OMWriteLine( writer![1], ["<OMV name=\"", name, "\"/>"] );
 end);
-
 
 
 #######################################################################
@@ -107,11 +107,11 @@ end);
 ##  Input : cd, name as strings
 ##  Output: <OMS cd="<cd>" name="<name>" />
 ##
-InstallGlobalFunction(OMPutSymbol,
-function(stream, cd, name)
-    OMWriteLine(stream, ["<OMS cd=\"", cd, "\" name=\"", name, "\"/>"]);
+InstallMethod( OMPutSymbol, "to write OMS in XML OpenMath", true,
+[ IsOpenMathXMLWriter, IsString, IsString ],0,
+function( writer, cd, name )
+  OMWriteLine( writer![1], ["<OMS cd=\"", cd, "\" name=\"", name, "\"/>"] );
 end);
-
 
 
 #######################################################################
@@ -128,21 +128,30 @@ end);
 ##        </OMA>
 ##
 
-
-InstallGlobalFunction(OMPutApplication,
-function ( stream, cd, name, list )
-    local  obj;
-    OMWriteLine( stream, [ "<OMA>" ] );
+InstallMethod(OMPutOMA, "to write OMA in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+	OMWriteLine( writer![1], [ "<OMA>" ] );
     OMIndent := OMIndent + 1;
-    OMPutSymbol( stream, cd, name );
-    for obj  in list  do
-        OMPut( stream, obj );
-    od;
-    OMIndent := OMIndent - 1;
-    OMWriteLine( stream, [ "</OMA>" ] );
 end);
 
+InstallMethod(OMPutEndOMA, "to write /OMA in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	OMWriteLine( writer![1], [ "</OMA>" ] );
+end);
 
+InstallGlobalFunction(OMPutApplication,
+function ( writer, cd, name, list )
+    local  obj;
+    OMPutOMA( writer );
+    OMPutSymbol( writer, cd, name );
+    for obj  in list  do
+        OMPut( writer, obj );
+    od;
+    OMPutEndOMA( writer );
+end);
 
 
 #######################################################################
@@ -150,23 +159,36 @@ end);
 #F  OMPutObject( <stream>, <obj> ) 
 ##
 ##
-InstallGlobalFunction(OMPutObject,
-function(stream, x)
 
-	if IsClosedStream( stream )  then
+InstallMethod(OMPutOMOBJ, "to write OMOBJ in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+	OMIndent := 0;
+	OMWriteLine( writer![1], [ "<OMOBJ>" ] );
+    OMIndent := 1;
+end);
+
+InstallMethod(OMPutEndOMOBJ, "to write /OMOBJ in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	OMWriteLine( writer![1], [ "</OMOBJ>" ] );
+end);
+
+InstallGlobalFunction(OMPutObject,
+function(writer, x)
+
+	if IsClosedStream( writer![1] )  then
 		Error( "closed stream" );
 	fi;
 
-	if IsOutputTextStream( stream )  then
-		SetPrintFormattingStatus( stream, false );
+	if IsOutputTextStream( writer![1] )  then
+		SetPrintFormattingStatus( writer![1], false );
 	fi;
 
-	OMIndent := 0;
-	OMWriteLine(stream, ["<OMOBJ>"]);
-	OMIndent:= OMIndent+1;
-	OMPut(stream, x);
-	OMIndent:=OMIndent-1;
-	OMWriteLine(stream, ["</OMOBJ>"]);
+    OMPutOMOBJ( writer );
+		OMPut( writer, x );
+    OMPutEndOMOBJ( writer );
 end);
 
 
@@ -241,13 +263,14 @@ end);
 ##
 InstallGlobalFunction( OMPrint,
 function( arg )
-	local str, outstream;
+	local str, outstream, writer;
 	str := "";
 	outstream := OutputTextString(str, true);
+	writer := OpenMathXMLWriter( outstream );
 	if Length( arg ) = 1 then
-		OMPutObject(outstream, arg[1] );
+		OMPutObject(writer, arg[1] );
 	elif Length( arg ) = 2 then
-		OMPutObject(outstream, arg[1], arg[2] );
+		OMPutObject(writer, arg[1], arg[2] );
 	else
 		Error("OpenMath : OMPrint accepts only 1 or 2 arguments!!!\n");
 	fi;
@@ -271,9 +294,9 @@ fi;
 str := "";
 outstream := OutputTextString( str, true );
 if noomobj then
-    OMPutObjectNoOMOBJtags( outstream, x );
+    OMPutObjectNoOMOBJtags( OpenMathXMLWriter(outstream), x );
 else
-    OMPutObject( outstream, x );
+    OMPutObject( OpenMathXMLWriter(outstream), x );
 fi;
 CloseStream( outstream );
 NormalizeWhitespace( str );
@@ -282,37 +305,38 @@ end);
 
 
 #############################################################################
+## 
 ## Various methods for OMPut
-
+## 
 
 BindGlobal( "OMINT_LIMIT", 2^15936 );
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <int> )  
+#M  OMPut( <OMWriter>, <int> )  
 ##
 ##  Printing for integers: specified in the standard
 ## 
-InstallMethod(OMPut, "for an integer", true,
-[IsOutputStream, IsInt],0,
-function(stream, x)
+InstallMethod(OMPut, "for an integer to XML OpenMath", true,
+[IsOpenMathXMLWriter, IsInt],0,
+function(writer, x)
     if x >= OMINT_LIMIT then
-  		OMWriteLine(stream, ["<OMI>", String(x), "</OMI>"]);
+  		OMWriteLine( writer![1], ["<OMI>", String(x), "</OMI>"] );
 	else
-  		OMWriteLine(stream, ["<OMI>", x, "</OMI>"]);
+  		OMWriteLine( writer![1], ["<OMI>", x, "</OMI>"] );
 	fi;
 end);
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <string> )  
+#M  OMPut( <OMWriter>, <string> )  
 ##
 ##  specified in the standard
 ## 
-InstallMethod(OMPut, "for a string", true,
-[IsOutputStream, IsString],0,
-function(stream, x)
+InstallMethod(OMPut, "for a string to XML OpenMath", true,
+[IsOpenMathXMLWriter, IsString],0,
+function(writer, x)
 	if IsEmpty(x) and not IsEmptyString(x) then
 		TryNextMethod();
 	fi;
@@ -321,7 +345,7 @@ function(stream, x)
   x := ReplacedString( x, "&", "&amp;" );
   x := ReplacedString( x, "<", "&lt;" );
 
-	OMWriteLine(stream, ["<OMSTR>",x,"</OMSTR>"]);
+	OMWriteLine(writer![1], ["<OMSTR>",x,"</OMSTR>"]);
 end);
 
 
@@ -390,7 +414,7 @@ fi;
 InstallMethod(OMPut, "for a boolean", true,
 [IsOutputStream, IsBool],0,
 function(stream, x)
-    if not x in [ true, false]  then
+    if not x in [ true, false ]  then
         TryNextMethod();
     fi;
     OMPutSymbol( stream, "logic1", x );
@@ -1174,9 +1198,9 @@ end);
 ##  Printing for permutations: specified in permut1.ocd 
 ## 
 InstallMethod(OMPut, "for a permutation", true,
-[IsOutputStream, IsPerm],0,
-function(stream, x)
-	OMPutApplication( stream, "permut1", "permutation", ListPerm(x) );
+[IsOpenMathWriter, IsPerm],0,
+function(writer, x)
+	OMPutApplication( writer, "permut1", "permutation", ListPerm(x) );
 end);
 
 

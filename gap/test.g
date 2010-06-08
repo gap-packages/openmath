@@ -35,7 +35,7 @@ function(o)
 	# output
 	t := "";
 	s := OutputTextString(t, false);
-	OMPutObject(s, o);
+	OMPutObject( OpenMathXMLWriter(s), o);
 	CloseStream(s);
 
 	#input

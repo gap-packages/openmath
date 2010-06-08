@@ -17,6 +17,24 @@ Revision.("openmath/gap/omput.gd") :=
 
 DeclareGlobalVariable("OpenMathRealRandomSource");
 
+
+#############################################################################
+#
+# Declarations for OpenMathWriter
+#
+DeclareCategory( "IsOpenMathWriter", IsObject );
+DeclareCategory( "IsOpenMathXMLWriter", IsOpenMathWriter );
+DeclareCategory( "IsOpenMathBinaryWriter", IsOpenMathWriter );
+OpenMathWritersFamily := NewFamily( "OpenMathWritersFamily" );
+DeclareGlobalFunction ( "OpenMathBinaryWriter" );
+DeclareGlobalFunction ( "OpenMathXMLWriter" );
+DeclareRepresentation( "IsOpenMathWriterRep", IsPositionalObjectRep, [ ] );
+OpenMathBinaryWriterType := NewType( OpenMathWritersFamily, 
+                              IsOpenMathWriterRep and IsOpenMathBinaryWriter );
+OpenMathXMLWriterType    := NewType( OpenMathWritersFamily, 
+                              IsOpenMathWriterRep and IsOpenMathXMLWriter );                                
+                            
+                               
 #######################################################################
 ##
 #F  OMPutObject( <stream>, <obj> )  
@@ -32,6 +50,8 @@ DeclareGlobalVariable("OpenMathRealRandomSource");
 ##  complex objects.
 ## 
 DeclareGlobalFunction("OMPutObject");
+DeclareOperation("OMPutOMOBJ",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutEndOMOBJ", [ IsOpenMathWriter ] );
 
 DeclareGlobalFunction("OMPutObjectNoOMOBJtags");
 
@@ -41,7 +61,8 @@ DeclareGlobalFunction("OMPutObjectNoOMOBJtags");
 #O  OMPut(<stream>,<obj> ) 
 ## 
 ##
-DeclareOperation("OMPut", [IsOutputStream, IsObject ]);
+DeclareOperation("OMPut", [IsOutputStream, IsObject ]); # will be deprecated
+DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 
 
 #######################################################################
@@ -82,7 +103,7 @@ DeclareGlobalFunction("OMWriteLine");
 ##  Input : cd, name as strings
 ##  Output: <OMS cd="<cd>" name="<name>" />
 ##
-DeclareGlobalFunction("OMPutSymbol");
+DeclareOperation("OMPutSymbol", [ IsOpenMathWriter, IsString, IsString ] );
 
 
 #######################################################################
@@ -92,7 +113,7 @@ DeclareGlobalFunction("OMPutSymbol");
 ##  Input : name as string
 ##  Output: <OMV name="<name>" />
 ##
-DeclareGlobalFunction("OMPutVar");
+DeclareOperation("OMPutVar", [ IsOpenMathWriter, IsString ] );
 
 
 #######################################################################
@@ -109,6 +130,8 @@ DeclareGlobalFunction("OMPutVar");
 ##        </OMA>
 ##
 DeclareGlobalFunction("OMPutApplication");
+DeclareOperation("OMPutOMA",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutEndOMA", [ IsOpenMathWriter ] );
 
 DeclareAttribute( "OMReference", IsObject );
 
@@ -128,23 +151,6 @@ DeclareOperation("OMPutList", [IsOutputStream, IsObject ]);
 OMIndent := 0;
 
 
-#############################################################################
-#
-# Declarations for OpenMathWriter
-#
-DeclareCategory( "IsOpenMathWriter", IsObject );
-DeclareCategory( "IsOpenMathXMLWriter", IsOpenMathWriter );
-DeclareCategory( "IsOpenMathBinaryWriter", IsOpenMathWriter );
-OpenMathWritersFamily := NewFamily( "OpenMathWritersFamily" );
-DeclareGlobalFunction ( "OpenMathBinaryWriter" );
-DeclareGlobalFunction ( "OpenMathXMLWriter" );
-DeclareRepresentation( "IsOpenMathWriterRep", IsPositionalObjectRep, [ ] );
-OpenMathBinaryWriterType := NewType( OpenMathWritersFamily, 
-                              IsOpenMathWriterRep and IsOpenMathBinaryWriter );
-OpenMathXMLWriterType    := NewType( OpenMathWritersFamily, 
-                              IsOpenMathWriterRep and IsOpenMathXMLWriter );                                
-                            
-                                
 #############################################################################
 #
 # Declarations for OMPlainString objects
