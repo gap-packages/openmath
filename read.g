@@ -43,6 +43,8 @@ fi;
 ## This module is concerned with outputting OpenMath; provides
 ## OMPutObject and OMPrint
 
+ReadPackage("openmath", "/gap/omputxml.gi");
+ReadPackage("openmath", "/gap/omputbin.gi");
 ReadPackage("openmath", "/gap/omput.gi");
 if IsExistingFile( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.gi") ) then
 	Read( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.gi") );

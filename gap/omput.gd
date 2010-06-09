@@ -61,7 +61,6 @@ DeclareGlobalFunction("OMPutObjectNoOMOBJtags");
 #O  OMPut(<stream>,<obj> ) 
 ## 
 ##
-DeclareOperation("OMPut", [IsOutputStream, IsObject ]); # will be deprecated
 DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 
 
@@ -135,7 +134,7 @@ DeclareOperation("OMPutEndOMA", [ IsOpenMathWriter ] );
 
 DeclareAttribute( "OMReference", IsObject );
 
-DeclareOperation( "OMPutReference", [ IsOutputStream, IsObject ] );
+DeclareOperation( "OMPutReference", [ IsOpenMathWriter, IsObject ] );
 
 
 #######################################################################
@@ -144,7 +143,7 @@ DeclareOperation( "OMPutReference", [ IsOutputStream, IsObject ] );
 ## 
 ##  Tries to render this as an OpenMath list
 ##
-DeclareOperation("OMPutList", [IsOutputStream, IsObject ]);
+DeclareOperation("OMPutList", [ IsOpenMathWriter, IsObject ]);
 
 
 # Determines the indentation of the next line to be printed.

@@ -9,31 +9,61 @@
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
 #Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
 ##
-##  Writes a GAP object to an output stream, as an OpenMath object
+##  High-level methods to output GAP objects in OpenMath 
 ## 
 
 Revision.("openmath/gap/omput.gi") := 
     "@(#)$Id$";
 
 
+#############################################################################
+#
+# Functions and methods for OpenMathWriter
+#
+InstallGlobalFunction( OpenMathBinaryWriter,
+function( stream )
+if IsStream( stream ) then
+    return Objectify( OpenMathBinaryWriterType, [ stream ] );
+else
+    Error( "The argument of OpenMathBinaryWriter must be a stream" );
+fi;                    
+end);
 
-# The Gap function AppendTo (used by OMWriteLine) uses
-# PrintFormattingStatus and, before Gap 4.4.7, PrintFormattingStatus was
-# defined only for text streams.
-
-if not CompareVersionNumbers( VERSION, "4.4.7" )  then
-    InstallOtherMethod( PrintFormattingStatus, "for non-text output stream",
-      true, [IsOutputStream], 0,
-      function ( str )
-        if IsOutputTextStream( str )  then
-            TryNextMethod();
-        fi;
-        return false;
-    end);
-fi;
+InstallGlobalFunction( OpenMathXMLWriter,
+function( stream )
+if IsStream( stream ) then
+    return Objectify( OpenMathXMLWriterType, [ stream ] );
+else
+    Error( "The argument of OpenMathXMLWriter must be a stream" );
+fi;                    
+end);
 
 
 #############################################################################
+##
+#M  PrintObj( <IsOpenMathBinaryWriter> )
+##
+InstallMethod( PrintObj, "for IsOpenMathBinaryWriter",
+[ IsOpenMathBinaryWriter ],
+function( obj )
+    Print( "<OpenMath binary writer to ", obj![1], ">" );
+end);
+
+
+#############################################################################
+##
+#M  PrintObj( <IsOpenMathXMLWriter> )
+##
+InstallMethod( PrintObj, "for IsOpenMathXMLWriter",
+[ IsOpenMathXMLWriter ],
+function( obj )
+    Print( "<OpenMath XML writer to ", obj![1], ">" );
+end);
+
+
+#############################################################################
+#
+# RandomString( <n> )
 #
 # This function generates a random string of the length n
 # It is needed in particular to create references, 
@@ -42,7 +72,7 @@ fi;
 # to avoid its early call when IO is not fully loaded (Error happens 
 # if GAP is started with "gap -r -A" and then LoadPackage("scscp");
 # is entered.
-
+#
 BindGlobal( "RandomString",
     function( n )
     local symbols, i;
@@ -58,90 +88,26 @@ BindGlobal( "RandomString",
     return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
     end);
     
-    
-#######################################################################
-##  
-#F  OMWriteLine( <stream>, <list> )
-##
-##  Input : List of arguments to print
-##  Output: \t ^ OMIndent, arguments
-##
-
-InstallGlobalFunction(OMWriteLine,
-function(stream, alist)
-	local i;
-
-	# do the indentation
-	AppendTo( stream, ListWithIdenticalEntries( OMIndent, '\t' ) );
-
-	for i in alist do
-		AppendTo(stream, i);
-	od;
-	AppendTo(stream, "\n");
-end);
-
 
 #######################################################################
-## Basic OpenMath objects and main functionality
-
+##
+## Compound OpenMath objects and main functionality
+##
 
 
 #######################################################################
 ##
-#F  OMPutVar( <stream>, <name> )
-##
-##  Input : name as string
-##  Output: <OMV name="<name>" />
-##
-InstallMethod( OMPutVar, "to write OMV in XML OpenMath", true,
-[ IsOpenMathXMLWriter, IsString ],0,
-function( writer, name )
-  OMWriteLine( writer![1], ["<OMV name=\"", name, "\"/>"] );
-end);
-
-
-#######################################################################
-##
-#F  OMPutSymbol( <stream>, <cd>, <name> )
-##
-##  Input : cd, name as strings
-##  Output: <OMS cd="<cd>" name="<name>" />
-##
-InstallMethod( OMPutSymbol, "to write OMS in XML OpenMath", true,
-[ IsOpenMathXMLWriter, IsString, IsString ],0,
-function( writer, cd, name )
-  OMWriteLine( writer![1], ["<OMS cd=\"", cd, "\" name=\"", name, "\"/>"] );
-end);
-
-
-#######################################################################
-##
-#M  OMPutApplication( <stream>, <cd>, <name>, <list> )
+#M  OMPutApplication( <OMWriter>, <cd>, <name>, <list> )
 ##
 ##  Input : cd, name as strings, list as a list
 ##  Output:
 ##        <OMA>
-##                <OMS cd=<cd> name=<name>/>
-##                OMPut(<stream>, <list>[1])
-##                OMPut(<stream>, <list>[2])
+##                <OMS cd=<cd> name=<name> />
+##                OMPut( <writer>, <list>[1] )
+##                OMPut( <writer>, <list>[2] )
 ##                ...
 ##        </OMA>
 ##
-
-InstallMethod(OMPutOMA, "to write OMA in XML OpenMath", true,
-[IsOpenMathXMLWriter],0,
-function( writer )
-	OMWriteLine( writer![1], [ "<OMA>" ] );
-    OMIndent := OMIndent + 1;
-end);
-
-InstallMethod(OMPutEndOMA, "to write /OMA in XML OpenMath", true,
-[IsOpenMathXMLWriter],0,
-function( writer )
-    OMIndent := OMIndent - 1;
-	OMWriteLine( writer![1], [ "</OMA>" ] );
-end);
-
 InstallGlobalFunction(OMPutApplication,
 function ( writer, cd, name, list )
     local  obj;
@@ -156,27 +122,11 @@ end);
 
 #######################################################################
 ##
-#F  OMPutObject( <stream>, <obj> ) 
+#F  OMPutObject( <OMWriter>, <obj> ) 
 ##
 ##
-
-InstallMethod(OMPutOMOBJ, "to write OMOBJ in XML OpenMath", true,
-[IsOpenMathXMLWriter],0,
-function( writer )
-	OMIndent := 0;
-	OMWriteLine( writer![1], [ "<OMOBJ>" ] );
-    OMIndent := 1;
-end);
-
-InstallMethod(OMPutEndOMOBJ, "to write /OMOBJ in XML OpenMath", true,
-[IsOpenMathXMLWriter],0,
-function( writer )
-    OMIndent := OMIndent - 1;
-	OMWriteLine( writer![1], [ "</OMOBJ>" ] );
-end);
-
 InstallGlobalFunction(OMPutObject,
-function(writer, x)
+function( writer, x )
 
 	if IsClosedStream( writer![1] )  then
 		Error( "closed stream" );
@@ -194,30 +144,28 @@ end);
 
 #######################################################################
 ##
-#F  OMPutObjectNoOMOBJtags( <stream>, <obj> ) 
+#F  OMPutObjectNoOMOBJtags( <OMWriter>, <obj> ) 
 ##
 ##
 InstallGlobalFunction(OMPutObjectNoOMOBJtags,
-function(stream, x)
+function( writer, x )
 
-	if IsClosedStream( stream )  then
+	if IsClosedStream( writer![1] )  then
 		Error( "closed stream" );
 	fi;
 
-	if IsOutputTextStream( stream )  then
-		SetPrintFormattingStatus( stream, false );
+	if IsOutputTextStream( writer![1] )  then
+		SetPrintFormattingStatus( writer![1], false );
 	fi;
 
 	OMIndent := 0;
-	# OMIndent:= OMIndent+1;
-	OMPut(stream, x);
-	# OMIndent:=OMIndent-1;
+	OMPut(writer, x);
 end);
 
 
 #############################################################################
 #
-# OMPutReference( stream, x );
+# OMPutReference( OMWriter, x );
 #
 # This method prints OpenMath references and can be used for printing complex 
 # objects, for example, ideals of polynomial rings (the ideal will carry the
@@ -245,13 +193,13 @@ end);
 InstallMethod( OMPutReference, 
 "for a stream and an object with reference",
 true,
-[ IsOutputStream, IsObject ],
+[ IsOpenMathWriter, IsObject ],
 0,
-function( stream, x )
+function( writer, x )
 if HasOMReference( x ) and not SuppressOpenMathReferences then
-   OMWriteLine( stream, [ "<OMR href=\"\043", OMReference( x ), "\" />" ] );
+   OMWriteLine( writer, [ "<OMR href=\"\043", OMReference( x ), "\" />" ] );
 else   
-   OMPut( stream, x );
+   OMPut( writer, x );
 fi;
 end);
 
@@ -309,155 +257,60 @@ end);
 ## Various methods for OMPut
 ## 
 
-BindGlobal( "OMINT_LIMIT", 2^15936 );
-
+ 
 #######################################################################
 ##
-#M  OMPut( <OMWriter>, <int> )  
-##
-##  Printing for integers: specified in the standard
-## 
-InstallMethod(OMPut, "for an integer to XML OpenMath", true,
-[IsOpenMathXMLWriter, IsInt],0,
-function(writer, x)
-    if x >= OMINT_LIMIT then
-  		OMWriteLine( writer![1], ["<OMI>", String(x), "</OMI>"] );
-	else
-  		OMWriteLine( writer![1], ["<OMI>", x, "</OMI>"] );
-	fi;
-end);
-
-
-#######################################################################
-##
-#M  OMPut( <OMWriter>, <string> )  
-##
-##  specified in the standard
-## 
-InstallMethod(OMPut, "for a string to XML OpenMath", true,
-[IsOpenMathXMLWriter, IsString],0,
-function(writer, x)
-	if IsEmpty(x) and not IsEmptyString(x) then
-		TryNextMethod();
-	fi;
-
-  # convert XML escaped chars
-  x := ReplacedString( x, "&", "&amp;" );
-  x := ReplacedString( x, "<", "&lt;" );
-
-	OMWriteLine(writer![1], ["<OMSTR>",x,"</OMSTR>"]);
-end);
-
-
-#######################################################################
-##
-#M  OMPut( <stream>, <float> )
-##
-##  Printing for floats: specified in the standard
-##
-if IsBound( IsFloat )  then
-InstallMethod(OMPut, "for a float", true,
-[IsOutputStream, IsFloat],0,
-function(stream, x)
-    local  string;
-    # treatment of x=0 separately was added when discovered
-    # that Float("-0") returns -0, but it is also faster.
-    if IsZero(x) then
-    	OMWriteLine( stream, [ "<OMF dec=\"0\"/>" ] );
-    else
-    	string := String( x );
-    	# the OpenMath standard requires floats encoded in this way, see
-    	# section 3.1.2
-    	string := ReplacedString( string, "e+", "e" );
-    	string := ReplacedString( string, "inf", "INF" );
-    	string := ReplacedString( string, "nan", "NaN" );
-    	OMWriteLine( stream, [ "<OMF dec=\"", string, "\"/>" ] );
-	fi;
-end);
-fi;
-
-
-#######################################################################
-##
-#M  OMPut( <stream>, <float> )
-##
-##  Printing for floats: specified in the standard
-##
-if IsBound( IS_MACFLOAT )  then
-InstallMethod(OMPut, "for a float", true,
-[IsOutputStream, IS_MACFLOAT],0,
-function(stream, x)
-    local  string;
-    # treatment of x=0 separately was added when discovered
-    # that Float("-0") returns -0, but it is also faster.
-    if IsZero(x) then
-    	OMWriteLine( stream, [ "<OMF dec=\"0\"/>" ] );
-    else
-    	string := String( x );
-    	# the OpenMath standard requires floats encoded in this way, see
-    	# section 3.1.2
-    	string := ReplacedString( string, "e+", "e" );
-    	string := ReplacedString( string, "inf", "INF" );
-    	string := ReplacedString( string, "nan", "NaN" );
-    	OMWriteLine( stream, [ "<OMF dec=\"", string, "\"/>" ] );
-	fi;
-end);
-fi;
-
-
-#######################################################################
-##
-#M  OMPut( <stream>, <bool> )  
+#M  OMPut( <OMWriter>, <bool> )  
 ##
 ##  Printing for booleans: specified in CD nums # now logic1
 ## 
 InstallMethod(OMPut, "for a boolean", true,
-[IsOutputStream, IsBool],0,
-function(stream, x)
+[ IsOpenMathWriter, IsBool ], 0,
+function(writer, x)
     if not x in [ true, false ]  then
         TryNextMethod();
     fi;
-    OMPutSymbol( stream, "logic1", x );
+    OMPutSymbol( writer, "logic1", String(x) );
 end);
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <rat> )  
+#M  OMPut( <OMWriter>, <rat> )  
 ##
 ##  Printing for rationals
 ## 
-InstallMethod(OMPut, "for a rational", true,
-[IsOutputStream, IsRat],0,
-function(stream, x)
-	OMPutApplication( stream, "nums1", "rational",
+InstallMethod( OMPut, "for a rational", true,
+[ IsOpenMathWriter, IsRat ],0,
+function( writer, x )
+	OMPutApplication( writer, "nums1", "rational",
 		[ NumeratorRat(x), DenominatorRat(x)] );
 end);
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <resclass> )  
+#M  OMPut( <OMWriter>, <resclass> )  
 ##
-##  Printing for rationals
+##  Printing for residue classes
 ## 
-InstallMethod(OMPut, "for a residue class", true,
-[IsOutputStream, IsZmodnZObj],0,
-function(stream, x)
-	OMPutApplication( stream, "integer2", "class",
+InstallMethod( OMPut, "for a residue class", true,
+[ IsOpenMathWriter, IsZmodnZObj ],0,
+function( writer, x )
+	OMPutApplication( writer, "integer2", "class",
 		[  x![1], FamilyObj(x)!.modulus ] );
 end);
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <cyc> )  
+#M  OMPut( <OMWriter>, <cyc> )  
 ##
 ##  Printing for cyclotomics
 ## 
-InstallMethod(OMPut, "for a proper cyclotomic", true,
-[IsOutputStream, IsCyc],0,
-function(stream, x)
+InstallMethod( OMPut, "for a proper cyclotomic", true,
+[ IsOpenMathWriter, IsCyc ],0,
+function( writer, x )
 	local
                 real,
                 imaginary,
@@ -471,7 +324,7 @@ function(stream, x)
         real := x -> (x + ComplexConjugate( x )) / 2;
         imaginary := x -> (x - ComplexConjugate( x )) * -1 / 2 * E( 4 );
 
-        OMPutApplication( stream, "complex1", "complex_cartesian", 
+        OMPutApplication( writer, "complex1", "complex_cartesian", 
             [ real(x), imaginary(x)] );
 
     else
@@ -479,25 +332,21 @@ function(stream, x)
 	n := Conductor(x);
 	clist := CoeffsCyc(x, n);
 
-	OMWriteLine(stream, ["<OMA>"]);
-	OMIndent := OMIndent+1;
-	OMPutSymbol( stream, "arith1", "plus" );
+	OMPutOMA(writer);
+	OMPutSymbol( writer, "arith1", "plus" );
 	for i in [1 .. n] do
 		if clist[i] <> 0 then
 
-			OMWriteLine(stream, ["<OMA>"]); # times
-			OMIndent := OMIndent+1;
-			OMPutSymbol( stream, "arith1", "times" );
-			OMPut(stream, clist[i]);
+			OMPutOMA(writer); # times
+			OMPutSymbol( writer, "arith1", "times" );
+			OMPut(writer, clist[i]);
 
-			OMPutApplication( stream, "algnums", "NthRootOfUnity", [ n, i-1 ] );
+			OMPutApplication( writer, "algnums", "NthRootOfUnity", [ n, i-1 ] );
 
-			OMIndent := OMIndent-1;
-			OMWriteLine(stream, ["</OMA>"]); #times
+			OMPutEndOMA(writer); #times
 		fi;
 	od;
-	OMIndent := OMIndent-1;
-	OMWriteLine(stream, ["</OMA>"]);
+	OMPutEndOMA(writer); 
 
     fi;
 end);
@@ -506,15 +355,15 @@ end);
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <infinity> )
+#M  OMPut( <OMWriter>, <infinity> )
 ##
 ##  Printing for infinity: specified in nums1.ocd
 ##
 
 InstallMethod(OMPut, "for infinity", true,
-[IsOutputStream, IsInfinity],0,
-function(stream, x)
-        OMPutSymbol( stream, "nums1", x );
+[ IsOpenMathWriter, IsInfinity ],0,
+function(writer, x)
+        OMPutSymbol( writer, "nums1", "infinity" );
 end);
 
 
@@ -522,15 +371,15 @@ end);
 
 #######################################################################
 ##
-#M  OMPut( <stream>,  <vector> )  
+#M  OMPut( <OMWriter>,  <vector> )  
 ##
 ##  Printing for vectors: specified in linalg2.ocd
 ##
 #InstallMethod(OMPut, "for a row vector", true,
-#[IsOutputStream, IsRowVector],0,
-#function(stream, x)
+#[IsOpenMathWriter, IsRowVector],0,
+#function(writer, x)
 #
-#  OMPutApplication( stream, "linalg2", "vector", x );
+#  OMPutApplication( writer, "linalg2", "vector", x );
 #
 #end);
 
@@ -538,69 +387,61 @@ end);
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <matrix> )  
+#M  OMPut( <OMWriter>, <matrix> )  
 ##
 ##  Printing for matrices: specified in linalg2.ocd
 ##
 InstallMethod(OMPut, "for a matrix", true,
-[IsOutputStream, IsMatrix],0,
-function(stream, x)
+[IsOpenMathWriter, IsMatrix],0,
+function(writer, x)
     local  r;
-
-    OMWriteLine( stream, [ "<OMA>" ] );
-    OMIndent := OMIndent + 1;
-
-    OMPutSymbol( stream, "linalg2", "matrix" );
+	OMPutOMA(writer);
+    OMPutSymbol( writer, "linalg2", "matrix" );
     for r  in x  do
-
-        OMPutApplication( stream, "linalg2", "matrixrow", r );
-
+        OMPutApplication( writer, "linalg2", "matrixrow", r );
     od;
-
-    OMIndent := OMIndent - 1;
-    OMWriteLine( stream, [ "</OMA>" ] );
-
+    OMPutEndOMA(writer);
 end);
 
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, NonnegativeIntegers )
+#M  OMPut( <OMWriter>, NonnegativeIntegers )
 ##
 ##  Printing for the set N
 ##
 InstallMethod(OMPut, "for NonnegativeIntegers", true,
-[IsOutputStream, IsNonnegativeIntegers],0,
-function(stream, x)
-        OMPutSymbol( stream, "setname1", "N" );
+[IsOpenMathWriter, IsNonnegativeIntegers],0,
+function(writer, x)
+        OMPutSymbol( writer, "setname1", "N" );
 end);
 
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, Integers )
+#M  OMPut( <OMWriter>, Integers )
 ##
 ##  Printing for the set Z
 ##
 InstallMethod(OMPut, "for Integers", true,
-[IsOutputStream, IsIntegers],0,
-function(stream, x)
-        OMPutSymbol( stream, "setname1", "Z" );
+[IsOpenMathWriter, IsIntegers],0,
+function(writer, x)
+        OMPutSymbol( writer, "setname1", "Z" );
 end);
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, Rationals )
+#M  OMPut( <OMWriter>, Rationals )
 ##
 ##  Printing for the set Q
 ##
 InstallMethod(OMPut, "for Rationals", true,
-[IsOutputStream, IsRationals],0,
-function(stream, x)
-        OMPutSymbol( stream, "setname1", "Q" );
+[IsOpenMathWriter, IsRationals],0,
+function(writer, x)
+        OMPutSymbol( writer, "setname1", "Q" );
 end);
 
 
@@ -608,30 +449,30 @@ end);
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <list> )  
+#M  OMPut( <OMWriter>, <list> )  
 ##
 ##  Printing for finite lists or collection. Prints them as lists.
 ##
 ## 
 
 InstallMethod(OMPut, "for a finite list or collection", true,
-[IsOutputStream, IsListOrCollection and IsFinite], 0,
-function(stream, x)
+[IsOpenMathWriter, IsListOrCollection and IsFinite], 0,
+function(writer, x)
 
-  OMPutApplication( stream, "list1", "list", x );
+  OMPutApplication( writer, "list1", "list", x );
 
 end);
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <set> )  
+#M  OMPut( <OMWriter>, <set> )  
 ##
 ##  Printing for finite set: specified in set1.ocd
 ##
 InstallMethod(OMPut, "for a finite set", true,
-[IsOutputStream, IsDuplicateFreeList and IsFinite],0,
-function(stream, x)
+[IsOpenMathWriter, IsDuplicateFreeList and IsFinite],0,
+function(writer, x)
 
   if IsString(x) and Length(x)>0 or IsEmptyString(x)  then 
   # this doesn't include the empty list
@@ -639,9 +480,9 @@ function(stream, x)
   fi;
 
   if IsEmpty(x) then
-    OMPutSymbol( stream, "set1", "emptyset" );
+    OMPutSymbol( writer, "set1", "emptyset" );
   else
-    OMPutApplication( stream, "set1", "set", x );
+    OMPutApplication( writer, "set1", "set", x );
   fi;
 
 end);
@@ -651,20 +492,20 @@ end);
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <range> )
+#M  OMPut( <OMWriter>, <range> )
 ##
 ##  Printing for ranges: specified in interval1.ocd
 ##
 
 InstallMethod(OMPut, "for a range", true,
-[IsOutputStream, IsRange and IsRangeRep],0,
-function ( stream, x )
+[IsOpenMathWriter, IsRange and IsRangeRep],0,
+function ( writer, x )
 
     if not x[2] - x[1] = 1  then
         TryNextMethod();
     fi;
 
-    OMPutApplication( stream, "interval1", "integer_interval",
+    OMPutApplication( writer, "interval1", "integer_interval",
         [ x[1], x[Length( x )] ] );
 
 end);
@@ -672,49 +513,45 @@ end);
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <group> )  
+#M  OMPut( <OMWriter>, <group> )  
 ##
 ##  Printing permutation group as specified in permgp1.group symbol
 ## 
 InstallMethod(OMPut, "for a permutation group", true,
-[IsOutputStream, IsPermGroup],0,
-function(stream, x)
+[IsOpenMathWriter, IsPermGroup],0,
+function(writer, x)
 	local g;
-    OMWriteLine(stream, ["<OMA>"]);
-    OMIndent := OMIndent +1;
-    OMPutSymbol( stream, "permgp1", "group" );
-    OMPutSymbol( stream, "permutation1", "right_compose" );
+	OMPutOMA(writer);
+    OMPutSymbol( writer, "permgp1", "group" );
+    OMPutSymbol( writer, "permutation1", "right_compose" );
 	for g in GeneratorsOfGroup(x) do
-		OMPut( stream, g );
+		OMPut( writer, g );
 	od;
-    OMIndent := OMIndent -1;
-    OMWriteLine(stream, ["</OMA>"]);
+    OMPutEndOMA(writer);
 end); 
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <semigrouphom> )  
+#M  OMPut( <OMWriter>, <semigrouphom> )  
 ##
 ## 
 InstallMethod(OMPut, "for a semigroup homomorphism given by images of generators", true,
-[IsOutputStream, IsSemigroupHomomorphism and IsSemigroupHomomorphismByImagesOfGensRep],0,
-function(stream, x)
+[IsOpenMathWriter, IsSemigroupHomomorphism and IsSemigroupHomomorphismByImagesOfGensRep],0,
+function(writer, x)
     local g;
-    OMWriteLine(stream, ["<OMA>"]);
-	OMIndent := OMIndent+1;
-	OMPutSymbol( stream, "semigroup4", "homomorphism_by_generators" );
-	OMPut(stream, Source(x) );
-	OMPut(stream, Range(x) ); 
+	OMPutOMA(writer);
+	OMPutSymbol( writer, "semigroup4", "homomorphism_by_generators" );
+	OMPut(writer, Source(x) );
+	OMPut(writer, Range(x) ); 
 	if IsMonoid( Source(x) ) then
-        OMPut(stream, List( GeneratorsOfMonoid( Source( x ) ), g -> [ g, g^x ] ) );
+        OMPut(writer, List( GeneratorsOfMonoid( Source( x ) ), g -> [ g, g^x ] ) );
     elif IsSemigroup( Source(x) ) then
-        OMPut(stream, List( GeneratorsOfSemigroup( Source( x ) ), g -> [ g, g^x ] ) );
+        OMPut(writer, List( GeneratorsOfSemigroup( Source( x ) ), g -> [ g, g^x ] ) );
     else
         Error( "OMPut for a semigroup homomorphism given by images of generators: can not output ", x );  
     fi;        
-	OMIndent := OMIndent-1;
-    OMWriteLine(stream, ["</OMA>"]);
+    OMPutEndOMA(writer);
 end);
 
 
@@ -729,23 +566,21 @@ end);
 #InstallMethod( OMPut, 
 #"for a univariate polynomial (polyu.poly_u_rep)", 
 #true,
-#[ IsOutputStream, IsUnivariatePolynomial ],
+#[ IsOpenMathWriter, IsUnivariatePolynomial ],
 #0,
-#function( stream, f )
+#function( writer, f )
 #local coeffs, deg, nr;
-#OMWriteLine( stream, [ "<OMA>" ] );
-#OMIndent := OMIndent + 1;
-#OMPutSymbol( stream, "polyu", "poly_u_rep" );
-#OMPutVar( stream, IndeterminateOfUnivariateRationalFunction(f) );
+#OMPutOMA(writer);
+#OMPutSymbol( writer, "polyu", "poly_u_rep" );
+#OMPutVar( writer, IndeterminateOfUnivariateRationalFunction(f) );
 #coeffs := CoefficientsOfUnivariatePolynomial(f);
 #deg := DegreeOfLaurentPolynomial(f);
 #for nr in [ deg+1, deg .. 1 ] do
 #  if coeffs[nr] <> 0 then
-#    OMPutApplication( stream, "polyu", "term", [ nr-1, coeffs[nr] ] );
+#    OMPutApplication( writer, "polyu", "term", [ nr-1, coeffs[nr] ] );
 #  fi;
 #od;  
-#OMIndent := OMIndent - 1;
-#OMWriteLine( stream, [ "</OMA>" ] );
+#OMPutEndOMA(writer);
 #end);
 
 
@@ -757,59 +592,53 @@ end);
 #InstallMethod( OMPut, 
 #"for an algebraic element of an algebraic extension", 
 #true,
-#[ IsOutputStream, IsAlgebraicElement ],
+#[ IsOpenMathWriter, IsAlgebraicElement ],
 #0,
-#function( stream, a )
+#function( writer, a )
 #local  fam, anam, ext, c, i, is_plus, is_times, is_power;
 #fam := FamilyObj( a );
 #anam := fam!.indeterminateName;
 #ext := ExtRepOfObj(a);
 #if Length( Filtered( ext, c -> not IsZero(c) ) ) > 1 then 
 #    is_plus := true;
-#    OMWriteLine( stream, [ "<OMA>" ] );
-#    OMIndent := OMIndent + 1;
-#    OMPutSymbol( stream, "arith1", "plus" );
+# 	 OMPutOMA(writer);
+#    OMPutSymbol( writer, "arith1", "plus" );
 #else
 #  is_plus := false;    
 #fi;
 #for i  in [ 1 .. Length(ext) ]  do
 #    if ext[i] <> fam!.baseZero  then
 #        if i=1 then
-#            OMPut( stream, ext[i] );
+#            OMPut( writer, ext[i] );
 #        else
 #            if ext[i] <> fam!.baseOne then
 #                is_times := true;
-#                OMWriteLine( stream, [ "<OMA>" ] );
-#                OMIndent := OMIndent + 1;
-#                OMPutSymbol( stream, "arith1", "times" );   
-#                OMPut( stream, ext[i] );
+# 	             OMPutOMA(writer);
+#                OMPutSymbol( writer, "arith1", "times" );   
+#                OMPut( writer, ext[i] );
 #            else
 #                is_times := false;
 #            fi;    
 #            if i>2 then
 #                is_power:=true;
-#                OMWriteLine( stream, [ "<OMA>" ] );
-#                OMIndent := OMIndent + 1;
-#                OMPutSymbol( stream, "arith1", "power" );  
+#                OMPutOMA(writer);
+#                OMPutSymbol( writer, "arith1", "power" );  
 #            else
 #                is_power := false;    
 #            fi;     
-#            OMPutVar( stream, anam );
+#            OMPutVar( writer, anam );
 #            if is_power then
-#                OMPut( stream, i-1 );
-#                OMIndent := OMIndent - 1;
-#                OMWriteLine( stream, [ "</OMA>" ] );
+#                OMPut( writer, i-1 );
+#                OMPutEndOMA(writer);
 #            fi;
 #            if is_times then
-#                OMIndent := OMIndent - 1;
-#                OMWriteLine( stream, [ "</OMA>" ] );              
+#                OMPutEndOMA(writer);
 #            fi;
 #        fi;
 #    fi;
 #od;       
 #if is_plus then
-#    OMIndent := OMIndent - 1;
-#    OMWriteLine( stream, [ "</OMA>" ] );  
+#	OMPutEndOMA(writer);
 #fi;                  
 #end);
 
@@ -821,31 +650,29 @@ end);
 InstallMethod( OMPut,
 "for a polynomial ring (polyd1.poly_ring_d_named or polyd1.poly_ring_d)",
 true,
-[ IsOutputStream, IsPolynomialRing ],
+[ IsOpenMathWriter, IsPolynomialRing ],
 0,
-function( stream, r )
+function( writer, r )
 
 if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
 
   SetOMReference( r, Concatenation("polyring", RandomString(16) ) );
-  OMWriteLine( stream, [ "<OMA id=\"", OMReference( r ), "\" >" ] );
+  OMWriteLine( writer, [ "<OMA id=\"", OMReference( r ), "\" >" ] );
   OMIndent := OMIndent + 1;
-  OMPutSymbol( stream, "polyd1", "poly_ring_d_named" );
-  OMPut( stream, CoefficientsRing( r ) );
-  OMPutVar( stream, IndeterminatesOfPolynomialRing( r )[1] );
-  OMIndent := OMIndent - 1;
-  OMWriteLine( stream, [ "</OMA>" ] );
+  OMPutSymbol( writer, "polyd1", "poly_ring_d_named" );
+  OMPut( writer, CoefficientsRing( r ) );
+  OMPutVar( writer, IndeterminatesOfPolynomialRing( r )[1] );
+  OMPutEndOMA(writer);
 
 else
 
   SetOMReference( r, Concatenation("polyring", RandomString(16) ) );
-  OMWriteLine( stream, [ "<OMA id=\"", OMReference( r ), "\" >" ] );
+  OMWriteLine( writer, [ "<OMA id=\"", OMReference( r ), "\" >" ] );
   OMIndent := OMIndent + 1;
-  OMPutSymbol( stream, "polyd1", "poly_ring_d" );
-  OMPut( stream, CoefficientsRing( r ) );
-  OMPut( stream, Length( IndeterminatesOfPolynomialRing( r ) ) );
-  OMIndent := OMIndent - 1;
-  OMWriteLine( stream, [ "</OMA>" ] );
+  OMPutSymbol( writer, "polyd1", "poly_ring_d" );
+  OMPut( writer, CoefficientsRing( r ) );
+  OMPut( writer, Length( IndeterminatesOfPolynomialRing( r ) ) );
+  OMPutEndOMA(writer);
 
 fi;
 end);
@@ -858,9 +685,9 @@ end);
 InstallOtherMethod( OMPut, 
 "for a polynomial ring and a (uni- or multivariate) polynomial (polyd1.DMP)", 
 true,
-[ IsOutputStream, IsPolynomialRing, IsPolynomial ],
+[ IsOpenMathWriter, IsPolynomialRing, IsPolynomial ],
 0,
-function( stream, r, f )
+function( writer, r, f )
 local coeffs, deg, nr, coeffring, nrindet, extrep, nvars, pows, i, pos;
 
 if not f in r then
@@ -872,13 +699,11 @@ coeffring := CoefficientsRing( r );
  
 if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
 
-  OMWriteLine( stream, [ "<OMA>" ] );
-  OMIndent := OMIndent + 1;
-  OMPutSymbol( stream, "polyd1", "DMP" );
-  OMPutReference( stream, r );
-  OMWriteLine( stream, [ "<OMA>" ] );
-  OMIndent := OMIndent + 1;
-  OMPutSymbol( stream, "polyd1", "SDMP" );
+  OMPutOMA(writer);
+  OMPutSymbol( writer, "polyd1", "DMP" );
+  OMPutReference( writer, r );
+  OMPutOMA(writer);
+  OMPutSymbol( writer, "polyd1", "SDMP" );
   coeffs := CoefficientsOfUnivariatePolynomial( f );
   deg := DegreeOfLaurentPolynomial( f );
   # The zero polynomial is represented by an SDMP with no terms.
@@ -890,13 +715,11 @@ if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
       # check is outside the loop
       for nr in [ deg+1, deg .. 1 ] do
         if coeffs[nr] <> 0 then
-          OMWriteLine( stream, [ "<OMA>" ] );
-          OMIndent := OMIndent + 1;
-          OMPutSymbol( stream, "polyd1", "term" );
-          OMPut( stream, coeffring, coeffs[nr] );
-          OMPut( stream, nr-1 );
-          OMIndent := OMIndent - 1;   
-          OMWriteLine( stream, [ "</OMA>" ] );     
+	      OMPutOMA(writer);
+          OMPutSymbol( writer, "polyd1", "term" );
+          OMPut( writer, coeffring, coeffs[nr] );
+          OMPut( writer, nr-1 );
+          OMPutEndOMA(writer);
         fi;
       od; 
       
@@ -904,33 +727,27 @@ if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
     
       for nr in [ deg+1, deg .. 1 ] do
         if coeffs[nr] <> 0 then
-          OMWriteLine( stream, [ "<OMA>" ] );
-          OMIndent := OMIndent + 1;
-          OMPutSymbol( stream, "polyd1", "term" );
-          OMPut( stream, coeffs[nr] );
-          OMPut( stream, nr-1 );
-          OMIndent := OMIndent - 1;   
-          OMWriteLine( stream, [ "</OMA>" ] );     
+	      OMPutOMA(writer);
+          OMPutSymbol( writer, "polyd1", "term" );
+          OMPut( writer, coeffs[nr] );
+          OMPut( writer, nr-1 );
+          OMPutEndOMA(writer);
         fi;
       od;       
     fi;  
   fi;
-  OMIndent := OMIndent - 1;
-  OMWriteLine( stream, [ "</OMA>" ] );
-  OMIndent := OMIndent - 1;
-  OMWriteLine( stream, [ "</OMA>" ] );
+  OMPutEndOMA(writer);
+  OMPutEndOMA(writer);
 
 else
 
   nrindet := Length(IndeterminatesOfPolynomialRing( r ) );
 
-  OMWriteLine( stream, [ "<OMA>" ] );
-  OMIndent := OMIndent + 1;
-  OMPutSymbol( stream, "polyd1", "DMP" );
-  OMPutReference( stream, r );
-  OMWriteLine( stream, [ "<OMA>" ] );
-  OMIndent := OMIndent + 1;
-  OMPutSymbol( stream, "polyd1", "SDMP" );
+  OMPutOMA(writer);
+  OMPutSymbol( writer, "polyd1", "DMP" );
+  OMPutReference( writer, r );
+  OMPutOMA(writer);
+  OMPutSymbol( writer, "polyd1", "SDMP" );
   extrep := ExtRepPolynomialRatFun( f );
 
   if IsField(coeffring) and IsFinite(coeffring) then
@@ -938,51 +755,45 @@ else
     # The part for polynomials over finite fields
     # to tell which field to use
     for nr in [ 1, 3 .. Length(extrep)-1 ] do
-      OMWriteLine( stream, [ "<OMA>" ] );
-      OMIndent := OMIndent + 1;
-      OMPutSymbol( stream, "polyd1", "term" );
-      OMPut( stream, coeffring, extrep[nr+1] ); # the coefficient
+	  OMPutOMA(writer);
+      OMPutSymbol( writer, "polyd1", "term" );
+      OMPut( writer, coeffring, extrep[nr+1] ); # the coefficient
       nvars := extrep[nr]{[1,3..Length(extrep[nr])-1]};
       pows := extrep[nr]{[2,4..Length(extrep[nr])]};
       for i in [1..nrindet] do
         pos := Position( nvars, i );
         if pos=fail then
-          OMPut( stream, 0 );
+          OMPut( writer, 0 );
         else
-          OMPut( stream, pows[pos] );
+          OMPut( writer, pows[pos] );
         fi;  
       od;
-      OMIndent := OMIndent - 1;   
-      OMWriteLine( stream, [ "</OMA>" ] ); 
+      OMPutEndOMA(writer);
     od; 
     
   else
   
     for nr in [ 1, 3 .. Length(extrep)-1 ] do
-      OMWriteLine( stream, [ "<OMA>" ] );
-      OMIndent := OMIndent + 1;
-      OMPutSymbol( stream, "polyd1", "term" );
-      OMPut( stream, extrep[nr+1] ); # the coefficient
+	  OMPutOMA(writer);
+      OMPutSymbol( writer, "polyd1", "term" );
+      OMPut( writer, extrep[nr+1] ); # the coefficient
       nvars := extrep[nr]{[1,3..Length(extrep[nr])-1]};
       pows := extrep[nr]{[2,4..Length(extrep[nr])]};
       for i in [1..nrindet] do
         pos := Position( nvars, i );
         if pos=fail then
-          OMPut( stream, 0 );
+          OMPut( writer, 0 );
         else
-          OMPut( stream, pows[pos] );
+          OMPut( writer, pows[pos] );
         fi;  
       od;
-      OMIndent := OMIndent - 1;   
-      OMWriteLine( stream, [ "</OMA>" ] ); 
+      OMPutEndOMA(writer);
     od; 
     
   fi;
     
-  OMIndent := OMIndent - 1;
-  OMWriteLine( stream, [ "</OMA>" ] );
-  OMIndent := OMIndent - 1;
-  OMWriteLine( stream, [ "</OMA>" ] );
+  OMPutEndOMA(writer);
+  OMPutEndOMA(writer);
 
 fi;
 
@@ -1014,17 +825,17 @@ BindGlobal( "SetOpenMathDefaultPolynomialRing",
 InstallMethod( OMPut, 
 "for a (uni- or multivariate) polynomial in the default ring (polyd1.DMP)", 
 true,
-[ IsOutputStream, IsPolynomial ],
+[ IsOpenMathWriter, IsPolynomial ],
 0,
-function( stream, f )
+function( writer, f )
 if f in OpenMathDefaultPolynomialRing then
-	OMPut( stream, OpenMathDefaultPolynomialRing, f );
+	OMPut( writer, OpenMathDefaultPolynomialRing, f );
 else
 	Print("#I  Warning : polynomial will be printed using its default ring \n",
 	      "#I  because the default OpenMath polynomial ring is not specified \n",
 	      "#I  or it is not contained in the default OpenMath polynomial ring.\n", 
 	      "#I  You may ignore this or call SetOpenMathDefaultPolynomialRing to fix it.\n");
-	OMPut( stream, DefaultRing( f ), f );
+	OMPut( writer, DefaultRing( f ), f );
 fi;	
 end);
 
@@ -1038,31 +849,22 @@ end);
 InstallMethod( OMPut, 
 "for a two-sided ideal with known generators (ring3.ideal)",
 true,
-[ IsOutputStream, 
+[ IsOpenMathWriter, 
   IsRing and HasLeftActingRingOfIdeal and 
              HasRightActingRingOfIdeal and HasGeneratorsOfTwoSidedIdeal ],
 0,
-function( stream, r )
+function( writer, r )
 local f;
-
-OMWriteLine( stream, [ "<OMA>" ] );
-OMIndent := OMIndent + 1;
-
-OMPutSymbol( stream, "ring3", "ideal" );
-OMPut( stream, LeftActingRingOfIdeal( r ) );
-
-OMWriteLine( stream, [ "<OMA>" ] );
-OMIndent := OMIndent + 1;
-OMPutSymbol( stream, "list1", "list" );
-for f in GeneratorsOfTwoSidedIdeal( r ) do
-  OMPut( stream, LeftActingRingOfIdeal( r ), f );
-od;
-OMIndent := OMIndent - 1;
-OMWriteLine( stream, [ "</OMA>" ] );
-
-OMIndent := OMIndent - 1;
-OMWriteLine( stream, [ "</OMA>" ] );  
-
+OMPutOMA(writer);
+	OMPutSymbol( writer, "ring3", "ideal" );
+	OMPut( writer, LeftActingRingOfIdeal( r ) );
+	OMPutOMA(writer);
+		OMPutSymbol( writer, "list1", "list" );
+		for f in GeneratorsOfTwoSidedIdeal( r ) do
+  			OMPut( writer, LeftActingRingOfIdeal( r ), f );
+		od;
+	OMPutEndOMA(writer);
+OMPutEndOMA(writer);
 end);
 
 
@@ -1073,16 +875,14 @@ end);
 InstallMethod( OMPut,
 "for algebraic extensions (field3.field_by_poly)",
 true,
-[ IsOutputStream, IsAlgebraicExtension ],
+[ IsOpenMathWriter, IsAlgebraicExtension ],
 0,
-function( stream, f )
-OMWriteLine( stream, [ "<OMA>" ] );
-OMIndent := OMIndent + 1;
-OMPutSymbol( stream, "field3", "field_by_poly" );
-OMPut( stream, LeftActingDomain( f ) );
-OMPut( stream, DefiningPolynomial( f ) );
-OMIndent := OMIndent - 1;
-OMWriteLine( stream, [ "</OMA>" ] );  
+function( writer, f )
+OMPutOMA(writer);
+OMPutSymbol( writer, "field3", "field_by_poly" );
+OMPut( writer, LeftActingDomain( f ) );
+OMPut( writer, DefiningPolynomial( f ) );
+OMPutEndOMA(writer);  
 end);    
 
 #############################################################################
@@ -1093,22 +893,18 @@ end);
 InstallMethod( OMPut, 
 "for an algebraic element of an algebraic extension (field4.field_by_poly_vector)", 
 true,
-[ IsOutputStream, IsAlgebraicElement ],
+[ IsOpenMathWriter, IsAlgebraicElement ],
 0,
-function( stream, a )
-OMWriteLine( stream, [ "<OMA>" ] );
-OMIndent := OMIndent + 1;
-OMPutSymbol( stream, "field4", "field_by_poly_vector" );
-OMWriteLine( stream, [ "<OMA>" ] );
-OMIndent := OMIndent + 1;
-OMPutSymbol( stream, "field3", "field_by_poly" );
-OMPut( stream, FamilyObj(a)!.baseField );
-OMPut( stream, FamilyObj(a)!.poly );
-OMIndent := OMIndent - 1;
-OMWriteLine( stream, [ "</OMA>" ] );  
-OMPut( stream, ExtRepOfObj(a) );
-OMIndent := OMIndent - 1;
-OMWriteLine( stream, [ "</OMA>" ] );  
+function( writer, a )
+OMPutOMA(writer);
+OMPutSymbol( writer, "field4", "field_by_poly_vector" );
+OMPutOMA(writer);
+OMPutSymbol( writer, "field3", "field_by_poly" );
+OMPut( writer, FamilyObj(a)!.baseField );
+OMPut( writer, FamilyObj(a)!.poly );
+OMPutEndOMA(writer);  
+OMPut( writer, ExtRepOfObj(a) );
+OMPutEndOMA(writer);  
 end); 
 
 
@@ -1119,35 +915,27 @@ end);
 InstallOtherMethod( OMPut, 
 "for for a finite field element using finfield1 CD", 
 true,
-[ IsOutputStream, IsField and IsFinite, IsFFE ],
+[ IsOpenMathWriter, IsField and IsFinite, IsFFE ],
 0,
-function( stream, f, a )
+function( writer, f, a )
 if IsZero(a) then
-	OMWriteLine( stream, [ "<OMA>" ] );
-		OMIndent := OMIndent + 1;
-		OMPutSymbol( stream, "arith1", "times" );
-		OMWriteLine( stream, [ "<OMA>" ] );
-			OMIndent := OMIndent + 1;
-			OMPutSymbol( stream, "finfield1", "primitive_element" );
-			OMPut( stream, Size( f ) );
-			OMIndent := OMIndent - 1;
-		OMWriteLine( stream, [ "</OMA>" ] );  
-		OMPut( stream, 0 );
-		OMIndent := OMIndent - 1;
-	OMWriteLine( stream, [ "</OMA>" ] );  
+        OMPutOMA(writer);
+		OMPutSymbol( writer, "arith1", "times" );
+            OMPutOMA(writer);
+			OMPutSymbol( writer, "finfield1", "primitive_element" );
+			OMPut( writer, Size( f ) );
+        OMPutEndOMA(writer);  
+		OMPut( writer, 0 );
+    OMPutEndOMA(writer); 
 else
-	OMWriteLine( stream, [ "<OMA>" ] );
-		OMIndent := OMIndent + 1;
-		OMPutSymbol( stream, "arith1", "power" );
-		OMWriteLine( stream, [ "<OMA>" ] );
-			OMIndent := OMIndent + 1;
-			OMPutSymbol( stream, "finfield1", "primitive_element" );
-			OMPut( stream, Size( f ) );
-			OMIndent := OMIndent - 1;
-		OMWriteLine( stream, [ "</OMA>" ] );  
-		OMPut( stream, LogFFE( a, PrimitiveRoot( f ) ) );
-		OMIndent := OMIndent - 1;
-	OMWriteLine( stream, [ "</OMA>" ] );  
+    OMPutOMA(writer);
+		OMPutSymbol( writer, "arith1", "power" );
+            OMPutOMA(writer);
+			OMPutSymbol( writer, "finfield1", "primitive_element" );
+			OMPut( writer, Size( f ) );
+        OMPutEndOMA(writer); 
+		OMPut( writer, LogFFE( a, PrimitiveRoot( f ) ) );
+    OMPutEndOMA(writer);
 fi;
 end); 
 
@@ -1159,10 +947,10 @@ end);
 InstallMethod( OMPut, 
 "for for a finite field element using finfield1 CD", 
 true,
-[ IsOutputStream, IsFFE ],
+[ IsOpenMathWriter, IsFFE ],
 0,
-function( stream, a )
-	OMPut( stream, DefaultField( a ), a );
+function( writer, a )
+	OMPut( writer, DefaultField( a ), a );
 end); 
 
 
@@ -1173,27 +961,25 @@ end);
 InstallMethod( OMPut, 
 "for for a finite field using setname2.GFp or setname2.GFpn", 
 true,
-[ IsOutputStream, IsField ],
+[ IsOpenMathWriter, IsField ],
 0,
-function( stream, f )
-OMWriteLine( stream, [ "<OMA>" ] );
-	OMIndent := OMIndent + 1;
+function( writer, f )
+    OMPutOMA(writer);
 	if IsPrimeInt( Size( f ) ) then
-		OMPutSymbol( stream, "setname2", "GFp" );
-  		OMPut( stream, Size( f ) );
+		OMPutSymbol( writer, "setname2", "GFp" );
+  		OMPut( writer, Size( f ) );
 	else
-		OMPutSymbol( stream, "setname2", "GFpn" );
-  		OMPut( stream, Characteristic( f ) );
-  		OMPut( stream, DegreeOverPrimeField( f ) );
+		OMPutSymbol( writer, "setname2", "GFpn" );
+  		OMPut( writer, Characteristic( f ) );
+  		OMPut( writer, DegreeOverPrimeField( f ) );
 	fi;
-	OMIndent := OMIndent - 1;
-OMWriteLine( stream, [ "</OMA>" ] );  
+    OMPutEndOMA(writer);  
 end); 
 
 
 #######################################################################
 ##
-#M  OMPut( <stream>, <perm> )  
+#M  OMPut( <OMWriter>, <perm> )  
 ##
 ##  Printing for permutations: specified in permut1.ocd 
 ## 
@@ -1209,13 +995,13 @@ end);
 # the search across all record components is very inefficient.
 # 
 #InstallMethod(OMPut, "for a function", true,
-#[IsOutputStream, IsFunction],0,
-#function ( stream, x )
+#[IsOpenMathWriter, IsFunction],0,
+#function ( writer, x )
 #    local cd, name;
 #    for cd in RecNames( OMsymRecord ) do
 #        for  name in RecNames( OMsymRecord.(cd) ) do
 #            if x = OMsymRecord.(cd).(name) then
-#                OMPutSymbol( stream, cd, name );
+#                OMPutSymbol( writer, cd, name );
 #                return;
 #            fi;
 #        od;
@@ -1227,125 +1013,36 @@ end);
 
 #######################################################################
 ##
-#M  OMPutList( <stream>, <list> )  
+#M  OMPutList( <OMWriter>, <list> )  
 ##
 ##
 InstallMethod(OMPutList, "for a list of any type", true,
-[IsOutputStream, IsList],0,
-function(stream, x)
+[IsOpenMathWriter, IsList],0,
+function(writer, x)
   local i;
-
-  OMWriteLine(stream, ["<OMA>"]);
-  OMIndent := OMIndent +1;
-
-	OMPutSymbol( stream, "list1", "list" );
+    OMPutOMA(writer);
+	OMPutSymbol( writer, "list1", "list" );
 	for i in x do
 		if IsString(i) then
-			OMPut(stream, i); # no such thing as characters in OpenMath
+			OMPut(writer, i); # no such thing as characters in OpenMath
 		else
-			OMPutList(stream, i);
+			OMPutList(writer, i);
 		fi;
 	od;
-
-	OMIndent := OMIndent -1;
-	OMWriteLine(stream, ["</OMA>"]);
+    OMPutEndOMA(writer);
 end);
 
 
 #######################################################################
 ##
-#M  OMPutList( <stream>, <list> )  
+#M  OMPutList( <OMWriter>, <list> )  
 ##
 ##
 InstallMethod(OMPutList, "when we can find no way of regarding it as a list", 
-true, [IsOutputStream, IsObject],0,
-function(stream, x)
-	OMPut(stream, x);
+true, [IsOpenMathWriter, IsObject],0,
+function(writer, x)
+	OMPut(writer, x);
 end);
-
-
-#############################################################################
-#
-# Functions and methods for OpenMathWriter
-#
-InstallGlobalFunction( OpenMathBinaryWriter,
-function( stream )
-if IsStream( stream ) then
-    return Objectify( OpenMathBinaryWriterType, [ stream ] );
-else
-    Error( "The argument of OpenMathBinaryWriter must be a stream" );
-fi;                    
-end);
-
-InstallGlobalFunction( OpenMathXMLWriter,
-function( stream )
-if IsStream( stream ) then
-    return Objectify( OpenMathXMLWriterType, [ stream ] );
-else
-    Error( "The argument of OpenMathXMLWriter must be a stream" );
-fi;                    
-end);
-
-
-#############################################################################
-##
-#M  PrintObj( <IsOpenMathBinaryWriter> )
-##
-InstallMethod( PrintObj, "for IsOpenMathBinaryWriter",
-[ IsOpenMathBinaryWriter ],
-function( obj )
-    Print( "<OpenMath binary writer to ", obj![1], ">" );
-end);
-
-
-#############################################################################
-##
-#M  PrintObj( <IsOpenMathXMLWriter> )
-##
-InstallMethod( PrintObj, "for IsOpenMathXMLWriter",
-[ IsOpenMathXMLWriter ],
-function( obj )
-    Print( "<OpenMath XML writer to ", obj![1], ">" );
-end);
-
-
-#############################################################################
-#
-# Functions and methods for OMPlainString
-#
-InstallGlobalFunction( OMPlainString,
-function( string )
-if IsString( string ) then
-    # note that we do not validate the string!
-    return Objectify( OMPlainStringDefaultType, [ string ] );
-else
-    Error( "The argument of OMPlainString must be a string" );
-fi;                    
-end);
-
-
-#############################################################################
-##
-#M  PrintObj( <IsOMPlainString> )
-##
-InstallMethod( PrintObj, "for IsOMPlainString",
-[ IsOMPlainStringRep and IsOMPlainString ],
-function( obj )
-    Print( obj![1] );
-end);
-
-
-#############################################################################
-##
-#M  OMPut( <IsOMPlainString> )
-##
-InstallMethod( OMPut, "for IsOMPlainString",
-true,
-[ IsOutputStream, IsOMPlainString ],
-0,
-function( stream, s )
-    OMWriteLine( stream, [ s ] );
-end); 
 
 
 #############################################################################

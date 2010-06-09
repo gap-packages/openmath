@@ -93,26 +93,20 @@ CreateHasseDiagram := function(f, le)
 end;
 
 
-
 #######################################################################
 ##
 #F  OMPutListVar( <stream>, <list> )  
 ##
 ##
 BindGlobal("OMPutListVar", 
-function(stream, x)
+function(writer, x)
   local i;
-
-  OMWriteLine(stream, ["<OMA>"]);
-  OMIndent := OMIndent +1;
-
-	OMPutSymbol( stream, "list1", "list" );
-	for i in x do
-		OMPutVar(stream, i); 
-	od;
-
-	OMIndent := OMIndent -1;
-	OMWriteLine(stream, ["</OMA>"]);
+  OMPutOMA( writer );
+    OMPutSymbol( writer, "list1", "list" );
+    for i in x do
+      OMPutVar(writer, i); 
+    od;
+  OMPutEndOMA( writer );
 end);
 
 
@@ -123,40 +117,35 @@ end);
 ## Addendum to GAP OpenMath phrasebook.
 ##
 InstallMethod(OMPut, "for a Hasse diagram", true,
-[IsOutputStream,IsHasseDiagram],0,
-function(stream, x)
+[IsOpenMathWriter,IsHasseDiagram],0,
+function(writer, x)
 	local d, i;
 	d := UnderlyingDomainOfBinaryRelation(x);
-	OMWriteLine(stream, ["<OMBIND>"]);
+	OMWriteLine(writer![1], ["<OMBIND>"]);
 	OMIndent := OMIndent +1;
-	OMPutSymbol(stream, "fns2", "constant");
-	OMWriteLine(stream, ["<OMBVAR>"]);
+	OMPutSymbol(writer, "fns2", "constant");
+	OMWriteLine(writer![1], ["<OMBVAR>"]);
 	OMIndent := OMIndent +1;
 	for i in d do
-		OMPutVar(stream, i);
+		OMPutVar(writer, i);
 	od;
 	OMIndent := OMIndent -1;
-	OMWriteLine(stream, ["</OMBVAR>"]);
+	OMWriteLine(writer![1], ["</OMBVAR>"]);
 
-	OMWriteLine(stream, ["<OMA>"]);
-	OMIndent := OMIndent +1;
-	OMPutSymbol(stream, "relation2", "hasse_diagram");
+    OMPutOMA( writer );
+	OMPutSymbol(writer, "relation2", "hasse_diagram");
 	
 	for i in d do
-		OMWriteLine(stream, ["<OMA>"]);
-		OMIndent := OMIndent +1;
-		OMPutSymbol(stream, "list1", "list");
-		OMPutVar(stream, i);
-		OMPutListVar(stream, ImagesElm(x, i));
-		OMIndent := OMIndent -1;
-		OMWriteLine(stream, ["</OMA>"]);
+        OMPutOMA( writer );
+		OMPutSymbol(writer, "list1", "list");
+		OMPutVar(writer, i);
+		OMPutListVar(writer, ImagesElm(x, i));
+        OMPutEndOMA( writer );
 	od;
+    OMPutEndOMA( writer );
 	OMIndent := OMIndent -1;
-	OMWriteLine(stream, ["</OMA>"]);
-	OMIndent := OMIndent -1;
-	OMWriteLine(stream, ["</OMBIND>"]);
+	OMWriteLine(writer![1], ["</OMBIND>"]);
 end);
-
 
 
 BindGlobal( "OMDirectoryTemporary", DirectoryTemporary() );
@@ -173,7 +162,6 @@ function(h)
 	output := OutputTextFile( filename, false ); #append
 	SetPrintFormattingStatus( output, false );
 	AppendTo(output, TOP_HTML);
-
 
 	OMPutObject(output,h);
 	AppendTo(output, BOTTOM_HTML);

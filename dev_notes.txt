@@ -37,8 +37,10 @@ cd /usr/local/gap_dev/4.0/pkg/openmath/tst
 nano test_new.src
 
 mv test_new test_new.bak
-gap_dev -T -A -b < test_new.src
+gap -T -r -A -b < test_new.src
 nano +30000 test_new
+
+(to remove lines after STOP_TEST)
 
 diff test_new test_new.bak
 
