@@ -195,9 +195,10 @@ InstallMethod( OMPutReference,
 true,
 [ IsOpenMathWriter, IsObject ],
 0,
+# TODO: move to omputxml.gi
 function( writer, x )
 if HasOMReference( x ) and not SuppressOpenMathReferences then
-   OMWriteLine( writer, [ "<OMR href=\"\043", OMReference( x ), "\" />" ] );
+   OMWriteLine( writer![1], [ "<OMR href=\"\043", OMReference( x ), "\" />" ] );
 else   
    OMPut( writer, x );
 fi;
