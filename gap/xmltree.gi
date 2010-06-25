@@ -46,7 +46,11 @@ InstallGlobalFunction( OMgetObjectXMLTree,
     function ( string )
     local  node;
 
-
+    # TODO: this maybe be reset in the middle of the session
+    # making references invalid. We need either to keep this
+    # for the whole session or to create another record to 
+    # store such objects
+    
     OMTempVars.OMBIND := rec(  );
     OMTempVars.OMREF := rec(  );
 

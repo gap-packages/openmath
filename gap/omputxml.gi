@@ -71,9 +71,9 @@ end);
 ##  Output: <OMV name="<name>" />
 ##
 InstallMethod( OMPutVar, "to write OMV in XML OpenMath", true,
-[ IsOpenMathXMLWriter, IsString ],0,
+[ IsOpenMathXMLWriter, IsObject ],0,
 function( writer, name )
-  OMWriteLine( writer![1], ["<OMV name=\"", name, "\"/>"] );
+  OMWriteLine( writer![1], ["<OMV name=\"", String(name), "\"/>"] );
 end);
 
 

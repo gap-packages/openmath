@@ -112,7 +112,7 @@ DeclareOperation("OMPutSymbol", [ IsOpenMathWriter, IsString, IsString ] );
 ##  Input : name as string
 ##  Output: <OMV name="<name>" />
 ##
-DeclareOperation("OMPutVar", [ IsOpenMathWriter, IsString ] );
+DeclareOperation("OMPutVar", [ IsOpenMathWriter, IsObject ] );
 
 
 #######################################################################
