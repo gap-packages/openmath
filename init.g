@@ -178,8 +178,6 @@ ReadPackage("openmath", "/gap/omget.g");
 # file containing updates
 ReadPackage("openmath", "/gap/new.g");
 
-
-
 #############################################################################
 ## Module 2: conversion from Gap to OpenMath
 ## (Modules 1 and 2 are independent)
@@ -206,6 +204,9 @@ ReadPackage("openmath", "/hasse/hasse.g");
 
 ReadPackage("openmath", "/gap/test.g");
 
+
+ReadPackage("openmath", "/gap/const.g");
+ReadPackage("openmath", "/gap/binread.g");
 
 #############################################################################
 #E
