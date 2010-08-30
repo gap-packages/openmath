@@ -30,6 +30,7 @@ BindGlobal( "OMIsNotDummyLeaf",
 
 if VERSION <> "4.dev" and not IsBoundGlobal( "MACFLOAT_STRING" ) then
     MACFLOAT_STRING := Float;
+    IS_MACFLOAT := IsFloat;
 fi;
 
 

@@ -107,6 +107,15 @@ DeclareOperation("OMPutSymbol", [ IsOpenMathWriter, IsString, IsString ] );
 
 #######################################################################
 ##
+#F  OMPutForeign( <stream>, <encoding>, <string> )
+##
+##  Input : encoding and string representing the foreighn object
+##
+DeclareOperation("OMPutForeign", [ IsOpenMathWriter, IsString, IsString ] );
+
+
+#######################################################################
+##
 #F  OMPutVar( <stream>, <name> )
 ##
 ##  Input : name as string
@@ -160,7 +169,6 @@ DeclareGlobalFunction ( "OMPlainString" );
 DeclareRepresentation( "IsOMPlainStringRep", IsPositionalObjectRep, [ ] );
 OMPlainStringDefaultType := NewType( OMPlainStringsFamily, 
                                 IsOMPlainStringRep and IsOMPlainString );                                
-
 
 #############################################################################
 #E
