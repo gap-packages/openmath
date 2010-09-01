@@ -141,6 +141,23 @@ DeclareGlobalFunction("OMPutApplication");
 DeclareOperation("OMPutOMA",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutEndOMA", [ IsOpenMathWriter ] );
 
+#######################################################################
+##
+#M  OMPutError( <stream>, <cd>, <name>, <list> )
+##
+##  Input : cd, name as strings, list as a list
+##  Output:
+##        <OME>
+##                <OMS cd=<cd> name=<name>/>
+##                OMPut(<list>[1])
+##                OMPut(<list>[2])
+##                ...
+##        </OME>
+##
+DeclareGlobalFunction("OMPutError");
+DeclareOperation("OMPutOME",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutEndOME", [ IsOpenMathWriter ] );
+
 DeclareAttribute( "OMReference", IsObject );
 
 DeclareOperation( "OMPutReference", [ IsOpenMathWriter, IsObject ] );

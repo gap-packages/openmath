@@ -97,6 +97,30 @@ BindGlobal( "RandomString",
 
 #######################################################################
 ##
+#M  OMPutError( <OMWriter>, <cd>, <name>, <list> )
+##
+##  Input : cd, name as strings, list as a list
+##  Output:
+##        <OMA>
+##                <OMS cd=<cd> name=<name> />
+##                OMPut( <writer>, <list>[1] )
+##                OMPut( <writer>, <list>[2] )
+##                ...
+##        </OMA>
+##
+InstallGlobalFunction(OMPutError,
+function ( writer, cd, name, list )
+    local  obj;
+    OMPutOME( writer );
+    OMPutSymbol( writer, cd, name );
+    for obj  in list  do
+        OMPut( writer, obj );
+    od;
+    OMPutEndOME( writer );
+end);
+
+#######################################################################
+##
 #M  OMPutApplication( <OMWriter>, <cd>, <name>, <list> )
 ##
 ##  Input : cd, name as strings, list as a list
@@ -163,46 +187,7 @@ function( writer, x )
 end);
 
 
-#############################################################################
-#
-# OMPutReference( OMWriter, x );
-#
-# This method prints OpenMath references and can be used for printing complex 
-# objects, for example, ideals of polynomial rings (the ideal will carry the
-# ring R, and each polynomial generating the ideal will also refer to the 
-# ring R). The method uses OMR, if the object x already has the attribute 
-# OMReference, and prints the object x otherwise. 
-#
-# The concept of references implies that the author of the code is able to
-# decide which objects needs references, and assign references to them, e.g.
-# using
-# SetOMReference( r, Concatenation("polyring", RandomString(16)));
-#
-# Once an object obtained a reference, it can not be changed, therefore, the
-# same reference will be used in communication with all other CASs. 
-#
-# However, the reference will be not printed automatically for an object
-# having it - otherwise, you will not be able to send the same object to
-# multiple CASs. Instead of this, the reference will be printed only when
-# this will be enforced by the usage of OMPutReference.
-#
-# If the SuppressOpenMathReferences is set to true, then 
-# OMPutReference (lib/openmath.gi) will put the actual 
-# OpenMath code for an object whenever it has id or not.
-#
-InstallMethod( OMPutReference, 
-"for a stream and an object with reference",
-true,
-[ IsOpenMathWriter, IsObject ],
-0,
-# TODO: move to omputxml.gi
-function( writer, x )
-if HasOMReference( x ) and not SuppressOpenMathReferences then
-   OMWriteLine( writer![1], [ "<OMR href=\"\043", OMReference( x ), "\" />" ] );
-else   
-   OMPut( writer, x );
-fi;
-end);
+
 
 
 #############################################################################

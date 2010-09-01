@@ -101,50 +101,17 @@ end);
 #######################################################################
 ##
 #M 
-#FIXME: this is horribly inefficient !!!!!!!!!!!!!!
 BindGlobal( "WriteHexAsBin",
 function( hexNum )
-local hexNumLen, binStri, num, charStri, counter;
+local hexNumLen, binStri, num, charStri, counter, binArray;
 hexNumLen := Length(hexNum);
 binStri := "";
 counter:= 1;
+binArray := ["0000", "0001" ,"0010", "0011",	"0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"];
 while counter <= hexNumLen do
-	charStri := String(hexNum[counter]);
-	RemoveCharacters(charStri,"\'");
+	charStri := hexNum{[counter]};
 	num := IntHexString(charStri);
-	if num = 0 then
-		Append(binStri,"0000");
-	elif num = 1 then
-		Append(binStri,"0001");
-	elif num = 2 then
-		Append(binStri,"0010");
-	elif num = 3 then
-		Append(binStri,"0011");
-	elif num = 4 then
-		Append(binStri,"0100");
-	elif num = 5 then
-		Append(binStri,"0101");
-	elif num = 6 then
-		Append(binStri,"0110");
-	elif num = 7 then
-		Append(binStri,"0111");
-	elif num = 8 then
-		Append(binStri,"1000");
-	elif num = 9 then
-		Append(binStri,"1001");
-	elif num = 10 then
-		Append(binStri,"1010");
-	elif num = 11 then
-		Append(binStri,"1011");
-	elif num = 12 then
-		Append(binStri,"1100");
-	elif num = 13 then
-		Append(binStri,"1101");
-	elif num = 14 then
-		Append(binStri,"1110");
-	elif num = 15 then
-		Append(binStri,"1111");
-	fi;
+	Append(binStri, binArray[num+1]);
 	counter := counter +1;
 od;
 return binStri;
@@ -234,7 +201,7 @@ end);
 ##
 ##
 InstallMethod(OMPut, "for a float to binary OpenMath", true,
-[ IsOpenMathBinaryWriter, IS_MACFLOAT ],0,
+[ IsOpenMathBinaryWriter, IsFloat ],0,
 function(writer, f)
 	local intPart, decPart, sign, decHex;
 	WriteByte( writer![1], 3);
@@ -252,7 +219,7 @@ function(writer, f)
 	else
 		
 	fi;
-	#TODO
+	#TODO not finished
 end);
 
 ########################################################################
@@ -410,18 +377,52 @@ end);
 
 ########################################################################
 ##
-#M  OMPut( <OMWriter>, <error> )
+#O  OMPutOME( <OMWriter> );
+#O  OMPutEndOME( <OMWriter> );
 ##
 ##
-##
+InstallMethod(OMPutOME, "to write OME in binary OpenMath", true,
+[ IsOpenMathBinaryWriter ], 0,
+function( writer )
+	WriteByte( writer![1], 22 );
+end);
+
+InstallMethod(OMPutEndOME, "to write /OME in binary OpenMath", true,
+[ IsOpenMathBinaryWriter ], 0,
+function( writer )
+	WriteByte( writer![1], 23 );
+end);
+
 
 ########################################################################
 ##
 #M  OMPut( <OMWriter>, <reference> )
 ##
+##	deals with external references for now
 ##
-##
-
+InstallMethod( OMPutReference, 
+"for a stream and an object with reference",
+true,
+[ IsOpenMathBinaryWriter, IsObject ],
+0,
+function( writer, x )
+local refStri, refLength, lengthList;
+if HasOMReference( x ) and not SuppressOpenMathReferences then
+   refStri := OMReference( x );
+   refLength := Length(refStri); 
+   if refLength > 255 then
+   	WriteByte (writer![1], 31+128);
+   	lengthList := BigIntToListofInts(refLength);
+	WriteIntasBytes(writer, lengthList);
+   else 
+   	WriteByte (writer![1], 31);
+   	WriteByte (writer![1], refLength);
+   fi;
+   WriteAll(writer![1], refStri);
+else   
+   OMPut( writer, x );
+fi;
+end);
 
 
 

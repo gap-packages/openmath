@@ -110,6 +110,25 @@ function( writer )
 	OMWriteLine( writer![1], [ "</OMA>" ] );
 end);
 
+#######################################################################
+##
+#M  OMPutOME
+#M  OMPutEndOME
+##
+InstallMethod(OMPutOME, "to write OME in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+	OMWriteLine( writer![1], [ "<OME>" ] );
+    OMIndent := OMIndent + 1;
+end);
+
+InstallMethod(OMPutEndOME, "to write /OME in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	OMWriteLine( writer![1], [ "</OME>" ] );
+end);
+
 
 #######################################################################
 ##
@@ -183,8 +202,9 @@ end);
 ##
 ##  Printing for floats: specified in the standard
 ##
+if IsBound( IsFloat )  then
 InstallMethod(OMPut, "for a float", true,
-[IsOpenMathXMLWriter, IS_MACFLOAT], 0,
+[IsOpenMathXMLWriter, IsFloat],0,
 function(writer, x)
     local  string;
     # treatment of x=0 separately was added when discovered
@@ -201,6 +221,7 @@ function(writer, x)
     	OMWriteLine( writer![1], [ "<OMF dec=\"", string, "\"/>" ] );
 	fi;
 end);
+fi;
 
 
 #######################################################################
@@ -269,6 +290,45 @@ function( writer, s )
     OMWriteLine( writer![1], [ s ] );
 end); 
 
+#############################################################################
+#
+# OMPutReference( OMWriter, x );
+#
+# This method prints OpenMath references and can be used for printing complex 
+# objects, for example, ideals of polynomial rings (the ideal will carry the
+# ring R, and each polynomial generating the ideal will also refer to the 
+# ring R). The method uses OMR, if the object x already has the attribute 
+# OMReference, and prints the object x otherwise. 
+#
+# The concept of references implies that the author of the code is able to
+# decide which objects needs references, and assign references to them, e.g.
+# using
+# SetOMReference( r, Concatenation("polyring", RandomString(16)));
+#
+# Once an object obtained a reference, it can not be changed, therefore, the
+# same reference will be used in communication with all other CASs. 
+#
+# However, the reference will be not printed automatically for an object
+# having it - otherwise, you will not be able to send the same object to
+# multiple CASs. Instead of this, the reference will be printed only when
+# this will be enforced by the usage of OMPutReference.
+#
+# If the SuppressOpenMathReferences is set to true, then 
+# OMPutReference (lib/openmath.gi) will put the actual 
+# OpenMath code for an object whenever it has id or not.
+#
+InstallMethod( OMPutReference, 
+"for a stream and an object with reference",
+true,
+[ IsOpenMathWriter, IsObject ],
+0,
+function( writer, x )
+if HasOMReference( x ) and not SuppressOpenMathReferences then
+   OMWriteLine( writer![1], [ "<OMR href=\"\043", OMReference( x ), "\" />" ] );
+else   
+   OMPut( writer, x );
+fi;
+end);
 
 #############################################################################
 #E
