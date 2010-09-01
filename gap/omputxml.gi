@@ -183,9 +183,8 @@ end);
 ##
 ##  Printing for floats: specified in the standard
 ##
-if IsBound( IsFloat )  then
 InstallMethod(OMPut, "for a float", true,
-[IsOpenMathXMLWriter, IsFloat],0,
+[IsOpenMathXMLWriter, IS_MACFLOAT], 0,
 function(writer, x)
     local  string;
     # treatment of x=0 separately was added when discovered
@@ -202,7 +201,6 @@ function(writer, x)
     	OMWriteLine( writer![1], [ "<OMF dec=\"", string, "\"/>" ] );
 	fi;
 end);
-fi;
 
 
 #######################################################################
