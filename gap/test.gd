@@ -1,6 +1,6 @@
 #######################################################################
 ##
-#W  test.gd          GAP OpenMath Package           Andrew Solomon
+#W  test.gd          GAP OpenMath Package                Andrew Solomon
 #W                                                     Marco Costantini
 ##
 #H  @(#)$Id$
@@ -16,19 +16,27 @@ Revision.("openmath/gap/test.gd") :=
     "@(#)$Id$";
 
 
+#######################################################################
+##
+#F  OMTestXML( <obj> )
+##
+##  Converts <obj> to XML OpenMath and back. Returns true iff <obj> 
+##  is unchanged (as a GAP object) by this operation. The OpenMath 
+##  standard does not stipulate that converting to and from OpenMath 
+##  should be the identity function so this is a useful diagnostic 
+##  tool.
+##
+DeclareGlobalFunction("OMTestXML");
+DeclareSynonym( "OMTest", OMTestXML );
+
 
 #######################################################################
 ##
-#F  OMTest( <obj> )
+#F  OMTestBinary( <obj> )
 ##
-##  
-##  Converts <obj> to OpenMath and back. Returns true iff <obj> is unchanged
-##  (as a GAP object) by this operation. The OpenMath standard does not 
-##  stipulate that converting to and from OpenMath should be the identity
-##  function so this is a useful diagnostic tool.
+##  Similar to OMTestXML, but uses binary OpenMath representation.
 ##
-
-DeclareGlobalFunction("OMTest");
+DeclareGlobalFunction("OMTestBinary");
 
 
 #############################################################################

@@ -50,6 +50,21 @@ if IsExistingFile( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].Installat
 	Read( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.gi") );
 fi;
 
+#################################################################
+## Module 1.2.a
+## This module reads token/values off the stream and builds GAP objects;
+## uses the external binary gpipe, 
+## requires the function OMsymLookup and provides OMpipeObject
+## Directories bin, include, OMCv1.3c, src belongs to this module.
+
+ReadPackage("openmath", "/gap/lex.g");
+ReadPackage("openmath", "/gap/parse.gi");
+
+# test for existence of the compiled binary
+if Filename(DirectoriesPackagePrograms("openmath"), "gpipe") = fail  then
+    Info( InfoWarning, 1,
+     "Warning: package openmath, the program `gpipe' is not compiled." );
+fi;
 
 #############################################################################
 #E

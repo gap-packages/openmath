@@ -130,23 +130,6 @@ ReadPackage("openmath", "/gap/gap.g");
 
 
 #################################################################
-## Module 1.2.a
-## This module reads token/values off the stream and builds GAP objects;
-## uses the external binary gpipe, 
-## requires the function OMsymLookup and provides OMpipeObject
-## Directories bin, include, OMCv1.3c, src belongs to this module.
-
-ReadPackage("openmath", "/gap/lex.g");
-ReadPackage("openmath", "/gap/parse.gi");
-
-# test for existence of the compiled binary
-if Filename(DirectoriesPackagePrograms("openmath"), "gpipe") = fail  then
-    Info( InfoWarning, 1,
-     "Warning: package openmath, the program `gpipe' is not compiled." );
-fi;
-
-
-#################################################################
 ## Module 1.2.b
 ## This module converts the OpenMath XML into a tree and parses it;
 ## requires the function OMsymLookup (and the function 
@@ -196,6 +179,13 @@ ReadPackage("openmath", "/gap/new.g");
 ReadPackage("openmath", "/hasse/config.g");
 ReadPackage("openmath", "/hasse/hasse.g");
 
+#############################################################################
+##
+## Binary OpenMath --> GAP
+##
+ReadPackage("openmath", "/gap/const.g");
+ReadPackage("openmath", "/gap/binread.g");
+
 
 #############################################################################
 ## Module 3: test
@@ -204,9 +194,6 @@ ReadPackage("openmath", "/hasse/hasse.g");
 
 ReadPackage("openmath", "/gap/test.g");
 
-
-ReadPackage("openmath", "/gap/const.g");
-ReadPackage("openmath", "/gap/binread.g");
 
 #############################################################################
 #E

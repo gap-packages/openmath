@@ -41,55 +41,12 @@ end);
 
 InstallGlobalFunction( OMpipeObject,
 function( fromgap )
-
-    local
-        gpipe_exec, # filename of gpipe executable
-        togap_stream, fromgap_stream, # streams from gpipe and to gpipe
-        togap, # strings
-        gap_obj;
-
-    gpipe_exec := Filename( DirectoriesPackagePrograms( "openmath" ), "gpipe" );
-
-    if gpipe_exec = fail  then
-        Error( "package ``openmath'': the program `gpipe' is not compiled;\n",
-         "see the README file or the dvi/ps/pdf manual of the package ``openmath''.\n",
-         "Without this program, conversion from OpenMath to GAP cannot be performed.\n" );
-    fi;
-
-    # Remove the possible arguments of the <OMOBJ> tag. This is
-    # necessary in order to support the OpenMath 2.0 objects of the form
-    # <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0" cdbase="http://www.openmath.org/cd">
-
-    # this means XML encoding
-    if fromgap[1] = '<'  then
-        fromgap := Concatenation( "<OMOBJ",
-            fromgap{[ Position( fromgap, '>' ) .. Length( fromgap ) ]} );
-    fi;
-
-    # Pipe 'fromgap' to 'gpipe', getting 'togap'
-
-    fromgap_stream := InputTextString( fromgap );
-    togap := "";
-    togap_stream := OutputTextString( togap, false );
-
-    Process( DirectoryCurrent(  ), gpipe_exec,
-             fromgap_stream, togap_stream, [ "-u", "-", "-" ] );
-
-    CloseStream( fromgap_stream );
-    CloseStream( togap_stream );
-
-
-    # Send 'togap' to OMgetObjectByteStream, getting a Gap object
-
-    togap_stream := InputTextString( togap );
-
-    gap_obj := OMgetObjectByteStream( togap_stream );
-
-    CloseStream( togap_stream );
+    local s, gap_obj;
+	s := InputTextString(fromgap);
+	gap_obj := OMParseXmlObj(GetNextObject(s));
+	CloseStream(s);
     return gap_obj;
-
 end);
-
 
 
 InstallGlobalFunction(OMparseApplication, function(stream)
