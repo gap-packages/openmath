@@ -201,7 +201,7 @@ end);
 ##
 ##
 InstallMethod(OMPut, "for a float to binary OpenMath", true,
-[ IsOpenMathBinaryWriter, IsFloat ],0,
+[ IsOpenMathBinaryWriter, IS_MACFLOAT ],0,
 function(writer, f)
 	local intPart, decPart, sign, decHex;
 	WriteByte( writer![1], 3);
