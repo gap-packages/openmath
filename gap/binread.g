@@ -231,7 +231,7 @@ function(stream, isRecursiveCall)
 			if isLong then #read 4 bytes
 				i := 4;
 				while i > 0 do
-					num := num + ReadByte(stream)*SHIFT_UNIT*i;
+					num := num + ReadByte(stream)*i;
 					i:= i -1;
 				od;
 				if num > 2^31-1 then
@@ -626,12 +626,10 @@ end);
 
 #gets a whole object, this function calls GetNextTagObject to read all the sub-objects
 InstallGlobalFunction( GetNextObject,
-function(stream)
-	local token, btoken;
-	#checking for the start token
-	token := ReadByte(stream);
-	#Print("read from GetNextObject : ", token, "\n");
-	btoken := toBlist(token);
+function( stream, firstbyte )
+	local btoken;
+	# firstbyte contains the start token
+	btoken := toBlist(firstbyte);
 	if (btoken <> TYPE_OBJECT) then 
 		Error("Object tag expected");
 	fi;

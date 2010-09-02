@@ -23,6 +23,7 @@ Revision.("openmath/gap/omputbin.gi") :=
 BindGlobal ( "BigIntToListofInts", 
 function(int)
 	local hexValue, hexValueLength, finalHexString, lengthDiff, listofInts;
+	listofInts:=[];
 	finalHexString := "";
 	hexValue := HexStringInt(int);
 	hexValueLength := Length(hexValue);

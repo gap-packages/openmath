@@ -71,41 +71,29 @@ BindGlobal("CharIsSpace", c -> c in  [' ','\n','\t']);
 
 #############################################################################
 ##
-#F  ReadTag( <input> )
+#F  ReadTag( <input>, <firstbyte> )
 ##
 ##  Read a tag of the form < tag >
 ##  return "<tag>" - no spaces
 ##
 BindGlobal("ReadTag", 
-function(input)
+function(input,firstbyte)
 	local
 		s,	# the string to return	
 		c,  # the character read
 		d;	# string to discard: contains encode or comment
-	# find the first '<'
+
 	s := "";
-	c := ReadCharSkipSpace(input);
-
-
-# The following lines handle binary encoding (an OpenMath with binary
-# encoding starts with CHAR_INT(24) and ends with CHAR_INT(25) ):
-
-if c <> fail and INT_CHAR( c ) = 24  then
-    s := [ c ];
-    repeat
-        c := ReadChar( input );
-        if c = fail  then
-            return fail;
-        fi;
-        Add( s, c );
-    until INT_CHAR( c ) = 25;
-    return s;
-fi;
-
-
-	if c <> '<' then
-		return fail;
+	# find the first '<'
+    if CHAR_INT(firstbyte) in [' ','\n','\t','\r'] then
+		c := ReadCharSkipSpace(input);
+	else
+	    c := CHAR_INT(firstbyte);	
 	fi;
+		
+    if c <> '<' then
+	   return fail;
+	fi;   
 
 	s[1] := c;
 	c := ReadCharSkipSpace(input);
@@ -154,7 +142,7 @@ end);
 
 #############################################################################
 ##
-#F  PipeOpenMathObject( <input>, <output> )
+#F  PipeOpenMathObject( <input>, <output>, <firstbyte> )
 ##
 ##  Return "true" if we succeed in piping an OMOBJ from
 ##  input to output, fail otherwise.
@@ -165,7 +153,7 @@ end);
 ##  a comment "<!-- -->".
 ##
 BindGlobal("PipeOpenMathObject",
-function(input,output)
+function(input,output,firstbyte)
 
 	local
 		s,	# string
@@ -175,13 +163,7 @@ function(input,output)
 		c;	# the last character read
 
 	# first read " <OMOBJ >"
-	s  := ReadTag(input);
-
-# The following lines handle binary encoding
-if IsList( s ) and Length( s ) >= 2 and INT_CHAR( s[1] ) = 24  then
-    Append( output, s );
-    return true;
-fi;
+	s  := ReadTag(input,firstbyte);
 
 	if not (IsList( s ) and Length( s ) > 6 and s{[ 1 .. 6 ]} = "<OMOBJ")  then
 		return fail;

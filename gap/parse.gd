@@ -32,7 +32,6 @@ Revision.("openmath/gap/parse.gd") :=
 
 
 DeclareGlobalFunction("OMgetObjectByteStream");
-DeclareGlobalFunction("OMpipeObject");
 DeclareGlobalFunction("OMparseApplication");
 DeclareGlobalFunction("OMparseAttribution");
 DeclareGlobalFunction("OMparseBind");

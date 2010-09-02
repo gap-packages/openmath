@@ -39,16 +39,6 @@ function(inputstream)
 end);
 
 
-InstallGlobalFunction( OMpipeObject,
-function( fromgap )
-    local s, gap_obj;
-	s := InputTextString(fromgap);
-	gap_obj := OMParseXmlObj(GetNextObject(s));
-	CloseStream(s);
-    return gap_obj;
-end);
-
-
 InstallGlobalFunction(OMparseApplication, function(stream)
 		local head, rest, nextob;
 
