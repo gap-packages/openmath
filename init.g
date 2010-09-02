@@ -150,6 +150,14 @@ fi;
 ReadPackage("openmath", "/gap/pipeobj.g");
 
 
+#############################################################################
+##
+## Binary OpenMath --> GAP
+##
+ReadPackage("openmath", "/gap/const.g");
+ReadPackage("openmath", "/gap/binread.g");
+
+
 #################################################################
 ## Module 1.4
 ## This module converts one OpenMath object to a Gap object; requires
@@ -178,13 +186,6 @@ ReadPackage("openmath", "/gap/new.g");
 
 ReadPackage("openmath", "/hasse/config.g");
 ReadPackage("openmath", "/hasse/hasse.g");
-
-#############################################################################
-##
-## Binary OpenMath --> GAP
-##
-ReadPackage("openmath", "/gap/const.g");
-ReadPackage("openmath", "/gap/binread.g");
 
 
 #############################################################################
