@@ -110,6 +110,40 @@ function( writer )
 	OMWriteLine( writer![1], [ "</OMA>" ] );
 end);
 
+
+#######################################################################
+##
+#M  OMPutOMATTR
+#M  OMPutEndOMATTR
+##
+InstallMethod(OMPutOMATTR, "to write OMATTR in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+	OMWriteLine( writer![1], [ "<OMATTR>" ] );
+    OMIndent := OMIndent + 1;
+end);
+
+InstallMethod(OMPutEndOMATTR, "to write /OMATTR in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	OMWriteLine( writer![1], [ "</OMATTR>" ] );
+end);
+
+InstallMethod(OMPutOMATP, "to write OMATP in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+	OMWriteLine( writer![1], [ "<OMATP>" ] );
+    OMIndent := OMIndent + 1;
+end);
+
+InstallMethod(OMPutEndOMATP, "to write /OMATP in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	OMWriteLine( writer![1], [ "</OMATP>" ] );
+end);
+
 #######################################################################
 ##
 #M  OMPutOME

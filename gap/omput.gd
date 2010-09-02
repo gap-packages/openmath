@@ -141,6 +141,17 @@ DeclareGlobalFunction("OMPutApplication");
 DeclareOperation("OMPutOMA",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutEndOMA", [ IsOpenMathWriter ] );
 
+
+#######################################################################
+##
+## Tags for attributions and attribution pairs
+##
+DeclareOperation("OMPutOMATTR",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutEndOMATTR",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutOMATP", [ IsOpenMathWriter ] );
+DeclareOperation("OMPutEndOMATP", [ IsOpenMathWriter ] );
+
+
 #######################################################################
 ##
 #M  OMPutError( <stream>, <cd>, <name>, <list> )
