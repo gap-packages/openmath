@@ -43,7 +43,6 @@ getObjLength := function(isLong, stream)
 			temp := EnsureCompleteHexNum(temp);
 			Append(length, temp);
 			i:= i -1;
-					Print("l:",length, "\n");
 			od;
 		length := IntHexString(length);
 
@@ -239,7 +238,6 @@ function(stream, isRecursiveCall)
 #################################start standard check for types####################################
 		
 		if (token = TYPE_INT_SMALL) then
-		    Print("Detected TYPE_INT_SMALL \n");
 			num := 0;
 			idStri := false;
 			sign := false;
@@ -249,7 +247,6 @@ function(stream, isRecursiveCall)
 				idStri := readAllTokens(idLength, stream, false);	
 			fi;
 			if isLong then #read 4 bytes
-						Print("in long small int\n");
 				num:= getObjLength(isLong, stream);
 				i := 0;
 				if num > 2^31-1 then
@@ -257,7 +254,6 @@ function(stream, isRecursiveCall)
 					sign := true;
 				fi;
 			else 
-				Print("in small short int\n");
 				num := ReadByte(stream);
 				if num > 127 then
 					num := 256 - num;
@@ -268,7 +264,6 @@ function(stream, isRecursiveCall)
 
 		
 		elif (token = TYPE_INT_BIG) then
-			Print("in big int\n");
 			num := 0;
 			#get length
 			objLength := getObjLength(isLong, stream);
