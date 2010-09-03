@@ -14,6 +14,23 @@
 #TODO error , they work but gap does not recognise them, although they seem to agree with OM standards
 #checking id: ints: 
 
+#######################################################################
+##
+#M 
+BindGlobal( "EnsureCompleteHexNum",
+function( hexNum )
+local hexNumLen, binStri, num, charStri, counter;
+hexNumLen := Length(hexNum);
+binStri := "0";
+if not IsEvenInt(hexNumLen) then
+	Append(binStri,hexNum);
+	return binStri;
+else
+	return hexNum;
+fi;
+end);
+
+
 #this function returns the length of the object, reads 4 bytes if long flag is set or 1 if flag is off		
 getObjLength := function(isLong, stream)
 	local length, i, temp;
@@ -23,10 +40,13 @@ getObjLength := function(isLong, stream)
 		temp := "";
 		while i > 0 do
 			temp := HexStringInt(ReadByte(stream));
+			temp := EnsureCompleteHexNum(temp);
 			Append(length, temp);
 			i:= i -1;
+					Print("l:",length, "\n");
 			od;
 		length := IntHexString(length);
+
 		return length;	
 	else 
 		return ReadByte(stream);
@@ -219,7 +239,7 @@ function(stream, isRecursiveCall)
 #################################start standard check for types####################################
 		
 		if (token = TYPE_INT_SMALL) then
-		    #Print("Detected TYPE_INT_SMALL \n");
+		    Print("Detected TYPE_INT_SMALL \n");
 			num := 0;
 			idStri := false;
 			sign := false;
@@ -229,16 +249,15 @@ function(stream, isRecursiveCall)
 				idStri := readAllTokens(idLength, stream, false);	
 			fi;
 			if isLong then #read 4 bytes
-				i := 4;
-				while i > 0 do
-					num := num + ReadByte(stream)*i;
-					i:= i -1;
-				od;
+						Print("in long small int\n");
+				num:= getObjLength(isLong, stream);
+				i := 0;
 				if num > 2^31-1 then
 					num := 2^32 - num;
 					sign := true;
 				fi;
 			else 
+				Print("in small short int\n");
 				num := ReadByte(stream);
 				if num > 127 then
 					num := 256 - num;
@@ -249,7 +268,7 @@ function(stream, isRecursiveCall)
 
 		
 		elif (token = TYPE_INT_BIG) then
-			
+			Print("in big int\n");
 			num := 0;
 			#get length
 			objLength := getObjLength(isLong, stream);

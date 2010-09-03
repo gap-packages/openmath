@@ -58,7 +58,7 @@ BindGlobal("TYPE_BVARS_END",toBlist( 29));
 BindGlobal("TYPE_REFERENCE_INT",toBlist( 30));
 BindGlobal("TYPE_REFERENCE_EXT",toBlist( 31));
 # other
-BindGlobal("SHIFT_UNIT",toBlist( 4));
+BindGlobal("SHIFT_UNIT",8);
 BindGlobal("MOST_SIG_MASK",toBlist(240));
 BindGlobal("LESS_SIG_MASK",toBlist(15));
 BindGlobal("EXP_BIAS", 1023);

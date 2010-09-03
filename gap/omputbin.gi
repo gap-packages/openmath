@@ -33,8 +33,8 @@ function(int)
 			Append(finalHexString,"0");
 			lengthDiff := lengthDiff - 1; 
 		od;
-		Append(finalHexString, hexValue);
 	fi;
+	Append(finalHexString, hexValue);
 	Add(listofInts, IntHexString(finalHexString{[1..2]}));
 	Add(listofInts, IntHexString(finalHexString{[3..4]}));
 	Add(listofInts, IntHexString(finalHexString{[5..6]}));
@@ -118,21 +118,6 @@ od;
 return binStri;
 end);
 
-#######################################################################
-##
-#M 
-BindGlobal( "EnsureCompleteHexNum",
-function( hexNum )
-local hexNumLen, binStri, num, charStri, counter;
-hexNumLen := Length(hexNum);
-binStri := "0";
-if not IsEvenInt(hexNumLen) then
-	Append(binStri,hexNum);
-	return binStri;
-else
-	return hexNum;
-fi;
-end);
 
 #######################################################################
 ##
@@ -172,6 +157,7 @@ if int >= -128 and int <= 127 then
 
 	
 elif int >= -2^31 and int <= 2^31-1 then
+	Print("int 2^31",int,"\n");
 	WriteByte( writer![1], 1+128);
 	intListLength := BigIntToListofInts(int);
 	WriteIntasBytes(writer, intListLength);
