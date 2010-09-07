@@ -1,7 +1,7 @@
 ##################	TO DO LOG	###########################
 
 #TODO: cdbase
-
+#TODO: arrays
 ############### Already Tested:
 #Small int
 #big int b10:OK b256:OK b16:ok isLong flag :OK all
@@ -16,7 +16,10 @@
 
 #######################################################################
 ##
-#M 
+#F  EnsureCompleteHexNum ( <hexNum> )
+##
+##  Completes a hexadecimal number to a byte size multiple
+## 
 BindGlobal( "EnsureCompleteHexNum",
 function( hexNum )
 local hexNumLen, binStri, num, charStri, counter;
@@ -30,9 +33,16 @@ else
 fi;
 end);
 
-
-#this function returns the length of the object, reads 4 bytes if long flag is set or 1 if flag is off		
-getObjLength := function(isLong, stream)
+#######################################################################
+##
+#F  GetObjLength ( <isLong> , <stream> )
+##
+##  Auxiliary function to get the length of an object. 
+##  If isLong is TRUE the length is obtained from reading 4 bytes.
+## 
+##  Input: isLong (boolean), stream
+##
+GetObjLength := function(isLong, stream)
 	local length, i, temp;
 	if isLong then 
 		i := 4;
@@ -51,9 +61,19 @@ getObjLength := function(isLong, stream)
 		return ReadByte(stream);
 	fi;
 end;
-	
-#reads all tokens of a given object for the given length and returns a string
-readAllTokens := function (length, stream, isUTF16)
+
+#######################################################################
+##
+#F  ReadAllTokens ( <length>, <stream>, <isUTF16> )
+##
+##  Auxiliary function to read all tokens for a given 
+##  length and ouput them as a string. 
+##  If isUTF16 flag is TRUE every second token will be skipped.
+## 
+##  Input: length (int), stream, isUTF16 (boolean)
+##  Output: string	
+##
+ReadAllTokens := function (length, stream, isUTF16)
 	local curByte, stri, out;
 	stri := "";
 	out := OutputTextString(stri,true);
@@ -73,8 +93,17 @@ readAllTokens := function (length, stream, isUTF16)
 	return stri;
 end;
 
-#read 8 bytes and returns a corresponding blist
-readFloatToBlist := function(stream)
+#######################################################################
+##
+#F  ReadFloatToBlist ( <stream> )
+##
+##  Auxiliary function to 8 bytes and output the 
+##  corresponding bit list representation. 
+##  
+##  Input: stream
+##  Output: bit list representation	
+##
+ReadFloatToBlist := function(stream)
 	local curByte, temp, bitList, length;
 	temp := [];
 	bitList :=[];
@@ -87,7 +116,16 @@ readFloatToBlist := function(stream)
 	od; 
 	return bitList;
 end;
-#returns a record that represents a float number in gap
+
+#######################################################################
+##
+#F  CreateRecordFloat ( <fnumber> , <idStri> )
+##
+##  Auxiliary function to create a record representation of a float
+##  
+##  Input: fnumber (Float), idStri (string)
+##  Output: record	
+##
 CreateRecordFloat := function(fnumber, idStri)
 	fnumber := String(fnumber);
 	if idStri <> false then
@@ -98,7 +136,15 @@ CreateRecordFloat := function(fnumber, idStri)
 	
 end;
 
-#returns a record representing a string 
+#######################################################################
+##
+#F  CreateRecordString ( <stri> , <idStri> )
+##
+##  Auxiliary function to create a record representation of a string
+##  
+##  Input: stri (string), idStri (string)
+##  Output: record	
+##
 CreateRecordString := function(stri, idStri)
 	if idStri <> false then
 		return rec( attributes := rec( id := idStri )  , name := STR_TAG , content := [ rec( content := stri ) ]); 
@@ -107,7 +153,15 @@ CreateRecordString := function(stri, idStri)
 	fi;
 end;
 
-#returns a record that represents an integer in gap
+#######################################################################
+##
+#F  CreateRecordInt ( <intNumber>, <sign>, <idStri> )
+##
+##  Auxiliary function to create a record representation of a integer
+##  
+##  Input: intNumber (int), sign (boolean), idStri (string)
+##  Output: record	
+##
 CreateRecordInt := function(intNumber, sign, idStri)
 	local signedNumber;
 	signedNumber := "-";
@@ -123,7 +177,15 @@ CreateRecordInt := function(intNumber, sign, idStri)
 	fi;
 end;
 
-#returns a record that represents a variable
+#######################################################################
+##
+#F  CreateRecordVar ( <stri> , <idStri> )
+##
+##  Auxiliary function to create a record representation of a variable
+##  
+##  Input: stri: name of the variable (string), idStri (string)
+##  Output: record	
+##
 CreateRecordVar := function(stri, idStri)
 	if idStri <> false then
 		return rec( attributes := rec(name := stri,  id := idStri ), name := VAR_TAG, content := 0); 
@@ -133,7 +195,16 @@ CreateRecordVar := function(stri, idStri)
 
 end;
 
-#returns a record that represents a symbol
+#######################################################################
+##
+#F  CreateRecordSym ( <stri> , <cdStri>, <idStri> )
+##
+##  Auxiliary function to create a record representation of a variable
+##  
+##  Input: stri: name of the symbol (string), cdStri: name of the 
+##          content dictionary, idStri (string)
+##  Output: record	
+##
 CreateRecordSym := function(stri, cdStri, idStri)
 	if idStri <> false then
 	  	return rec( attributes := rec( cd := cdStri, name := stri, id := idStri ), name := SYM_TAG, content := 0);
@@ -142,7 +213,15 @@ CreateRecordSym := function(stri, cdStri, idStri)
 	fi;
 end;
 
-#return a record that represents an application
+#######################################################################
+##
+#F  CreateRecordApp ( <idStri>, <objectList> )
+##
+##  Auxiliary function to create a record representation of an application
+##  
+##  Input: idStri (string), objectList (list)
+##  Output: record	
+##
 CreateRecordApp := function(idStri, objectList)
 	if idStri <> false then
 		return rec( attributes := rec( id := idStri ), name := APP_TAG, content := objectList); 
@@ -151,6 +230,15 @@ CreateRecordApp := function(idStri, objectList)
 	fi;
 end;
 
+#######################################################################
+##
+#F  CreateRecordAtribution ( <objectList> , <idStri> )
+##
+##  Auxiliary function to create a record representation of an Attribution
+##  
+##  Input:  objectList (list), idStri (string)
+##  Output: record	
+##
 CreateRecordAtribution := function(objectList, idStri)
 	if idStri <> false then
 		return rec( attributes := rec( id := idStri ), name := ATT_TAG, content := objectList); 
@@ -159,6 +247,15 @@ CreateRecordAtribution := function(objectList, idStri)
 	fi;
 end;
 
+#######################################################################
+##
+#F  CreateRecordAttributePairs  ( <objectList> , <idStri> )
+##
+##  Auxiliary function to create a record representation of attribution pairs
+##  
+##  Input: objectList (list), idStri (string)
+##  Output: record	
+##
 CreateRecordAttributePairs := function(objectList, idStri)
 	if idStri <> false then
 		return rec( attributes := rec( id := idStri ), name := ATP_TAG, content := objectList);
@@ -167,6 +264,15 @@ CreateRecordAttributePairs := function(objectList, idStri)
 	fi;
 end;
 
+#######################################################################
+##
+#F  CreateRecordError  ( <objectList> , <idStri> )
+##
+##  Auxiliary function to create a record representation of an error
+##  
+##  Input: objectList (list), idStri (string)
+##  Output: record	
+##
 CreateRecordError := function (objectList, idStri)
 	if idStri <> false then
 		return rec( attributes := rec( id:= idStri ), name := ERR_TAG, content := objectList);
@@ -176,6 +282,15 @@ CreateRecordError := function (objectList, idStri)
 
 end;
 
+#######################################################################
+##
+#F  CreateRecordOMBVar  ( <objectList> , <idStri> )
+##
+##  Auxiliary function to create a record representation of an OMBVAR
+##  
+##  Input: objectList (list), idStri (string)
+##  Output: record	
+##
 CreateRecordOMBVar := function(objectList, idStri)
 	if idStri <> false then
 		return rec( attributes := rec( id:= idStri ), name := BVAR_TAG, content := objectList);
@@ -184,6 +299,15 @@ CreateRecordOMBVar := function(objectList, idStri)
 	fi;
 end;
 
+#######################################################################
+##
+#F  CreateRecordBinding ( <objectList> , <idStri> )
+##
+##  Auxiliary function to create a record representation of bindings
+##  
+##  Input:  objectList (list), idStri (string)
+##  Output: record	
+##
 CreateRecordBinding := function(objectList, idStri)
 	if idStri <> false then
 		return rec( attributes := rec( id:= idStri ), name := BIND_TAG, content := objectList);
@@ -192,6 +316,16 @@ CreateRecordBinding := function(objectList, idStri)
 	fi;
 end;
 
+#######################################################################
+##
+#F  CreateRecordApp ( <objectRef>, <isInternal> )
+##
+##  Auxiliary function to create a record representation of a referece,
+##  either internal or external 
+##  
+##  Input: objectRef (string), isInternal (boolean)
+##  Output: record	
+##
 CreateRecordReference := function(objectRef, isInternal)
 	if isInternal then
 		return rec( attributes := rec( id := "inner", href := objectRef ), name := REF_TAG, content := 0); 
@@ -200,6 +334,15 @@ CreateRecordReference := function(objectRef, isInternal)
 	fi;
 end;
 
+#######################################################################
+##
+#F  CreateRecordApp ( <idStri>, <objectList> )
+##
+##  Auxiliary function to create a record representation of an application
+##  
+##  Input: idStri (string), objectList (list)
+##  Output: record	
+##
 CreateRecordForeign := function(forStri, encStri, idStri)
 	if idStri <> false then
 		return rec( attributes := rec( id := idStri, encoding:= encStri )  , name := FOR_TAG , content := [ rec( content := forStri ) ]); 
@@ -243,11 +386,11 @@ function(stream, isRecursiveCall)
 			sign := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				idStri := readAllTokens(idLength, stream, false);	
+				idLength := GetObjLength(isLong, stream);
+				idStri := ReadAllTokens(idLength, stream, false);	
 			fi;
 			if isLong then #read 4 bytes
-				num:= getObjLength(isLong, stream);
+				num:= GetObjLength(isLong, stream);
 				i := 0;
 				if num > 2^31-1 then
 					num := 2^32 - num;
@@ -266,12 +409,12 @@ function(stream, isRecursiveCall)
 		elif (token = TYPE_INT_BIG) then
 			num := 0;
 			#get length
-			objLength := getObjLength(isLong, stream);
+			objLength := GetObjLength(isLong, stream);
 			#check for id
 			idStri := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
+				idLength := GetObjLength(isLong, stream);
 			fi;
 
 			# get base and sign
@@ -301,7 +444,7 @@ function(stream, isRecursiveCall)
 				od;
 				num := IntHexString(objectStri);		
 			else
-				objectStri := readAllTokens(objLength, stream, false);
+				objectStri := ReadAllTokens(objLength, stream, false);
 				#needs to be converted to a b10 before assigning it	
 				if base = MASK_BASE_16 then
 					num := IntHexString(objectStri);
@@ -312,7 +455,7 @@ function(stream, isRecursiveCall)
 				fi;
 			fi;
 			if hasId then
-				idStri := readAllTokens(idLength, stream, false);	
+				idStri := ReadAllTokens(idLength, stream, false);	
 			fi;
 			treeObject := CreateRecordInt(num, sign, idStri);
 		
@@ -322,12 +465,12 @@ function(stream, isRecursiveCall)
 			#check for id
 			if hasId then
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				idStri := readAllTokens(idLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				idStri := ReadAllTokens(idLength, stream, false);
 			fi;
 			
 			#obtain a blist representation of the float
-			tempList := readFloatToBlist(stream);
+			tempList := ReadFloatToBlist(stream);
 			#get the sign from the most significant bit
 			sign := tempList[1];
 			#appending the implicit 1 + 3 false to complete the bytes, this is necessary for HexStringBlist to work correctly
@@ -352,15 +495,15 @@ function(stream, isRecursiveCall)
 
 		elif (token = TYPE_VARIABLE) then
 			objectStri := "";
-			objLength := getObjLength(isLong, stream);
+			objLength := GetObjLength(isLong, stream);
 			idStri := false;			
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				objectStri := readAllTokens(objLength, stream, false);
-				idStri := readAllTokens(idLength, stream, false);	
+				idLength := GetObjLength(isLong, stream);
+				objectStri := ReadAllTokens(objLength, stream, false);
+				idStri := ReadAllTokens(idLength, stream, false);	
 			else
-				objectStri := readAllTokens(objLength, stream, false);
+				objectStri := ReadAllTokens(objLength, stream, false);
 			fi;
 			treeObject := CreateRecordVar(objectStri, idStri);
 		
@@ -368,47 +511,47 @@ function(stream, isRecursiveCall)
 		elif (token = TYPE_SYMBOL) then
 			objectStri := "";
 			cdStri := "";
-			cdLength := getObjLength(isLong, stream);
-			objLength := getObjLength(isLong, stream);
+			cdLength := GetObjLength(isLong, stream);
+			objLength := GetObjLength(isLong, stream);
 			idStri := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				cdStri := readAllTokens(cdLength, stream, false);
-				objectStri := readAllTokens(objLength, stream, false);
-				idStri := readAllTokens(idLength, stream, false);	
+				idLength := GetObjLength(isLong, stream);
+				cdStri := ReadAllTokens(cdLength, stream, false);
+				objectStri := ReadAllTokens(objLength, stream, false);
+				idStri := ReadAllTokens(idLength, stream, false);	
 			else
-				cdStri := readAllTokens(cdLength, stream, false);
-				objectStri := readAllTokens(objLength, stream, false);
+				cdStri := ReadAllTokens(cdLength, stream, false);
+				objectStri := ReadAllTokens(objLength, stream, false);
 			fi;
 			treeObject := CreateRecordSym(objectStri, cdStri, idStri);
 		
 
 		elif (token = TYPE_STRING_UTF) then
 			#must be twice the length as it is UTF-16 (each char takes 2 bytes, second byte being ignored)
-			objLength := getObjLength(isLong, stream);
+			objLength := GetObjLength(isLong, stream);
 			idStri := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				objectStri := readAllTokens(objLength, stream, true);
-				idStri := readAllTokens(idLength, stream, false);	
+				idLength := GetObjLength(isLong, stream);
+				objectStri := ReadAllTokens(objLength, stream, true);
+				idStri := ReadAllTokens(idLength, stream, false);	
 			else
-				objectStri := readAllTokens(objLength, stream, true);
+				objectStri := ReadAllTokens(objLength, stream, true);
 			fi;
 			treeObject := CreateRecordString(objectStri, idStri);
 		
 		
 		elif (token = TYPE_STRING_ISO) then
-			objLength := getObjLength(isLong, stream);
+			objLength := GetObjLength(isLong, stream);
 			idStri := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				objectStri := readAllTokens(objLength, stream, false);
-				idStri := readAllTokens(idLength, stream, false);	
+				idLength := GetObjLength(isLong, stream);
+				objectStri := ReadAllTokens(objLength, stream, false);
+				idStri := ReadAllTokens(idLength, stream, false);	
 			else
-				objectStri := readAllTokens(objLength, stream, false);
+				objectStri := ReadAllTokens(objLength, stream, false);
 			fi;	
 			treeObject := CreateRecordString(objectStri, idStri);
 		
@@ -419,17 +562,17 @@ function(stream, isRecursiveCall)
 
 		### FIXME gap does not parse a tree with a foreign tag in....
 		if (TYPE_FOREIGN = IntersectionBlist(token, TYPE_FOREIGN)) then
-			encLength := getObjLength(isLong, stream);
-			objLength := getObjLength(isLong, stream);
+			encLength := GetObjLength(isLong, stream);
+			objLength := GetObjLength(isLong, stream);
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				encStri := readAllTokens(encLength, stream, false);
-				objectStri := readAllTokens(objLength, stream, false);
-				idStri := readAllTokens(idLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				encStri := ReadAllTokens(encLength, stream, false);
+				objectStri := ReadAllTokens(objLength, stream, false);
+				idStri := ReadAllTokens(idLength, stream, false);
 			else
-				encStri := readAllTokens(encLength, stream, false);
-				objectStri := readAllTokens(objLength, stream, false);	
+				encStri := ReadAllTokens(encLength, stream, false);
+				objectStri := ReadAllTokens(objLength, stream, false);	
 			fi;
 			treeObject := CreateRecordForeign(objectStri, encStri, idStri);
 		fi;
@@ -439,8 +582,8 @@ function(stream, isRecursiveCall)
 			objectList := [];
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				idStri := readAllTokens(idLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				idStri := ReadAllTokens(idLength, stream, false);
 			fi;
 			i := 0;
 			while (true) do
@@ -458,8 +601,8 @@ function(stream, isRecursiveCall)
 			idStri := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				idStri := readAllTokens(idLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				idStri := ReadAllTokens(idLength, stream, false);
 			fi;
 			token := ReadByte(stream);
 			token := toBlist(token);
@@ -485,8 +628,8 @@ function(stream, isRecursiveCall)
 			idStriAttrPairs := false;
 			if(hasId) then 
 				idStriAttrPairs := "";
-				idLength := getObjLength(isLong, stream);
-				idStriAttrPairs := readAllTokens(idLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				idStriAttrPairs := ReadAllTokens(idLength, stream, false);
 			fi;	
 				objectList := [];
 			#getting pairs till an end token is found
@@ -516,8 +659,8 @@ function(stream, isRecursiveCall)
 			idStri := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				idStri := readAllTokens(objLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				idStri := ReadAllTokens(objLength, stream, false);
 			fi;
 			objectList := [];
 			omSymbol := GetNextTagObject(stream, true);
@@ -532,8 +675,8 @@ function(stream, isRecursiveCall)
 			idStri := false;
 			if(hasId) then 
 				idStri := "";
-				idLength := getObjLength(isLong, stream);
-				idStri := readAllTokens(idLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				idStri := ReadAllTokens(idLength, stream, false);
 			fi;
 			omSymbol := GetNextTagObject(stream, true);
 			token := ReadByte(stream);
@@ -560,8 +703,8 @@ function(stream, isRecursiveCall)
 			idBVars := false;
 			if(hasId) then 
 				idBVars := "";
-				idLength := getObjLength(isLong, stream);
-				idBVars := readAllTokens(idLength, stream, false);
+				idLength := GetObjLength(isLong, stream);
+				idBVars := ReadAllTokens(idLength, stream, false);
 			fi;
 			objectList := [];
 			#getting pairs till an end token is found
@@ -581,12 +724,12 @@ function(stream, isRecursiveCall)
 			treeObject := CreateRecordBinding(objectList, idStri);
 		
 		elif (token = TYPE_REFERENCE_INT) then
-			objLength := getObjLength(isLong, stream);
+			objLength := GetObjLength(isLong, stream);
 			treeObject := CreateRecordReference(objLength, true);
 				
 		elif (token = TYPE_REFERENCE_EXT) then
-			objLength := getObjLength(isLong, stream);
-			objectStri := readAllTokens(objLength, stream, false);
+			objLength := GetObjLength(isLong, stream);
+			objectStri := ReadAllTokens(objLength, stream, false);
 			treeObject := CreateRecordReference(objectStri, false);
 		
 		elif (token = TYPE_BVARS) then
@@ -596,8 +739,8 @@ function(stream, isRecursiveCall)
 			Error("Attribution pairs token shouldn't be here'");
 			#TODO must test this
 		elif (token = TYPE_CDBASE) then
-			objLength := getObjLength(isLong, stream);
-			objectStri := readAllTokens(objLength, stream, false);
+			objLength := GetObjLength(isLong, stream);
+			objectStri := ReadAllTokens(objLength, stream, false);
 			treeObject := GetNextTagObject(stream);
 			treeObject.content[1].attributes.cdbase := objectStri;
 		

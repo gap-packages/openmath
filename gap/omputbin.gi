@@ -211,12 +211,12 @@ end);
 
 ########################################################################
 ##
-#M  OMPut( <OMWriter>, <variable> )
+#M  OMPutVar( <OMWriter>, <variable> )
 ##
 ##
 ##
-InstallMethod(OMPut, "for a variable to binary OpenMath", true,
-[ IsOpenMathXMLWriter, IsObject ],0,
+InstallMethod(OMPutVar, "for a variable to binary OpenMath", true,
+[ IsOpenMathBinaryWriter, IsObject ],0,
 function(writer, var)
 	local varLength, varStri, varLengthList;
 	varStri := String(var);
@@ -227,7 +227,7 @@ function(writer, var)
 		WriteIntasBytes(writer, varLengthList);
 	else
 		WriteByte( writer![1], 5);
-		WriteByte(varLength);
+		WriteByte(writer![1], varLength);
 	fi;
 	WriteAll(writer![1], varStri);
 
@@ -244,6 +244,7 @@ InstallMethod( OMPutSymbol, "for a symbol to binary OpenMath", true,
 [IsOpenMathBinaryWriter, IsString, IsString ],0,
 function( writer, cd, name )	
 	local cdLength, nameLength, cdListInt, nameListInt;
+
 	nameListInt := [];
 	cdLength := Length(cd);
 	nameLength := Length(name);
@@ -265,6 +266,35 @@ function( writer, cd, name )
 
 end);
 
+#######################################################################
+##
+#M  OMPutOMATTR
+#M  OMPutEndOMATTR
+##
+InstallMethod(OMPutOMATTR, "to write OMATTR in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+	WriteByte( writer![1], 18 );
+end);
+
+InstallMethod(OMPutEndOMATTR, "to write /OMATTR in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	WriteByte( writer![1], 19 );
+end);
+
+InstallMethod(OMPutOMATP, "to write OMATP in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+	WriteByte( writer![1], 20);
+end);
+
+InstallMethod(OMPutEndOMATP, "to write /OMATP in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+	WriteByte( writer![1], 21 );
+end);
 
 
 ########################################################################
@@ -278,16 +308,19 @@ InstallMethod(OMPut, "for a string to binary OpenMath", true,
 function( writer, string )	
 	local strLength, strListLength;
 	strLength := Length(string);
-	if strLength > 255 then
-		strListLength := BigIntToListofInts(strLength);	
-		WriteByte(writer![1], 6+128);
-		#writing the string length as 4 bytes
-		WriteIntasBytes(writer, strListLength);
-	else
+		Print("string len: ",strLength,"\n");
 		WriteByte(writer![1], 6);
-		WriteByte(writer![1], strLength);
-	fi;
+#	if strLength > 255 then
+#		strListLength := BigIntToListofInts(strLength);	
+#		WriteByte(writer![1], 6+128);
+#		#writing the string length as 4 bytes
+#		WriteIntasBytes(writer, strListLength);
+#	else
+#		
+#		WriteByte(writer![1], strLength);
+#	fi;
 	WriteAll(writer[1],string);
+	Print("end reached\n");
 end);
 
 

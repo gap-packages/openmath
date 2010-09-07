@@ -640,7 +640,6 @@ true,
 [ IsOpenMathWriter, IsPolynomialRing ],
 0,
 function( writer, r )
-
 if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
 
   SetOMReference( r, Concatenation("polyring", RandomString(16) ) );
