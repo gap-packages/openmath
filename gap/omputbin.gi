@@ -308,19 +308,16 @@ InstallMethod(OMPut, "for a string to binary OpenMath", true,
 function( writer, string )	
 	local strLength, strListLength;
 	strLength := Length(string);
-		Print("string len: ",strLength,"\n");
+	if strLength > 255 then
+		strListLength := BigIntToListofInts(strLength);	
+		WriteByte(writer![1], 134); # 6+128
+		#writing the string length as 4 bytes
+		WriteIntasBytes(writer, strListLength);
+	else
 		WriteByte(writer![1], 6);
-#	if strLength > 255 then
-#		strListLength := BigIntToListofInts(strLength);	
-#		WriteByte(writer![1], 6+128);
-#		#writing the string length as 4 bytes
-#		WriteIntasBytes(writer, strListLength);
-#	else
-#		
-#		WriteByte(writer![1], strLength);
-#	fi;
-	WriteAll(writer[1],string);
-	Print("end reached\n");
+		WriteByte(writer![1], strLength);
+	fi;
+	WriteAll(writer![1],string);
 end);
 
 
