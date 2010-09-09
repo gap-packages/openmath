@@ -82,7 +82,7 @@ ReadAllTokens := function (length, stream, isUTF16)
 		WriteByte(out, curByte);
 		length := length -1;
 		if isUTF16 then
-			curByte := toBlist(curByte);
+			curByte := ToBlist(curByte);
 			if UTF_NOT_SUPP = IntersectionBlist(curByte ,UTF_NOT_SUPP) then
 				Error("Characted in string not supported\n");	
 			fi;
@@ -110,7 +110,7 @@ ReadFloatToBlist := function(stream)
 	length := 8;
 	while length > 0 do
 		curByte := ReadByte(stream);
-		temp := toBlist(curByte); 
+		temp := ToBlist(curByte); 
 		Append(bitList,temp);
 		length :=  length -1;
 	od; 
@@ -318,7 +318,7 @@ end;
 
 #######################################################################
 ##
-#F  CreateRecordApp ( <objectRef>, <isInternal> )
+#F  CreateRecordReference ( <objectRef>, <isInternal> )
 ##
 ##  Auxiliary function to create a record representation of a referece,
 ##  either internal or external 
@@ -336,11 +336,11 @@ end;
 
 #######################################################################
 ##
-#F  CreateRecordApp ( <idStri>, <objectList> )
+#F  CreateRecordForeign ( <forStri>, <encStri>, <idStri> )
 ##
-##  Auxiliary function to create a record representation of an application
+##  Auxiliary function to create a record representation of an foreign object
 ##  
-##  Input: idStri (string), objectList (list)
+##  Input: forStri: format (string), encStri: encoding (string), idStri (string)
 ##  Output: record	
 ##
 CreateRecordForeign := function(forStri, encStri, idStri)
@@ -356,13 +356,23 @@ end;
 #	return rec( attributes := rec( ), name := ERR_TAG, content := objectList);
 #end;
 
+
+#######################################################################
+##
+#F  GetNextTagObject ( <stream>, <isRecursiveCall> )
+##
+##  Main function to parse an object. If isRecursiveCall is TRUE no object tags are added
+##  
+##  Input: stream, isRecursiveCall (boolean)
+##  Output: object record	
+##
 InstallGlobalFunction( GetNextTagObject,
 function(stream, isRecursiveCall)
 	local omObject, omSymbol, omObject2, token, objLength, sign, isLong, num, i, tempList, 
 	      basensign, base, curByte, objectStri, exponent, fraction, hasId, idLength, idStri, idStriAttrPairs, idBVars, cdStri, cdLength, encLength, encStri, objectList, treeObject;
 		token := ReadByte(stream);
 
-		token := toBlist(token);
+		token := ToBlist(token);
 		isLong := false;
 		hasId := false;
 		# checking if the long and id flag is on
@@ -378,8 +388,8 @@ function(stream, isRecursiveCall)
 		fi;
 		#removing bits that could interfere with type distinction
 		token := IntersectionBlist(token ,TYPE_MASK);
-#################################start standard check for types####################################
 		
+		#start of type checks
 		if (token = TYPE_INT_SMALL) then
 			num := 0;
 			idStri := false;
@@ -419,7 +429,7 @@ function(stream, isRecursiveCall)
 
 			# get base and sign
 			basensign := ReadByte(stream); 
-			basensign := toBlist(basensign);
+			basensign := ToBlist(basensign);
 			
 			#set the sign
 			if (MASK_SIGN_POS = IntersectionBlist(basensign, MASK_SIGN_POS)) then
@@ -559,9 +569,8 @@ function(stream, isRecursiveCall)
 		elif (token = TYPE_BYTES) then
 			Error("Gap does not support byte arrays, sorry...");
 		
-
-		### FIXME gap does not parse a tree with a foreign tag in....
-		if (TYPE_FOREIGN = IntersectionBlist(token, TYPE_FOREIGN)) then
+		
+		elif (TYPE_FOREIGN = IntersectionBlist(token, TYPE_FOREIGN)) then
 			encLength := GetObjLength(isLong, stream);
 			objLength := GetObjLength(isLong, stream);
 			if(hasId) then 
@@ -575,7 +584,6 @@ function(stream, isRecursiveCall)
 				objectStri := ReadAllTokens(objLength, stream, false);	
 			fi;
 			treeObject := CreateRecordForeign(objectStri, encStri, idStri);
-		fi;
 
 		elif (token = TYPE_APPLICATION) then
 			idStri := false;
@@ -605,7 +613,7 @@ function(stream, isRecursiveCall)
 				idStri := ReadAllTokens(idLength, stream, false);
 			fi;
 			token := ReadByte(stream);
-			token := toBlist(token);
+			token := ToBlist(token);
 			isLong := false;
 			hasId := false;
 			# checking if the long and id flag is on
@@ -680,7 +688,7 @@ function(stream, isRecursiveCall)
 			fi;
 			omSymbol := GetNextTagObject(stream, true);
 			token := ReadByte(stream);
-			token := toBlist(token);
+			token := ToBlist(token);
 			isLong := false;
 			hasId := false;
 			# checking if the long and id flag is on
@@ -737,7 +745,6 @@ function(stream, isRecursiveCall)
 		
 		elif (token = TYPE_ATTRPAIRS) then
 			Error("Attribution pairs token shouldn't be here'");
-			#TODO must test this
 		elif (token = TYPE_CDBASE) then
 			objLength := GetObjLength(isLong, stream);
 			objectStri := ReadAllTokens(objLength, stream, false);
@@ -772,7 +779,7 @@ function(stream, isRecursiveCall)
 		#added to allow not removing the end token when called recursively
 		if (not isRecursiveCall) then	
 			token := ReadByte(stream);
-			token := toBlist(token);
+			token := ToBlist(token);
 
 		fi;
 
@@ -780,13 +787,20 @@ function(stream, isRecursiveCall)
 	return treeObject;	
 end);
 
-
-#gets a whole object, this function calls GetNextTagObject to read all the sub-objects
+#######################################################################
+##
+#F  GetNextObject ( <stream>, <firstbyte> )
+##
+##  Acts as a wrapper for GetNextTagObject when getting 
+##  objects contained within an object
+##  
+##  Input: stream, firstbyte: start token (int)
+##  Output: object record	
 InstallGlobalFunction( GetNextObject,
 function( stream, firstbyte )
 	local btoken;
 	# firstbyte contains the start token
-	btoken := toBlist(firstbyte);
+	btoken := ToBlist(firstbyte);
 	if (btoken <> TYPE_OBJECT) then 
 		Error("Object tag expected");
 	fi;

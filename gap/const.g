@@ -1,7 +1,13 @@
-
-#temporarily put here to test
-#turns an int into a Blist for bitwise comparison operations
-toBlist := function(token)
+#######################################################################
+##
+#F  ToBlist ( <token> )
+##
+##  Auxiliary function that creates a bit list representation of an int
+## 
+##  Input: token (int)
+##  Output: bit list	
+##
+ToBlist := function(token)
 	#ensuring that the string to be converted has 2 hex digits, otherwise the conversion fails
 	 local val;
 	 val := token;
@@ -12,57 +18,53 @@ toBlist := function(token)
 	 return BlistStringDecode(token);
 end;
 
-
-
 #OMBinary constants
-
-
 # Flags
-BindGlobal("FLAG_STATUS",toBlist(32));
-BindGlobal("FLAG_ID",toBlist(64));
-BindGlobal("FLAG_LONG",toBlist(128));
+BindGlobal("FLAG_STATUS",ToBlist(32));
+BindGlobal("FLAG_ID",ToBlist(64));
+BindGlobal("FLAG_LONG",ToBlist(128));
 # Bit-masks
-BindGlobal("TYPE_MASK",toBlist( 31));
-BindGlobal("MASK_SIGN_POS",toBlist( 43)); # 0x2b "+"
-BindGlobal("MASK_SIGN_NEG",toBlist( 45)); # 0x2d "-"
-BindGlobal("MASK_BASE_10",toBlist(0));
-BindGlobal("MASK_BASE_16",toBlist( 64));
-BindGlobal("MASK_BASE_256",toBlist( 128));
+BindGlobal("TYPE_MASK",ToBlist( 31));
+BindGlobal("MASK_SIGN_POS",ToBlist( 43)); # 0x2b "+"
+BindGlobal("MASK_SIGN_NEG",ToBlist( 45)); # 0x2d "-"
+BindGlobal("MASK_BASE_10",ToBlist(0));
+BindGlobal("MASK_BASE_16",ToBlist( 64));
+BindGlobal("MASK_BASE_256",ToBlist( 128));
 # Atomic objects
-BindGlobal("TYPE_INT_SMALL",toBlist(  1));
-BindGlobal("TYPE_INT_BIG",toBlist(  2));
-BindGlobal("TYPE_OMFLOAT",toBlist(  3));
-BindGlobal("TYPE_BYTES",toBlist(  4));
-BindGlobal("TYPE_VARIABLE",toBlist(  5));
-BindGlobal("TYPE_STRING_ISO",toBlist(  6));
-BindGlobal("TYPE_STRING_UTF",toBlist(  7));
-BindGlobal("TYPE_SYMBOL",toBlist(  8));
-BindGlobal("TYPE_CDBASE",toBlist(  9));
-BindGlobal("TYPE_FOREIGN",toBlist( 12));
+BindGlobal("TYPE_INT_SMALL",ToBlist(  1));
+BindGlobal("TYPE_INT_BIG",ToBlist(  2));
+BindGlobal("TYPE_OMFLOAT",ToBlist(  3));
+BindGlobal("TYPE_BYTES",ToBlist(  4));
+BindGlobal("TYPE_VARIABLE",ToBlist(  5));
+BindGlobal("TYPE_STRING_ISO",ToBlist(  6));
+BindGlobal("TYPE_STRING_UTF",ToBlist(  7));
+BindGlobal("TYPE_SYMBOL",ToBlist(  8));
+BindGlobal("TYPE_CDBASE",ToBlist(  9));
+BindGlobal("TYPE_FOREIGN",ToBlist( 12));
 # Compound objects
-BindGlobal("TYPE_APPLICATION",toBlist( 16));
-BindGlobal("TYPE_APPLICATION_END",toBlist( 17));
-BindGlobal("TYPE_ATTRIBUTION",toBlist( 18));
-BindGlobal("TYPE_ATTRIBUTION_END",toBlist( 19));
-BindGlobal("TYPE_ATTRPAIRS",toBlist( 20));
-BindGlobal("TYPE_ATTRPAIRS_END",toBlist( 21));
-BindGlobal("TYPE_ERROR",toBlist( 22));
-BindGlobal("TYPE_ERROR_END",toBlist( 23));
-BindGlobal("TYPE_OBJECT",toBlist( 24));
-BindGlobal("TYPE_OBJECT_END",toBlist( 25));
-BindGlobal("TYPE_BINDING",toBlist( 26));
-BindGlobal("TYPE_BINDING_END",toBlist( 27));
-BindGlobal("TYPE_BVARS",toBlist( 28));
-BindGlobal("TYPE_BVARS_END",toBlist( 29));
+BindGlobal("TYPE_APPLICATION",ToBlist( 16));
+BindGlobal("TYPE_APPLICATION_END",ToBlist( 17));
+BindGlobal("TYPE_ATTRIBUTION",ToBlist( 18));
+BindGlobal("TYPE_ATTRIBUTION_END",ToBlist( 19));
+BindGlobal("TYPE_ATTRPAIRS",ToBlist( 20));
+BindGlobal("TYPE_ATTRPAIRS_END",ToBlist( 21));
+BindGlobal("TYPE_ERROR",ToBlist( 22));
+BindGlobal("TYPE_ERROR_END",ToBlist( 23));
+BindGlobal("TYPE_OBJECT",ToBlist( 24));
+BindGlobal("TYPE_OBJECT_END",ToBlist( 25));
+BindGlobal("TYPE_BINDING",ToBlist( 26));
+BindGlobal("TYPE_BINDING_END",ToBlist( 27));
+BindGlobal("TYPE_BVARS",ToBlist( 28));
+BindGlobal("TYPE_BVARS_END",ToBlist( 29));
 # References
-BindGlobal("TYPE_REFERENCE_INT",toBlist( 30));
-BindGlobal("TYPE_REFERENCE_EXT",toBlist( 31));
+BindGlobal("TYPE_REFERENCE_INT",ToBlist( 30));
+BindGlobal("TYPE_REFERENCE_EXT",ToBlist( 31));
 # other
 BindGlobal("SHIFT_UNIT",8);
-BindGlobal("MOST_SIG_MASK",toBlist(240));
-BindGlobal("LESS_SIG_MASK",toBlist(15));
+BindGlobal("MOST_SIG_MASK",ToBlist(240));
+BindGlobal("LESS_SIG_MASK",ToBlist(15));
 BindGlobal("EXP_BIAS", 1023);
-BindGlobal("UTF_NOT_SUPP", toBlist(128));
+BindGlobal("UTF_NOT_SUPP", ToBlist(128));
 
 # OM tags
 BindGlobal("INT_TAG","OMI");

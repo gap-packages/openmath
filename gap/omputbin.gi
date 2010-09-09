@@ -46,11 +46,26 @@ end);
 #
 #  Writes 4 bytes given
 BindGlobal( "WriteIntasBytes",
-function( writer, listofInts )
-	WriteByte(writer![1], listofInts[1]);
-	WriteByte(writer![1], listofInts[2]);
-	WriteByte(writer![1], listofInts[3]);
-	WriteByte(writer![1], listofInts[4]);
+function( stream, listofInts )
+	WriteByte(stream, listofInts[1]);
+	WriteByte(stream, listofInts[2]);
+	WriteByte(stream, listofInts[3]);
+	WriteByte(stream, listofInts[4]);
+end);
+
+#######################################################################
+#
+#  Obtains position of first 1 in binary string
+BindGlobal( "FindFirst1BinaryString",
+function( binStri )
+local i, binStriLen;
+binStriLen := Length(binStri);
+i := 1;
+while binStri[i] <> '1' and i <= binStriLen do
+i := i +1;
+od;
+
+return i;
 end);
 
 #######################################################################
@@ -64,7 +79,7 @@ local intPart, resultHex, number, i, zeroF;
 	resultHex := "";
 	zeroF := Float("0.0");
 	while decPart <> zeroF do
-		if i > 51 then
+		if i > 10 then
 			break;
 		fi;
 		number := decPart * 16;
@@ -75,48 +90,141 @@ local intPart, resultHex, number, i, zeroF;
 		i := i +1;
 	od;
 	return resultHex;
+	
 end);
-
-#######################################################################
-##
-#M 
-# removes all falses at the start of the list.
-BindGlobal( "NormaliseBlist", 
-function( list )
-local i, listLen, finalList;
-i:= 1;
-listLen := Length(list);
-while  i <= listLen and list[i] = false do
-	i := i +1;
-od;
-if i >= listLen then
-	finalList := [list[listLen]];
-else
-	finalList := list{[i..listLen]};
-fi;
-list := finalList;
-return i;
-end);
-
 
 #######################################################################
 ##
 #M 
 BindGlobal( "WriteHexAsBin",
-function( hexNum )
-local hexNumLen, binStri, num, charStri, counter, binArray;
+function( hexNum, withLeadingZeroes )
+local hexNumLen, binStri, num, charStri, counter, binArrayWithZeroes, binArrayNoLeadingZeroes;
 hexNumLen := Length(hexNum);
 binStri := "";
 counter:= 1;
-binArray := ["0000", "0001" ,"0010", "0011",	"0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"];
+binArrayWithZeroes := ["0000", "0001" ,"0010", "0011",	"0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"];
+binArrayNoLeadingZeroes := ["", "1" ,"10", "11", "100", "101", "110", "111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"];
+charStri := hexNum{[counter]};
+num := IntHexString(charStri);
+if withLeadingZeroes then
+	Append(binStri, binArrayWithZeroes[num+1]);
+else
+	Append(binStri, binArrayNoLeadingZeroes[num+1]);
+fi;
+counter := counter +1;
 while counter <= hexNumLen do
 	charStri := hexNum{[counter]};
 	num := IntHexString(charStri);
-	Append(binStri, binArray[num+1]);
+	Append(binStri, binArrayWithZeroes[num+1]);
 	counter := counter +1;
 od;
 return binStri;
 end);
+
+#######################################################################
+##
+#M 
+BindGlobal( "WriteBinAsHex",
+function( binStri )
+local binStriLen, hexStri, counter, binArray,hexArray, limit, upper, lower;
+binStriLen := Length(binStri);
+hexStri := "";
+counter:= 1;
+binArray := ["0000", "0001" ,"0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"];
+hexArray := ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+#limit := binStriLen /4;
+upper := 4;
+lower := 1;
+while upper <= binStriLen do
+	for counter in [1..16] do
+		if binStri{[lower..upper]} = binArray[counter] then
+			Append(hexStri, hexArray[counter]);
+			break;
+		fi;
+		counter := counter + 1;
+	od;
+	upper := upper +4;
+	lower := lower + 4;
+od;
+return hexStri;
+end);
+
+########################################################################
+###
+##M 
+## removes all falses at the start of the list.
+#BindGlobal( "NormaliseBlist", 
+#function( list )
+#local i, listLen, finalList;
+#i:= 1;
+#listLen := Length(list);
+#while  i <= listLen and list[i] = false do
+#	i := i +1;
+#od;
+#if i >= listLen then
+#	finalList := [list[listLen]];
+#else
+#	finalList := list{[i..listLen]};
+#fi;
+#list := finalList;
+#return i;
+#end);
+
+#######################################################################
+##
+#M 
+BindGlobal( "WriteHexStriAsBytes",
+function( hexStri, stream )
+local hexStriLen, intValue, upper, lower;
+upper := 2;
+lower := 1;
+intValue := 0;
+hexStriLen := Length(hexStri);
+while upper <= hexStriLen do
+intValue := IntHexString(hexStri{[lower..upper]});
+Print(intValue, "\n");
+WriteByte(stream, intValue);
+upper := upper +2;
+lower := lower +2;
+od;
+end);
+
+#######################################################################
+##
+#M 
+BindGlobal( "WriteBinStringsAsBytes",
+function( sign, exponent, mantissa , stream)
+local  exponentLen, mantissaLen, firstPart, secondPart, numbZeroes, hexStri;
+exponentLen := Length(exponent);
+mantissaLen := Length(mantissa);
+firstPart := "";
+secondPart := mantissa;
+if sign then 
+	Append(firstPart, "1" );
+else 
+	Append(firstPart, "0" );
+fi;
+if exponentLen < 11 then 
+	numbZeroes := 11 - exponentLen ;
+	while numbZeroes <> 0 do 
+		Append(firstPart, "0");
+	numbZeroes := numbZeroes - 1;
+	od;
+fi;
+Append(firstPart, exponent);
+if mantissaLen < 52 then 
+	numbZeroes := 52 - mantissaLen;
+	while numbZeroes <> 0 do 
+		Append(secondPart, "0");
+	numbZeroes := numbZeroes -1;
+	od;
+fi;
+Append(firstPart,secondPart);
+hexStri := WriteBinAsHex(firstPart);
+WriteHexStriAsBytes(hexStri, stream);
+end);
+
+
 
 
 #######################################################################
@@ -160,7 +268,7 @@ elif int >= -2^31 and int <= 2^31-1 then
 	Print("int 2^31",int,"\n");
 	WriteByte( writer![1], 1+128);
 	intListLength := BigIntToListofInts(int);
-	WriteIntasBytes(writer, intListLength);
+	WriteIntasBytes(writer![1], intListLength);
 
 elif intLength >= 0 and intLength <= 255 then
 	WriteByte( writer![1], 2);	
@@ -175,7 +283,7 @@ elif intLength > 255 then
 		WriteByte(writer![1], 43); #base 10 | sign +	
 	fi;
 	intListLength := BigIntToListofInts(intLength);
-	WriteIntasBytes(writer, intListLength);
+	WriteIntasBytes(writer![1], intListLength);
 	WriteAll(writer![1], intStri);
 fi;
 
@@ -190,7 +298,7 @@ end);
 InstallMethod(OMPut, "for a float to binary OpenMath", true,
 [ IsOpenMathBinaryWriter, IS_MACFLOAT ],0,
 function(writer, f)
-	local intPart, decPart, sign, decHex;
+	local intPart, decPart, sign, decHex, decBin, decBinLen, exponent, pos, mantissa, intBin, absIntPart;
 	WriteByte( writer![1], 3);
 	if f > 0 then
 		sign := false;
@@ -200,13 +308,27 @@ function(writer, f)
 	intPart := Int(f);
 	decPart := f - intPart;
 	decHex := WriteDecasHex(decPart);
-	decHex := EnsureCompleteHexNum(decHex);
-	if AbsInt(intPart) = 0 then
-		
+	decBin := WriteHexAsBin(decHex, true);
+	decBinLen := Length(decBin);
+	absIntPart := AbsInt(intPart);
+	if absIntPart = 0 then
+		pos := FindFirst1BinaryString(decBin);
+		exponent := 1023 - pos;
+		exponent := WriteHexAsBin(HexStringInt(exponent), false);
+		mantissa := decBin{[pos+1..decBinLen]};
 	else
-		
+		intBin := WriteHexAsBin(HexStringInt(absIntPart),false);
+		pos := Length(intBin) -1;
+		exponent := 1023 + pos;
+		exponent := WriteHexAsBin(HexStringInt(exponent), false);
+		Append(intBin, decBin);
+		mantissa := intBin{[2..Length(intBin)]};
 	fi;
-	#TODO not finished
+	if Length(mantissa) > 52 then
+		mantissa := mantissa{[1..52]};
+	fi;
+	WriteBinStringsAsBytes( sign, exponent, mantissa , writer![1]);
+
 end);
 
 ########################################################################
@@ -224,7 +346,7 @@ function(writer, var)
 	if varLength >= 256 then
 		WriteByte( writer![1], 5+128);
 		varLengthList := BigIntToListofInts(varLength);
-		WriteIntasBytes(writer, varLengthList);
+		WriteIntasBytes(writer![1], varLengthList);
 	else
 		WriteByte( writer![1], 5);
 		WriteByte(writer![1], varLength);
@@ -253,9 +375,9 @@ function( writer, cd, name )
 		cdListInt := BigIntToListofInts(cdLength);
 		nameListInt := BigIntToListofInts(nameLength);
 		#writing the cd length as 4 bytes
-		WriteIntasBytes(writer, cdListInt);
+		WriteIntasBytes(writer![1], cdListInt);
 		#writing the name length as 4 bytes
-		WriteIntasBytes(writer, nameListInt);	
+		WriteIntasBytes(writer![1], nameListInt);	
 	else
 		WriteByte(writer![1], 8);
 		WriteByte(writer![1], cdLength);
@@ -312,7 +434,7 @@ function( writer, string )
 		strListLength := BigIntToListofInts(strLength);	
 		WriteByte(writer![1], 134); # 6+128
 		#writing the string length as 4 bytes
-		WriteIntasBytes(writer, strListLength);
+		WriteIntasBytes(writer![1], strListLength);
 	else
 		WriteByte(writer![1], 6);
 		WriteByte(writer![1], strLength);
@@ -344,8 +466,8 @@ function( writer, encString, objString )
 		WriteByte(writer![1], 12+128);
 		encStrListLength := BigIntToListofInts(encStrLength);
 		objStrListLength := BigIntToListofInts(objStrLength);
-		WriteIntasBytes(writer, encStrListLength);
-		WriteIntasBytes(writer, objStrListLength);
+		WriteIntasBytes(writer![1], encStrListLength);
+		WriteIntasBytes(writer![1], objStrListLength);
 	else
 		WriteByte(writer![1], 12);
 		WriteByte(writer![1], encStrLength);
@@ -430,7 +552,7 @@ if HasOMReference( x ) and not SuppressOpenMathReferences then
    if refLength > 255 then
    	WriteByte (writer![1], 31+128);
    	lengthList := BigIntToListofInts(refLength);
-	WriteIntasBytes(writer, lengthList);
+	WriteIntasBytes(writer![1], lengthList);
    else 
    	WriteByte (writer![1], 31);
    	WriteByte (writer![1], refLength);
