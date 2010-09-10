@@ -44,6 +44,14 @@ end);
 
 #######################################################################
 #
+#  Checks whethere it is a real float
+BindGlobal( "IsIntFloat",
+function(x) 
+return Float(0) = x-Float(Int(x));
+end);
+
+#######################################################################
+#
 #  Writes 4 bytes given
 BindGlobal( "WriteIntasBytes",
 function( stream, listofInts )
@@ -181,11 +189,10 @@ lower := 1;
 intValue := 0;
 hexStriLen := Length(hexStri);
 while upper <= hexStriLen do
-intValue := IntHexString(hexStri{[lower..upper]});
-Print(intValue, "\n");
-WriteByte(stream, intValue);
-upper := upper +2;
-lower := lower +2;
+	intValue := IntHexString(hexStri{[lower..upper]});
+	WriteByte(stream, intValue);
+	upper := upper +2;
+	lower := lower +2;
 od;
 end);
 
@@ -265,7 +272,6 @@ if int >= -128 and int <= 127 then
 
 	
 elif int >= -2^31 and int <= 2^31-1 then
-	Print("int 2^31",int,"\n");
 	WriteByte( writer![1], 1+128);
 	intListLength := BigIntToListofInts(int);
 	WriteIntasBytes(writer![1], intListLength);
@@ -306,7 +312,11 @@ function(writer, f)
 		sign := true;
 	fi;
 	intPart := Int(f);
-	decPart := f - intPart;
+	if IsIntFloat(f) then 
+		decPart := 0;
+	else
+		decPart := f - intPart;
+	fi;
 	decHex := WriteDecasHex(decPart);
 	decBin := WriteHexAsBin(decHex, true);
 	decBinLen := Length(decBin);

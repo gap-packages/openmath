@@ -140,6 +140,32 @@ if IsBound( ParseTreeXMLString )  then
     ReadPackage("openmath", "/gap/xmltree.g");
 fi;
 
+#################################################
+# patch for HexStringBlist
+MakeReadWriteGlobal("HexStringBlist");
+
+BindGlobal("HexStringBlist",
+function ( b )
+   local  i, n, s;
+   HexBlistSetup(  );
+   n := Length( b );
+   i := 1;
+   s := "";
+   while i + 7 <= n  do
+       Append( s, HEXBYTES[PositionSorted( BLISTBYTES, b{[ i .. i + 7 ]} )] );
+       i := i + 8;
+   od;
+   b := b{[ i .. n ]};
+   if Length( b ) = 0  then
+       return s;
+   fi;
+   while Length( b ) < 8  do
+       Add( b, false );
+   od;
+   Append( s, HEXBYTES[PositionSorted( BLISTBYTES, b )] );
+   return s;
+end);
+
 
 #################################################################
 ## Module 1.3
