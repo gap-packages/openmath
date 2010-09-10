@@ -90,6 +90,17 @@ function( writer, cd, name )
   OMWriteLine( writer![1], ["<OMS cd=\"", cd, "\" name=\"", name, "\"/>"] );
 end);
 
+########################################################################
+##
+#M  OMPut( <OMWriter>, <symbol> )
+##
+##
+##
+InstallMethod( OMPutOMAWithId, "to put Applications with Ids", true,
+[IsOpenMathXMLWriter , IsObject],0,
+function(write, reference)
+  OMWriteLine( writer![1], [ "<OMA id=\"", reference, "\" >" ] );
+end);
 
 #######################################################################
 ##

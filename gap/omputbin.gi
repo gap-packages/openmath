@@ -398,6 +398,18 @@ function( writer, cd, name )
 
 end);
 
+########################################################################
+##
+#M  OMPut( <OMWriter>, <symbol> )
+##
+##
+##
+InstallMethod( OMPutOMAWithId, "to put Applications with Ids", true,
+[IsOpenMathBinaryWriter , IsObject],0,
+function(write, reference)
+# need to look into putting the id in the binary
+end);
+
 #######################################################################
 ##
 #M  OMPutOMATTR

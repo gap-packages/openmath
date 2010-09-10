@@ -150,6 +150,7 @@ DeclareOperation("OMPutOMATTR",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutEndOMATTR",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutOMATP", [ IsOpenMathWriter ] );
 DeclareOperation("OMPutEndOMATP", [ IsOpenMathWriter ] );
+DeclareOperation("OMPutOMAWithId", [ IsOpenMathWriter , IsObject ] );
 
 
 #######################################################################
