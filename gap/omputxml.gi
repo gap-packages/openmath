@@ -92,13 +92,13 @@ end);
 
 ########################################################################
 ##
-#M  OMPut( <OMWriter>, <symbol> )
+#M  OMPutOMAWithId( <OMWriter>, <reference> )
 ##
 ##
 ##
 InstallMethod( OMPutOMAWithId, "to put Applications with Ids", true,
 [IsOpenMathXMLWriter , IsObject],0,
-function(write, reference)
+function(writer, reference)
   OMWriteLine( writer![1], [ "<OMA id=\"", reference, "\" >" ] );
 end);
 

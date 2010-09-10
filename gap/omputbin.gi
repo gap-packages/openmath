@@ -47,7 +47,7 @@ end);
 #  Checks whethere it is a real float
 BindGlobal( "IsIntFloat",
 function(x) 
-return Float(0) = x-Float(Int(x));
+	return Float(0) = x-Float(Int(x));
 end);
 
 #######################################################################
@@ -272,7 +272,7 @@ if int >= -128 and int <= 127 then
 
 	
 elif int >= -2^31 and int <= 2^31-1 then
-	WriteByte( writer![1], 1+128);
+	WriteByte( writer![1], 129); #1+128
 	intListLength := BigIntToListofInts(int);
 	WriteIntasBytes(writer![1], intListLength);
 
@@ -282,7 +282,7 @@ elif intLength >= 0 and intLength <= 255 then
 	WriteByte(writer![1], 43); #base 10 | sign +
 	WriteAll(writer![1], intStri);
 elif intLength > 255 then
-	WriteByte( writer![1], 2+128);
+	WriteByte( writer![1], 130);#2+128
 	if int < 0 then
 		WriteByte(writer![1], 45); #base 10 | sign -
 	else
@@ -354,7 +354,7 @@ function(writer, var)
 	varStri := String(var);
 	varLength := Length(varStri);
 	if varLength >= 256 then
-		WriteByte( writer![1], 5+128);
+		WriteByte( writer![1], 133); #5+128
 		varLengthList := BigIntToListofInts(varLength);
 		WriteIntasBytes(writer![1], varLengthList);
 	else
@@ -381,7 +381,7 @@ function( writer, cd, name )
 	cdLength := Length(cd);
 	nameLength := Length(name);
 	if (cdLength > 255 or nameLength > 255) then
-		WriteByte( writer![1], 8+128);
+		WriteByte( writer![1], 136); #128+8
 		cdListInt := BigIntToListofInts(cdLength);
 		nameListInt := BigIntToListofInts(nameLength);
 		#writing the cd length as 4 bytes
@@ -398,17 +398,7 @@ function( writer, cd, name )
 
 end);
 
-########################################################################
-##
-#M  OMPut( <OMWriter>, <symbol> )
-##
-##
-##
-InstallMethod( OMPutOMAWithId, "to put Applications with Ids", true,
-[IsOpenMathBinaryWriter , IsObject],0,
-function(write, reference)
-# need to look into putting the id in the binary
-end);
+
 
 #######################################################################
 ##
@@ -485,7 +475,7 @@ function( writer, encString, objString )
 	encStrLength := Length(encString);
 	objStrLength := Length(objString);
 	if encStrLength > 255 or objStrLength > 255 then
-		WriteByte(writer![1], 12+128);
+		WriteByte(writer![1], 140);#12+128
 		encStrListLength := BigIntToListofInts(encStrLength);
 		objStrListLength := BigIntToListofInts(objStrLength);
 		WriteIntasBytes(writer![1], encStrListLength);
@@ -495,8 +485,31 @@ function( writer, encString, objString )
 		WriteByte(writer![1], encStrLength);
 		WriteByte(writer![1], objStrLength);
 	fi;
-	WriteAll(writer[1], encString);
-	WriteAll(writer[1], objString);
+	WriteAll(writer![1], encString);
+	WriteAll(writer![1], objString);
+end);
+
+########################################################################
+##
+#M  OMPutOMAWithId( <OMWriter>, <reference> )
+##
+##
+##
+InstallMethod( OMPutOMAWithId, "to put Applications with Ids", true,
+[IsOpenMathBinaryWriter , IsObject],0,
+function(writer, reference)
+	local referenceList, referenceLen;
+	referenceLen := Length(reference);
+	if referenceLen > 255 then
+		referenceList := BigIntToListofInts(referenceLen);	
+		WriteByte(writer![1], 208); # 16+64+128
+		#writing the reference length as 4 bytes
+		WriteIntasBytes(writer![1], referenceList);
+	else
+		WriteByte(writer![1], 80); #16+64
+		WriteByte(writer![1], referenceLen);
+	fi;
+	WriteAll(writer![1], reference);
 end);
 
 
@@ -572,7 +585,7 @@ if HasOMReference( x ) and not SuppressOpenMathReferences then
    refStri := OMReference( x );
    refLength := Length(refStri); 
    if refLength > 255 then
-   	WriteByte (writer![1], 31+128);
+   	WriteByte (writer![1], 159); #31+128
    	lengthList := BigIntToListofInts(refLength);
 	WriteIntasBytes(writer![1], lengthList);
    else 

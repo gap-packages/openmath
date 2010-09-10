@@ -643,8 +643,8 @@ function( writer, r )
 if Length( IndeterminatesOfPolynomialRing( r ) ) = 1 then
 
   SetOMReference( r, Concatenation("polyring", RandomString(16) ) );
- # OMWriteLine( writer![1], [ "<OMA id=\"", OMReference( r ), "\" >" ] );
-  OMPutOMAWithId( writer![1], OMReference(r) );
+#  OMWriteLine( writer![1], [ "<OMA id=\"", OMReference( r ), "\" >" ] );
+  OMPutOMAWithId( writer, OMReference(r) );
   OMIndent := OMIndent + 1;
   OMPutSymbol( writer, "polyd1", "poly_ring_d_named" );
   OMPut( writer, CoefficientsRing( r ) );
@@ -655,7 +655,7 @@ else
 
   SetOMReference( r, Concatenation("polyring", RandomString(16) ) );
  # OMWriteLine( writer![1], [ "<OMA id=\"", OMReference( r ), "\" >" ] );
-  OMPutOMAWithId( writer![1], OMReference(r) );
+  OMPutOMAWithId( writer, OMReference(r) );
   OMIndent := OMIndent + 1;
   OMPutSymbol( writer, "polyd1", "poly_ring_d" );
   OMPut( writer, CoefficientsRing( r ) );
