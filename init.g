@@ -142,10 +142,12 @@ fi;
 
 #################################################
 # patch for HexStringBlist
+
+if VERSION <> "4.dev" then
+
 MakeReadWriteGlobal("HexStringBlist");
 
-BindGlobal("HexStringBlist",
-function ( b )
+HexStringBlist := function ( b )
    local  i, n, s;
    HexBlistSetup(  );
    n := Length( b );
@@ -164,7 +166,11 @@ function ( b )
    od;
    Append( s, HEXBYTES[PositionSorted( BLISTBYTES, b )] );
    return s;
-end);
+end;
+
+MakeReadOnlyGlobal("HexStringBlist");
+
+fi;
 
 
 #################################################################
