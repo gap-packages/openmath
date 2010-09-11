@@ -97,7 +97,7 @@ end);
 ##
 ##
 InstallMethod( OMPutOMAWithId, "to put Applications with Ids", true,
-[IsOpenMathXMLWriter , IsObject],0,
+[IsOpenMathXMLWriter, IsString],0,
 function(writer, reference)
   OMWriteLine( writer![1], [ "<OMA id=\"", reference, "\" >" ] );
 end);

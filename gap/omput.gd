@@ -139,6 +139,7 @@ DeclareOperation("OMPutVar", [ IsOpenMathWriter, IsObject ] );
 ##
 DeclareGlobalFunction("OMPutApplication");
 DeclareOperation("OMPutOMA",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutOMAWithId", [ IsOpenMathWriter , IsString ] );
 DeclareOperation("OMPutEndOMA", [ IsOpenMathWriter ] );
 
 
@@ -150,7 +151,6 @@ DeclareOperation("OMPutOMATTR",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutEndOMATTR",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutOMATP", [ IsOpenMathWriter ] );
 DeclareOperation("OMPutEndOMATP", [ IsOpenMathWriter ] );
-DeclareOperation("OMPutOMAWithId", [ IsOpenMathWriter , IsObject ] );
 
 
 #######################################################################

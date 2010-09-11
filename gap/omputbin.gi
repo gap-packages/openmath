@@ -399,7 +399,6 @@ function( writer, cd, name )
 end);
 
 
-
 #######################################################################
 ##
 #M  OMPutOMATTR
@@ -496,7 +495,7 @@ end);
 ##
 ##
 InstallMethod( OMPutOMAWithId, "to put Applications with Ids", true,
-[IsOpenMathBinaryWriter , IsObject],0,
+[IsOpenMathBinaryWriter , IsString],0,
 function(writer, reference)
 	local referenceList, referenceLen;
 	referenceLen := Length(reference);
