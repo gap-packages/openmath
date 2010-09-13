@@ -263,33 +263,45 @@ InstallMethod(OMPut, "for an integer to binary OpenMath", true,
 [ IsOpenMathBinaryWriter, IsInt ],0,
 function( writer, int )
 local intStri, intLength, intListLength;
-intStri := String(int);
+intStri := String(AbsInt(int));
 intLength := Length(intStri);
 
 if int >= -128 and int <= 127 then
 	WriteByte( writer![1], 1);
+	if int < 0 then
+		int := 256 + int;
+	fi;
 	WriteByte(writer![1], int);
 
 	
 elif int >= -2^31 and int <= 2^31-1 then
 	WriteByte( writer![1], 129); #1+128
+	if int < 0 then
+		int := 2^32 + int;
+	fi;
 	intListLength := BigIntToListofInts(int);
 	WriteIntasBytes(writer![1], intListLength);
 
 elif intLength >= 0 and intLength <= 255 then
 	WriteByte( writer![1], 2);	
 	WriteByte(writer![1], intLength);
-	WriteByte(writer![1], 43); #base 10 | sign +
-	WriteAll(writer![1], intStri);
-elif intLength > 255 then
-	WriteByte( writer![1], 130);#2+128
 	if int < 0 then
 		WriteByte(writer![1], 45); #base 10 | sign -
 	else
 		WriteByte(writer![1], 43); #base 10 | sign +	
 	fi;
+	WriteAll(writer![1], intStri);
+	
+elif intLength > 255 then
+	WriteByte( writer![1], 130);#2+128
 	intListLength := BigIntToListofInts(intLength);
 	WriteIntasBytes(writer![1], intListLength);
+	if int < 0 then
+		WriteByte(writer![1], 45); #base 10 | sign -
+	else
+		WriteByte(writer![1], 43); #base 10 | sign +	
+	fi;
+	
 	WriteAll(writer![1], intStri);
 fi;
 
