@@ -152,6 +152,30 @@ DeclareOperation("OMPutEndOMATTR",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutOMATP", [ IsOpenMathWriter ] );
 DeclareOperation("OMPutEndOMATP", [ IsOpenMathWriter ] );
 
+#######################################################################
+##
+#M  OMPutBinding( <stream>, <cd>, <name>, <listbvars>, <object> )
+##
+##  Input : cd, name, list of bvars, object
+##  Output:
+##        <OMBIND>
+##                <OMS cd=<cd> name=<name>/>
+##                OMPut(<list>[1])
+##                OMPut(<object)
+##                ...
+##        </OMBIND>
+##
+DeclareGlobalFunction("OMPutBinding");
+DeclareOperation("OMPutOMBIND",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutOMBINDWithId", [ IsOpenMathWriter , IsString ] );
+DeclareOperation("OMPutEndOMBIND", [ IsOpenMathWriter ] );
+
+#######################################################################
+##
+## Tags for binding vars
+##
+DeclareOperation("OMPutBVAR",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutEndBVAR",    [ IsOpenMathWriter ] );
 
 #######################################################################
 ##

@@ -52,6 +52,22 @@ end);
 
 #######################################################################
 #
+#  Returns a list with the number of falses specified, 
+#  if 0 then returns an empty list.
+BindGlobal( "CreateListWithFalses",
+function(numFalses) 
+	local listFalses;
+	listFalses := [];
+	while numFalses <> 0 do
+		Add(listFalses, false);
+		numFalses := numFalses -1;
+	od;
+	
+	return listFalses;
+end);
+
+#######################################################################
+#
 #  Writes 4 bytes given
 BindGlobal( "WriteIntasBytes",
 function( stream, listofInts )
@@ -70,7 +86,7 @@ local i, binStriLen;
 binStriLen := Length(binStri);
 i := 1;
 while binStri[i] <> '1' and i <= binStriLen do
-i := i +1;
+	i := i +1;
 od;
 
 return i;
@@ -429,6 +445,11 @@ function( writer )
 	WriteByte( writer![1], 19 );
 end);
 
+#######################################################################
+##
+#M  OMPutOMATP
+#M  OMPutEndOMATP
+##
 InstallMethod(OMPutOMATP, "to write OMATP in Binary OpenMath", true,
 [IsOpenMathBinaryWriter],0,
 function( writer )
@@ -441,6 +462,33 @@ function( writer )
 	WriteByte( writer![1], 21 );
 end);
 
+########################################################################
+##
+#M  OMPut( <OMWriter>, <bitList> )
+##
+##
+##
+InstallMethod(OMPut, "for a bit list to binary OpenMath", true,
+[IsOpenMathBinaryWriter, IsBlist ],0,
+function( writer, bitList )	
+	local bitListLength, bitListLengthList, tempList, numFalses, hexStri;
+	WriteByte(writer![1],4);
+	bitListLength := Length(bitList);
+	if bitListLength > 255 then
+		bitListLengthList := BigIntToListofInts(bitListLength);	
+		WriteByte(writer![1],132); #4+128
+		#writing the string length as 4 bytes
+		WriteIntasBytes(writer![1], bitListLengthList);
+	else
+		WriteByte(writer![1],4);
+		WriteByte(writer![1], bitListLength);
+	fi;
+	numFalses := 8 - bitListLength mod 8;
+	tempList := CreateListWithFalses(numFalses);
+	Append(tempList, bitList);
+	hexStri := HexStringBlist(tempList);
+	WriteHexStriAsBytes(hexStri);
+end);
 
 ########################################################################
 ##

@@ -35,6 +35,25 @@ end);
 
 #######################################################################
 ##
+#F  ReadTokensToBlist ( <stream> , <length>)
+##
+##  
+## 
+BindGlobal( "ReadTokensToBlist",
+function( stream , length)
+local bitList, hexNum, byte, i;
+bitList := [];
+i := 1;
+for i in [1..length] do
+hexNum := HexStringInt(ReadByte(stream));
+byte := BlistStringDecode(EnsureCompleteHexNum(hexNum));
+Append(bitList, byte);
+od;
+return bitList;
+end);
+
+#######################################################################
+##
 #F  GetObjLength ( <isLong> , <stream> )
 ##
 ##  Auxiliary function to get the length of an object. 
@@ -352,6 +371,33 @@ CreateRecordForeign := function(forStri, encStri, idStri)
 
 end;
 
+#######################################################################
+##
+#F  CreateRecordBlist ( <bitList>, <idStri>, <listLen> )
+##
+##  Auxiliary function to create a record representation of a blist
+##  
+##  Input: bitList, id, list length
+##  Output: record representation of a blist
+##
+CreateRecordBlist := function(bitList, idStri, listLen)
+	local symbolRecord, objectList, i;
+	objectList := [];
+	i:= 1;
+	symbolRecord := CreateRecordSym("list","list1",false);
+	Add(objectList, symbolRecord );
+	for i in [1..listLen] do
+		Add(objectList, CreateRecordSym(String(bitList[i]),"logic1", false ));
+	od;
+	if idStri <> false then
+		return CreateRecordApp(idStri, objectList); 
+	else
+		return CreateRecordApp(idStri, objectList); 
+	fi;
+	
+end;
+
+
 #CreateRecordCDBase := function(cdStri)
 #	return rec( attributes := rec( ), name := ERR_TAG, content := objectList);
 #end;
@@ -369,7 +415,7 @@ end;
 InstallGlobalFunction( GetNextTagObject,
 function(stream, isRecursiveCall)
 	local omObject, omSymbol, omObject2, token, objLength, sign, isLong, num, i, tempList, 
-	      basensign, base, curByte, objectStri, exponent, fraction, hasId, idLength, idStri, idStriAttrPairs, idBVars, cdStri, cdLength, encLength, encStri, objectList, treeObject;
+	      basensign, base, curByte, objectStri, exponent, fraction, hasId, idLength, idStri, idStriAttrPairs, idBVars, cdStri, cdLength, encLength, encStri, objectList, treeObject, bitList;
 		token := ReadByte(stream);
 
 		token := ToBlist(token);
@@ -567,7 +613,17 @@ function(stream, isRecursiveCall)
 		
 
 		elif (token = TYPE_BYTES) then
-			Error("Gap does not support byte arrays, sorry...");
+			objLength := GetObjLength(isLong, stream);
+			idStri := false;
+			if(hasId) then 
+				idStri := "";
+				idLength := GetObjLength(isLong, stream);
+				bitList := ReadTokensToBlist( stream, objLength);
+				idStri := ReadAllTokens(idLength, stream, false);	
+			else
+				bitList := ReadTokensToBlist( stream, objLength);
+			fi;	
+			treeObject := CreateRecordBlist(bitList, idStri, objLength);
 		
 		
 		elif (TYPE_FOREIGN = IntersectionBlist(token, TYPE_FOREIGN)) then
