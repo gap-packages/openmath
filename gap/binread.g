@@ -1,7 +1,3 @@
-##################	TO DO LOG	###########################
-
-#TODO: cdbase
-#TODO: arrays
 ############### Already Tested:
 #Small int
 #big int b10:OK b256:OK b16:ok isLong flag :OK all
@@ -11,8 +7,8 @@
 # symbols
 #variables
 #binding
-#TODO error , they work but gap does not recognise them, although they seem to agree with OM standards
-#checking id: ints: 
+#error
+
 
 #######################################################################
 ##
@@ -229,6 +225,23 @@ CreateRecordSym := function(stri, cdStri, idStri)
 	  	return rec( attributes := rec( cd := cdStri, name := stri, id := idStri ), name := SYM_TAG, content := 0);
 	else
 	  	return rec( attributes := rec( cd := cdStri, name := stri ), name := SYM_TAG, content := 0);
+	fi;
+end;
+
+#######################################################################
+##
+#F  CreateRecordObject ( <objectRecord>, <cdbase> )
+##
+##  Auxiliary function to create a record representation of an Object
+##  
+##  Input: 
+##  Output: record	
+##
+CreateRecordObject := function(objectRecord, cdBaseStri)
+	if cdBaseStri <> false then
+		return rec( attributes := rec( cdbase := cdBaseStri ), name := "OMOBJ", content :=[ objectRecord ]);
+	else
+		return rec( attributes := rec( ), name := "OMOBJ", content :=[ objectRecord ]);
 	fi;
 end;
 
@@ -460,7 +473,7 @@ function(stream, isRecursiveCall)
 				fi;	
 			fi;
 			treeObject:= CreateRecordInt(num, sign, idStri);
-
+			treeObject:= CreateRecordObject(treeObject, false);
 		
 		elif (token = TYPE_INT_BIG) then
 			num := 0;
@@ -514,7 +527,7 @@ function(stream, isRecursiveCall)
 				idStri := ReadAllTokens(idLength, stream, false);	
 			fi;
 			treeObject := CreateRecordInt(num, sign, idStri);
-		
+			treeObject:= CreateRecordObject(treeObject, false);
 					
 		elif (token = TYPE_OMFLOAT) then
 			idStri := false;
@@ -548,7 +561,8 @@ function(stream, isRecursiveCall)
 			num := 	Float(sign*2^(exponent - EXP_BIAS) * fraction*2^-52);
 			#call record creator and assign		
 			treeObject := CreateRecordFloat(num, idStri);
-
+			treeObject:= CreateRecordObject(treeObject, false);
+			
 		elif (token = TYPE_VARIABLE) then
 			objectStri := "";
 			objLength := GetObjLength(isLong, stream);
@@ -562,7 +576,7 @@ function(stream, isRecursiveCall)
 				objectStri := ReadAllTokens(objLength, stream, false);
 			fi;
 			treeObject := CreateRecordVar(objectStri, idStri);
-		
+			treeObject:= CreateRecordObject(treeObject, false);
 		
 		elif (token = TYPE_SYMBOL) then
 			objectStri := "";
@@ -581,7 +595,7 @@ function(stream, isRecursiveCall)
 				objectStri := ReadAllTokens(objLength, stream, false);
 			fi;
 			treeObject := CreateRecordSym(objectStri, cdStri, idStri);
-		
+			treeObject:= CreateRecordObject(treeObject, false);		
 
 		elif (token = TYPE_STRING_UTF) then
 			#must be twice the length as it is UTF-16 (each char takes 2 bytes, second byte being ignored)
@@ -596,7 +610,7 @@ function(stream, isRecursiveCall)
 				objectStri := ReadAllTokens(objLength, stream, true);
 			fi;
 			treeObject := CreateRecordString(objectStri, idStri);
-		
+			treeObject:= CreateRecordObject(treeObject, false);		
 		
 		elif (token = TYPE_STRING_ISO) then
 			objLength := GetObjLength(isLong, stream);
@@ -610,7 +624,7 @@ function(stream, isRecursiveCall)
 				objectStri := ReadAllTokens(objLength, stream, false);
 			fi;	
 			treeObject := CreateRecordString(objectStri, idStri);
-		
+			treeObject:= CreateRecordObject(treeObject, false);		
 
 		elif (token = TYPE_BYTES) then
 			objLength := GetObjLength(isLong, stream);
@@ -624,7 +638,7 @@ function(stream, isRecursiveCall)
 				bitList := ReadTokensToBlist( stream, objLength);
 			fi;	
 			treeObject := CreateRecordBlist(bitList, idStri, objLength);
-		
+			treeObject:= CreateRecordObject(treeObject, false);		
 		
 		elif (TYPE_FOREIGN = IntersectionBlist(token, TYPE_FOREIGN)) then
 			encLength := GetObjLength(isLong, stream);
@@ -640,6 +654,7 @@ function(stream, isRecursiveCall)
 				objectStri := ReadAllTokens(objLength, stream, false);	
 			fi;
 			treeObject := CreateRecordForeign(objectStri, encStri, idStri);
+			treeObject:= CreateRecordObject(treeObject, false);
 
 		elif (token = TYPE_APPLICATION) then
 			idStri := false;
@@ -659,7 +674,7 @@ function(stream, isRecursiveCall)
 				i := i+1;
 			od;
 			treeObject := CreateRecordApp(idStri, objectList);
-		
+			treeObject:= CreateRecordObject(treeObject, false);	
 
 		elif (token = TYPE_ATTRIBUTION) then
 			idStri := false;
@@ -717,7 +732,7 @@ function(stream, isRecursiveCall)
 			Add(objectList, omObject2);
 			#creating the final tree
 			treeObject := CreateRecordAtribution(objectList, idStri);			
-		
+			treeObject:= CreateRecordObject(treeObject, false);		
 			
 		elif (token = TYPE_ERROR) then		
 			idStri := false;
@@ -733,7 +748,7 @@ function(stream, isRecursiveCall)
 			Add(objectList, omObject);
 			#creating the final tree
 			treeObject := CreateRecordError(objectList, idStri);
-		
+			treeObject:= CreateRecordObject(treeObject, false);		
 		
 		elif (token = TYPE_BINDING) then
 			idStri := false;
@@ -786,16 +801,19 @@ function(stream, isRecursiveCall)
 			Add(objectList, treeObject);
 			Add(objectList, omObject2);
 			treeObject := CreateRecordBinding(objectList, idStri);
-		
+			treeObject:= CreateRecordObject(treeObject, false);
+					
 		elif (token = TYPE_REFERENCE_INT) then
 			objLength := GetObjLength(isLong, stream);
 			treeObject := CreateRecordReference(objLength, true);
-				
+			treeObject:= CreateRecordObject(treeObject, false);
+							
 		elif (token = TYPE_REFERENCE_EXT) then
 			objLength := GetObjLength(isLong, stream);
 			objectStri := ReadAllTokens(objLength, stream, false);
 			treeObject := CreateRecordReference(objectStri, false);
-		
+			treeObject:= CreateRecordObject(treeObject, false);
+					
 		elif (token = TYPE_BVARS) then
 			Error("Bvars token shouldn't be here'");
 		
@@ -805,8 +823,7 @@ function(stream, isRecursiveCall)
 			objLength := GetObjLength(isLong, stream);
 			objectStri := ReadAllTokens(objLength, stream, false);
 			treeObject := GetNextTagObject(stream);
-			treeObject.content[1].attributes.cdbase := objectStri;
-		
+			treeObject := CreateRecordObject(treeObject, objectStri);		
 		#END LINE CASES
 		elif (token = TYPE_APPLICATION_END) then		
 			return fail;

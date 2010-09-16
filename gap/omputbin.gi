@@ -44,16 +44,21 @@ end);
 
 #######################################################################
 #
-#  Checks whethere it is a real float
+#M  IsIntFloat( <object> )
+#
+#   Checks whethere it is a real float
 BindGlobal( "IsIntFloat",
 function(x) 
 	return Float(0) = x-Float(Int(x));
 end);
 
 #######################################################################
-#
-#  Returns a list with the number of falses specified, 
-#  if 0 then returns an empty list.
+##
+#M CreateListWithFalses( <integer> )
+##
+##  Returns a list with the number of falses specified, 
+##  if 0 then returns an empty list.
+##
 BindGlobal( "CreateListWithFalses",
 function(numFalses) 
 	local listFalses;
@@ -67,8 +72,12 @@ function(numFalses)
 end);
 
 #######################################################################
-#
-#  Writes 4 bytes given
+##
+#M  WriteIntasBytes( <stream>, <list> )
+##
+##  Writes an integer as four bytes given a list representing the integer,
+##  in binary and the stream
+##
 BindGlobal( "WriteIntasBytes",
 function( stream, listofInts )
 	WriteByte(stream, listofInts[1]);
@@ -78,8 +87,11 @@ function( stream, listofInts )
 end);
 
 #######################################################################
-#
-#  Obtains position of first 1 in binary string
+##
+#M  FindFirst1BinaryString( <string> )
+##
+##  Obtains position of first 1 in the binary string
+##  
 BindGlobal( "FindFirst1BinaryString",
 function( binStri )
 local i, binStriLen;
@@ -94,8 +106,10 @@ end);
 
 #######################################################################
 ##
-#M 
-#
+#M  WriteDecasHex( <float> ) 
+##
+##  Returns the decimal number in a hexadecimal representation
+##
 BindGlobal( "WriteDecasHex",
 function( decPart )
 local intPart, resultHex, number, i, zeroF;
@@ -119,7 +133,11 @@ end);
 
 #######################################################################
 ##
-#M 
+#M  WriteHexAsBin( <hexNum>, <bool> )
+##
+##  Returns the given hexadecimal number as a binary string. 
+##  Leading zeroes are included if the flag is set to TRUE.
+## 
 BindGlobal( "WriteHexAsBin",
 function( hexNum, withLeadingZeroes )
 local hexNumLen, binStri, num, charStri, counter, binArrayWithZeroes, binArrayNoLeadingZeroes;
@@ -147,7 +165,10 @@ end);
 
 #######################################################################
 ##
-#M 
+#M  WriteBinAsHex( <string> )
+##
+##  Returns the binary string passed as a hexadecimal number
+##
 BindGlobal( "WriteBinAsHex",
 function( binStri )
 local binStriLen, hexStri, counter, binArray,hexArray, limit, upper, lower;
@@ -196,7 +217,10 @@ end);
 
 #######################################################################
 ##
-#M 
+#M  WriteHexStriAsBytes( <string>, <stream> )
+##
+##  Writes the hexadecimal string to the stream as bytes. 
+##
 BindGlobal( "WriteHexStriAsBytes",
 function( hexStri, stream )
 local hexStriLen, intValue, upper, lower;
@@ -214,7 +238,9 @@ end);
 
 #######################################################################
 ##
-#M 
+#M  WriteBinStringsAsBytes( <)
+##
+## 
 BindGlobal( "WriteBinStringsAsBytes",
 function( sign, exponent, mantissa , stream)
 local  exponentLen, mantissaLen, firstPart, secondPart, numbZeroes, hexStri;

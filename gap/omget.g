@@ -49,7 +49,7 @@ function( stream )
     if firstbyte = 24 then 
   	    # Binary encoding
  	    gap_obj := GetNextObject( stream, firstbyte );
-     	gap_obj := OMParseXmlObj( gap_obj );
+     	gap_obj := OMParseXmlObj( gap_obj.content[1] );
         return gap_obj;
     else        
      	# XML encoding
