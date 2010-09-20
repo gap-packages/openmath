@@ -399,6 +399,7 @@ CreateRecordBlist := function(bitList, idStri, listLen)
 	i:= 1;
 	symbolRecord := CreateRecordSym("list","list1",false);
 	Add(objectList, symbolRecord );
+	listLen := listLen*8;
 	for i in [1..listLen] do
 		Add(objectList, CreateRecordSym(String(bitList[i]),"logic1", false ));
 	od;
@@ -629,7 +630,8 @@ function(stream, isRecursiveCall)
 				idStri := ReadAllTokens(idLength, stream, false);	
 			else
 				bitList := ReadTokensToBlist( stream, objLength);
-			fi;	
+			fi;
+			#Error("stop\n");	
 			treeObject := CreateRecordBlist(bitList, idStri, objLength);
 		
 		elif token = TYPE_FOREIGN then
