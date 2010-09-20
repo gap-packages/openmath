@@ -40,9 +40,8 @@ BindGlobal( "OMObjects",
 
     # Basic OpenMath objects
 
-
   OMB := function ( node )
-        Error( "GAP doesn't support byte arrays." );
+        return node.content[1].content;
     end,
 
 

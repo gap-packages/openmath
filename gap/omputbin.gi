@@ -61,13 +61,11 @@ end);
 ##
 BindGlobal( "CreateListWithFalses",
 function(numFalses) 
-	local listFalses;
+	local listFalses, i;
 	listFalses := [];
-	while numFalses <> 0 do
-		Add(listFalses, false);
-		numFalses := numFalses -1;
-	od;
-	
+	for i in [1..numFalses] do
+        listFalses[i]:=false;
+    od;
 	return listFalses;
 end);
 

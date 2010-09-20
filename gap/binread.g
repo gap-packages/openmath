@@ -394,20 +394,22 @@ end;
 ##  Output: record representation of a blist
 ##
 CreateRecordBlist := function(bitList, idStri, listLen)
-	local symbolRecord, objectList, i;
-	objectList := [];
-	i:= 1;
-	symbolRecord := CreateRecordSym("list","list1",false);
-	Add(objectList, symbolRecord );
-	listLen := listLen*8;
-	for i in [1..listLen] do
-		Add(objectList, CreateRecordSym(String(bitList[i]),"logic1", false ));
-	od;
-	if idStri <> false then
-		return CreateRecordApp(idStri, objectList); 
-	else
-		return CreateRecordApp(idStri, objectList); 
-	fi;
+    return rec( attributes := rec( ), name := "OMB", 
+      content := [ rec( name:="PCDATA", content:=bitList) ] );
+	# local symbolRecord, objectList, i;
+	# objectList := [];
+	# i:= 1;
+	# symbolRecord := CreateRecordSym("list","list1",false);
+	# Add(objectList, symbolRecord );
+	# listLen := listLen*8;
+	# for i in [1..listLen] do
+		# Add(objectList, CreateRecordSym(String(bitList[i]),"logic1", false ));
+	# od;
+	# if idStri <> false then
+		# return CreateRecordApp(idStri, objectList); 
+	# else
+		# return CreateRecordApp(idStri, objectList); 
+	# fi;
 	
 end;
 

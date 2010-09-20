@@ -26,8 +26,9 @@ InstallGlobalFunction( OMParseXmlObj,
         Error( "unknown OpenMath object ", node.name );
     fi;
 
-    if IsBound( node.content ) and IsList( node.content ) and 
-                not (node.name = "OMSTR" or node.name = "OMI")  then
+    if IsBound( node.content ) and 
+       IsList( node.content ) and 
+        not (node.name = "OMSTR" or node.name = "OMI" or node.name = "OMB")  then
         node.content := Filtered( node.content, OMIsNotDummyLeaf );
     fi;
     obj := OMObjects.(node.name)( node );
