@@ -155,6 +155,45 @@ function( writer )
 	OMWriteLine( writer![1], [ "</OMATP>" ] );
 end);
 
+
+#######################################################################
+##
+#M  OMPutOMBIND
+#M  OMPutEndOMBIND
+##
+InstallMethod(OMPutOMBIND, "to write OMBIND in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+	OMWriteLine( writer![1], [ "<OMBIND>" ] );
+    OMIndent := OMIndent + 1;
+end);
+
+InstallMethod(OMPutEndOMBIND, "to write /OMBIND in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	OMWriteLine( writer![1], [ "</OMBIND>" ] );
+end);
+
+#######################################################################
+##
+#M  OMPutOMBVAR
+#M  OMPutEndOMBVAR
+##
+InstallMethod(OMPutOMBVAR, "to write OMBVAR in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+	OMWriteLine( writer![1], [ "<OMBVAR>" ] );
+    OMIndent := OMIndent + 1;
+end);
+
+InstallMethod(OMPutEndOMBVAR, "to write /OMBVAR in XML OpenMath", true,
+[IsOpenMathXMLWriter],0,
+function( writer )
+    OMIndent := OMIndent - 1;
+	OMWriteLine( writer![1], [ "</OMBVAR>" ] );
+end);
+
 #######################################################################
 ##
 #M  OMPutOME

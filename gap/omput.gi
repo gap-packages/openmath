@@ -431,9 +431,23 @@ function(writer, x)
         OMPutSymbol( writer, "setname1", "Q" );
 end);
 
+#######################################################################
+##
+#F  OMPutListVar( <stream>, <list> )  
+##
+##
+BindGlobal("OMPutListVar", 
+function(writer, x)
+  local i;
+  OMPutOMA( writer );
+    OMPutSymbol( writer, "list1", "list" );
+    for i in x do
+      OMPutVar(writer, i); 
+    od;
+  OMPutEndOMA( writer );
+end);
 
-
-
+#TODO this has been commented to test OMPut for Byte arrays
 #######################################################################
 ##
 #M  OMPut( <OMWriter>, <list> )  
@@ -442,13 +456,13 @@ end);
 ##
 ## 
 
-InstallMethod(OMPut, "for a finite list or collection", true,
-[IsOpenMathWriter, IsListOrCollection and IsFinite], 0,
-function(writer, x)
+#InstallMethod(OMPut, "for a finite list or collection", true,
+#[IsOpenMathWriter, IsListOrCollection and IsFinite], 0,
+#function(writer, x)
 
-  OMPutApplication( writer, "list1", "list", x );
+#  OMPutApplication( writer, "list1", "list", x );
 
-end);
+#end);
 
 
 #######################################################################
@@ -628,6 +642,46 @@ end);
 #	OMPutEndOMA(writer);
 #fi;                  
 #end);
+
+#######################################################################
+##
+#M  OMPut( <stream>, <hasse diagram> )
+##
+## Addendum to GAP OpenMath phrasebook.
+##
+InstallMethod(OMPut, "for a Hasse diagram", true,
+[IsOpenMathWriter,IsHasseDiagram],0,
+function(writer, x)
+	local d, i;
+	d := UnderlyingDomainOfBinaryRelation(x);
+#	OMWriteLine(writer![1], ["<OMBIND>"]);
+	OMPutOMBIND(writer);
+	OMIndent := OMIndent +1;
+	OMPutSymbol(writer, "fns2", "constant");
+#	OMWriteLine(writer![1], ["<OMBVAR>"]);
+	OMPutOMBVAR(writer);
+	OMIndent := OMIndent +1;
+	for i in d do
+		OMPutVar(writer, i);
+	od;
+	OMIndent := OMIndent -1;
+#	OMWriteLine(writer![1], ["</OMBVAR>"]);
+	OMPutEndOMBVAR(writer);
+    OMPutOMA( writer );
+	OMPutSymbol(writer, "relation2", "hasse_diagram");
+	
+	for i in d do
+        OMPutOMA( writer );
+		OMPutSymbol(writer, "list1", "list");
+		OMPutVar(writer, i);
+		OMPutListVar(writer, ImagesElm(x, i));
+        OMPutEndOMA( writer );
+	od;
+    OMPutEndOMA( writer );
+	OMIndent := OMIndent -1;
+#	OMWriteLine(writer![1], ["</OMBIND>"]);
+	OMPutEndOMBIND(writer);
+end);
 
 
 #############################################################################

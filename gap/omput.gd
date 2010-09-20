@@ -165,7 +165,7 @@ DeclareOperation("OMPutEndOMATP", [ IsOpenMathWriter ] );
 ##                ...
 ##        </OMBIND>
 ##
-DeclareGlobalFunction("OMPutBinding");
+#DeclareGlobalFunction("OMPutBinding");
 DeclareOperation("OMPutOMBIND",    [ IsOpenMathWriter ] );
 DeclareOperation("OMPutOMBINDWithId", [ IsOpenMathWriter , IsString ] );
 DeclareOperation("OMPutEndOMBIND", [ IsOpenMathWriter ] );
@@ -174,8 +174,8 @@ DeclareOperation("OMPutEndOMBIND", [ IsOpenMathWriter ] );
 ##
 ## Tags for binding vars
 ##
-DeclareOperation("OMPutBVAR",    [ IsOpenMathWriter ] );
-DeclareOperation("OMPutEndBVAR",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutOMBVAR",    [ IsOpenMathWriter ] );
+DeclareOperation("OMPutEndOMBVAR",    [ IsOpenMathWriter ] );
 
 #######################################################################
 ##

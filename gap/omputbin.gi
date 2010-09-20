@@ -488,6 +488,41 @@ function( writer )
 	WriteByte( writer![1], 21 );
 end);
 
+#######################################################################
+##
+#M  OMPutOMBIND
+#M  OMPutEndOMBIND
+##
+InstallMethod(OMPutOMBIND, "to write OMBIND in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+	WriteByte( writer![1], 26 );
+end);
+
+InstallMethod(OMPutEndOMBIND, "to write /OMBIND in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+	WriteByte( writer![1], 27 );
+end);
+
+#######################################################################
+##
+#M  OMPutOMBVAR
+#M  OMPutEndOMBVAR
+##
+InstallMethod(OMPutOMBVAR, "to write OMBVAR in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+	WriteByte( writer![1], 28 );
+end);
+
+InstallMethod(OMPutEndOMBVAR, "to write /OMBVAR in Binary OpenMath", true,
+[IsOpenMathBinaryWriter],0,
+function( writer )
+	WriteByte( writer![1], 29 );
+end);
+
+
 ########################################################################
 ##
 #M  OMPut( <OMWriter>, <bitList> )
@@ -495,25 +530,39 @@ end);
 ##
 ##
 InstallMethod(OMPut, "for a bit list to binary OpenMath", true,
-[IsOpenMathBinaryWriter, IsBlist ],0,
+[IsOpenMathBinaryWriter, IsBlistRep ],0,
 function( writer, bitList )	
-	local bitListLength, bitListLengthList, tempList, numFalses, hexStri;
-	WriteByte(writer![1],4);
+	local numBytesLength,bitListLength, tempList, numFalses, hexStri, numBytes, quoVal, modVal;
+	Print("in blist binary\n");
 	bitListLength := Length(bitList);
-	if bitListLength > 255 then
-		bitListLengthList := BigIntToListofInts(bitListLength);	
+	quoVal := QuoInt(bitListLength,8);
+	modVal := bitListLength mod 8;
+	if quoVal = 0 then
+		numBytes := 1;
+		numFalses := 8 - bitListLength;
+	else	
+		if modVal <> 0 then
+			numBytes := quoVal +1;
+			numFalses := 8 - modVal;
+		else
+			numBytes := quoVal;
+			numFalses := 0;
+		fi;
+	fi;
+	if numBytes > 255 then
+		numBytesLength := BigIntToListofInts(numBytes);	
 		WriteByte(writer![1],132); #4+128
 		#writing the string length as 4 bytes
-		WriteIntasBytes(writer![1], bitListLengthList);
+		WriteIntasBytes(writer![1], numBytesLength);
 	else
 		WriteByte(writer![1],4);
-		WriteByte(writer![1], bitListLength);
+		WriteByte(writer![1], numBytes);
 	fi;
-	numFalses := 8 - bitListLength mod 8;
+	#Error("stop2");
 	tempList := CreateListWithFalses(numFalses);
 	Append(tempList, bitList);
 	hexStri := HexStringBlist(tempList);
-	WriteHexStriAsBytes(hexStri);
+	WriteHexStriAsBytes(hexStri, writer![1]);
 end);
 
 ########################################################################

@@ -135,10 +135,10 @@ OMSTR := function ( node )
   OMBIND := function ( node )
     local  OMBVAR, string, i;
 
-        if not (node.content[1].attributes.cd = "fns1" and node.content[1].attributes.name = "lambda" and
-            node.content[1].name = "OMS" and node.content[2].name = "OMBVAR" )  then
-            Error( "this binding is unimplemented" );
-        fi;
+#        if not (node.content[1].attributes.cd = "fns1" and node.content[1].attributes.name = "lambda" and
+#            node.content[1].name = "OMS" and node.content[2].name = "OMBVAR" )  then
+#            Error( "this binding is unimplemented" );
+#        fi;
 
         node.content[2].content := Filtered( node.content[2].content, OMIsNotDummyLeaf );
         if IsList( node.content[3].content )  then

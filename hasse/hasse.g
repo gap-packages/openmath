@@ -93,59 +93,8 @@ CreateHasseDiagram := function(f, le)
 end;
 
 
-#######################################################################
-##
-#F  OMPutListVar( <stream>, <list> )  
-##
-##
-BindGlobal("OMPutListVar", 
-function(writer, x)
-  local i;
-  OMPutOMA( writer );
-    OMPutSymbol( writer, "list1", "list" );
-    for i in x do
-      OMPutVar(writer, i); 
-    od;
-  OMPutEndOMA( writer );
-end);
 
 
-#######################################################################
-##
-#M  OMPut( <stream>, <hasse diagram> )
-##
-## Addendum to GAP OpenMath phrasebook.
-##
-InstallMethod(OMPut, "for a Hasse diagram", true,
-[IsOpenMathWriter,IsHasseDiagram],0,
-function(writer, x)
-	local d, i;
-	d := UnderlyingDomainOfBinaryRelation(x);
-	OMWriteLine(writer![1], ["<OMBIND>"]);
-	OMIndent := OMIndent +1;
-	OMPutSymbol(writer, "fns2", "constant");
-	OMWriteLine(writer![1], ["<OMBVAR>"]);
-	OMIndent := OMIndent +1;
-	for i in d do
-		OMPutVar(writer, i);
-	od;
-	OMIndent := OMIndent -1;
-	OMWriteLine(writer![1], ["</OMBVAR>"]);
-
-    OMPutOMA( writer );
-	OMPutSymbol(writer, "relation2", "hasse_diagram");
-	
-	for i in d do
-        OMPutOMA( writer );
-		OMPutSymbol(writer, "list1", "list");
-		OMPutVar(writer, i);
-		OMPutListVar(writer, ImagesElm(x, i));
-        OMPutEndOMA( writer );
-	od;
-    OMPutEndOMA( writer );
-	OMIndent := OMIndent -1;
-	OMWriteLine(writer![1], ["</OMBIND>"]);
-end);
 
 
 BindGlobal( "OMDirectoryTemporary", DirectoryTemporary() );
