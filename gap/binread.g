@@ -393,23 +393,13 @@ end;
 ##  Input: bitList, id, list length
 ##  Output: record representation of a blist
 ##
-CreateRecordBlist := function(bitList, idStri, listLen)
-    return rec( attributes := rec( ), name := "OMB", 
-      content := [ rec( name:="PCDATA", content:=bitList) ] );
-	# local symbolRecord, objectList, i;
-	# objectList := [];
-	# i:= 1;
-	# symbolRecord := CreateRecordSym("list","list1",false);
-	# Add(objectList, symbolRecord );
-	# listLen := listLen*8;
-	# for i in [1..listLen] do
-		# Add(objectList, CreateRecordSym(String(bitList[i]),"logic1", false ));
-	# od;
-	# if idStri <> false then
-		# return CreateRecordApp(idStri, objectList); 
-	# else
-		# return CreateRecordApp(idStri, objectList); 
-	# fi;
+CreateRecordBlist := function(bitList, idStri)
+	
+	if idStri <> false then
+	    return rec( attributes := rec( id:= idStri ), name := "OMB", content := [ rec( name:="PCDATA", content:=bitList) ] );
+	else
+	    return rec( attributes := rec( ), name := "OMB", content := [ rec( name:="PCDATA", content:=bitList) ] );
+	fi;
 	
 end;
 
@@ -633,8 +623,7 @@ function(stream, isRecursiveCall)
 			else
 				bitList := ReadTokensToBlist( stream, objLength);
 			fi;
-			#Error("stop\n");	
-			treeObject := CreateRecordBlist(bitList, idStri, objLength);
+			treeObject := CreateRecordBlist(bitList, idStri);
 		
 		elif token = TYPE_FOREIGN then
 			encLength := GetObjLength(isLong, stream);
@@ -847,7 +836,6 @@ function(stream, isRecursiveCall)
 			treeObject:= CreateRecordObject(treeObject, false);
 		fi;
 
-	Print(treeObject);
 	return treeObject;	
 end);
 

@@ -198,6 +198,14 @@ DeclareAttribute( "OMReference", IsObject );
 
 DeclareOperation( "OMPutReference", [ IsOpenMathWriter, IsObject ] );
 
+#######################################################################
+##
+#O  OMPutByteArray( <stream>, <bitlist> ) 
+## 
+##  Put bitlists into byte arrays
+##
+DeclareOperation("OMPutByteArray", [ IsOpenMathBinaryWriter, IsBlistRep ]);
+
 
 #######################################################################
 ##

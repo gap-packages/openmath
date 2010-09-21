@@ -447,7 +447,6 @@ function(writer, x)
   OMPutEndOMA( writer );
 end);
 
-#TODO this has been commented to test OMPut for Byte arrays
 #######################################################################
 ##
 #M  OMPut( <OMWriter>, <list> )  
@@ -456,13 +455,15 @@ end);
 ##
 ## 
 
-#InstallMethod(OMPut, "for a finite list or collection", true,
-#[IsOpenMathWriter, IsListOrCollection and IsFinite], 0,
-#function(writer, x)
-
-#  OMPutApplication( writer, "list1", "list", x );
-
-#end);
+InstallMethod(OMPut, "for a finite list or collection", true,
+[IsOpenMathWriter, IsListOrCollection and IsFinite], 0,
+function(writer, x)
+  if IsBlist(x) then
+    OMPutByteArray( writer, x);
+  else
+    OMPutApplication( writer, "list1", "list", x );
+  fi;
+end);
 
 
 #######################################################################

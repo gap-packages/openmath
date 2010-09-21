@@ -523,15 +523,14 @@ end);
 
 ########################################################################
 ##
-#M  OMPut( <OMWriter>, <bitList> )
+#M  OMPutByteArray( <OMWriter>, <bitList> )
 ##
 ##
 ##
-InstallMethod(OMPut, "for a bit list to binary OpenMath", true,
+InstallMethod(OMPutByteArray, "for a bit list to binary OpenMath", true,
 [IsOpenMathBinaryWriter, IsBlistRep ],0,
 function( writer, bitList )	
-	local numBytesLength,bitListLength, tempList, numFalses, hexStri, numBytes, quoVal, modVal;
-	Print("in blist binary\n");
+	local numBytesLength, bitListLength, tempList, numFalses, hexStri, numBytes, quoVal, modVal;
 	bitListLength := Length(bitList);
 	quoVal := QuoInt(bitListLength,8);
 	modVal := bitListLength mod 8;
@@ -556,7 +555,6 @@ function( writer, bitList )
 		WriteByte(writer![1],4);
 		WriteByte(writer![1], numBytes);
 	fi;
-	#Error("stop2");
 	tempList := CreateListWithFalses(numFalses);
 	Append(tempList, bitList);
 	hexStri := HexStringBlist(tempList);
