@@ -60,11 +60,5 @@ fi;
 ReadPackage("openmath", "/gap/lex.g");
 ReadPackage("openmath", "/gap/parse.gi");
 
-# test for existence of the compiled binary
-if Filename(DirectoriesPackagePrograms("openmath"), "gpipe") = fail  then
-    Info( InfoWarning, 1,
-     "Warning: package openmath, the program `gpipe' is not compiled." );
-fi;
-
 #############################################################################
 #E
