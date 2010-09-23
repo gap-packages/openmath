@@ -527,10 +527,11 @@ end);
 ##
 ##
 ##
-InstallMethod(OMPutByteArray, "for a bit list to binary OpenMath", true,
-[IsOpenMathBinaryWriter, IsBlistRep ],0,
+InstallGlobalFunction(OMPutByteArray,
 function( writer, bitList )	
-	local numBytesLength, bitListLength, tempList, numFalses, hexStri, numBytes, quoVal, modVal;
+  # TODO: fill the 2nd branch and move this function to omput.gi 
+  local numBytesLength, bitListLength, tempList, numFalses, hexStri, numBytes, quoVal, modVal;
+  if IsOpenMathBinaryWriter(writer)  then	
 	bitListLength := Length(bitList);
 	quoVal := QuoInt(bitListLength,8);
 	modVal := bitListLength mod 8;
@@ -559,7 +560,11 @@ function( writer, bitList )
 	Append(tempList, bitList);
 	hexStri := HexStringBlist(tempList);
 	WriteHexStriAsBytes(hexStri, writer![1]);
+else
+  Error("Bytearrays are not supported in the XML mode yet!");
+fi;
 end);
+
 
 ########################################################################
 ##

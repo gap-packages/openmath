@@ -204,7 +204,7 @@ DeclareOperation( "OMPutReference", [ IsOpenMathWriter, IsObject ] );
 ## 
 ##  Put bitlists into byte arrays
 ##
-DeclareOperation("OMPutByteArray", [ IsOpenMathBinaryWriter, IsBlistRep ]);
+DeclareGlobalFunction("OMPutByteArray");
 
 
 #######################################################################
