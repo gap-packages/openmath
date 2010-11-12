@@ -20,8 +20,7 @@ Revision.("openmath/gap/omput.gi") :=
 #
 # Functions and methods for OpenMathWriter
 #
-InstallGlobalFunction( OpenMathBinaryWriter,
-function( stream )
+InstallGlobalFunction( OpenMathBinaryWriter, function( stream )
 if IsStream( stream ) then
     return Objectify( OpenMathBinaryWriterType, [ stream ] );
 else
@@ -29,8 +28,7 @@ else
 fi;                    
 end);
 
-InstallGlobalFunction( OpenMathXMLWriter,
-function( stream )
+InstallGlobalFunction( OpenMathXMLWriter, function( stream )
 if IsStream( stream ) then
     return Objectify( OpenMathXMLWriterType, [ stream ] );
 else
@@ -73,8 +71,7 @@ end);
 # if GAP is started with "gap -r -A" and then LoadPackage("scscp");
 # is entered.
 #
-BindGlobal( "RandomString",
-    function( n )
+BindGlobal( "RandomString", function( n )
     local symbols, i;
     symbols := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
     if IsBound( OpenMathRealRandomSource ) then 
@@ -108,8 +105,7 @@ BindGlobal( "RandomString",
 ##                ...
 ##        </OMA>
 ##
-InstallGlobalFunction(OMPutError,
-function ( writer, cd, name, list )
+InstallGlobalFunction(OMPutError, function ( writer, cd, name, list )
     local  obj;
     OMPutOME( writer );
     OMPutSymbol( writer, cd, name );
@@ -133,8 +129,7 @@ end);
 ##                ...
 ##        </OMA>
 ##
-InstallGlobalFunction(OMPutApplication,
-function ( writer, cd, name, list )
+InstallGlobalFunction(OMPutApplication, function ( writer, cd, name, list )
     local  obj;
     OMPutOMA( writer );
     OMPutSymbol( writer, cd, name );
@@ -150,8 +145,7 @@ end);
 #F  OMPutObject( <OMWriter>, <obj> ) 
 ##
 ##
-InstallGlobalFunction(OMPutObject,
-function( writer, x )
+InstallGlobalFunction(OMPutObject, function( writer, x )
 
 	if IsClosedStream( writer![1] )  then
 		Error( "closed stream" );
@@ -172,8 +166,7 @@ end);
 #F  OMPutObjectNoOMOBJtags( <OMWriter>, <obj> ) 
 ##
 ##
-InstallGlobalFunction(OMPutObjectNoOMOBJtags,
-function( writer, x )
+InstallGlobalFunction(OMPutObjectNoOMOBJtags, function( writer, x )
 
 	if IsClosedStream( writer![1] )  then
 		Error( "closed stream" );
@@ -196,8 +189,7 @@ end);
 #F  OMPrint( <obj> ) .......................   Print <obj> as OpenMath object
 ##
 ##
-InstallGlobalFunction( OMPrint,
-function( arg )
+InstallGlobalFunction( OMPrint, function( arg )
 	local str, outstream, writer;
 	str := "";
 	outstream := OutputTextString(str, true);
@@ -218,8 +210,7 @@ end);
 ## 
 ## OMString( <obj> ) ............ Return string with <obj> as OpenMath object
 ##
-InstallGlobalFunction( OMString,
-function ( x )
+InstallGlobalFunction( OMString, function ( x )
 local noomobj, str, outstream;
 if ValueOption("noomobj") <> fail then
     noomobj := true;
@@ -436,8 +427,7 @@ end);
 #F  OMPutListVar( <stream>, <list> )  
 ##
 ##
-BindGlobal("OMPutListVar", 
-function(writer, x)
+BindGlobal("OMPutListVar", function(writer, x)
   local i;
   OMPutOMA( writer );
     OMPutSymbol( writer, "list1", "list" );
@@ -847,8 +837,7 @@ end);
 #
 BindGlobal( "OpenMathDefaultPolynomialRing", [ ] );
 
-BindGlobal( "SetOpenMathDefaultPolynomialRing",
-    function( R )
+BindGlobal( "SetOpenMathDefaultPolynomialRing", function( R )
     if not IsPolynomialRing(R) then
     	Error("The argument must be a polynomial ring\n");
     fi;

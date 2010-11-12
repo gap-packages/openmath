@@ -32,8 +32,7 @@ Revision.("openmath/gap/omget.g") :=
 
 
 
-InstallGlobalFunction(OMGetObject,
-function( stream )
+InstallGlobalFunction(OMGetObject, function( stream )
     local
         fromgap, firstbyte, gap_obj, # string
         success; # whether PipeOpenMathObject worked

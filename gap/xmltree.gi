@@ -18,8 +18,7 @@ Revision.("openmath/gap/xmltree.gi") :=
     "@(#)$Id$";
 
 
-InstallGlobalFunction( OMParseXmlObj, 
-    function ( node )
+InstallGlobalFunction( OMParseXmlObj, function ( node )
     local obj;
 
     if not IsBound( OMObjects.(node.name) )  then
@@ -43,8 +42,7 @@ end );
 
 
 
-InstallGlobalFunction( OMgetObjectXMLTree,
-    function ( string )
+InstallGlobalFunction( OMgetObjectXMLTree, function ( string )
     local  node;
 
     # TODO: this maybe be reset in the middle of the session

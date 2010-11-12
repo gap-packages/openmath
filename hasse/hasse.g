@@ -100,8 +100,7 @@ end;
 BindGlobal( "OMDirectoryTemporary", DirectoryTemporary() );
 
 
-BindGlobal("DrawHasse", 
-function(h)
+BindGlobal("DrawHasse", function(h)
 
 	local output, filename;
 

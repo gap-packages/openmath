@@ -16,8 +16,7 @@
 ##
 ##  Completes a hexadecimal number to a byte size multiple
 ## 
-BindGlobal( "EnsureCompleteHexNum",
-function( hexNum )
+BindGlobal( "EnsureCompleteHexNum", function( hexNum )
 local hexNumLen, binStri, num, charStri, counter;
 hexNumLen := Length(hexNum);
 binStri := "0";
@@ -35,8 +34,7 @@ end);
 ##
 ##  
 ## 
-BindGlobal( "ReadTokensToBlist",
-function( stream , length)
+BindGlobal( "ReadTokensToBlist", function( stream , length)
 local bitList, hexNum, byte, i;
 bitList := [];
 i := 1;
@@ -848,8 +846,7 @@ end);
 ##  
 ##  Input: stream, firstbyte: start token (int)
 ##  Output: object record	
-InstallGlobalFunction( GetNextObject,
-function( stream, firstbyte )
+InstallGlobalFunction( GetNextObject, function( stream, firstbyte )
 	local btoken;
 	# firstbyte contains the start token
 	btoken := ToBlist(firstbyte);

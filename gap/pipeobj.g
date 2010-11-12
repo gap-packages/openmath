@@ -24,8 +24,7 @@ Revision.("openmath/gap/pipeobj.g") :=
 ##  Reads and returns next non-space byte from input stream
 ##  returning the associated character.
 ##
-BindGlobal("ReadCharSkipSpace", 
-function(input)
+BindGlobal("ReadCharSkipSpace", function(input)
 	local
 		b,	# byte
 		c;  # character
@@ -47,8 +46,7 @@ end);
 ##
 ##  Reads and returns next byte as a character.
 ##
-BindGlobal("ReadChar", 
-function(input)
+BindGlobal("ReadChar", function(input)
 	local
 		b,	# byte
 		c;  # character
@@ -76,8 +74,7 @@ BindGlobal("CharIsSpace", c -> c in  [' ','\n','\t']);
 ##  Read a tag of the form < tag >
 ##  return "<tag>" - no spaces
 ##
-BindGlobal("ReadTag", 
-function(input,firstbyte)
+BindGlobal("ReadTag", function(input,firstbyte)
 	local
 		s,	# the string to return	
 		c,  # the character read
@@ -152,8 +149,7 @@ end);
 ##  and terminates with "<\OMOBJ>" unless it is inside
 ##  a comment "<!-- -->".
 ##
-BindGlobal("PipeOpenMathObject",
-function(input,output,firstbyte)
+BindGlobal("PipeOpenMathObject", function(input,output,firstbyte)
 
 	local
 		s,	# string

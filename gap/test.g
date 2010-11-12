@@ -24,8 +24,7 @@ Revision.("openmath/tst/test.g") :=
 ##  Converts to XML OpenMath and back. 
 ##  Returns true iff <object> is unchanged.
 ##
-InstallGlobalFunction(OMTestXML,
-function(o)
+InstallGlobalFunction(OMTestXML, function(o)
 
 	local
 		p,	# the object retrieved
@@ -54,8 +53,7 @@ end);
 ##  Converts to binary OpenMath and back. 
 ##  Returns true iff <object> is unchanged.
 ##
-InstallGlobalFunction(OMTestBinary,
-function(o)
+InstallGlobalFunction(OMTestBinary, function(o)
 
 	local
 		p,	# the object retrieved

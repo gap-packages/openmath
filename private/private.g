@@ -28,18 +28,13 @@ BindGlobal("OMgapNthRootOfUnity",
 ## 
 
 ## quit
-BindGlobal("OMgapQuitFunc",
-function()
-	return fail;
-end);
+BindGlobal("OMgapQuitFunc", function() return fail; end);
 
-BindGlobal("OMgapQuit",
-	x->OMgapQuitFunc());
+BindGlobal("OMgapQuit", x->OMgapQuitFunc());
 
 
 ## assign
-BindGlobal("OMgapAssignFunc",
-function(varname, obj)
+BindGlobal("OMgapAssignFunc", function(varname, obj)
 	if IsBoundGlobal(varname) then
 		UnbindGlobal(varname);
 	fi;
@@ -54,8 +49,7 @@ BindGlobal("OMgapAssign",
 
 
 ## retrieve
-BindGlobal("OMgapRetrieveFunc",
-function(varname)
+BindGlobal("OMgapRetrieveFunc", function(varname)
 	if ValueGlobal(varname) = fail then
 		return false;
 	else
@@ -70,8 +64,7 @@ BindGlobal("OMgapRetrieve",
 ## native_statement and error
 OM_GAP_OUTPUT_STR := "";
 OM_GAP_ERROR_STR := "";
-BindGlobal("OMgapNativeStatementFunc",
-function(statement)
+BindGlobal("OMgapNativeStatementFunc", function(statement)
 	local i, result;
 
 	OM_GAP_ERROR_STR := "";
@@ -104,16 +97,14 @@ end);
 BindGlobal("OMgapNativeStatement",
 	x->OMgapId([OMgap1ARGS(x), OMgapNativeStatementFunc(x[1])])[2]);
 
-BindGlobal("OMgapNativeErrorFunc",
-function()
+BindGlobal("OMgapNativeErrorFunc", function()
 	return OM_GAP_ERROR_STR; # near as possible to the empty object
 end);
 
 BindGlobal("OMgapNativeError",
 	x->OMgapId(OMgapNativeErrorFunc()));
 
-BindGlobal("OMgapNativeOutputFunc",
-function()
+BindGlobal("OMgapNativeOutputFunc", function()
 	return OM_GAP_OUTPUT_STR; # near as possible to the empty object
 end);
 

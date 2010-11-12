@@ -42,8 +42,7 @@ fi;
 ##  Input : List of arguments to print
 ##  Output: \t ^ OMIndent, arguments
 ##
-InstallGlobalFunction(OMWriteLine,
-function(stream, alist)
+InstallGlobalFunction(OMWriteLine, function(stream, alist)
 	local i;
 
 	# do the indentation
@@ -338,8 +337,7 @@ fi;
 #
 # Functions and methods for OMPlainString
 #
-InstallGlobalFunction( OMPlainString,
-function( string )
+InstallGlobalFunction( OMPlainString, function( string )
 if IsString( string ) then
     # note that we do not validate the string!
     return Objectify( OMPlainStringDefaultType, [ string ] );

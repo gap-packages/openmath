@@ -331,8 +331,7 @@ end);
 ##  This borrows heavily from Thomas Breuer's 
 ##  CharacterTableDisplayStringEntryDefault
 ##
-BindGlobal("OMIrredMatEntryPut",
-function(writer, entry, data)
+BindGlobal("OMIrredMatEntryPut", function(writer, entry, data)
 	local val, irrstack, irrnames, name, ll, i, letters, n;
 
   # OMPut(writer,entry);
@@ -422,8 +421,7 @@ end);
 ##  This borrows heavily from Thomas Breuer's 
 ##  character table Display routines -- see lib/ctbl.gi
 ##
-BindGlobal("OMPutIrredMat",
-function(writer, x)
+BindGlobal("OMPutIrredMat", function(writer, x)
 	local r,i, irredmat, data;
 
 	data := CharacterTableDisplayStringEntryDataDefault( x );

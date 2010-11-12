@@ -20,8 +20,7 @@ Revision.("openmath/gap/omputbin.gi") :=
 ##
 ##  Returns a list of 4 integers as to represent the number over 4 bytes
 ##
-BindGlobal ( "BigIntToListofInts", 
-function(int)
+BindGlobal ( "BigIntToListofInts", function(int)
 	local hexValue, hexValueLength, finalHexString, lengthDiff, listofInts;
 	listofInts:=[];
 	finalHexString := "";
@@ -47,8 +46,7 @@ end);
 #M  IsIntFloat( <object> )
 #
 #   Checks whethere it is a real float
-BindGlobal( "IsIntFloat",
-function(x) 
+BindGlobal( "IsIntFloat", function(x) 
 	return Float(0) = x-Float(Int(x));
 end);
 
@@ -59,8 +57,7 @@ end);
 ##  Returns a list with the number of falses specified, 
 ##  if 0 then returns an empty list.
 ##
-BindGlobal( "CreateListWithFalses",
-function(numFalses) 
+BindGlobal( "CreateListWithFalses", function(numFalses) 
 	local listFalses, i;
 	listFalses := [];
 	for i in [1..numFalses] do
@@ -76,8 +73,7 @@ end);
 ##  Writes an integer as four bytes given a list representing the integer,
 ##  in binary and the stream
 ##
-BindGlobal( "WriteIntasBytes",
-function( stream, listofInts )
+BindGlobal( "WriteIntasBytes", function( stream, listofInts )
 	WriteByte(stream, listofInts[1]);
 	WriteByte(stream, listofInts[2]);
 	WriteByte(stream, listofInts[3]);
@@ -90,8 +86,7 @@ end);
 ##
 ##  Obtains position of first 1 in the binary string
 ##  
-BindGlobal( "FindFirst1BinaryString",
-function( binStri )
+BindGlobal( "FindFirst1BinaryString", function( binStri )
 local i, binStriLen;
 binStriLen := Length(binStri);
 i := 1;
@@ -108,8 +103,7 @@ end);
 ##
 ##  Returns the decimal number in a hexadecimal representation
 ##
-BindGlobal( "WriteDecasHex",
-function( decPart )
+BindGlobal( "WriteDecasHex", function( decPart )
 local intPart, resultHex, number, i, zeroF;
 	i := 0;
 	resultHex := "";
@@ -136,8 +130,7 @@ end);
 ##  Returns the given hexadecimal number as a binary string. 
 ##  Leading zeroes are included if the flag is set to TRUE.
 ## 
-BindGlobal( "WriteHexAsBin",
-function( hexNum, withLeadingZeroes )
+BindGlobal( "WriteHexAsBin", function( hexNum, withLeadingZeroes )
 local hexNumLen, binStri, num, charStri, counter, binArrayWithZeroes, binArrayNoLeadingZeroes;
 hexNumLen := Length(hexNum);
 binStri := "";
@@ -167,8 +160,7 @@ end);
 ##
 ##  Returns the binary string passed as a hexadecimal number
 ##
-BindGlobal( "WriteBinAsHex",
-function( binStri )
+BindGlobal( "WriteBinAsHex", function( binStri )
 local binStriLen, hexStri, counter, binArray,hexArray, limit, upper, lower;
 binStriLen := Length(binStri);
 hexStri := "";
@@ -219,8 +211,7 @@ end);
 ##
 ##  Writes the hexadecimal string to the stream as bytes. 
 ##
-BindGlobal( "WriteHexStriAsBytes",
-function( hexStri, stream )
+BindGlobal( "WriteHexStriAsBytes", function( hexStri, stream )
 local hexStriLen, intValue, upper, lower;
 upper := 2;
 lower := 1;
@@ -239,8 +230,7 @@ end);
 #M  WriteBinStringsAsBytes( <)
 ##
 ## 
-BindGlobal( "WriteBinStringsAsBytes",
-function( sign, exponent, mantissa , stream)
+BindGlobal("WriteBinStringsAsBytes", function(sign,exponent,mantissa,stream)
 local  exponentLen, mantissaLen, firstPart, secondPart, numbZeroes, hexStri;
 exponentLen := Length(exponent);
 mantissaLen := Length(mantissa);
@@ -527,8 +517,7 @@ end);
 ##
 ##
 ##
-InstallGlobalFunction(OMPutByteArray,
-function( writer, bitList )	
+InstallGlobalFunction( OMPutByteArray, function( writer, bitList )	
   # TODO: fill the 2nd branch and move this function to omput.gi 
   local numBytesLength, bitListLength, tempList, numFalses, hexStri, numBytes, quoVal, modVal;
   if IsOpenMathBinaryWriter(writer)  then	
@@ -709,11 +698,8 @@ end);
 ##
 ##	deals with external references for now
 ##
-InstallMethod( OMPutReference, 
-"for a stream and an object with reference",
-true,
-[ IsOpenMathBinaryWriter, IsObject ],
-0,
+InstallMethod( OMPutReference, "for a stream and an object with reference",
+true, [ IsOpenMathBinaryWriter, IsObject ], 0,
 function( writer, x )
 local refStri, refLength, lengthList;
 if HasOMReference( x ) and not SuppressOpenMathReferences then
@@ -732,25 +718,6 @@ else
    OMPut( writer, x );
 fi;
 end);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #############################################################################

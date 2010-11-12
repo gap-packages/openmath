@@ -17,8 +17,7 @@ Revision.("openmath/gap/parse.gi") :=
 
 
 
-InstallGlobalFunction(OMgetObjectByteStream,
-function(inputstream)
+InstallGlobalFunction(OMgetObjectByteStream, function(inputstream)
 	local stream, obj;
 
 	# assumes there is at least one byte on stream.
