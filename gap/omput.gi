@@ -372,12 +372,19 @@ end);
 InstallMethod(OMPut, "for a matrix", true,
 [IsOpenMathWriter, IsMatrix],0,
 function(writer, x)
-    local  r;
+	local  r;
 	OMPutOMA(writer);
-    OMPutSymbol( writer, "linalg2", "matrix" );
-    for r  in x  do
-        OMPutApplication( writer, "linalg2", "matrixrow", r );
-    od;
+	if ValueOption( "OMignoreMatrices" ) = true or not IsRectangularTable(x) then
+    	OMPutSymbol( writer, "list1", "list" );
+    	for r  in x  do
+    		OMPutApplication( writer, "list1", "list", r );
+    	od;
+    else
+    	OMPutSymbol( writer, "linalg2", "matrix" );
+    	for r  in x  do
+    		OMPutApplication( writer, "linalg2", "matrixrow", r );
+    	od;
+    fi;
     OMPutEndOMA(writer);
 end);
 
@@ -471,12 +478,20 @@ function(writer, x)
     TryNextMethod();
   fi;
 
-  if IsEmpty(x) then
-    OMPutSymbol( writer, "set1", "emptyset" );
-  else
-    OMPutApplication( writer, "set1", "set", x );
-  fi;
+  if ValueOption( "OMignoreSets" ) = true then
 
+    OMPutApplication( writer, "list1", "list", x );
+
+  else
+
+    if IsEmpty(x) then
+      OMPutSymbol( writer, "set1", "emptyset" );
+    else
+      OMPutApplication( writer, "set1", "set", x );
+    fi;
+
+  fi;
+  
 end);
 
 
