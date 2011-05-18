@@ -570,8 +570,7 @@ end);
 # with the TRIP system and later was commented out because of switching 
 # to the 'polyd1' CD.
 #
-#InstallMethod( OMPut, 
-#"for a univariate polynomial (polyu.poly_u_rep)", 
+#InstallMethod( OMPut, "for a univariate polynomial (polyu.poly_u_rep)", 
 #true,
 #[ IsOpenMathWriter, IsUnivariatePolynomial ],
 #0,
@@ -596,8 +595,7 @@ end);
 # OMPut for an algebraic element of an algebraic extension
 # (commented out because of switching to field4.field_by_poly_vector)
 #
-#InstallMethod( OMPut, 
-#"for an algebraic element of an algebraic extension", 
+#InstallMethod( OMPut, "for an algebraic element of an algebraic extension", 
 #true,
 #[ IsOpenMathWriter, IsAlgebraicElement ],
 #0,
@@ -694,8 +692,7 @@ end);
 #
 # OMPut for a polynomial ring (polyd1.poly_ring_d_named / polyd1.poly_ring_d)
 #
-InstallMethod( OMPut,
-"for a polynomial ring (polyd1.poly_ring_d_named or polyd1.poly_ring_d)",
+InstallMethod( OMPut, "for a polynomial ring (polyd1.poly_ring_d_named or polyd1.poly_ring_d)",
 true,
 [ IsOpenMathWriter, IsPolynomialRing ],
 0,
@@ -728,8 +725,7 @@ end);
 #
 # OMPut for a polynomial ring and a (uni/multivariate) polynomial (polyd1.DMP) 
 #
-InstallOtherMethod( OMPut, 
-"for a polynomial ring and a (uni- or multivariate) polynomial (polyd1.DMP)", 
+InstallOtherMethod( OMPut, "for a polynomial ring and a (uni- or multivariate) polynomial (polyd1.DMP)", 
 true,
 [ IsOpenMathWriter, IsPolynomialRing, IsPolynomial ],
 0,
@@ -867,8 +863,7 @@ BindGlobal( "SetOpenMathDefaultPolynomialRing", function( R )
 # OMPut for a (uni/multivariate) polynomial in the default ring or 
 # in OpenMathDefaultPolynomialRing, using polyd1.DMP 
 #
-InstallMethod( OMPut, 
-"for a (uni- or multivariate) polynomial in the default ring (polyd1.DMP)", 
+InstallMethod( OMPut, "for a (uni- or multivariate) polynomial in the default ring (polyd1.DMP)", 
 true,
 [ IsOpenMathWriter, IsPolynomial ],
 0,
@@ -891,8 +886,7 @@ end);
 #
 # This currently works only with polynomial rings!!!
 #
-InstallMethod( OMPut, 
-"for a two-sided ideal with known generators (ring3.ideal)",
+InstallMethod( OMPut, "for a two-sided ideal with known generators (ring3.ideal)",
 true,
 [ IsOpenMathWriter, 
   IsRing and HasLeftActingRingOfIdeal and 
@@ -917,8 +911,7 @@ end);
 #
 # OMPut for algebraic extensions (field3.field_by_poly)
 #
-InstallMethod( OMPut,
-"for algebraic extensions (field3.field_by_poly)",
+InstallMethod( OMPut, "for algebraic extensions (field3.field_by_poly)",
 true,
 [ IsOpenMathWriter, IsAlgebraicExtension ],
 0,
@@ -935,8 +928,7 @@ end);
 # OMPut for an algebraic element of an algebraic extension 
 # (field4.field_by_poly_vector)
 #
-InstallMethod( OMPut, 
-"for an algebraic element of an algebraic extension (field4.field_by_poly_vector)", 
+InstallMethod( OMPut, "for an algebraic element of an algebraic extension (field4.field_by_poly_vector)", 
 true,
 [ IsOpenMathWriter, IsAlgebraicElement ],
 0,
@@ -957,8 +949,7 @@ end);
 #
 # OMPut for a finite field and its element using finfield1 CD
 #
-InstallOtherMethod( OMPut, 
-"for for a finite field element using finfield1 CD", 
+InstallOtherMethod( OMPut, "for for a finite field element using finfield1 CD", 
 true,
 [ IsOpenMathWriter, IsField and IsFinite, IsFFE ],
 0,
@@ -989,8 +980,7 @@ end);
 #
 # OMPut for a finite field element in its default field
 #
-InstallMethod( OMPut, 
-"for for a finite field element using finfield1 CD", 
+InstallMethod( OMPut, "for for a finite field element using finfield1 CD", 
 true,
 [ IsOpenMathWriter, IsFFE ],
 0,
@@ -1003,8 +993,7 @@ end);
 #
 # OMPut for a finite field using setname2.{GFp,GFpn}
 #
-InstallMethod( OMPut, 
-"for for a finite field using setname2.GFp or setname2.GFpn", 
+InstallMethod( OMPut, "for for a finite field using setname2.GFp or setname2.GFpn", 
 true,
 [ IsOpenMathWriter, IsField ],
 0,
