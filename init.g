@@ -143,7 +143,7 @@ fi;
 #################################################
 # patch for HexStringBlist
 
-if VERSION <> "4.dev" then
+if not CompareVersionNumbers( GAPInfo.Version, "4.5.0") then
 
 MakeReadWriteGlobal("HexStringBlist");
 
