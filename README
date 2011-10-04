@@ -1,10 +1,8 @@
-##############################################################################
+###########################################################################
 ##
-#W README                   The OpenMath package              Marco Costantini
-#W                                                         Alexander Konovalov
-#W                                                              Andrew Solomon
-##
-#H $Id$
+#W README                   The OpenMath package           Marco Costantini
+#W                                                      Alexander Konovalov
+#W                                                           Andrew Solomon
 ##
 
                            The OpenMath Package
@@ -34,11 +32,11 @@ Alexander Konovalov
 
 September 2010
 
-##############################################################################
+###########################################################################
 
           Historical notes from previous releases and changelogs
 
-##############################################################################
+###########################################################################
 
 The first release of the package was produced in March 2000 by Andrew Solomon 
 when he worked at the School of Computer Science, University of St Andrews. 
@@ -55,7 +53,7 @@ this package. He made the modifications listed below, which were necessary in
 order to extend the functionality and to fix the bugs, and because both 
 OpenMath and the package mechanism of GAP have evolved in the meantime.
 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 This package performs the conversion from GAP to OpenMath, using only GAP
 code, and this part is expected to work on each machine on which GAP works.
@@ -209,7 +207,7 @@ Marco Costantini
 
 December 2005, January and July 2006
 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 Since 2007 Alexander Konovalov made several further changes in this package
 and after an agreement with Andrew Solomon became its maintainer. The list of
@@ -311,3 +309,14 @@ Alexander Konovalov                               April 2009
   version of OMPut.
 * OMPut for a finite field element using finfield1 CD.
 * OMPut for a finite field using setname2.{GFp,GFpn}.
+
+11.0.0 (October 2011)
+* Included bidirectional support for binary OpenMath encoding implemented 
+  by Max Nicosia during his internship in St Andrews in summer 2010.
+* Introduced OpenMathXMLWriter and OpenMathBinaryWriter objects, which
+  encapsulate streams and may be viewed as transducers accepting GAP 
+  objects and writing them to a stream in the XML or binary OpenMath.
+* Changed the first argument of OMPutObject from stream to 
+  OpenMathXMLWriter or OpenMathBinaryWriter.
+* Removed no longer needed INRIA OpenMath library which was formerly used
+  to work with binary OpenMath encoding.
