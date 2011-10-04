@@ -3,20 +3,13 @@
 #W  omget.g             OpenMath Package               Andrew Solomon
 #W                                                     Marco Costantini
 ##
-#H  @(#)$Id$
+#Y  Copyright (C) 1999, 2000, 2001, 2006
+#Y  School Math and Comp. Sci., University of St.  Andrews, Scotland
+#Y  Copyright (C) 2004, 2005, 2006 Marco Costantini
 ##
-#Y    Copyright (C) 1999, 2000, 2001, 2006
-#Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
-#Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
-##
-##  Reads an OpenMath object from an input stream and returns
-##  a GAP object.
+##  Reads an OpenMath object from an input stream and returns a GAP object.
 ##
 ##
-
-Revision.("openmath/gap/omget.g") :=
-    "@(#)$Id$";
-
 
 
 #############################################################################
@@ -29,9 +22,6 @@ Revision.("openmath/gap/omget.g") :=
 ##  From there the OpenMath object is turned into a GAP object
 ##  by an appropriate function.
 ##
-
-
-
 InstallGlobalFunction(OMGetObject, function( stream )
     local
         fromgap, firstbyte, gap_obj, # string

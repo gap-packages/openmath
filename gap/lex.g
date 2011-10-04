@@ -3,8 +3,6 @@
 #W  lex.g               OpenMath Package              Andrew Solomon
 #W                                                    Marco Costantini
 ##
-#H  @(#)$Id$
-##
 #Y    Copyright (C) 1999, 2000, 2001, 2006
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
 #Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
@@ -14,10 +12,6 @@
 ##  Comprises the "instream" functions - deals with stream at byte level
 ##  and the "get" functions which get tokens and values from streams.
 ##
-
-Revision.("openmath/gap/lex.g") :=
-    "@(#)$Id$";
-
 
 
 #################################################################
