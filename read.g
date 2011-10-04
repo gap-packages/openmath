@@ -1,9 +1,8 @@
-#############################################################################
+###########################################################################
 ##
 #W    read.g              OpenMath Package             Andrew Solomon
 #W                                                     Marco Costantini
 ##
-#H    @(#)$Id$
 ##
 #Y    Copyright (C) 1999, 2000, 2001, 2006
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
@@ -12,8 +11,6 @@
 ##    read.g file
 ##
 
-Revision.("openmath/read.g") :=
-    "@(#)$Id$";
 
 ## the *.gd and *.g files are read by init.g
 
@@ -33,7 +30,7 @@ else
 fi;
 
 
-#############################################################################
+###########################################################################
 ## Module 2: conversion from Gap to OpenMath
 ## (Modules 1 and 2 are independent)
 
@@ -46,8 +43,14 @@ fi;
 ReadPackage("openmath", "/gap/omputxml.gi");
 ReadPackage("openmath", "/gap/omputbin.gi");
 ReadPackage("openmath", "/gap/omput.gi");
-if IsExistingFile( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.gi") ) then
-	Read( Concatenation( GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,"/private/private.gi") );
+if IsExistingFile( 
+     Concatenation( 
+       GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,
+       "/private/private.gi") ) then
+	Read( 
+	  Concatenation( 
+	    GAPInfo.PackagesInfo.("openmath")[1].InstallationPath,
+	    "/private/private.gi") );
 fi;
 
 #################################################################
@@ -60,5 +63,5 @@ fi;
 ReadPackage("openmath", "/gap/lex.g");
 ReadPackage("openmath", "/gap/parse.gi");
 
-#############################################################################
+###########################################################################
 #E
