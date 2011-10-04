@@ -2,7 +2,6 @@
 **
 *W  gap_tokens.h            OM Package 									Andrew Solomon
 **
-*H  @(#)$Id$
 **
 *Y  Copyright (C)  1996,  Lehrstuhl D fuer Mathematik,  RWTH Aachen,  Germany
 *Y  (C) 1998 School Math and Comp. Sci., University of St.  Andrews, Scotland
