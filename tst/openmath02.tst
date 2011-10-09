@@ -1,4 +1,4 @@
-# from paragraph [ 2, 1, 1, 5 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omput.gd", 159 ]
+# from paragraph [ 2, 1, 1, 5 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omput.gd", 159 ]
 
 
 gap> OMPrint( [ 1, 1/2 ] );     
@@ -15,7 +15,7 @@ gap> OMPrint( [ 1, 1/2 ] );
 </OMOBJ>
 
 
-# from paragraph [ 2, 1, 1, 7 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omput.gd", 176 ]
+# from paragraph [ 2, 1, 1, 7 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omput.gd", 176 ]
 
 
 gap> OMPrint( "This is a string" );
@@ -24,7 +24,7 @@ gap> OMPrint( "This is a string" );
 </OMOBJ>
 
 
-# from paragraph [ 2, 1, 1, 9 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omput.gd", 185 ]
+# from paragraph [ 2, 1, 1, 9 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omput.gd", 185 ]
 
 
 gap> OMPrint( 1-2*E(4) );      
@@ -52,7 +52,7 @@ gap> OMPrint(E(3));
 </OMOBJ>
 
 
-# from paragraph [ 2, 1, 1, 11 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omput.gd", 213 ]
+# from paragraph [ 2, 1, 1, 11 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omput.gd", 213 ]
 
 
 gap> OMPrint( Group( (1,2) ) );
@@ -95,7 +95,7 @@ gap> OMPrint( FreeGroup( 2 ) );
 </OMOBJ>
 
 
-# from paragraph [ 2, 1, 2, 4 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omput.gd", 274 ]
+# from paragraph [ 2, 1, 2, 4 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omput.gd", 274 ]
 
 
 gap> OMString(42);
@@ -104,7 +104,7 @@ gap> OMString([1,2]:noomobj);
 "<OMA> <OMS cd=\"list1\" name=\"list\"/> <OMI>1</OMI> <OMI>2</OMI> </OMA>"
 
 
-# from paragraph [ 2, 2, 1, 5 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omget.gd", 40 ]
+# from paragraph [ 2, 2, 1, 5 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omget.gd", 40 ]
 
 
 gap> txml:=Filename(DirectoriesPackageLibrary("openmath","tst"),"test3.omt");;   
@@ -119,7 +119,7 @@ E(4)
 gap> CloseStream(xstream);CloseStream(bstream);
 
 
-# from paragraph [ 2, 3, 4, 7 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omput.gd", 96 ]
+# from paragraph [ 2, 3, 4, 7 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omput.gd", 96 ]
 
 
 gap> g := [[1,2],[1,0]];;
@@ -148,7 +148,7 @@ gap> Print(t);
 </OMOBJ>
 
 
-# from paragraph [ 2, 3, 5, 5 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/omput.gd", 451 ]
+# from paragraph [ 2, 3, 5, 5 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/omput.gd", 451 ]
 
 
 gap> s:=OMPlainString("<OMS cd=\"nums1\" name=\"pi\"/>");
@@ -159,14 +159,14 @@ gap> OMPrint(s);
 </OMOBJ>
 
 
-# from paragraph [ 2, 4, 1, 6 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/test.gd", 28 ]
+# from paragraph [ 2, 4, 1, 6 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/test.gd", 28 ]
 
 
 gap> OMTestXML([[1..10],[1/2,2+E(4)],ZmodnZObj(2,6),(1,2),true,"string"]);     
 true
 
 
-# from paragraph [ 2, 4, 2, 4 ][ "/Users/alexk/CVSREPS/GAPDEV/pkg/openmath/doc/../gap/test.gd", 58 ]
+# from paragraph [ 2, 4, 2, 4 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/../gap/test.gd", 58 ]
 
 
 gap> OMTestBinary([[1..10],[1/2,2+E(4)],ZmodnZObj(2,6),(1,2),true,"string"]);     
