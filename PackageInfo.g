@@ -16,11 +16,12 @@ PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
 Version := "11.0.0",
-Date := "04/10/2011",
+Date := "09/10/2011",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "11.0.0">
-##  <!ENTITY RELEASEDATE "04 October 2011">
+##  <!ENTITY RELEASEDATE "09 October 2011">
 ##  <#/GAPDoc>
+
 
 PackageWWWHome := "http://www.cs.st-andrews.ac.uk/~alexk/openmath/",
 
