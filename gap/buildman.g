@@ -65,7 +65,7 @@ main:="manual.xml";
 bookname:="openmath";
 MakeGAPDocDoc( path, main, OPENMATHMANUALFILES, bookname );  
 CopyHTMLStyleFiles( path );
-GAPDocManualLab( "Openmath" );; 
+GAPDocManualLab( "openmath" );; 
 ExtractManualExamples( "openmath", main, OPENMATHMANUALFILES);
 end;
 
@@ -81,7 +81,7 @@ path:=Concatenation( mypath, "/doc/");
 main:="manual.xml";
 bookname:="openmath";
 MakeGAPDocDoc( path, main, OPENMATHMANUALFILES, bookname );  
-GAPDocManualLab( "Openmath" );; 
+GAPDocManualLab( "openmath" );; 
 end;
 
 
