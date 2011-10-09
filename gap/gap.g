@@ -1179,8 +1179,9 @@ setname2 := rec(
 
 ));
  
-
-OMsymRecord.semigroup4 := rec(
+if not CompareVersionNumbers( GAPInfo.Version, "4.5.0") then
+# this requires MONOID so will not work in GAP 4.5
+  OMsymRecord.semigroup4 := rec(
 	automorphism_group := AutomorphismGroup, # requires MONOID package and GRAPE, 
 	                                         # duplicated in semigroup3 CD
 	homomorphism_by_generators :=            # requires MONOID
@@ -1190,8 +1191,8 @@ OMsymRecord.semigroup4 := rec(
         # (this must be the case for the GAP client)
         return SemigroupHomomorphismByImagesOfGensNC( x[1], x[2], List( x[3], g -> g[2] ) );
         end);
+fi;
 
- 
 ######################################################################
 ##
 #F  OMsymLookup( [<cd>, <name>] )

@@ -528,7 +528,8 @@ end);
 ##
 #M  OMPut( <OMWriter>, <semigrouphom> )  
 ##
-## 
+##  this requires MONOID so will not work in GAP 4.5
+if not CompareVersionNumbers( GAPInfo.Version, "4.5.0") then
 InstallMethod(OMPut, "for a semigroup homomorphism given by images of generators", true,
 [IsOpenMathWriter, IsSemigroupHomomorphism and IsSemigroupHomomorphismByImagesOfGensRep],0,
 function(writer, x)
@@ -546,7 +547,7 @@ function(writer, x)
     fi;        
     OMPutEndOMA(writer);
 end);
-
+fi;
 
 ###########################################################################
 #
