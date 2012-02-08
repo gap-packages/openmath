@@ -102,7 +102,7 @@ function(writer, f)
 #	OMWriteLine( writer, [ "<OMA id=\"", OMReference( f ), "\" >" ] );
     OMPutOMA( writer );
 	OMPutSymbol( writer, "fpgroup1", "free_groupn" );
-	OMPut( writer, Rank( f ) );
+	OMPut( writer, Length( GeneratorsOfGroup( f ) ) );
     OMPutEndOMA( writer );
 end);
 
