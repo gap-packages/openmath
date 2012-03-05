@@ -51,7 +51,16 @@ end);
 BindGlobal("OMgapPlus", Sum);
 BindGlobal("OMgapTimes", Product);
 BindGlobal("OMgapDivide", x-> OMgapId([OMgap2ARGS(x), x[1]/x[2]])[2]);
-BindGlobal("OMgapPower", x-> OMgapId([OMgap2ARGS(x), x[1]^x[2]])[2]);
+BindGlobal("OMgapPower", function( x )
+  if Length(x) <> 2 then
+    Error("argument list of length 2 expected");
+  fi;
+  if IsInt(x[1]) and x[2]=1/2 then
+    return Sqrt(x[1]);
+  else
+    return x[1]^x[2];
+  fi;
+end);
 
 
 ###########################################################################
@@ -705,12 +714,12 @@ multiset1 := rec(
 
 nums1 := rec(
 	based_integer := fail, 
-	e := fail, 
+	e := FLOAT.E, 
 	gamma := fail, 
 	i := E(4),
 	infinity := infinity,
-	NaN := "nan",
-	pi := fail, 
+	NaN := FLOAT.NAN,
+	pi := FLOAT.PI, 
 	rational := OMgapDivide
 ),
 
