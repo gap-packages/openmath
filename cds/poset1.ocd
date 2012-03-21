@@ -1,0 +1,154 @@
+<CDName>poset1</CDName>
+<CDReviewDate>2009-06-26</CDReviewDate>
+<CDDate>2009-06-26</CDDate>
+<CDVersion>1</CDVersion>
+<CDRevision>0</CDRevision>
+<CDStatus>private</CDStatus>
+
+<Description>
+This is a private CD to represent lattices of subgroups. 
+</Description>
+
+<CDDefinition>
+<Name>vertex</Name>
+<Description> 
+Represents a vertex of the diagram (a subgroup of the group). 
+The first argument is its label, the second argument is the 
+list of labels of its subgroups.
+</Description>
+</CDDefinition>
+
+<CDDefinition>
+<Name>class</Name>
+<Description> 
+Represents conjugacy class of subgroups. The argument is the list
+of vertices. 
+</Description>
+</CDDefinition>
+
+<CDDefinition>
+<Name>level</Name>
+<Description> 
+Represents a level of the diagram. The first argument is the index,
+the second argument is the list of classes.
+</Description>
+</CDDefinition>
+
+<CDDefinition>
+<Name>poset_diagram</Name>
+<Description> 
+Represents the poset diagram (lattice of subgroups). The argument is 
+the list of levels.
+</Description>
+
+</FMP>
+<OMOBJ>
+	<OMA>
+		<OMS cd="poset1" name="poset_diagram"/>
+		<OMA>
+			<OMS cd="poset1" name="level"/>
+			<OMI>1</OMI>
+			<OMA>
+				<OMS cd="list1" name="list"/>
+				<OMA>
+					<OMS cd="poset1" name="class"/>
+					<OMA>
+						<OMS cd="list1" name="list"/>
+						<OMA>
+							<OMS cd="poset1" name="vertex"/>
+							<OMSTR>G</OMSTR>
+							<OMA>
+								<OMS cd="list1" name="list"/>
+								<OMSTR>3</OMSTR>
+								<OMSTR>2.1</OMSTR>
+								<OMSTR>2.2</OMSTR>
+								<OMSTR>2.3</OMSTR>
+							</OMA>
+						</OMA>
+					</OMA>
+				</OMA>
+			</OMA>
+		</OMA>
+		<OMA>
+			<OMS cd="poset1" name="level"/>
+			<OMI>2</OMI>
+			<OMA>
+				<OMS cd="list1" name="list"/>
+				<OMA>
+					<OMS cd="poset1" name="class"/>
+					<OMA>
+						<OMS cd="list1" name="list"/>
+						<OMA>
+							<OMS cd="poset1" name="vertex"/>
+							<OMSTR>3</OMSTR>
+							<OMA>
+								<OMS cd="list1" name="list"/>
+								<OMSTR>1</OMSTR>
+							</OMA>
+						</OMA>
+					</OMA>
+				</OMA>
+			</OMA>
+		</OMA>
+		<OMA>
+			<OMS cd="poset1" name="level"/>
+			<OMI>3</OMI>
+			<OMA>
+				<OMS cd="list1" name="list"/>
+				<OMA>
+					<OMS cd="poset1" name="class"/>
+					<OMA>
+						<OMS cd="list1" name="list"/>
+						<OMA>
+							<OMS cd="poset1" name="vertex"/>
+							<OMSTR>2.1</OMSTR>
+							<OMA>
+								<OMS cd="list1" name="list"/>
+								<OMSTR>1</OMSTR>
+							</OMA>
+						</OMA>
+						<OMA>
+							<OMS cd="poset1" name="vertex"/>
+							<OMSTR>2.2</OMSTR>
+							<OMA>
+								<OMS cd="list1" name="list"/>
+								<OMSTR>1</OMSTR>
+							</OMA>
+						</OMA>
+						<OMA>
+							<OMS cd="poset1" name="vertex"/>
+							<OMSTR>2.3</OMSTR>
+							<OMA>
+								<OMS cd="list1" name="list"/>
+								<OMSTR>1</OMSTR>
+							</OMA>
+						</OMA>
+					</OMA>
+				</OMA>
+			</OMA>
+		</OMA>
+		<OMA>
+			<OMS cd="poset1" name="level"/>
+			<OMI>6</OMI>
+			<OMA>
+				<OMS cd="list1" name="list"/>
+				<OMA>
+					<OMS cd="poset1" name="class"/>
+					<OMA>
+						<OMS cd="list1" name="list"/>
+						<OMA>
+							<OMS cd="poset1" name="vertex"/>
+							<OMSTR>1</OMSTR>
+							<OMS cd="set1" name="emptyset"/>
+						</OMA>
+					</OMA>
+				</OMA>
+			</OMA>
+		</OMA>
+	</OMA>
+</OMOBJ>
+</FMP>
+
+</CDDefinition>
+
+</CD>

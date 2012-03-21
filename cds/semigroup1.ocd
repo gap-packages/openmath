@@ -1,0 +1,55 @@
+<CDName>semigroup1</CDName>
+<CDReviewDate>2009-05-14</CDReviewDate>
+<CDDate>2009-05-14</CDDate>
+<CDVersion>1</CDVersion>
+<CDRevision>0</CDRevision>
+<CDStatus>private</CDStatus>
+
+<Description>
+This is a private CD to represent semigroups by their generators. 
+</Description>
+
+<CDDefinition>
+
+<Name>semigroup_by_generators</Name>
+<Description> 
+An n-ary function to construct a semigroup from the list of its arguments.
+</Description>
+
+</FMP>
+<OMOBJ>
+	<OMA>
+		<OMS cd="semigroup1" name="semigroup_by_generators"/>
+		<OMA>
+			<OMS cd="linalg2" name="matrix"/>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>1</OMI>
+				<OMI>1</OMI>
+			</OMA>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>0</OMI>
+				<OMI>0</OMI>
+			</OMA>
+		</OMA>
+		<OMA>
+			<OMS cd="linalg2" name="matrix"/>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>1</OMI>
+				<OMI>1</OMI>
+			</OMA>
+			<OMA>
+				<OMS cd="linalg2" name="matrixrow"/>
+				<OMI>0</OMI>
+				<OMI>0</OMI>
+			</OMA>
+		</OMA>
+	</OMA>
+</OMOBJ>
+</FMP>
+
+</CDDefinition>
+
+</CD>

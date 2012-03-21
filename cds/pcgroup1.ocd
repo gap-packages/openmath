@@ -1,0 +1,37 @@
+<CDName>pcgroup1</CDName>
+<CDReviewDate>2009-05-20</CDReviewDate>
+<CDDate>2009-05-20</CDDate>
+<CDVersion>1</CDVersion>
+<CDRevision>0</CDRevision>
+<CDStatus>private</CDStatus>
+
+<Description>
+This is a private CD to represent pc-groups by their pcgs code.
+It facilitates exchanging pc-groups between GAP instances in an
+internal format which is supported by GAP.
+</Description>
+
+<CDDefinition>
+
+<Name>pcgroup_by_pcgscode</Name>
+<Description> 
+An function to construct pc-group in GAP. It has two arguments.
+The first argument is the pcgs code of the group, produced using
+the GAP function "CodePcGroup", and the second argument is the
+order of the group. The resulting group in GAP is constructed 
+applying the GAP function "PcGroupCode" to this arguments.
+</Description>
+
+</FMP>
+<OMOBJ>
+	<OMA>
+		<OMS cd="pcgroup1" name="pcgroup_by_pcgscode"/>
+		<OMI>5009944435162496868332619159</OMI>
+		<OMI>256</OMI>
+	</OMA>
+</OMOBJ>
+</FMP>
+
+</CDDefinition>
+
+</CD>

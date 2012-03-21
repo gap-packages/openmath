@@ -1,0 +1,35 @@
+<CDName>record1</CDName>
+<CDReviewDate>2009-05-17</CDReviewDate>
+<CDDate>2009-05-17</CDDate>
+<CDVersion>1</CDVersion>
+<CDRevision>0</CDRevision>
+<CDStatus>private</CDStatus>
+
+<Description>
+This is a private CD to represent records. It facilitates exchanging 
+CAS data that are internally represented as records. 
+</Description>
+
+<CDDefinition>
+
+<Name>record</Name>
+<Description> 
+An function to construct a record. This function has n pairs of arguments.
+Each pair corresponds to the name of the record component and its value.
+</Description>
+
+</FMP>
+<OMOBJ>
+	<OMA>
+		<OMS cd="record1" name="record"/>
+		<OMSTR>b</OMSTR>
+		<OMI>2</OMI>
+		<OMSTR>a</OMSTR>
+		<OMI>1</OMI>
+	</OMA>
+</OMOBJ>
+</FMP>
+
+</CDDefinition>
+
+</CD>

@@ -1,0 +1,36 @@
+<CDName>transform1</CDName>
+<CDReviewDate>2009-05-14</CDReviewDate>
+<CDDate>2009-05-14</CDDate>
+<CDVersion>1</CDVersion>
+<CDRevision>0</CDRevision>
+<CDStatus>private</CDStatus>
+
+<Description>
+This is a private CD for transformations. A transformation in GAP
+is an endomorphism of a set of integers of the form {1, ..., n}. 
+</Description>
+
+<CDDefinition>
+
+<Name>transformation</Name>
+<Description> 
+An n-ary function to construct a transformation of degree n 
+with the list of images given as its arguments.
+</Description>
+
+</FMP>
+<OMOBJ>
+	<OMA>
+		<OMS cd="transform1" name="transformation"/>
+		<OMI>2</OMI>
+		<OMI>3</OMI>
+		<OMI>4</OMI>
+		<OMI>2</OMI>
+		<OMI>4</OMI>
+	</OMA>
+</OMOBJ>
+</FMP>
+
+</CDDefinition>
+
+</CD>

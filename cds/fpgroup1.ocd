@@ -1,0 +1,77 @@
+<CDName>fpgroup1</CDName>
+<CDReviewDate>2009-06-10</CDReviewDate>
+<CDDate>2009-06-10</CDDate>
+<CDVersion>1</CDVersion>
+<CDRevision>0</CDRevision>
+<CDStatus>private</CDStatus>
+
+<Description>
+This is a private CD to represent finitely presented groups. 
+</Description>
+
+<CDDefinition>
+
+<Name>free_groupn</Name>
+<Description> 
+A one-argument function to construct a free group of the specified rank.
+</Description>
+
+</FMP>
+<OMOBJ>
+	<OMA>
+		<OMS cd="fpgroup1" name="free_groupn"/>
+		<OMI>2</OMI>
+	</OMA>
+</OMOBJ>
+</FMP>
+
+</CDDefinition>
+
+<CDDefinition>
+
+<Name>fpgroup</Name>
+<Description> 
+This is a function to construct a finitely presented group by factoring 
+a free group by a set of relators. Its first argument corresponds to the
+free group, and the rest of arguments describe the relators using the 
+external representation for associative words used in GAP (see
+'?The External Representation for Associative Words'.
+</Description>
+
+</FMP>
+<OMOBJ>
+	<OMA>
+		<OMS cd="fpgroup1" name="fpgroup"/>
+		<OMA>
+			<OMS cd="fpgroup1" name="free_groupn"/>
+			<OMI>2</OMI>
+		</OMA>
+		<OMA>
+			<OMS cd="list1" name="list"/>
+			<OMI>1</OMI>
+			<OMI>4</OMI>
+		</OMA>
+		<OMA>
+			<OMS cd="list1" name="list"/>
+			<OMI>2</OMI>
+			<OMI>2</OMI>
+		</OMA>
+		<OMA>
+			<OMS cd="list1" name="list"/>
+			<OMI>2</OMI>
+			<OMI>-1</OMI>
+			<OMI>1</OMI>
+			<OMI>1</OMI>
+			<OMI>2</OMI>
+			<OMI>1</OMI>
+			<OMI>1</OMI>
+			<OMI>1</OMI>
+		</OMA>
+	</OMA>
+</OMOBJ>
+
+</FMP>
+
+</CDDefinition>
+
+</CD>
