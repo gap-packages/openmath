@@ -1,4 +1,4 @@
-# from paragraph [ 3, 1, 0, 4 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/extend.xml", 23 ]
+# from paragraph [ 3, 1, 0, 4 ][ "openmath/doc/extend.xml", 23 ]
 
 
 gap> Display( OMsymRecord.nums1 );          
@@ -15,7 +15,7 @@ rec(
     end )
 
 
-# from paragraph [ 3, 1, 0, 10 ][ "/Users/alexk/gap4r5/pkg/openmath/doc/extend.xml", 64 ]
+# from paragraph [ 3, 1, 0, 10 ][ "openmath/doc/extend.xml", 64 ]
 
 
 gap> OMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );                
