@@ -24,13 +24,13 @@ demonstrates a combination of all possible cases:
 <![CDATA[
 gap> Display( OMsymRecord.nums1 );          
 rec(
-  NaN := "nan",
+  NaN := nan,
   based_integer := fail,
-  e := fail,
+  e := 2.718281828459045,
   gamma := fail,
   i := E(4),
   infinity := infinity,
-  pi := fail,
+  pi := 3.141592653589793,
   rational := function ( x )
         return OMgapId( [ OMgap2ARGS( x ), x[1] / x[2] ] )[2];
     end )
