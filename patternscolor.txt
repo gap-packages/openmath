@@ -1,0 +1,46 @@
+#############################################################################
+#
+# $Id$
+#
+# patternscolor.txt
+#
+# These are patterns to classify files in a checked out GAP root
+# directory according to whether they are shipped with the main 
+# archive, with the tools archive or not at all.
+# Lines starting with # are ignored, lines starting with - are
+# patterns for files not to be shipped, lines starting with + 
+# are patterns files to be shipped with the main archive and
+# lines starting with a T are patterns for files to be shipped
+# with the tools archive. The first match decides about the class.
+#
+# some problematic files which we need:
+# (in particular there are files with extension .o and .a)
+# files and directories we never include
+-*.o
+-*.DS_Store
+-*.cvsignore*
+-*CVS/*
+-*.git/*
+# excluded directories 
+-bin/*
+-htm/*
+-include/*
+-OMCv1.3c/*
+-OMlib/*
+-protos/*
+-src/*
+# included directories
++cds/*
++doc/*
++gap/*
++hasse/*
++private/*
++tst/*
+# individual files
++CHANGES
++GPL
++README
++examples
++*.g
+# the rest is excluded
+-*
