@@ -1,19 +1,28 @@
 #!/bin/sh
-#############################################################################
-##
-##  $Id$
 
 export PKGNAME="openmath"
-export PKGVERSION="11.1.2"
-export TOOLPATH="/Users/alexk/CVSREPS/GAPDEV/dev/DistributionUpdate/dist45"
+export PKGVERSION="11.1.3"
+export TOOLPATH="/Users/alexk/HGREPS/gap/dev/DistributionUpdate/dist45"
 
-cp ${TOOLPATH}/classifyfiles.py /Users/alexk/CVSREPS/GAPDEV/pkg/
-cp ${TOOLPATH}/patternstextbinary.txt /Users/alexk/CVSREPS/GAPDEV/pkg/
-cp patternscolor.txt /Users/alexk/CVSREPS/GAPDEV/pkg/
+cp ${TOOLPATH}/classifyfiles.py ../
+cp ${TOOLPATH}/patternstextbinary.txt ../
+cp patternscolor.txt ../
 
 echo 'making a list of files to wrap'
 
-cd /Users/alexk/CVSREPS/GAPDEV/pkg/
+cd ..
+
+chmod 644 $PKGNAME/cds/*
+chmod 644 $PKGNAME/doc/*.*
+chmod 644 $PKGNAME/gap/*.*
+chmod 644 $PKGNAME/hasse/*.*
+chmod 644 $PKGNAME/private/*.*
+chmod 644 $PKGNAME/tst/*.*
+chmod 644 $PKGNAME/CHANGES
+chmod 644 $PKGNAME/GPL
+chmod 644 $PKGNAME/README
+chmod 644 $PKGNAME/examples
+chmod 644 $PKGNAME/*.g
 
 python ./classifyfiles.py $PKGNAME
 
@@ -29,6 +38,8 @@ cat listignoredfiles.txt
 echo '======================================================================'
 
 cat listtextfiles.txt listbinaryfiles.txt > filestowrap.txt
+
+rm -rf $PKGNAME-$PKGVERSION.tar.gz
 
 tar -cvzf $PKGNAME-$PKGVERSION.tar.gz -T filestowrap.txt
 
