@@ -322,12 +322,12 @@ gap> Size(d);
 5
 gap> 
 gap> r := BinaryRelationByElements(d,
-> [ Tuple(["0","a"]),
-> Tuple(["0","b"]),
-> Tuple(["0","c"]),
-> Tuple(["a","1"]),
-> Tuple(["b","1"]),
-> Tuple(["c","1"])]);
+> [ DirectProductElement(["0","a"]),
+> DirectProductElement(["0","b"]),
+> DirectProductElement(["0","c"]),
+> DirectProductElement(["a","1"]),
+> DirectProductElement(["b","1"]),
+> DirectProductElement(["c","1"])]);
 <general mapping: <object> -> <object> >
 gap> 
 gap> p := TransitiveClosureBinaryRelation(ReflexiveClosureBinaryRelation(r));

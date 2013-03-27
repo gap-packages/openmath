@@ -12,24 +12,6 @@
 ##  Low-level methods for output in the OpenMath XML format
 ## 
 
-
-###########################################################################
-#
-# The Gap function AppendTo (used by OMWriteLine) uses
-# PrintFormattingStatus and, before Gap 4.4.7, PrintFormattingStatus was
-# defined only for text streams.
-#
-if not CompareVersionNumbers( VERSION, "4.4.7" )  then
-    InstallOtherMethod( PrintFormattingStatus, "for non-text output stream",
-      true, [IsOutputStream], 0,
-      function ( str )
-        if IsOutputTextStream( str )  then
-            TryNextMethod();
-        fi;
-        return false;
-    end);
-fi;
-    
     
 ###########################################################################
 ##  

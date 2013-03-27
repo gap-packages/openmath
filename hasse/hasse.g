@@ -78,7 +78,7 @@ CreateHasseDiagram := function(f, le)
   tups := [];
   for i in lc do
     for j in i[2] do
-      Append(tups, [Tuple([i[1], j])]);
+      Append(tups, [DirectProductElement([i[1], j])]);
     od;
   od;
   rel := BinaryRelationByElements(Domain(f), tups);
