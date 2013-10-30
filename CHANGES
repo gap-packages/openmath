@@ -1,3 +1,18 @@
+11.11.5 (October 2013)
+* Test output updated to match GAP 4.7.1
+
+11.11.4 (March 2013)
+* Cleaned up usage of some obsoletes
+
+11.11.3 (February 2013)
+* Updated tests to automate failure detection
+
+11.11.2 (May 2012)
+* Improved testing facilities
+
+11.11.1 (April 2012)
+* Updated example of OMsymRecord.nums1.
+
 11.11.0 (March 2012)
 * Added .ocd files for private content dictonaries, already implemented in
   the package, to the 'ocd' directory.

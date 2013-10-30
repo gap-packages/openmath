@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export PKGNAME="openmath"
-export PKGVERSION="11.1.4"
+export PKGVERSION="11.1.5"
 export TOOLPATH="/Users/alexk/HGREPS/gap/dev/DistributionUpdate/dist45"
 
 cp ${TOOLPATH}/classifyfiles.py ../
