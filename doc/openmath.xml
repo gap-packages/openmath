@@ -159,9 +159,10 @@ gap> OMPrint(x+1);
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
 <Section Label="Reading OpenMath from streams">
-<Heading>Reading &OpenMath; code from streams</Heading>
+<Heading>Reading &OpenMath; code from streams and strings</Heading>
 
 <#Include Label="OMGetObject">
+<#Include Label="EvalOMString">
 
 </Section>
 

@@ -7,8 +7,9 @@
 #Y  School Math and Comp. Sci., University of St.  Andrews, Scotland
 #Y  Copyright (C) 2004, 2005, 2006 Marco Costantini
 ##
-##  Reads an OpenMath object from an input stream and returns a GAP object.
-##
+##  OMGetObject reads an OpenMath object from an input stream and returns
+##  a GAP object. EvalOMString is an analog of EvalString for a string which
+##  contains an OpenMath object.
 ##
 
 
@@ -59,6 +60,22 @@ InstallGlobalFunction(OMGetObject, function( stream )
  
   	fi;    
     
+end);
+
+
+#############################################################################
+##
+#F  EvalOMString( <omstr> )
+##
+##  This function is an analog of EvalString for a string which contains an 
+##  OpenMath object.
+##
+InstallGlobalFunction( EvalOMString, function( omstr )
+local s, obj;
+    s := InputTextString( omstr );
+    obj := OMGetObject( s );
+    CloseStream( s );
+    return obj;
 end);
 
 

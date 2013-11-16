@@ -7,8 +7,9 @@
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
 #Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
 ##
-##  Reads an OpenMath object from an input stream and returns
-##  a GAP object.
+##  OMGetObject reads an OpenMath object from an input stream and returns
+##  a GAP object. EvalOMString is an analog of EvalString for a string which
+##  contains an OpenMath object.
 ##
 
 
@@ -64,8 +65,37 @@
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-
 DeclareGlobalFunction("OMGetObject");
+
+
+#############################################################################
+##
+#F  EvalOMString( <omstr> )
+##
+##  <#GAPDoc Label="EvalOMString">
+##  <ManSection>
+##      <Func Name="EvalOMString" Arg="omstr" />
+##  <Description>
+##  This function is an analog of <Ref Func="EvalString" BookName="ref" />.
+##  Its argument <A>omstr</A> must be a string containing a single &OpenMath;
+##  object. <Ref Func="EvalOMString"/> will return the &GAP; object represented
+##  by <A>omstr</A>. 
+##  <P/>
+##  If <A>omstr</A> contains more &OpenMath; objects, the rest will be ignored.
+##  <Example>
+##  <![CDATA[
+##  gap> s:="<OMOBJ><OMS cd=\"setname1\" name=\"Z\"/></OMOBJ>";;
+##  gap> EvalOMString(s);
+##  Integers
+##  gap> G:=SL(2,5);; G=EvalOMString(OMString(G));
+##  true
+##  ]]>
+##  </Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareGlobalFunction("EvalOMString");
+
 
 #####################################################################
 ##
