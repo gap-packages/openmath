@@ -1,3 +1,7 @@
+11.2.0 (November 2013)
+* Added function EvalOMString which is an analog of EvalString to evaluate
+  a string containing an OpenMath object
+
 11.11.5 (October 2013)
 * Test output updated to match GAP 4.7.1
 
