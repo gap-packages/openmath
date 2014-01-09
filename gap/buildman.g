@@ -58,43 +58,12 @@ mypath := GAPInfo.PackagesInfo.("openmath")[1].InstallationPath;
 path:=Concatenation( mypath, "/doc/");
 main:="manual.xml";
 bookname:="openmath";
-MakeGAPDocDoc( path, main, OPENMATHMANUALFILES, bookname );  
+MakeGAPDocDoc( path, main, OPENMATHMANUALFILES, bookname, "../../.." );  
 CopyHTMLStyleFiles( path );
 GAPDocManualLab( "openmath" );; 
 ExtractMyManualExamples( "openmath", main, OPENMATHMANUALFILES);
 end;
 
-
-###########################################################################
-##
-##  OPENMATHBuildManualForGAP44()
-##
-OPENMATHBuildManualForGAP44:=function()
-local mypath, path, main, files, f, bookname;
-mypath := GAPInfo.PackagesInfo.("openmath")[1].InstallationPath;
-path:=Concatenation( mypath, "/doc/");
-main:="manual.xml";
-bookname:="openmath";
-MakeGAPDocDoc( path, main, OPENMATHMANUALFILES, bookname );  
-GAPDocManualLab( "openmath" );; 
-end;
-
-
-###########################################################################
-##
-##  OPENMATHBuildManualHTML()
-##
-OPENMATHBuildManualHTML:=function()
-local path, main, files, str, r, h;
-path:=Concatenation(
-        GAPInfo.PackagesInfo.("openmath")[1].InstallationPath, "/doc/");
-main:="manual.xml";
-str:=ComposedXMLString( path, main, OPENMATHMANUALFILES );
-r:=ParseTreeXMLString( str );
-CheckAndCleanGapDocTree( r );
-h:=GAPDoc2HTML( r, path );
-GAPDoc2HTMLPrintHTMLFiles( h, path );
-end;
 
 ###########################################################################
 
