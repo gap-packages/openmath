@@ -15,12 +15,12 @@ SetPackageInfo( rec(
 PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.2.0",
-Date := "16/11/2013",
+Version := "11.3.0",
+Date := "08/01/2016",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "11.2.0">
-##  <!ENTITY RELEASEDATE "16 November 2013">
-##  <!ENTITY RELEASEYEAR "2013">
+##  <!ENTITY VERSION "11.3.0">
+##  <!ENTITY RELEASEDATE "08 January 2016">
+##  <!ENTITY RELEASEYEAR "2016">
 ##  <#/GAPDoc>
 
 
@@ -43,7 +43,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "alexk@mcs.st-andrews.ac.uk",
-    WWWHome       := "http://www.cs.st-andrews.ac.uk/~alexk/",
+    WWWHome       := "http://blogs.cs.st-andrews.ac.uk/alexk/",
     PostalAddress := Concatenation( [
                      "School of Computer Science\n",
                      "University of St Andrews\n",
