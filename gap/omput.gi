@@ -268,7 +268,7 @@ InstallMethod( OMPut, "for a residue class", true,
 [ IsOpenMathWriter, IsZmodnZObj ],0,
 function( writer, x )
 	OMPutApplication( writer, "integer2", "class",
-		[  x![1], FamilyObj(x)!.modulus ] );
+		[  Int(x), Characteristic(FamilyObj( x )) ] );
 end);
 
 
