@@ -21,14 +21,6 @@ MakeReadWriteGlobal("OMTempVars");
 BindGlobal( "OMIsNotDummyLeaf", 
     node -> not node.name = "PCDATA" and not node.name = "XMLCOMMENT");
 
-
-if not CompareVersionNumbers( GAPInfo.Version, "4.5.0") and 
-   not IsBoundGlobal( "MACFLOAT_STRING" ) then
-    MACFLOAT_STRING := Float;
-    IS_MACFLOAT := IsFloat;
-fi;
-
-
 BindGlobal( "OMObjects",
 
     rec(
@@ -45,7 +37,7 @@ BindGlobal( "OMObjects",
             Error( "hexadecimal encoding of floats is not supported" );
         fi;
         if CompareVersionNumbers( GAPInfo.Version, "4.5.0") then
-        	return MACFLOAT_STRING( node.attributes.dec );
+        	return Float( node.attributes.dec );
         else
         	return Float( node.attributes.dec );
         fi;
@@ -213,7 +205,7 @@ OMObjects.OMF :=
         if not IsBound( node.attributes.dec )  then
             Error( "hexadecimal encoding of floats is not supported" );
         fi;
-      	return MACFLOAT_STRING( node.attributes.dec );
+      	return Float( node.attributes.dec );
     end;
 
 else

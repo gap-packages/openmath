@@ -359,7 +359,7 @@ end);
 ##
 ##
 InstallMethod(OMPut, "for a float to binary OpenMath", true,
-[ IsOpenMathBinaryWriter, IS_MACFLOAT ],0,
+[ IsOpenMathBinaryWriter, IsFloat ],0,
 function(writer, f)
 	local intPart, decPart, sign, decHex, decBin, decBinLen, exponent, 
 	      pos, mantissa, intBin, absIntPart;

@@ -268,7 +268,7 @@ end);
 ##  Printing for floats: specified in the standard
 ##
 InstallMethod(OMPut, "for a float", true,
-[IsOpenMathXMLWriter, IS_MACFLOAT],0,
+[IsOpenMathXMLWriter, IsFloat],0,
 function(writer, x)
     local  string;
     # treatment of x=0 separately was added when discovered
@@ -285,34 +285,6 @@ function(writer, x)
     	OMWriteLine( writer![1], [ "<OMF dec=\"", string, "\"/>" ] );
 	fi;
 end);
-
-
-###########################################################################
-##
-#M  OMPut( <stream>, <float> )
-##
-##  Printing for floats: specified in the standard
-##
-if IsBound( IS_MACFLOAT )  then
-InstallMethod(OMPut, "for a float", true,
-[IsOpenMathXMLWriter, IS_MACFLOAT],0,
-function(writer, x)
-    local  string;
-    # treatment of x=0 separately was added when discovered
-    # that Float("-0") returns -0, but it is also faster.
-    if IsZero(x) then
-    	OMWriteLine( writer![1], [ "<OMF dec=\"0\"/>" ] );
-    else
-    	string := String( x );
-    	# the OpenMath standard requires floats encoded in this way, see
-    	# section 3.1.2
-    	string := ReplacedString( string, "e+", "e" );
-    	string := ReplacedString( string, "inf", "INF" );
-    	string := ReplacedString( string, "nan", "NaN" );
-    	OMWriteLine( writer![1], [ "<OMF dec=\"", string, "\"/>" ] );
-	fi;
-end);
-fi;
 
 
 ###########################################################################
