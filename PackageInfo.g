@@ -15,11 +15,11 @@ SetPackageInfo( rec(
 PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.3.0",
+Version := "11.3.1",
 Date := "08/01/2016",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "11.3.0">
-##  <!ENTITY RELEASEDATE "08 January 2016">
+##  <!ENTITY VERSION "11.3.1">
+##  <!ENTITY RELEASEDATE "28 January 2016">
 ##  <!ENTITY RELEASEYEAR "2016">
 ##  <#/GAPDoc>
 
