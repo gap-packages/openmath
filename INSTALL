@@ -1,0 +1,28 @@
+This package is installed as a normal Gap package: see Gap reference
+manual, chapter "74 GAP Packages" (and if you don't have write access to
+the Gap installation see also section "9.2 GAP Root Directory"), for
+details.
+
+This package suggests compilation, and the complilation is non-standard:
+see README file for details.
+
+cd pkg/openmath
+
+cd OMCv1.3c/src/
+./configure
+make
+cd ../../
+./configure ../../
+make
+
+
+The part in C language compiles and runs also on Windows with Cygwin 
+(see http://www.cygwin.com/).
+A Windows user may also try to get a precompiled OMC binary from
+ftp://ftp-sop.inria.fr/safir/OM (I didn't try), and thereafter
+
+cd pkg/openmath
+
+./configure ../../
+make
+

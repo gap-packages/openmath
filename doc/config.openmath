@@ -1,0 +1,5 @@
+@msfiles = ("openmath");
+@gdfiles  = ("../gap/omput", "../gap/parse", "../gap/omget", "../gap/test");
+$LIB = "../gap";
+
+

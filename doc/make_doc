@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# remove the generated files
+# rm manual.dvi manual.six manual.ps manual.pdf ../htm/*.htm manual.lab manual.toc
+# rm -f openmath.tex
+
+# create openmath.tex
+../../../etc/buildman.pe -f config.openmath
+
+# compile the manual
+tex manual
+../../../doc/manualindex manual
+tex manual
+
+dvips -o manual.ps manual
+
+ps2pdf manual.ps
+
+# file manual.bbl is asked by ../../../etc/convert.pl
+# bibtex manual
+echo "\\begin{thebibliography}{} \\end{thebibliography}" > manual.bbl 
+
+# create the htm files, in the ../htm directory
+if test ! -d ../htm;  then mkdir ../htm;  fi
+../../../etc/convert.pl -c -i -n openmath.htm . ../htm
+
+# remove the temp and log files
+rm manual.aux manual.idx manual.ilg manual.ind manual.log manual.bbl

@@ -1,0 +1,14 @@
+<OMOBJ>
+	<OMA>
+		<OMS cd="group1" name="CharacterTableOfGroup"/>
+		<OMA>
+			<OMS cd="group1" name="Group"/>
+			<OMA>
+				<OMS cd="permut1" name="Permutation"/>
+				<OMI> 2 </OMI>
+				<OMI> 3 </OMI>
+				<OMI> 1 </OMI>
+			</OMA>
+		</OMA>
+	</OMA>
+</OMOBJ>

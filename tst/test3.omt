@@ -1,0 +1,75 @@
+<OMOBJ>
+	<OMI>
+	912873912381273891
+	</OMI>
+</OMOBJ>
+
+
+<OMOBJ>
+	<OMS cd="nums" name="i" />
+</OMOBJ>
+
+<OMOBJ>
+	<OMS cd="nums" name="true" />
+</OMOBJ>
+
+
+<OMOBJ>
+	<OMS cd="nums" name="false" />
+</OMOBJ>
+
+
+<OMOBJ>
+  <OMS cd="fns" name="lambda" />
+</OMOBJ>
+
+
+<OMOBJ>
+  <OMV name="dummy1" />
+</OMOBJ>
+
+<OMOBJ>
+  <OMSTR>string1</OMSTR>
+</OMOBJ>
+
+<OMOBJ>
+	<OMA>
+		<OMS cd="permut1" name="Permutation"/>
+		<OMI> 2 </OMI>
+		<OMI> 3 </OMI>
+		<OMI> 1 </OMI>
+	</OMA>
+</OMOBJ>
+
+<OMOBJ>
+	<OMA>
+		<OMS cd="group1" name="Group"/>
+		<OMA>
+			<OMS cd="permut1" name="Permutation"/>
+			<OMI> 2 </OMI>
+			<OMI> 3 </OMI>
+			<OMI> 1 </OMI>
+		</OMA>
+	</OMA>
+</OMOBJ>
+
+<OMOBJ>
+	<OMATTR>
+		<OMATP>
+			<OMS cd="nums" name="true"/>
+			<OMI> 1 </OMI>
+		</OMATP>
+
+		<OMA>
+      <OMS cd="permut1" name="Permutation"/>
+      <OMI> 2 </OMI>
+      <OMI> 3 </OMI>
+      <OMI> 1 </OMI>
+    </OMA>
+	</OMATTR>
+</OMOBJ>
+
+
+
+
+

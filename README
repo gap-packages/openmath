@@ -1,0 +1,321 @@
+% The content of this file can be read also in the dvi/ps/pdf manual.
+
+The compilation is non-standard! See below.
+
+
+\noindent
+This package has been developed to allow {\GAP} users to
+import and export mathematical objects encoded in OpenMath,
+for the purpose of exchanging them with other applications that
+are OpenMath enabled.
+
+
+\noindent
+1. Copyright
+
+This package is distributed under GPL license and the terms of the {\GAP}
+copyright. Additionally, it contains code developed at INRIA
+(copyright INRIA), under the ESPRIT project number 24969 (OpenMath).
+The user may not use the library in commercial products without seeking
+permission from the {\GAP} group (support@gap-system.org) and the 
+CAFE team at  INRIA SA (stephane.dalmas@sophia.inria.fr).
+
+It may be redistributed ``as is'' together with this notice.
+
+\noindent
+2. Technicalities and installation
+
+This package includes a C program, and works with full functionality
+only if this program has been compiled.
+
+To install this package (after extracting the packages archive
+file to the {\GAP} pkg directory):
+
+a) go to the directory `pkg/openmath/OMCv1.3c/src' and call 
+
+/bin/sh ./configure
+
+and then call `make' to compile the INRIA library (producing libOM.a).
+
+
+b) go to the directory `pkg/openmath' (the
+directory containing this README file) and call
+
+/bin/sh ./configure <path>
+
+where <path> is a path to the main {\GAP} root directory (so normally you would
+call /bin/sh ./configure ../..).
+
+afterwards call `make' to compile the binary. See file examples for usage examples.
+
+c) you also need to modify the file hasse/config.g
+to make the Hasse diagram stuff work.
+
+
+
+\noindent
+3. The INRIA library
+
+The files in the directory `openmath/OMCv1.3c' are the OpenMath C library
+version 1.3c developed by the CAFE group at INRIA SA. For the latest 
+version, contact: stephane.dalmas@sophia.inria.fr , or try
+\URL{ftp://ftp-sop.inria.fr/safir/OM} .
+
+
+\vfill
+
+Andrew Solomon (andrew@illywhacker.net),
+Department of Computer Science,
+University of St. Andrews.
+
+
+9 March 2000.
+
+
+\medskip
+\noindent
+
+June 2004: I have done some modifications in this package, in order to
+make it usable again:
+
+provided a PackageInfo.g file (this file is needed by {\GAP} 4.4);
+
+changed in several points ``share package'' into ``package'' as now the
+term ``share'' is obsolete;
+
+slight modifications in the file doc/make_doc;
+
+the warning ``The compilation is non-standard! See below.'' above.
+
+Marco Costantini
+
+
+
+\medskip
+
+
+After agreement with Andrew Solomon, I will be the maintainer of this
+package. I have done the modifications listed below, which were
+necessary in order to extend the functionality and to fix the bugs, and
+because both OpenMath and the package mechanism of {\GAP} have evolved
+in the meantime.
+
+Marco Costantini
+
+December 2005 and January 2006
+
+
+This package performs the conversion from {\GAP} to OpenMath, using only
+{\GAP} code, and this part is expected to work on each machine on which
+{\GAP} works. This package performs also the conversion from OpenMath to
+{\GAP}, either using a function from the {\GAP} package ``GapDoc'', or
+using an external program (which is included in the package, is
+written in C, and needs to be compiled); autodetection is used.
+
+
+The list of supported OpenMath Content Dictionaries (CDs) is implicit in
+the code. 
+For the supported CDs and symbols when converting from OpenMath to
+{\GAP}, see the files gap/gap.g, variables OMsymTable and
+OMnullarySymbolToGAP, and gap/new.g.
+For the supported CDs and symbols when converting from {\GAP} to
+OpenMath, see the files gap/omput.gi, method for OMPut (and
+hasse/hasse.g for the Hasse diagram).
+If you modify the code to add support for other CDs, please inform me,
+so that your modifications can be included in a new version of this
+package.
+
+
+The websites of this package are:
+
+\URL{http://www-math.science.unitn.it/~costanti/\#openmath} and
+\URL{http://www.gap-system.org/Packages/openmath.html} .
+
+For contacts, write to costanti@science.unitn.it .
+
+The content of the subdirectories is:
+
+%notest
+\beginexample
+
+openmath/
+|-- OMCv1.3c    the OpenMath C library by the CAFE team at INRIA
+|-- bin         the compiled gpipe program
+|-- cds         some (out-of-date) OpenMath content dictionaries
+|-- doc         documentation in TeX, dvi, ps, pdf, txt
+|-- gap         GAP code
+|-- hasse       GAP code for Hasse diagrams
+|-- htm         documentation in html
+|-- include     file gap_tokens.h
+|-- src         source of the gpipe program
+|-- tst         test files and examples
+
+\endexample
+
+
+List of main modifications made by Marco Costantini to the original
+package by Andrew Solomon (technical).
+
+\beginlist
+
+\item o file pkg/openmath/gap/gap.g
+
+\itemitem o Updated function ``OMnullarySymbolToGAP'' according to the
+current OpenMath CDs.
+
+
+\item o added file pkg/openmath/gap/new.g that contains
+
+\itemitem o Update to function OMsymTable, according to the current
+OpenMath CDs (for converting from OpenMath to {\GAP}).
+
+
+\item o file pkg/openmath/gap/lex.g
+
+\itemitem o Added support for XML escaped characters.
+
+
+\item o file pkg/openmath/gap/parse.gi
+
+\itemitem o Added support for the new OpenMath 2.0 objects that contain
+information inside the OMOBJ tag.
+
+\itemitem o Now ``gpipe'' is called using Process instead of Exec (this
+increases both the performance and the portability).
+
+
+\item o added files xmltree.gd and xmltree.gi that contain
+
+\itemitem o A function that converts the OpenMath XML into a tree and
+parses it.
+
+
+\item o file pkg/openmath/gap/pipeobj.g
+
+\itemitem o Added support for conversion of OpenMath objects with binary
+encoding, from OpenMath to {\GAP}.
+
+\itemitem o Added support for comment along the streams, between
+OpenMath objects.
+
+
+\item o file pkg/openmath/gap/omget.g
+
+\itemitem o Now OMGetObject doesn't hang any more when OpenMath object is
+not retrieved.
+
+\itemitem o Now OMGetObject closes the files that is has opened.
+
+\itemitem o Modified also to avoid using a new temporary directory for
+each call of OMGetObject.
+
+
+\item o file pkg/openmath/gap/omput.gi 
+
+\itemitem o Updated and fixed functions ``OMPut'' and related, according
+to the current OpenMath CDs.
+
+\itemitem o Simplified the code for the OMPutby methods, by introducing
+OMPutApplication and using OMPutSymbol.
+
+\itemitem o Added OMPut methods for infinity, a range, a float, Rationals,
+Integers, NonnegativeIntegers (for converting from {\GAP} to OpenMath).
+
+\itemitem o Fixed OMPut method for cyclotomics. Now it is correct for
+GaussianRationals and infinity.
+
+\itemitem o Added a SetPrintFormattingStatus in OMWriteLine, to fix
+conversion of long objects.
+
+\itemitem o Fixed some typos.
+
+
+\item o Added file pkg/openmath/hasse/config.g
+
+\itemitem o Removed unnecessay INSTALLATION_PATH 
+
+\itemitem o Warning about SERVLET
+
+
+\item o file pkg/openmath/PackageInfo.g
+
+\itemitem o Provided an up-to-date, informative, complete and working 
+PackageInfo.g file.
+
+
+\item o file pkg/openmath/init.g
+
+\itemitem o Moved here reading of \*.gd files from read.g
+
+\itemitem o Removed the outdated stuff
+
+
+\item o file pkg/openmath/read.g
+
+\itemitem o Now the is clearly indiceted which is the interdependence of 
+the files in the package.
+
+\itemitem o Reads the file pkg/openmath/gap/new.g above.
+
+\itemitem o Moved reading of \*.gd files to file init.g
+
+\itemitem o Converted ReadPkg to ReadPackage
+
+\itemitem o Removed banner (moved to PackageInfo.g file)
+
+
+\item o added files pkg/openmath/tst/test_new,
+pkg/openmath/tst/test_new.src, pkg/openmath/tst/test_new.omt
+
+\itemitem o Provided a test file.
+
+
+\item o file pkg/openmath/doc/openmath.msk
+
+\itemitem o Fixed the examples, to make them to look exactly like in {\GAP}.
+
+
+\item o file pkg/openmath/README (this file)
+
+\itemitem o Updated, added more information and the list of
+modifications.
+
+
+\item o files pkg/openmath/examples and pkg/openmath/hasse/example
+
+\itemitem o Converted RequirePackage to LoadPackage
+
+\itemitem o Added some notes
+
+
+\item o in various files
+
+\itemitem o Refactored the code, so that the code is splitted into
+several independent modules (see file read.g).
+
+\itemitem o Added commands to close all the streams.
+
+\itemitem o Modified to fit with the file structure prescribed in the
+``ext'' manual.
+
+\itemitem o various minor changes.
+
+
+\item o Now the package loads, and provides conversion from {\GAP} to
+OpenMath, even if the external binary has not been compiled. In this
+case, if the conversion from OpenMath to {\GAP} is attempted, an
+informative error message is issued.
+
+
+\endlist
+
+
+
+\medskip
+
+
+Marco Costantini
+
+December 2005, January and July 2006
+
+

@@ -1,0 +1,93 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%A  openmath.msk                GAP documentation              Andrew Solomon
+%%
+%A  @(#)$Id$
+%%
+%Y  (C) 1999 School Math and Comp. Sci., University of St.  Andrews, Scotland
+%%
+\Chapter{OpenMath functionality in GAP}
+
+After loading the package:
+\beginexample
+gap> LoadPackage( "openmath" );
+true
+\endexample
+the following operations are available.
+
+\Declaration{OMPrint}
+\beginexample
+gap> g := Group((1,2,3));;
+gap> OMPrint(g);
+<OMOBJ>
+	<OMA>
+		<OMS cd="group1" name="Group"/>
+		<OMA>
+			<OMS cd="permut1" name="Permutation"/>
+			<OMI> 2</OMI>
+			<OMI> 3</OMI>
+			<OMI> 1</OMI>
+		</OMA>
+	</OMA>
+</OMOBJ>
+\endexample
+
+
+\Declaration{OMGetObject}
+This may be used to retrieve objects from a file,
+for example:
+\beginexample
+gap> test3:=Filename(DirectoriesPackageLibrary("openmath","tst"),"test3.omt");;
+gap> stream := InputTextFile( test3 );;
+gap> OMGetObject(stream);
+912873912381273891
+gap> OMGetObject(stream);
+E(4)
+gap> CloseStream(stream);
+\endexample
+or it can be used to retrieve them from standard input -
+one may paste an OpenMath object directly into standard input
+after issuing GAP with the following commands:
+%notest
+\beginexample
+gap> stream := InputTextUser();;
+gap> g := OMGetObject(stream);CloseStream(stream);
+\endexample
+
+
+\Declaration{OMPutObject}
+\beginexample
+gap> g := [[1,2],[1,0]];;
+gap> t := "";
+""
+gap> s := OutputTextString(t, true);;
+gap> OMPutObject(s, g);
+gap> CloseStream(s);
+gap> Print(t);
+<OMOBJ>
+	<OMA>
+		<OMS cd="linalg2" name="matrix"/>
+		<OMA>
+			<OMS cd="linalg2" name="matrixrow"/>
+			<OMI> 1</OMI>
+			<OMI> 2</OMI>
+		</OMA>
+		<OMA>
+			<OMS cd="linalg2" name="matrixrow"/>
+			<OMI> 1</OMI>
+			<OMI> 0</OMI>
+		</OMA>
+	</OMA>
+</OMOBJ>
+\endexample
+
+\Declaration{OMTest}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%E
