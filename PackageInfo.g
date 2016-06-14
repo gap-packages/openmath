@@ -25,7 +25,11 @@ Date := "08/01/2016",
 
 
 PackageWWWHome := "http://www.cs.st-andrews.ac.uk/~alexk/openmath/",
-
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/gap-packages/openmath"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 ArchiveURL := Concatenation( ~.PackageWWWHome, "openmath-", ~.Version ),
 ArchiveFormats := ".tar.gz",
 
