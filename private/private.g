@@ -76,13 +76,16 @@ BindGlobal("OMgapNativeStatementFunc", function(statement)
 
 	i := InputTextString(statement);
 	# want to catch standard out.
-	result := READ_COMMAND(i,false);
+	result := READ_COMMAND_REAL(i,false);
 	CloseStream(i);
 	
-	OM_GAP_OUTPUT_STR :=  StringView(result);
-	# this is the way of indicating an error condition...
-	if (result = fail) then
-		OM_GAP_ERROR_STR := "Unknown Error";
+	if Length(result) = 2 then
+		OM_GAP_OUTPUT_STR :=  StringView(result[2]);
+	elif result[1] = true then
+		OM_GAP_OUTPUT_STR :=  "";
+        else
+                OM_GAP_OUTPUT_STR := fail;
+		OM_GAP_ERROR_STR  := "Unknown Error";
 		return false;
 	fi;
 

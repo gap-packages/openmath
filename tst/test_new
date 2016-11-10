@@ -99,7 +99,7 @@ true
 ""
 gap> OMGetObject(stream); OM_GAP_OUTPUT_STR; OM_GAP_ERROR_STR; OM_GAP_OUTPUT_STR := "";; OM_GAP_ERROR_STR := "";;
 true
-"SuPeRfail"
+""
 ""
 gap> OMGetObject(stream); OM_GAP_OUTPUT_STR; OM_GAP_ERROR_STR;
 ""
@@ -340,8 +340,8 @@ gap> h := HasseDiagram(p);
 gap> 
 gap> # the bug was here.
 gap> Elements(UnderlyingRelation(h));
-[ DirectProductElement( [ "0", "a" ] ), DirectProductElement( [ "0", "b" ] ),
-  DirectProductElement( [ "0", "c" ] ), DirectProductElement( [ "a", "1" ] ),
+[ DirectProductElement( [ "0", "a" ] ), DirectProductElement( [ "0", "b" ] ), 
+  DirectProductElement( [ "0", "c" ] ), DirectProductElement( [ "a", "1" ] ), 
   DirectProductElement( [ "b", "1" ] ), DirectProductElement( [ "c", "1" ] ) ]
 gap> 
 gap> ### test for the various supported objects
@@ -747,6 +747,8 @@ gap> OMPrint(floats);
 		<OMF dec="NaN"/>
 	</OMA>
 </OMOBJ>
-gap> List(floats,OMTest);
-[ true, true, true, true, false ]
-gap> STOP_TEST( "test", 10000000 );
+gap> 
+gap> STOP_TEST( "test", 10000 );
+Test of the 'openmath' package
+GAP4stones: 138
+gap> LogTo();
