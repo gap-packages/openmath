@@ -15,22 +15,25 @@ SetPackageInfo( rec(
 PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.3.1",
-Date := "08/01/2016",
+Version := "11.4.0",
+Date := "06/02/2017",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "11.3.1">
-##  <!ENTITY RELEASEDATE "28 January 2016">
-##  <!ENTITY RELEASEYEAR "2016">
+##  <!ENTITY VERSION "11.4.0">
+##  <!ENTITY RELEASEDATE "6 February 2017">
+##  <!ENTITY RELEASEYEAR "2017">
 ##  <#/GAPDoc>
 
-
-PackageWWWHome := "http://www.cs.st-andrews.ac.uk/~alexk/openmath/",
-SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/gap-packages/openmath"
+SourceRepository := rec(
+    Type := "git",
+    URL := Concatenation( "https://github.com/gap-packages/", LowercaseString(~.PackageName) ),
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-ArchiveURL := Concatenation( ~.PackageWWWHome, "openmath-", ~.Version ),
+PackageWWWHome  := Concatenation( "https://gap-packages.github.io/", LowercaseString(~.PackageName) ),
+README_URL      := Concatenation( ~.PackageWWWHome, "/README.md" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/", ~.PackageName, "-", ~.Version ),
 ArchiveFormats := ".tar.gz",
 
 Persons := [
@@ -46,7 +49,7 @@ Persons := [
     FirstNames    := "Alexander",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "alexk@mcs.st-andrews.ac.uk",
+    Email         := "alexander.konovalov@st-andrews.ac.uk",
     WWWHome       := "http://blogs.cs.st-andrews.ac.uk/alexk/",
     PostalAddress := Concatenation( [
                      "School of Computer Science\n",
@@ -61,15 +64,7 @@ Persons := [
     LastName      := "Nicosia",
     FirstNames    := "Max",
     IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "ln73@st-andrews.ac.uk",
-    PostalAddress := Concatenation( [
-                     "School of Computer Science\n",
-                     "University of St Andrews\n",
-                     "Jack Cole Building, North Haugh,\n",
-                     "St Andrews, Fife, KY16 9SX, Scotland" ] ),
-    Place         := "St Andrews",
-    Institution   := "University of St Andrews"
+    IsMaintainer  := false
   ),   
   
   rec(
@@ -77,8 +72,6 @@ Persons := [
     FirstNames    := "Andrew",
     IsAuthor      := true,
     IsMaintainer  := false,
-    Email         := "andrew@illywhacker.net",
-    WWWHome       := "http://www.illywhacker.net/",
     PostalAddress := Concatenation( [
     "Faculty of IT\n",
     "University of Technology, Sydney\n",
@@ -100,11 +93,6 @@ This package allows <span class=\"pkgname\">GAP</span> users to import \
 and export mathematical objects encoded in OpenMath, for the purpose of \
 exchanging them with other applications that are OpenMath enabled.",
 
-README_URL := 
-  Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL := 
-  Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-  
 PackageDoc := rec(
   BookName  := "OpenMath",
   ArchiveURLSubset := ["doc"],
@@ -116,12 +104,12 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4.7",
+  GAP := ">=4.8",
   # Needed packages:
   # GapDoc provides the function ParseTreeXMLString
   # IO is needed to generate random string from really random source 
-  NeededOtherPackages := [ [ "GapDoc", ">= 1.3" ], 
-                           [ "IO", ">= 3.0"] ],
+  NeededOtherPackages := [ [ "GapDoc", ">= 1.5" ], 
+                           [ "IO", ">= 4.4"] ],
   ExternalConditions := [ ]
 ),
 
