@@ -101,7 +101,7 @@ and export mathematical objects encoded in OpenMath, for the purpose of \
 exchanging them with other applications that are OpenMath enabled.",
 
 README_URL := 
-  Concatenation( ~.PackageWWWHome, "README" ),
+  Concatenation( ~.PackageWWWHome, "README.md" ),
 PackageInfoURL := 
   Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
   
