@@ -1,3 +1,6 @@
+11.4.0 (February 2017)
+* New release after switching to GitHub and GitHub pages
+
 11.2.0 (November 2013)
 * Added function EvalOMString which is an analog of EvalString to evaluate
   a string containing an OpenMath object
