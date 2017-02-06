@@ -1,0 +1,123 @@
+  
+  [1X3 [33X[0;0YExtending the [5XOpenMath[105X[101X[1X package[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YExploring the range of supported symbols[133X[101X
+  
+  [33X[0;0YThe  [5XOpenMath[105X  package  supports  such  basic [5XOpenMath[105X objects as integers (
+  <OMI>  ),  character  strings ( <OMSTR> ) and variables ( <OMVAR> ). Besides
+  that,  it  supports  a number of [5XOpenMath[105X content dictionaries (some of them
+  only partially, dependently on their relevance to [5XGAP[105X). To see which symbols
+  from  which  content  dictionaries  are  supported  for  the conversion from
+  [5XOpenMath[105X  to [5XGAP[105X, explore the global record [10XOMsymRecord[110X. Its components have
+  names  of appropriate CDs, and subcomponents of each component have names of
+  symbols  from  the  corresponding  CD.  If the value of the component is not
+  equal to [9Xfail[109X, then it contains the function or the object which is used for
+  conversion. The following example of the entry for the [10Xnums1[110X CD demonstrates
+  a combination of all possible cases:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( OMsymRecord.nums1 );          [127X[104X
+    [4X[28Xrec([128X[104X
+    [4X[28X  NaN := nan,[128X[104X
+    [4X[28X  based_integer := fail,[128X[104X
+    [4X[28X  e := 2.718281828459045,[128X[104X
+    [4X[28X  gamma := fail,[128X[104X
+    [4X[28X  i := E(4),[128X[104X
+    [4X[28X  infinity := infinity,[128X[104X
+    [4X[28X  pi := 3.141592653589793,[128X[104X
+    [4X[28X  rational := function ( x )[128X[104X
+    [4X[28X        return OMgapId( [ OMgap2ARGS( x ), x[1] / x[2] ] )[2];[128X[104X
+    [4X[28X    end )[128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[10XOMsymRecord[110X  contains  all symbols for which conversion from [5XOpenMath[105X to [5XGAP[105X
+  is  supported  except  some  special symbols related with errors and special
+  procedures from the [5XSCSCP[105X package which are treated separately.[133X
+  
+  [33X[0;0YTo check quickly if [5XGAP[105X can parse a given [5XOpenMath[105X object, copy the [5XOpenMath[105X
+  code and paste it directly into standard input after the following command:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27Xs:= InputTextUser();; g := OMGetObject(s); CloseStream(s);[127X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  main  tool  for the conversion from [5XGAP[105X to [5XOpenMath[105X is [10XOMPut( <writer>,
+  <object>  )[110X.  A  number  of  methods  for  [10XOMPut[110X  are  installed in the file
+  [11Xopenmath/gap/omput.gi[111X.[133X
+  
+  [33X[0;0YTo  check  quickly  whether  the  object  may be converted to [5XOpenMath[105X, call
+  [10XOMprint[110X for that object, for example:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XOMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );                [127X[104X
+    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X	<OMA>[128X[104X
+    [4X[28X		<OMS cd="list1" name="list"/>[128X[104X
+    [4X[28X		<OMA>[128X[104X
+    [4X[28X			<OMS cd="interval1" name="integer_interval"/>[128X[104X
+    [4X[28X			<OMI>1</OMI>[128X[104X
+    [4X[28X			<OMI>10</OMI>[128X[104X
+    [4X[28X		</OMA>[128X[104X
+    [4X[28X		<OMA>[128X[104X
+    [4X[28X			<OMS cd="integer2" name="class"/>[128X[104X
+    [4X[28X			<OMI>2</OMI>[128X[104X
+    [4X[28X			<OMI>6</OMI>[128X[104X
+    [4X[28X		</OMA>[128X[104X
+    [4X[28X		<OMA>[128X[104X
+    [4X[28X			<OMS cd="permut1" name="permutation"/>[128X[104X
+    [4X[28X			<OMI>2</OMI>[128X[104X
+    [4X[28X			<OMI>1</OMI>[128X[104X
+    [4X[28X		</OMA>[128X[104X
+    [4X[28X	</OMA>[128X[104X
+    [4X[28X</OMOBJ>[128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  package  is  in  the  continuous development and will support even more
+  symbols  in  the  future. In the meantime, if you will have any requests for
+  the support for particular symbols, please contact Alexander Konovalov.[133X
+  
+  
+  [1X3.2 [33X[0;0YAdding support for private content dictionaries and symbols[133X[101X
+  
+  [33X[0;0YThere  is  also  a way for the user to extend the package adding support for
+  private and experimental CDs or separate symbols. We allocated the directory
+  [11Xopenmath/private[111X  for  this  purposes,  and  currently  it  contain the file
+  [11Xprivate.g[111X  for  conversions from [5XOpenMath[105X to [5XGAP[105X and the file [11Xprivate.gi[111X for
+  conversions from [5XGAP[105X to [5XOpenMath[105X for some symbols from private CDs contained
+  in the [11Xopenmath/cds[111X directory.[133X
+  
+  [33X[0;0YIn  particular,  we extended the package with the following private [5XOpenMath[105X
+  symbols:[133X
+  
+  [30X    [33X[0;6Y[10Xgroup1.group_by_generators[110X  which allows us to input and output groups
+        given by their generators as this is a natural way to create groups in
+        [5XGAP[105X;[133X
+  
+  [30X    [33X[0;6Y[10Xsemigroup1.semigroup_by_generators[110X   and  [10Xmonoid1.monoid_by_generators[110X
+        following the same considerations for semigroups and monoids;[133X
+  
+  [30X    [33X[0;6Y[10Xpcgroup1.pcgroup_by_pcgscode[110X for PcGroups given by their pcgs code and
+        order;[133X
+  
+  [30X    [33X[0;6Y[10Xrecord1.record[110X for records as they are important data structures which
+        we  want  to  pass  in  a straightforward manner between different [5XGAP[105X
+        instances;[133X
+  
+  [30X    [33X[0;6Y[10Xtransform1.transformation[110X  to  support transformations, transformation
+        semigroups and their automorphism groups.[133X
+  
+  [33X[0;0YThe  file [11Xprivate.g[111X is loaded from [11Xopenmath/gap/new.g[111X, and the [11Xprivate.gi[111X is
+  loaded  from  [11Xopenmath/gap/read.g[111X.  If  the user would like to add own code,
+  this may be done either by adding it to these files or by placing additional
+  files in [11Xopenmath/private[111X directory and load them similarly to [11Xprivate.g[111X and
+  [11Xprivate.gi[111X.  We will welcome user's contributions in the form of the code to
+  support  existing content dictionaries from the [5XOpenMath[105X web site or private
+  content dictionaries, if they may be interesting for a wider community.[133X
+  

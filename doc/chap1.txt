@@ -1,0 +1,71 @@
+  
+  [1X1 [33X[0;0YIntroduction and installation[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YBrief description of the package[133X[101X
+  
+  [33X[0;0YThe  [5XGAP[105X package [5XOpenMath[105X provides an [5XOpenMath[105X phrasebook for [5XGAP[105X: it allows
+  [5XGAP[105X  users to import and export mathematical objects encoded in [5XOpenMath[105X for
+  the purpose of exchanging them with other [5XOpenMath[105X-enabled applications.[133X
+  
+  [33X[0;0YThis manual describes:[133X
+  
+  [30X    [33X[0;6Yhow to view [5XOpenMath[105X representation of an object;[133X
+  
+  [30X    [33X[0;6Yhow  to read [5XOpenMath[105X object from stream or write it to stream for the
+        purposes of exchange with another [5XOpenMath[105X-enabled application;[133X
+  
+  [30X    [33X[0;6Yhow to find which objects can be converted to/from [5XOpenMath[105X using this
+        package;[133X
+  
+  [30X    [33X[0;6Yhow  to  extend  the  package  to  support  private  [5XOpenMath[105X  content
+        dictionaries.[133X
+  
+  [33X[0;0YFor   the   detailed   information   about  [5XOpenMath[105X  standard  and  content
+  dictionaries see the [5XOpenMath[105X homepage [7Xhttp://www.openmath.org[107X.[133X
+  
+  [33X[0;0YFor  practical purposes, the [5XOpenMath[105X package will be most efficient if used
+  in  conjunction  with  the  [5XGAP[105X  package  [5XSCSCP[105X  ([KL]) which implements the
+  Symbolic   Computation   Software  Composability  protocol  ([FHKLR]).  This
+  protocol  specifies  an  [5XOpenMath[105X-based  remote procedure call framework, in
+  which  all  messages  (procedure  calls and returns of results of successful
+  computation  or  error  messages)  are  encoded  in  [5XOpenMath[105X  using content
+  dictionaries  [5Xscscp1[105X  and  [5Xscscp2[105X  ([FHKLLRa],  [FHKLLRb]).  Using the [5XSCSCP[105X
+  package,   [5XGAP[105X   can   communicate   locally  or  remotely  with  any  other
+  [5XOpenMath[105X-enabled  [5XSCSCP[105X-compliant  application which may be not only another
+  computer algebra system but also another instance of the [5XGAP[105X system or even,
+  for  example, an external C/C++ or Java application. Such communication will
+  go  into  a  seamless  manner  with the [5XGAP[105X/[5XOpenMath[105X conversion going in the
+  background.[133X
+  
+  
+  [1X1.2 [33X[0;0YInstallation of the package[133X[101X
+  
+  [33X[0;0YTo  use  the  [5XOpenMath[105X  package it is required to install the [5XGAPDoc[105X package
+  [LN] to use the help system and parse [5XOpenMath[105X objects in the XML format.[133X
+  
+  [33X[0;0YTo  install  the [5XOpenMath[105X package, unpack the archive and place the [11Xopenmath[111X
+  directory  in  the  [11Xpkg[111X  subdirectory  of your [5XGAP[105X4.4 installation. When you
+  don't  have write access to the directory of your main [5XGAP[105X installation, you
+  can  also install the package [13Xoutside the [5XGAP[105X main directory[113X by unpacking it
+  inside  a  directory [11XMYGAPDIR/pkg[111X. Then to be able to load [5XOpenMath[105X you need
+  to call GAP with the [10X-l ";MYGAPDIR"[110X option.[133X
+  
+  [33X[0;0YWhen  the  [5XOpenMath[105X  package  is  installed, it may be loaded as shown below
+  (possibly loading required packages at the same time):[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XLoadPackage("openmath");[127X[104X
+    [4X[28X-----------------------------------------------------------------------------[128X[104X
+    [4X[28XLoading  OpenMath 11.0.0 (OpenMath functionality in GAP)[128X[104X
+    [4X[28Xby Marco Costantini,[128X[104X
+    [4X[28X   Alexander Konovalov (http://www.cs.st-andrews.ac.uk/~alexk/),[128X[104X
+    [4X[28X   Nicosia Max (ln73@st-andrews.ac.uk), and[128X[104X
+    [4X[28X   Andrew Solomon (http://www.illywhacker.net/).[128X[104X
+    [4X[28XHomepage: http://www.cs.st-andrews.ac.uk/~alexk/openmath/[128X[104X
+    [4X[28X-----------------------------------------------------------------------------[128X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  

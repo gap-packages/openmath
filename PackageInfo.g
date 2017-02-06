@@ -1,102 +1,140 @@
-#############################################################################
-##  
-##  Demo PackageInfo.g for the GitHubPagesForGAP
+###########################################################################
 ##
-
+#W    PackageInfo.g            OpenMath Package            Marco Costantini
+##                                                      Alexander Konovalov
+##                                                              Max Nicosia
+##                                                           Andrew Solomon
+##
+#Y    Copyright (C) 1999, 2000, 2001, 2006, 2007-2011
+#Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
+#Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
+##
+##    PackageInfo.g file
+##
 SetPackageInfo( rec(
+PackageName := "OpenMath",
+Subtitle := "OpenMath functionality in GAP",
 
-PackageName := "GitHubPagesForGAP",
+Version := "11.3.1",
+Date := "08/01/2016",
+##  <#GAPDoc Label="PKGVERSIONDATA">
+##  <!ENTITY VERSION "11.3.1">
+##  <!ENTITY RELEASEDATE "28 January 2016">
+##  <!ENTITY RELEASEYEAR "2016">
+##  <#/GAPDoc>
 
-Subtitle := "A GitHub Pages generator for GAP packages",
-Version := "0.2",
-Date := "04/02/2017", # dd/mm/yyyy format
+
+PackageWWWHome := "http://www.cs.st-andrews.ac.uk/~alexk/openmath/",
+SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/gap-packages/openmath"
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+ArchiveURL := Concatenation( ~.PackageWWWHome, "openmath-", ~.Version ),
+ArchiveFormats := ".tar.gz",
 
 Persons := [
   rec(
-    LastName      := "Horn",
+    LastName      := "Costantini",
+    FirstNames    := "Marco",
+    IsAuthor      := true,
+    IsMaintainer  := false
+  ),
+ 
+  rec(
+    LastName      := "Konovalov",
+    FirstNames    := "Alexander",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "alexk@mcs.st-andrews.ac.uk",
+    WWWHome       := "http://blogs.cs.st-andrews.ac.uk/alexk/",
+    PostalAddress := Concatenation( [
+                     "School of Computer Science\n",
+                     "University of St Andrews\n",
+                     "Jack Cole Building, North Haugh,\n",
+                     "St Andrews, Fife, KY16 9SX, Scotland" ] ),
+    Place         := "St Andrews",
+    Institution   := "University of St Andrews"
+  ),  
+  
+  rec(
+    LastName      := "Nicosia",
     FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "max.horn@math.uni-giessen.de",
-    WWWHome       := "http://www.quendi.de/math",
-    PostalAddress := Concatenation(
-                       "AG Algebra\n",
-                       "Mathematisches Institut\n",
-                       "Justus-Liebig-Universität Gießen\n",
-                       "Arndtstraße 2\n",
-                       "35392 Gießen\n",
-                       "Germany" ),
-    Place         := "Gießen",
-    Institution   := "Justus-Liebig-Universität Gießen"
-  ),
-
+    Email         := "ln73@st-andrews.ac.uk",
+    PostalAddress := Concatenation( [
+                     "School of Computer Science\n",
+                     "University of St Andrews\n",
+                     "Jack Cole Building, North Haugh,\n",
+                     "St Andrews, Fife, KY16 9SX, Scotland" ] ),
+    Place         := "St Andrews",
+    Institution   := "University of St Andrews"
+  ),   
+  
   rec(
-    LastName      := "Thor",
-    FirstNames    := "A. U.",
+    LastName      := "Solomon",
+    FirstNames    := "Andrew",
     IsAuthor      := true,
     IsMaintainer  := false,
-    #Email         := "author@example.com",
-  ),
-
-  rec(
-    LastName      := "Itor",
-    FirstNames    := "Jan",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    #Email         := "janitor@example.com",
+    Email         := "andrew@illywhacker.net",
+    WWWHome       := "http://www.illywhacker.net/",
+    PostalAddress := Concatenation( [
+    "Faculty of IT\n",
+    "University of Technology, Sydney\n",
+    "Broadway, NSW 2007\n",
+    "Australia" ] ),
+    Institution   := "Faculty of Information Technology, University of Technology, Sydney."
   ),
 ],
 
-Status := "other",
-
-# The following are not strictly necessary in your own PackageInfo.g
-# (in the sense that update.g only looks at the usual fields
-# like PackageWWWHome, ArchiveURL etc.). But they are convenient
-# if you use exactly the scheme for your package website that we propose.
-GithubUser := "fingolfin",
-GithubRepository := ~.PackageName,
-GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
-
-PackageWWWHome := Concatenation("http://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-# The following assumes you are using the Github releases system. If not, adjust
-# it accordingly.
-ArchiveURL     := Concatenation(~.GithubWWW,
-                    "/releases/download/v", ~.Version, "/",
-                    ~.GithubRepository, "-", ~.Version),
-
-ArchiveFormats := ".tar.gz .tar.bz2",
+Status := "accepted",
+CommunicatedBy := "David Joyner (Annapolis)",
+AcceptDate := "08/2010",
 
 AbstractHTML := 
-  "This is a pseudo package that contains no actual\
-  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
-  GAP packages that allows to quickly setup GitHub Pages.",
 
+"This package provides an <a href=\"http://www.openmath.org/\">OpenMath</a> \
+phrasebook for <span class=\"pkgname\">GAP</span>. \
+This package allows <span class=\"pkgname\">GAP</span> users to import \
+and export mathematical objects encoded in OpenMath, for the purpose of \
+exchanging them with other applications that are OpenMath enabled.",
+
+README_URL := 
+  Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL := 
+  Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+  
 PackageDoc := rec(
-  BookName  := "GitHubPagesForGAP",
+  BookName  := "OpenMath",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "A GitHub Pages generator for GAP packages",
+  LongTitle := "OpenMath functionality in GAP",
+  Autoload  := true
 ),
 
-# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP := ">=4.8.1",
-  NeededOtherPackages := [
-    ["GAPDoc", ">= 1.2"],
-    ["IO", ">= 4.1"],
-  ],
-  SuggestedOtherPackages := [["orb", ">= 4.2"]],
-  ExternalConditions := []
+  GAP := ">=4.7",
+  # Needed packages:
+  # GapDoc provides the function ParseTreeXMLString
+  # IO is needed to generate random string from really random source 
+  NeededOtherPackages := [ [ "GapDoc", ">= 1.3" ], 
+                           [ "IO", ">= 3.0"] ],
+  ExternalConditions := [ ]
 ),
 
 AvailabilityTest := ReturnTrue,
 
-Keywords := ["GitHub Pages", "GAP"]
+Autoload := false,
+
+TestFile := "tst/testall.g",
+
+Keywords := [ "OpenMath", "Phrasebook" ]
 
 ));
 
 
+#############################################################################
+#E
