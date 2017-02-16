@@ -753,4 +753,3 @@ gap>
 gap> STOP_TEST( "test", 10000 );
 Test of the 'openmath' package
 GAP4stones: 128
-gap> LogTo();
