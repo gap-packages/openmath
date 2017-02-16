@@ -1,5 +1,17 @@
+11.4.1 (February 2017)
+* Added xmlns and version to OMOBJ tag
+
 11.4.0 (February 2017)
 * New release after switching to GitHub and GitHub pages
+* Replace obsolete Tuple by DirectProductElement
+* Switched from READ_COMMAND to READ_COMMAND_REAL (available from GAP 4.8.2)
+
+11.3.1 (February 2016)
+* Removed old compatibility code for MACFLOATs
+
+11.3.0 (January 2016)
+* Upgraded to work with GAP 4.8
+* Fixed the output of integer2.class to work in GAP 4.8
 
 11.2.0 (November 2013)
 * Added function EvalOMString which is an analog of EvalString to evaluate
