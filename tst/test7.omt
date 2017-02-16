@@ -1,5 +1,5 @@
 <!-- Example came from interfacing Macaulay2: evaluates to Z(5)*a*x_1^3 -->
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="polyd1" name="DMP"/>
 		<OMA id="polyringPVqOdEpUtDXHg1A6">

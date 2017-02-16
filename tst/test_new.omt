@@ -1,7 +1,7 @@
 <!-- this is a comment -->
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="relation1" name="eq"/>
     <OMA>
@@ -38,7 +38,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
  <OMA>
   <OMS cd="arith1" name="times"/>
   <OMA>
@@ -72,7 +72,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
   <OMS cd="linalg1" name="vector_selector"/>
     <OMI>2</OMI>
@@ -87,7 +87,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
  <OMA>
   <OMS cd="minmax1" name="max"/>
   <OMA>
@@ -101,7 +101,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
  <OMA>
   <OMS cd="minmax1" name="min"/>
   <OMA>
@@ -116,7 +116,7 @@
 
 
 <?xml version="1.0" encoding="UTF-8"?>
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
  <OMS cd="nums1" name="i"/>
 </OMOBJ>
 
@@ -124,7 +124,7 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
  <OMS cd="nums1" name="infinity"/>
 </OMOBJ>
 
@@ -133,7 +133,7 @@
 <!-- the following is a set -->
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="set1" name="set"/>
     <OMI> 3 </OMI>
@@ -160,7 +160,7 @@
 
 <!-- this is an object inside a comment, and is supposed to be ignored
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OME>
     <OMS cd="error" name="unhandled_symbol"/>
     <OMS cd="setname1" name="C"/>
@@ -172,7 +172,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="set1" name="set"/>
     <OMI> 3 </OMI>
@@ -189,7 +189,7 @@
 symbol: it is an attribution, of the form
 <OMA><OMATTR><OMATP>[...]</OMATP><OMS [...]></OMATTR>[...]</OMA> -->
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMATTR>
       <OMATP>
@@ -295,7 +295,7 @@ symbol: it is an attribution, of the form
 
 <!-- the following examples are supposed to generate errors 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OME>
     <OMS cd="error" name="unhandled_symbol"/>
     <OMS cd="setname1" name="C"/>
@@ -304,7 +304,7 @@ symbol: it is an attribution, of the form
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OME>
     <OMS cd="error" name="unexpected_symbol"/>
     <OMS cd="arith1" name="plurse"/>
@@ -313,7 +313,7 @@ symbol: it is an attribution, of the form
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OME>
     <OMS cd="error" name="unsupported_CD"/>
     <OMS cd="specfun1" name="BesselJ"/>
@@ -322,13 +322,13 @@ symbol: it is an attribution, of the form
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
         <OMS cd="not_existing_cd" name="xyz"/>
 </OMOBJ>
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
         <OMS cd="logic1" name="not_existing_symbol"/>
 </OMOBJ>
 

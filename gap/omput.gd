@@ -104,7 +104,7 @@ OpenMathXMLWriterType    := NewType( OpenMathWritersFamily,
 ##  gap> OMPutObject(w, g);
 ##  gap> CloseStream(s);
 ##  gap> Print(t);
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMA>
 ##  		<OMS cd="linalg2" name="matrix"/>
 ##  		<OMA>
@@ -159,7 +159,7 @@ DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 ##  <Example>
 ##  <![CDATA[
 ##  gap> OMPrint( [ 1, 1/2 ] );     
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMA>
 ##  		<OMS cd="list1" name="list"/>
 ##  		<OMI>1</OMI>
@@ -176,7 +176,7 @@ DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 ##  <Example>
 ##  <![CDATA[
 ##  gap> OMPrint( "This is a string" );
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMSTR>This is a string</OMSTR>
 ##  </OMOBJ>
 ##  ]]>
@@ -185,7 +185,7 @@ DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 ##  <Example>
 ##  <![CDATA[
 ##  gap> OMPrint( 1-2*E(4) );      
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMA>
 ##  		<OMS cd="complex1" name="complex_cartesian"/>
 ##  		<OMI>1</OMI>
@@ -193,7 +193,7 @@ DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 ##  	</OMA>
 ##  </OMOBJ>
 ##  gap> OMPrint(E(3));       
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMA>
 ##  		<OMS cd="arith1" name="plus"/>
 ##  		<OMA>
@@ -213,7 +213,7 @@ DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 ##  <Example>
 ##  <![CDATA[
 ##  gap> OMPrint( Group( (1,2) ) );
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMA>
 ##  		<OMS cd="permgp1" name="group"/>
 ##  		<OMS cd="permutation1" name="right_compose"/>
@@ -225,7 +225,7 @@ DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 ##  	</OMA>
 ##  </OMOBJ>
 ##  gap> OMPrint( Group( [ [ [ 1, 2 ],[ 0, 1 ] ] ] ) );
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMA>
 ##  		<OMS cd="group1" name="group_by_generators"/>
 ##  		<OMA>
@@ -244,7 +244,7 @@ DeclareOperation("OMPut", [IsOpenMathWriter, IsObject ]);
 ##  	</OMA>
 ##  </OMOBJ>
 ##  gap> OMPrint( FreeGroup( 2 ) );                      
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMA>
 ##  		<OMS cd="fpgroup1" name="free_groupn"/>
 ##  		<OMI>2</OMI>
@@ -274,7 +274,7 @@ DeclareGlobalFunction("OMPrint");
 ##  <Example>
 ##  <![CDATA[
 ##  gap> OMString(42);
-##  "<OMOBJ> <OMI>42</OMI> </OMOBJ>"
+##  "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"> <OMI>42</OMI> </OMOBJ>"
 ##  gap> OMString([1,2]:noomobj);    
 ##  "<OMA> <OMS cd=\"list1\" name=\"list\"/> <OMI>1</OMI> <OMI>2</OMI> </OMA>"
 ##  ]]>
@@ -453,7 +453,7 @@ OMIndent := 0;
 ##  gap> s:=OMPlainString("<OMS cd=\"nums1\" name=\"pi\"/>");
 ##  <OMS cd="nums1" name="pi"/>
 ##  gap> OMPrint(s);                                       
-##  <OMOBJ>
+##  <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 ##  	<OMS cd="nums1" name="pi"/>
 ##  </OMOBJ>
 ##  ]]>

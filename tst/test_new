@@ -159,7 +159,7 @@ gap> OMPutObject(w, g);
 gap> CloseStream(s);
 gap> 
 gap> s := InputTextString(t);
-InputTextString(0,345)
+InputTextString(0,400)
 gap> g2 := OMGetObject(s);
 Group([ (1,2,3,4,5), (1,2) ])
 gap> CloseStream(s);
@@ -169,7 +169,7 @@ gap>
 gap> g := SymmetricGroup(5);
 Sym( [ 1 .. 5 ] )
 gap> OMPrint(g);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="permgp1" name="group"/>
 		<OMS cd="permutation1" name="right_compose"/>
@@ -233,12 +233,14 @@ gap> OMPutObject( w, "OutputTextString, InputTextString" );
 gap> CloseStream( s );
 gap> 
 gap> test_string;
-"<OMOBJ>\n\t<OMI>123</OMI>\n</OMOBJ>\n<OMOBJ>\n\t<OMS cd=\"logic1\" name=\"fal\
-se\"/>\n</OMOBJ>\n<OMOBJ>\n\t<OMSTR>OutputTextString, InputTextString</OMSTR>\
-\n</OMOBJ>\n"
+"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\">\n\t<OMI>12\
+3</OMI>\n</OMOBJ>\n<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\
+\"2.0\">\n\t<OMS cd=\"logic1\" name=\"false\"/>\n</OMOBJ>\n<OMOBJ xmlns=\"http\
+://www.openmath.org/OpenMath\" version=\"2.0\">\n\t<OMSTR>OutputTextString, In\
+putTextString</OMSTR>\n</OMOBJ>\n"
 gap> 
 gap> s := InputTextString( test_string );
-InputTextString(0,150)
+InputTextString(0,315)
 gap> OMGetObject( s );
 123
 gap> OMGetObject( s );
@@ -284,16 +286,16 @@ true
 gap> 
 gap> # test of a hexadecimal encoded integer
 gap> 
-gap> s := InputTextString( "<OMOBJ><OMI>x10ab2937fed2837a028374</OMI></OMOBJ>" );
-InputTextString(0,49)
+gap> s := InputTextString( "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"><OMI>x10ab2937fed2837a028374</OMI></OMOBJ>" );
+InputTextString(0,104)
 gap> OMGetObject(s);
 20151098133805576518534004
 gap> CloseStream(s);
 gap> 
 gap> # test of escaped XML chars
 gap> 
-gap> s := InputTextString( "<OMOBJ> <OMSTR>&lt;&amp;&gt;&quot;&apos;</OMSTR> </OMOBJ>" );
-InputTextString(0,57)
+gap> s := InputTextString( "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"> <OMSTR>&lt;&amp;&gt;&quot;&apos;</OMSTR> </OMOBJ>" );
+InputTextString(0,112)
 gap> OMGetObject(s);
 "<&>\"'"
 gap> CloseStream(s);
@@ -305,7 +307,7 @@ true
 gap> 
 gap> # test that the strings are returned in string representation
 gap> 
-gap> stream := InputTextString( "<OMOBJ><OMSTR></OMSTR></OMOBJ> <OMOBJ><OMSTR>ciao</OMSTR></OMOBJ>" );;
+gap> stream := InputTextString( "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"><OMSTR></OMSTR></OMOBJ> <OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"><OMSTR>ciao</OMSTR></OMOBJ>" );;
 gap> IsStringRep( OMGetObject( stream ) );
 true
 gap> IsStringRep( OMGetObject( stream ) );
@@ -351,7 +353,7 @@ gap> #I  Total: 18 entries
 gap> #I  Method 1: ``OMPut: for Rationals'', value: 65
 gap> 
 gap> OMPrint(Rationals);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMS cd="setname1" name="Q"/>
 </OMOBJ>
 gap> OMTest(Rationals);
@@ -360,7 +362,7 @@ gap>
 gap> #I  Method 2: ``OMPut: for Integers'', value: 42
 gap> 
 gap> OMPrint(Integers);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMS cd="setname1" name="Z"/>
 </OMOBJ>
 gap> OMTest(Integers);
@@ -369,7 +371,7 @@ gap>
 gap> #I  Method 3: ``OMPut: for a range'', value: 40
 gap> 
 gap> OMPrint([3..10]);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="interval1" name="integer_interval"/>
 		<OMI>3</OMI>
@@ -382,7 +384,7 @@ gap>
 gap> #I  Method 4: ``OMPut: for a matrix'', value: 32
 gap> 
 gap> OMPrint([[11,12],[21,22]]);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="linalg2" name="matrix"/>
 		<OMA>
@@ -403,7 +405,7 @@ gap>
 gap> #I  Method 5: ``OMPut: for NonnegativeIntegers'', value: 31
 gap> 
 gap> OMPrint(NonnegativeIntegers);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMS cd="setname1" name="N"/>
 </OMOBJ>
 gap> OMTest(NonnegativeIntegers);
@@ -413,7 +415,7 @@ gap> #I  Method 6: ``OMPut: for a character table'', value: 23
 gap> #I  Method 7: ``OMPut: for a permutation group'', value: 23
 gap> 
 gap> OMPrint(AlternatingGroup(6));
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="permgp1" name="group"/>
 		<OMS cd="permutation1" name="right_compose"/>
@@ -442,7 +444,7 @@ gap>
 gap> #I  Method: ``OMPut: for a group''
 gap> 
 gap> OMPrint( Group( [[0,1],[-1,0]],[[1,1],[0,1]] ) );
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="group1" name="group_by_generators"/>
 		<OMA>
@@ -479,7 +481,7 @@ gap>
 gap> #I  Method 8: ``OMPut: for an integer'', value: 20
 gap> 
 gap> OMPrint(10^72);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMI>100000000000000000000000000000000000000000000000000000000000000000000000\
 0</OMI>
 </OMOBJ>
@@ -489,7 +491,7 @@ gap>
 gap> #I  Method 9: ``OMPut: for a rational'', value: 19
 gap> 
 gap> OMPrint(10/72);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="nums1" name="rational"/>
 		<OMI>5</OMI>
@@ -502,7 +504,7 @@ gap>
 gap> #I  Method 10: ``OMPut: for infinity'', value: 18
 gap> 
 gap> OMPrint(infinity);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMS cd="nums1" name="infinity"/>
 </OMOBJ>
 gap> OMTest(infinity);
@@ -511,7 +513,7 @@ gap>
 gap> #I  Method 11: ``OMPut: for a proper cyclotomic'', value: 18
 gap> 
 gap> OMPrint(2/3+5/4*E(4));
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="complex1" name="complex_cartesian"/>
 		<OMA>
@@ -532,7 +534,7 @@ gap>
 gap> #I  Method 12: ``OMPut: for a row vector'', value: 14
 gap> 
 gap> OMPrint([1,2,3]);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="list1" name="list"/>
 		<OMI>1</OMI>
@@ -546,7 +548,7 @@ gap>
 gap> #I  Method 13: ``OMPut: for a Hasse diagram'', value: 13
 gap> 
 gap> OMPrint(h);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMBIND>
 			<OMS cd="fns2" name="constant"/>
 			<OMBVAR>
@@ -606,13 +608,13 @@ gap>
 gap> #I  Method 14: ``OMPut: for a finite set'', value: 11
 gap> 
 gap> OMPrint([]);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMS cd="set1" name="emptyset"/>
 </OMOBJ>
 gap> OMTest([]);
 true
 gap> OMPrint(Set([true,false]));
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="set1" name="set"/>
 		<OMS cd="logic1" name="true"/>
@@ -625,7 +627,7 @@ gap>
 gap> #I  Method 15: ``OMPut: for a permutation'', value: 10
 gap> 
 gap> OMPrint((1,3,5));
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="permut1" name="permutation"/>
 		<OMI>3</OMI>
@@ -641,44 +643,44 @@ gap>
 gap> #I  Method 16: ``OMPut: for a string'', value: 7
 gap> 
 gap> OMPrint("OMPut: for a string");
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMSTR>OMPut: for a string</OMSTR>
 </OMOBJ>
 gap> OMTest("OMPut: for a string");
 true
 gap> OMPrint(Set(['a','b']));
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMSTR>ab</OMSTR>
 </OMOBJ>
 gap> OMTest(Set(['a','b']));
 true
 gap> OMPrint("");
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMSTR></OMSTR>
 </OMOBJ>
 gap> OMTest("");
 true
 gap> # also the escaped XML chars
 gap> OMPrint("&");
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMSTR>&amp;</OMSTR>
 </OMOBJ>
 gap> OMTest("&");
 true
 gap> OMPrint("<");
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMSTR>&lt;</OMSTR>
 </OMOBJ>
 gap> OMTest("<");
 true
 gap> OMPrint("<&>\"'");
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMSTR>&lt;&amp;>"'</OMSTR>
 </OMOBJ>
 gap> OMTest("<&>\"'");
 true
 gap> OMPrint("&lt;&amp;");
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMSTR>&amp;lt;&amp;amp;</OMSTR>
 </OMOBJ>
 gap> OMTest("&lt;&amp;");
@@ -687,7 +689,7 @@ gap>
 gap> #I  Method 17: ``OMPut: for a finite list or collection'', value: 6
 gap> 
 gap> OMPrint([ [ 1 .. 10 ], Rationals, false, true, infinity, 1, 0 ]);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="list1" name="list"/>
 		<OMA>
@@ -709,7 +711,7 @@ gap>
 gap> #I  Method 18: ``OMPut: for a boolean'', value: 3
 gap> 
 gap> OMPrint(false);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMS cd="logic1" name="false"/>
 </OMOBJ>
 gap> OMTest(false);
@@ -720,7 +722,7 @@ gap>
 gap> floats := List( [ 0, "-0", 1, 1/2, -1, "inf", "-inf" ], Float );
 [ 0., -0., 1., 0.5, -1., inf, -inf ]
 gap> OMPrint(floats);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="list1" name="list"/>
 		<OMF dec="0"/>
@@ -737,7 +739,7 @@ true
 gap> floats := List( [ 11^7, 11^-7, -11^7, -11^-7, "nan" ], Float );
 [ 1.94872e+07, 5.13158e-08, -1.94872e+07, -5.13158e-08, nan ]
 gap> OMPrint(floats);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="list1" name="list"/>
 		<OMF dec="19487171."/>
@@ -750,5 +752,5 @@ gap> OMPrint(floats);
 gap> 
 gap> STOP_TEST( "test", 10000 );
 Test of the 'openmath' package
-GAP4stones: 138
+GAP4stones: 128
 gap> LogTo();

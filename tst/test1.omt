@@ -1,4 +1,4 @@
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="basic" name="+"/>
     <OMI>10</OMI>
@@ -58,7 +58,7 @@
   </OMA>
 </OMOBJ>
 <!-- Another object. test for sharing scope errors -->
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="basic" name="+"/>
     <OMV name="x"/>
@@ -78,7 +78,7 @@
   </OMA>
 </OMOBJ>
 <!-- test for binders -->
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMBIND>
     <!-- binder -->
     <OMS cd="quant" name="foreach"/>

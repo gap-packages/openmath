@@ -180,13 +180,13 @@ OMTest(10^4000);
 
 # test of a hexadecimal encoded integer
 
-s := InputTextString( "<OMOBJ><OMI>x10ab2937fed2837a028374</OMI></OMOBJ>" );
+s := InputTextString( "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"><OMI>x10ab2937fed2837a028374</OMI></OMOBJ>" );
 OMGetObject(s);
 CloseStream(s);
 
 # test of escaped XML chars
 
-s := InputTextString( "<OMOBJ> <OMSTR>&lt;&amp;&gt;&quot;&apos;</OMSTR> </OMOBJ>" );
+s := InputTextString( "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"> <OMSTR>&lt;&amp;&gt;&quot;&apos;</OMSTR> </OMOBJ>" );
 OMGetObject(s);
 CloseStream(s);
 
@@ -196,7 +196,7 @@ OMTest( List( [4..127], CHAR_INT ) );
 
 # test that the strings are returned in string representation
 
-stream := InputTextString( "<OMOBJ><OMSTR></OMSTR></OMOBJ> <OMOBJ><OMSTR>ciao</OMSTR></OMOBJ>" );;
+stream := InputTextString( "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"><OMSTR></OMSTR></OMOBJ> <OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"><OMSTR>ciao</OMSTR></OMOBJ>" );;
 IsStringRep( OMGetObject( stream ) );
 IsStringRep( OMGetObject( stream ) );
 CloseStream(stream);

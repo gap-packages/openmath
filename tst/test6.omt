@@ -1,6 +1,6 @@
 <!-- CD="cas" test -->
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="assign"/>
 		<OMSTR>a</OMSTR>
@@ -9,7 +9,7 @@
 </OMOBJ>
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="retrieve"/>
 		<OMSTR>a</OMSTR>
@@ -18,7 +18,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>a := 3;</OMSTR>
@@ -26,7 +26,7 @@
 </OMOBJ>
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>Size([1,2,3]);</OMSTR>
@@ -36,7 +36,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>quit;</OMSTR>
@@ -45,14 +45,14 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_error"/>
 	</OMA>
 </OMOBJ>
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_output"/>
 	</OMA>
@@ -62,7 +62,7 @@
 
 <!-- character table examples -->
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>c := CharacterTable("V4");</OMSTR>
@@ -70,7 +70,7 @@
 </OMOBJ>
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="retrieve"/>
 		<OMSTR>c</OMSTR>
@@ -78,14 +78,14 @@
 </OMOBJ>
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>c := CharacterTable("S3");</OMSTR>
 	</OMA>
 </OMOBJ>
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>c := CharacterTable("fooey);</OMSTR>
@@ -93,14 +93,14 @@
 </OMOBJ>
 
 <!-- this tests the security feature -->
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>c := READ("fooey");</OMSTR>
 	</OMA>
 </OMOBJ>
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="native_statement"/>
 		<OMSTR>c := CharacterTable("fooey");</OMSTR>
@@ -108,7 +108,7 @@
 </OMOBJ>
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="retrieve"/>
 		<OMSTR>c</OMSTR>
@@ -121,7 +121,7 @@
 
 
 
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
   <OMA>
     <OMS cd="cas" name="quit"/>
 	</OMA>

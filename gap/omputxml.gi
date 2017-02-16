@@ -200,11 +200,14 @@ end);
 #M  OMPutOMOBJ
 #M  OMPutEndOMOBJ
 ##
+
+BindGlobal( "OMOBJ_TAG", "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\">" );
+
 InstallMethod(OMPutOMOBJ, "to write OMOBJ in XML OpenMath", true,
 [IsOpenMathXMLWriter],0,
 function( writer )
 	OMIndent := 0;
-	OMWriteLine( writer![1], [ "<OMOBJ>" ] );
+	OMWriteLine( writer![1], [ OMOBJ_TAG ] );
     OMIndent := 1;
 end);
 

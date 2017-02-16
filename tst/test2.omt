@@ -1,4 +1,4 @@
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 		<OMATTR>
       <OMATP>
         <OMS cd="presentation" name="font"/>
