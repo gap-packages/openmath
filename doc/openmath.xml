@@ -17,7 +17,7 @@ gap> OMPrint(x^2+y);
 #I  because the default OpenMath polynomial ring is not specified 
 #I  or it is not contained in the default OpenMath polynomial ring.
 #I  You may ignore this or call SetOpenMathDefaultPolynomialRing to fix it.
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="polyd1" name="DMP"/>
 		<OMA id="polyring9qiY2oOaiITWUORb" >
@@ -55,7 +55,7 @@ gap> OMPrint(x+1);
 #I  because the default OpenMath polynomial ring is not specified 
 #I  or it is not contained in the default OpenMath polynomial ring.
 #I  You may ignore this or call SetOpenMathDefaultPolynomialRing to fix it.
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="polyd1" name="DMP"/>
 		<OMA id="polyring0LqlkhnCyLldcoBl" >
@@ -94,7 +94,7 @@ gap> x:=Indeterminate(Rationals,"x");; y:=Indeterminate(Rationals,"y");;
 gap> R:=PolynomialRing(Rationals,[x,y]);;
 gap> SetOpenMathDefaultPolynomialRing(R);
 gap> OMPrint(x^2+y);
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="polyd1" name="DMP"/>
 		<OMA id="polyring9eNcBGFHXkjl2kWh" >
@@ -127,7 +127,7 @@ properly reflects that it belongs to a polynomial ring with two variables.
 <Log>
 <![CDATA[
 gap> OMPrint(x+1);  
-<OMOBJ>
+<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
 		<OMS cd="polyd1" name="DMP"/>
 		<OMR href="#polyring9eNcBGFHXkjl2kWh" />
