@@ -6,10 +6,10 @@
                          [1X[5XOpenMath[105X functionality in GAP[101X
   
   
-                                 Version 11.4.0
+                                 Version 11.4.1
   
   
-                                6 February 2017
+                                16 February 2017
   
   
                                 Marco Costantini
@@ -32,11 +32,13 @@
   
   
   Max Nicosia
-      Email:    [7Xmailto:ln73 at st-andrews dot ac dot uk[107X
-      Address:  [33X[0;14YSchool of Computer Science[133X
-                [33X[0;14YUniversity of St Andrews[133X
-                [33X[0;14YJack Cole Building, North Haugh,[133X
-                [33X[0;14YSt Andrews, Fife, KY16 9SX, Scotland[133X
+      Email:    [7Xmailto:lmn27 at cam dot ac dot uk[107X
+      Homepage: [7Xhttp://www-edc.eng.cam.ac.uk/~lmn27/[107X
+      Address:  [33X[0;14YUniversity of Cambridge[133X
+                [33X[0;14YDepartment of Engineering[133X
+                [33X[0;14YEngineering Design Centre[133X
+                [33X[0;14YIntelligent Interactive Systems Group[133X
+                [33X[0;14YTrumpington Street, Cambridge, CB2 1PZ, UK[133X
   
   
   Andrew Solomon
@@ -75,7 +77,10 @@
         [33X[0;6Y[7Xhttp://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html[107X).[133X
   
   [30X    [33X[0;6YEU  FP6  Programme  project  026133  [21XSCIEnce  -  Symbolic  Computation
-        Infrastructure for Europe[121X (see [7Xhttp://www.symbolic-computation.org/[107X).[133X
+        Infrastructure for Europe[121X (see [7Xhttp://www.symbolic-computing.org/[107X).[133X
+  
+  [30X    [33X[0;6YOpenDreamKit  Horizon  2020  European Research Infrastructures project
+        #676541 (see [7Xhttp://opendreamkit.org/[107X).[133X
   
   [33X[0;0YWe acknowledge with gratitude this support.[133X
   

@@ -18,7 +18,7 @@
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XOMPrint( [ 1, 1/2 ] );     [127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="list1" name="list"/>[128X[104X
     [4X[28X		<OMI>1</OMI>[128X[104X
@@ -37,7 +37,7 @@
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XOMPrint( "This is a string" );[127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMSTR>This is a string</OMSTR>[128X[104X
     [4X[28X</OMOBJ>[128X[104X
     [4X[28X[128X[104X
@@ -49,7 +49,7 @@
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XOMPrint( 1-2*E(4) );      [127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="complex1" name="complex_cartesian"/>[128X[104X
     [4X[28X		<OMI>1</OMI>[128X[104X
@@ -57,7 +57,7 @@
     [4X[28X	</OMA>[128X[104X
     [4X[28X</OMOBJ>[128X[104X
     [4X[25Xgap>[125X [27XOMPrint(E(3));       [127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="arith1" name="plus"/>[128X[104X
     [4X[28X		<OMA>[128X[104X
@@ -79,7 +79,7 @@
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XOMPrint( Group( (1,2) ) );[127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="permgp1" name="group"/>[128X[104X
     [4X[28X		<OMS cd="permutation1" name="right_compose"/>[128X[104X
@@ -91,7 +91,7 @@
     [4X[28X	</OMA>[128X[104X
     [4X[28X</OMOBJ>[128X[104X
     [4X[25Xgap>[125X [27XOMPrint( Group( [ [ [ 1, 2 ],[ 0, 1 ] ] ] ) );[127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="group1" name="group_by_generators"/>[128X[104X
     [4X[28X		<OMA>[128X[104X
@@ -110,7 +110,7 @@
     [4X[28X	</OMA>[128X[104X
     [4X[28X</OMOBJ>[128X[104X
     [4X[25Xgap>[125X [27XOMPrint( FreeGroup( 2 ) );                      [127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="fpgroup1" name="free_groupn"/>[128X[104X
     [4X[28X		<OMI>2</OMI>[128X[104X
@@ -279,7 +279,7 @@
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XOMString(42);[127X[104X
-    [4X[28X"<OMOBJ> <OMI>42</OMI> </OMOBJ>"[128X[104X
+    [4X[28X"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\" version=\"2.0\"> <OMI>42</OMI> </OMOBJ>"[128X[104X
     [4X[25Xgap>[125X [27XOMString([1,2]:noomobj);    [127X[104X
     [4X[28X"<OMA> <OMS cd=\"list1\" name=\"list\"/> <OMI>1</OMI> <OMI>2</OMI> </OMA>"[128X[104X
     [4X[28X[128X[104X
@@ -419,7 +419,7 @@
     [4X[25Xgap>[125X [27XOMPutObject(w, g);[127X[104X
     [4X[25Xgap>[125X [27XCloseStream(s);[127X[104X
     [4X[25Xgap>[125X [27XPrint(t);[127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="linalg2" name="matrix"/>[128X[104X
     [4X[28X		<OMA>[128X[104X
@@ -459,7 +459,7 @@
     [4X[25Xgap>[125X [27Xs:=OMPlainString("<OMS cd=\"nums1\" name=\"pi\"/>");[127X[104X
     [4X[28X<OMS cd="nums1" name="pi"/>[128X[104X
     [4X[25Xgap>[125X [27XOMPrint(s);                                       [127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMS cd="nums1" name="pi"/>[128X[104X
     [4X[28X</OMOBJ>[128X[104X
     [4X[28X[128X[104X

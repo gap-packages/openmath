@@ -56,7 +56,7 @@
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XOMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );                [127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="list1" name="list"/>[128X[104X
     [4X[28X		<OMA>[128X[104X
