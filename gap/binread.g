@@ -503,8 +503,7 @@ function(stream, isRecursiveCall)
 					num := IntHexString(objectStri);
 				else 
 				#just assign the integer
-					num := objectStri;
-					num := EvalString(num);
+					num := Int(objectStri);
 				fi;
 			fi;
 			if hasId then
