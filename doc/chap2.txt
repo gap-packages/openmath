@@ -129,7 +129,7 @@
     [4X[28X#I  because the default OpenMath polynomial ring is not specified [128X[104X
     [4X[28X#I  or it is not contained in the default OpenMath polynomial ring.[128X[104X
     [4X[28X#I  You may ignore this or call SetOpenMathDefaultPolynomialRing to fix it.[128X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="polyd1" name="DMP"/>[128X[104X
     [4X[28X		<OMA id="polyring9qiY2oOaiITWUORb" >[128X[104X
@@ -169,7 +169,7 @@
     [4X[28X#I  because the default OpenMath polynomial ring is not specified [128X[104X
     [4X[28X#I  or it is not contained in the default OpenMath polynomial ring.[128X[104X
     [4X[28X#I  You may ignore this or call SetOpenMathDefaultPolynomialRing to fix it.[128X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="polyd1" name="DMP"/>[128X[104X
     [4X[28X		<OMA id="polyring0LqlkhnCyLldcoBl" >[128X[104X
@@ -209,7 +209,7 @@
     [4X[25Xgap>[125X [27XR:=PolynomialRing(Rationals,[x,y]);;[127X[104X
     [4X[25Xgap>[125X [27XSetOpenMathDefaultPolynomialRing(R);[127X[104X
     [4X[25Xgap>[125X [27XOMPrint(x^2+y);[127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="polyd1" name="DMP"/>[128X[104X
     [4X[28X		<OMA id="polyring9eNcBGFHXkjl2kWh" >[128X[104X
@@ -244,7 +244,7 @@
   [4X[32X  Example  [32X[104X
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XOMPrint(x+1);  [127X[104X
-    [4X[28X<OMOBJ>[128X[104X
+    [4X[28X<OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">[128X[104X
     [4X[28X	<OMA>[128X[104X
     [4X[28X		<OMS cd="polyd1" name="DMP"/>[128X[104X
     [4X[28X		<OMR href="#polyring9eNcBGFHXkjl2kWh" />[128X[104X
