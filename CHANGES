@@ -1,3 +1,6 @@
+11.4.2 (February 2017)
+* Replaced EvalString by Int to convert a string to an integer
+
 11.4.1 (February 2017)
 * Added xmlns and version to OMOBJ tag
 
