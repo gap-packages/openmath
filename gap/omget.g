@@ -23,43 +23,74 @@
 ##  From there the OpenMath object is turned into a GAP object
 ##  by an appropriate function.
 ##
-InstallGlobalFunction(OMGetObject, function( stream )
-    local
-        fromgap, firstbyte, gap_obj, # string
-        success; # whether PipeOpenMathObject worked
 
-    if IsClosedStream( stream )  then
-        Error( "closed stream" );
-    elif IsEndOfStream( stream )  then
-        Error( "end of stream" );
+#! @Description
+#!   Get the XML tree representation of an object from the input
+#!   stream.
+#!   This will also return the attributes needed in the SCSCP
+#!   package
+#
+# FIXME: can representations be mixed in the same stream?
+#
+InstallGlobalFunction(OMGetTree,
+function(stream)
+    local firstbyte, xml, success, result;
+
+    if not IsInputStream(stream) then
+        Error("<stream> has to be an input stream");
+    fi;
+    if IsClosedStream(stream) then
+        Error("<stream> is closed");
+    fi;
+    if IsEndOfStream(stream) then
+        Error("<stream> is in state end-of-stream");
     fi;
 
+    # FIXME: This is parser state and should not be global
+    # Reset temporary variables.
+    OMTempVars.OMBIND := rec(  );
+    OMTempVars.OMREF := rec(  );
+
     firstbyte := ReadByte(stream);
-    
-    if firstbyte = 24 then 
-  	    # Binary encoding
- 	    gap_obj := GetNextObject( stream, firstbyte );
-     	gap_obj := OMParseXmlObj( gap_obj.content[1] );
-        return gap_obj;
-    else        
-     	# XML encoding
-        fromgap := "";
-        # Get one OpenMath object from 'stream' and put into 'fromgap',
+    if firstbyte = 24 then
+        # Binary encoding
+        # FIXME: How does this fail?
+        # FIXME: Test/check that this actually returns what we expect
+        result := GetNextObject( stream, firstbyte );
+    else
+        # XML encoding
+
+        # Get one OpenMath object from 'stream' and put into 'xml',
         # using PipeOpenMathObject
-
-        success := PipeOpenMathObject( stream, fromgap, firstbyte );
-
+        # FIXME: The XML Parser should support getting one object
+        #        from a stream, since PipeObject is a bit of a hack
+        xml := "";
+        success := PipeOpenMathObject( stream, xml, firstbyte );
         if success <> true  then
-       		Error( "OpenMath object not retrieved" );
+            return fail;
         fi;
-		
-        # convert the OpenMath string into a Gap object using an appropriate
-        # function
+        # FIXME: The rather bizarre looking (and not error checked)
+        #        .content[1] is due to the fact that GAPDoc's XML
+        #        parser on which we are relying here wraps our XML
+        #        in a <WHOLEDOCUMENT></WHOLEDOCUMENT> block
+        result := ParseTreeXMLString(xml).content[1];
+        # FIXME: Why?
+        result.content := Filtered(result.content, OMIsNotDummyLeaf );
+    fi;
+    return result;
+end);
 
-        return OMgetObjectXMLTree( fromgap );
- 
-  	fi;    
-    
+InstallGlobalFunction(OMGetObject,
+function( stream )
+    local tree;
+
+    tree := OMGetTree(stream);
+
+    # FIXME: Check why OMgetObjectXMLTree resets OMBIND/OMREF,
+    #        hence the two ways of parsing objects used
+    #        in the previous version of this function were
+    #        inconsistent?
+    return OMParseXmlObj( tree.content[1] );
 end);
 
 
