@@ -54,15 +54,4 @@ if IsExistingFile(
 fi;
 
 ###########################################################################
-## Module 1.2.a
-## This module reads token/values off the stream and builds GAP 
-## objects; formerly this was performed using the external binary 
-## 'gpipe' (required directories bin, include, OMCv1.3c and src).
-## It required the function OMsymLookup and provided OMpipeObject.
-## Some parts of this module are still re-used in other modules.
-##
-ReadPackage("openmath", "/gap/lex.g");
-ReadPackage("openmath", "/gap/parse.gi");
-
-###########################################################################
 #E
