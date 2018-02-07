@@ -65,6 +65,7 @@
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareGlobalFunction("OMGetTree");
 DeclareGlobalFunction("OMGetObject");
 
 
