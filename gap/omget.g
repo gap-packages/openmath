@@ -42,6 +42,11 @@ function(stream)
         Error("<stream> is in state end-of-stream");
     fi;
 
+    # FIXME: This is parser state and should not be global
+    # Reset temporary variables.
+    OMTempVars.OMBIND := rec(  );
+    OMTempVars.OMREF := rec(  );
+
     firstbyte := ReadByte(stream);
     if firstbyte = 24 then
         # Binary encoding
@@ -65,6 +70,8 @@ function(stream)
         #        parser on which we are relying here wraps our XML
         #        in a <WHOLEDOCUMENT></WHOLEDOCUMENT> block
         result := ParseTreeXMLString(xml).content[1];
+        # FIXME: Why?
+        result.content := Filtered(result.content, OMIsNotDummyLeaf );
     fi;
     return result;
 end);

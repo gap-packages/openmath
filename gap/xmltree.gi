@@ -7,12 +7,13 @@
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
 #Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
 ##
-##  The main function in this file converts the OpenMath XML into a tree
-##  (using the function ParseTreeXMLString from package GapDoc) and
-##  parses it.
+##  The main function in this file converts an XML document that is encoded
+##  as a GAP record (as output by ParseTreeXMLString) into a GAP Object.
 ##
 
-
+## TODO: Move this function to xmltree.g?
+## One must not reset OMTempVars in this function, because it is called
+## from code in xmltree.g while parsing objects.
 InstallGlobalFunction( OMParseXmlObj, function ( node )
     local obj;
 
@@ -20,9 +21,8 @@ InstallGlobalFunction( OMParseXmlObj, function ( node )
         Error( "unknown OpenMath object ", node.name );
     fi;
 
-    if IsBound( node.content ) and 
-       IsList( node.content ) and 
-        not (node.name = "OMSTR" or node.name = "OMI" or node.name = "OMB")  then
+    if IsBound( node.content ) and IsList( node.content ) and
+       not (node.name = "OMSTR" or node.name = "OMI" or node.name = "OMB")  then
         node.content := Filtered( node.content, OMIsNotDummyLeaf );
     fi;
     obj := OMObjects.(node.name)( node );
@@ -33,29 +33,6 @@ InstallGlobalFunction( OMParseXmlObj, function ( node )
 
     return obj;
 end );
-
-
-
-
-InstallGlobalFunction( OMgetObjectXMLTree, function ( string )
-    local  node;
-
-    # TODO: this maybe be reset in the middle of the session
-    # making references invalid. We need either to keep this
-    # for the whole session or to create another record to 
-    # store such objects
-    
-    OMTempVars.OMBIND := rec(  );
-    OMTempVars.OMREF := rec(  );
-
-    node := ParseTreeXMLString( string ).content[1];
-    # DisplayXMLStructure( node );
-    node.content := Filtered( node.content, OMIsNotDummyLeaf );
-
-    return OMParseXmlObj( node.content[1] );
-
-end );
-
 
 #############################################################################
 #E
