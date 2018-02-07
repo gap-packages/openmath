@@ -1,5 +1,5 @@
-["[Build Status](https://travis-ci.org/gap-packages/OpenMath.svg?branch=master)](https://travis-ci.org/gap-packages/OpenMath)
-[![Code Coverage](https://codecov.io/github/gap-packages/OpenMath/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/OpenMath)
+[![Build Status](https://travis-ci.org/gap-packages/openmath.svg?branch=master)](https://travis-ci.org/gap-packages/openmath)
+[![Code Coverage](https://codecov.io/github/gap-packages/openmath/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/openmath)
 
 # The OpenMath package
 
@@ -43,5 +43,4 @@ it under the terms of the GNU General Public License as published by the
 Free Software Foundation; either version 2 of the License, or (at your
 option) any later version.
 
-For details see the files COPYRIGHT.md and LICENSE.
-
+For details see the COPYING file.
