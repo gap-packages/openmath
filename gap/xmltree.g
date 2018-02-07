@@ -92,9 +92,11 @@ BindGlobal( "OMObjects"
                          return headfun( List( [ 2 .. Length( node.content ) ], x -> OMParseXmlObj( node.content[x] ) ) );
                      fi;
                  end,
+                 OMATP := function(node)
+                     return List( [1,3,..Length(node.content)-1]
+                                , i -> List([i, i+1], x -> OMParseXmObj(node.content[x]) ) );
+                 end,
                  OMATTR := function(node)
-                     node.content := Filtered( node.content, x -> x.name <> "OMATP" );
-                     # the only thing we don't ignore - the unattributed object
                      return OMParseXmlObj( node.content[1] );
                  end,
                  OMBIND := function(node)
