@@ -523,32 +523,6 @@ function(writer, x)
     OMPutEndOMA(writer);
 end); 
 
-
-###########################################################################
-##
-#M  OMPut( <OMWriter>, <semigrouphom> )  
-##
-##  this requires MONOID so will not work in GAP 4.5
-if not CompareVersionNumbers( GAPInfo.Version, "4.5.0") then
-InstallMethod(OMPut, "for a semigroup homomorphism given by images of generators", true,
-[IsOpenMathWriter, IsSemigroupHomomorphism and IsSemigroupHomomorphismByImagesOfGensRep],0,
-function(writer, x)
-    local g;
-	OMPutOMA(writer);
-	OMPutSymbol( writer, "semigroup4", "homomorphism_by_generators" );
-	OMPut(writer, Source(x) );
-	OMPut(writer, Range(x) ); 
-	if IsMonoid( Source(x) ) then
-        OMPut(writer, List( GeneratorsOfMonoid( Source( x ) ), g -> [ g, g^x ] ) );
-    elif IsSemigroup( Source(x) ) then
-        OMPut(writer, List( GeneratorsOfSemigroup( Source( x ) ), g -> [ g, g^x ] ) );
-    else
-        Error( "OMPut for a semigroup homomorphism given by images of generators: can not output ", x );  
-    fi;        
-    OMPutEndOMA(writer);
-end);
-fi;
-
 ###########################################################################
 #
 # OMPut for a univariate polynomial (polyu.poly_u_rep)
