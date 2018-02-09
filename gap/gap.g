@@ -1108,17 +1108,6 @@ semigroup2 := rec(
 	right_multiplication := fail
 ),
 
-semigroup3 := rec(
-	automorphism_group := AutomorphismGroup, # requires MONOID package and 
-	                                         # GRAPE, duplicated in semigroup4 CD
-	cyclic_semigroup := fail, 
-	direct_power := fail, 
-	direct_product := fail, 
-	free_semigroup := fail, 
-	left_regular_representation := fail, 
-	maps_semigroup := fail
-),
-
 semigroup4 := rec(
 	automorphism_group := fail,
 	homomorphism_by_generators := fail
@@ -1187,20 +1176,6 @@ setname2 := rec(
 )
 
 ));
- 
-if not CompareVersionNumbers( GAPInfo.Version, "4.5.0") then
-# this requires MONOID so will not work in GAP 4.5
-  OMsymRecord.semigroup4 := rec(
-	automorphism_group := AutomorphismGroup, # requires MONOID package and GRAPE, 
-	                                         # duplicated in semigroup3 CD
-	homomorphism_by_generators :=            # requires MONOID
-        function(x)
-        local g;
-        # we use NC method trusting that the client send valid input 
-        # (this must be the case for the GAP client)
-        return SemigroupHomomorphismByImagesOfGensNC( x[1], x[2], List( x[3], g -> g[2] ) );
-        end);
-fi;
 
 ######################################################################
 ##

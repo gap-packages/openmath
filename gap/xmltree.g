@@ -36,11 +36,7 @@ BindGlobal( "OMObjects",
         if not IsBound( node.attributes.dec )  then
             Error( "hexadecimal encoding of floats is not supported" );
         fi;
-        if CompareVersionNumbers( GAPInfo.Version, "4.5.0") then
-        	return Float( node.attributes.dec );
-        else
-        	return Float( node.attributes.dec );
-        fi;
+        return Float( node.attributes.dec );
     end,
 
 
@@ -198,8 +194,6 @@ OMSTR := function ( node )
 
 MakeReadWriteGlobal("OMObjects"); 
 
-if CompareVersionNumbers( GAPInfo.Version, "4.5.0") then 
-
 OMObjects.OMF := 
     function ( node )
         if not IsBound( node.attributes.dec )  then
@@ -207,18 +201,6 @@ OMObjects.OMF :=
         fi;
       	return Float( node.attributes.dec );
     end;
-
-else
-
-OMObjects.OMF := 
-    function ( node )
-        if not IsBound( node.attributes.dec )  then
-            Error( "hexadecimal encoding of floats is not supported" );
-        fi;
-       	return Float( node.attributes.dec );
-    end;
-
-fi;
 
 #############################################################################
 #E
