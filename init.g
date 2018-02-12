@@ -19,6 +19,12 @@ ReadPackage("openmath", "config.g");
 # Reading *.gd files
 #
 ReadPackage("openmath", "gap/parse.gd");
+
+# Module 1.2.b
+# This module converts the OpenMath XML into a tree and parses it;
+# requires the function OMsymLookup (and the function 
+# ParseTreeXMLString from package GapDoc) and provides 
+# the function OMgetObjectXMLTree
 ReadPackage("openmath", "gap/xmltree.gd");
 ReadPackage("openmath", "gap/omget.gd");
 ReadPackage("openmath", "gap/omput.gd");
@@ -36,15 +42,6 @@ ReadPackage("openmath", "gap/test.gd");
 # symbols to GAP objects and provides the function OMsymLookup
 ReadPackage("openmath", "gap/gap.g");
 
-
-#
-# Module 1.2.b
-# This module converts the OpenMath XML into a tree and parses it;
-# requires the function OMsymLookup (and the function 
-# ParseTreeXMLString from package GapDoc) and provides 
-# the function OMgetObjectXMLTree
-#
-ReadPackage("openmath", "gap/xmltree.g");
 
 # Module 1.3
 # This module gets exactly one OpenMath object from <input stream>;
