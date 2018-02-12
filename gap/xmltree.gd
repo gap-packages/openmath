@@ -15,5 +15,15 @@
 DeclareGlobalFunction("OMParseXmlObj");
 DeclareGlobalFunction("OMgetObjectXMLTree");
 
+# FIXME: This is global parser state and should be
+#        made local.
+DeclareGlobalVariable("OMTempVars");
+
+DeclareGlobalFunction("OMIsNotDummyLeaf");
+
+# This record contains the handler functions to parse
+# various OpenMath entities.
+DeclareGlobalVariable("OMObjects");
+
 #############################################################################
 #E
