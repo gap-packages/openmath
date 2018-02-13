@@ -162,13 +162,13 @@ gap> OMPrint(s);
 </OMOBJ>
 
 
-# [ "doc/../gap/test.gd", 28, 33 ]
+# [ "doc/../gap/testing.gd", 28, 33 ]
 
 gap> OMTestXML([[1..10],[1/2,2+E(4)],ZmodnZObj(2,6),(1,2),true,"string"]);     
 true
 
 
-# [ "doc/../gap/test.gd", 58, 63 ]
+# [ "doc/../gap/testing.gd", 58, 63 ]
 
 gap> OMTestBinary([[1..10],[1/2,2+E(4)],ZmodnZObj(2,6),(1,2),true,"string"]);     
 true

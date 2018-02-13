@@ -41,7 +41,7 @@ OPENMATHMANUALFILES:=[
 "../PackageInfo.g", 
 "../gap/omget.gd",
 "../gap/omput.gd",
-"../gap/test.gd" 
+"../gap/testing.gd" 
 ];
 
 ###########################################################################

@@ -24,7 +24,7 @@ ReadPackage("openmath", "/gap/parse.gd");
 ReadPackage("openmath", "/gap/xmltree.gd");
 ReadPackage("openmath", "/gap/omget.gd");
 ReadPackage("openmath", "/gap/omput.gd");
-ReadPackage("openmath", "/gap/test.gd");
+ReadPackage("openmath", "/gap/testing.gd");
 
 #############################################################################
 ##
@@ -131,11 +131,11 @@ ReadPackage("openmath", "/hasse/hasse.g");
 
 
 #############################################################################
-## Module 3: test
+## Module 3: testing
 ## Provides the function OMTest for testing OMGetObject.OMPutObject = id
 ## requires OMGetObject and OMPutObject
 
-ReadPackage("openmath", "/gap/test.g");
+ReadPackage("openmath", "/gap/testing.g");
 
 
 #############################################################################
