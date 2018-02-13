@@ -1,6 +1,6 @@
 #######################################################################
 ##
-#W  test.gd          GAP OpenMath Package                Andrew Solomon
+#W  testing.         GAP OpenMath Package                Andrew Solomon
 #W                                                     Marco Costantini
 ##
 #Y    Copyright (C) 1999, 2000, 2001, 2006
