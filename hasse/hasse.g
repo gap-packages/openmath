@@ -87,21 +87,18 @@ CreateHasseDiagram := function(f, le)
 end;
 
 
-BindGlobal( "OMDirectoryTemporary", DirectoryTemporary() );
-
-
 BindGlobal("DrawHasse", function(h)
 
 	local output, filename;
 
-	filename := Filename( OMDirectoryTemporary, "nsinput.html" );
+	filename := Filename( DirectoryTemporary(), "nsinput.html" );
 	RemoveFile( filename );
 
 	output := OutputTextFile( filename, false ); #append
 	SetPrintFormattingStatus( output, false );
 	AppendTo(output, TOP_HTML);
 
-	OMPutObject(output,h);
+	OMPutObject( OpenMathXMLWriter(output), h );
 	AppendTo(output, BOTTOM_HTML);
 	CloseStream(output);
 

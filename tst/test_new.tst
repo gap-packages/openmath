@@ -182,14 +182,15 @@ gap> OMPrint(g);
 
 # test with the different kinds of stream
 # OutputTextFile, InputTextFile
-gap> s := OutputTextFile( Filename( OMDirectoryTemporary, "test" ), false );;
+gap> tmpdir := DirectoryTemporary();;
+gap> s := OutputTextFile( Filename( tmpdir, "test" ), false );;
 gap> w := OpenMathXMLWriter( s );;
 gap> OMPutObject( w, 123 );
 gap> OMPutObject( w, false );
 gap> OMPutObject( w, "OutputTextFile, InputTextFile" );
 gap> CloseStream( s );
 gap> 
-gap> s := InputTextFile( Filename( OMDirectoryTemporary, "test" ) );;
+gap> s := InputTextFile( Filename( tmpdir, "test" ) );;
 gap> OMGetObject( s );
 123
 gap> OMGetObject( s );
@@ -198,7 +199,7 @@ gap> OMGetObject( s );
 "OutputTextFile, InputTextFile"
 gap> CloseStream( s );
 gap> 
-gap> RemoveFile( Filename( OMDirectoryTemporary, "test" ) );
+gap> RemoveFile( Filename( tmpdir, "test" ) );
 true
 
 ## OutputTextUser,  InputTextUser
