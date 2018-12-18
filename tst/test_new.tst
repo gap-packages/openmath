@@ -51,15 +51,6 @@ gap> OMGetObject(stream);
 (1,2,3)
 gap> CloseStream( stream );
 
-# similar, for file tst/test4.out: gpipe encoding
-gap> stream := InputTextFile(Filename(
->         DirectoriesPackageLibrary("openmath","tst"),"test4.out"));;
-gap> OMgetObjectByteStream(stream);
-912873912381273891
-gap> OMgetObjectByteStream(stream);
-E(4)
-gap> CloseStream( stream );
-
 # similar, for file tst/test5.omt
 gap> stream := InputTextFile(Filename(DirectoriesPackageLibrary("openmath","tst"),"test5.omt"));;
 gap> OMGetObject(stream);
@@ -182,14 +173,15 @@ gap> OMPrint(g);
 
 # test with the different kinds of stream
 # OutputTextFile, InputTextFile
-gap> s := OutputTextFile( Filename( OMDirectoryTemporary, "test" ), false );;
+gap> dir := DirectoryTemporary();;
+gap> s := OutputTextFile( Filename( dir, "test" ), false );;
 gap> w := OpenMathXMLWriter( s );;
 gap> OMPutObject( w, 123 );
 gap> OMPutObject( w, false );
 gap> OMPutObject( w, "OutputTextFile, InputTextFile" );
 gap> CloseStream( s );
 gap> 
-gap> s := InputTextFile( Filename( OMDirectoryTemporary, "test" ) );;
+gap> s := InputTextFile( Filename( dir, "test" ) );;
 gap> OMGetObject( s );
 123
 gap> OMGetObject( s );
@@ -198,7 +190,7 @@ gap> OMGetObject( s );
 "OutputTextFile, InputTextFile"
 gap> CloseStream( s );
 gap> 
-gap> RemoveFile( Filename( OMDirectoryTemporary, "test" ) );
+gap> RemoveFile( Filename( dir, "test" ) );
 true
 
 ## OutputTextUser,  InputTextUser
@@ -245,15 +237,6 @@ gap>
 gap> s := InputTextString( "\030\020\b\007\cminmax1max\020\b\004\cset1set\>\>\>\t\>\005\021\021\031" );
 InputTextString(0,35)
 gap> OMGetObject(s);
-9
-gap> CloseStream(s);
-
-# test with gpipe encoding and InputTextString
-gap> gpipe_string := List( [ 24, 16, 8, 109, 105, 110, 109, 97, 120, 49, 255, 109, 97, 120, 255, 16, 8, 115, 
-> 101, 116, 49, 255, 115, 101, 116, 255, 2, 49, 255, 2, 57, 255, 2, 53, 255, 17, 17, 25 ], CHAR_INT );;
-gap> s := InputTextString( gpipe_string );
-InputTextString(0,38)
-gap> OMgetObjectByteStream(s);
 9
 gap> CloseStream(s);
 
