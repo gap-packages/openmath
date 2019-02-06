@@ -13,7 +13,7 @@ MAKING A CHANGE:
 
 * build the manual and manual test files with 
   
-ReadPackage("openmath/gap/buildman.g");
+ReadPackage("openmath", "gap/buildman.g");
 
 * test the package functionality:
 
@@ -51,7 +51,7 @@ PREPARING A NEW RELEASE:
   
 * build the manual and manual test files with 
   
-  ReadPackage("openmath/gap/buildman.g");  
+  ReadPackage("openmath", "gap/buildman.g");
 
 * test the PackageInfo.g, and that the documentation is available in GAP:
 
