@@ -16,7 +16,8 @@ PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
 Version := "11.4.2",
-Date := "28/02/2017",
+Date := "28/02/2017", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
 ##  <!ENTITY VERSION "11.4.2">
 ##  <!ENTITY RELEASEDATE "28 February 2017">
