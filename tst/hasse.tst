@@ -35,8 +35,7 @@ gap> l := AsList(s);
   (1,2,3,4), (1,2,4,3), (1,2,4), (1,3,2), (1,3,4,2), (1,3), (1,3,4), 
   (1,3)(2,4), (1,3,2,4), (1,4,3,2), (1,4,2), (1,4,3), (1,4), (1,4,2,3), 
   (1,4)(2,3) ]
-gap> h := CreateHasseDiagram(l,le);
-<general mapping: <object> -> <object> >
+gap> h := CreateHasseDiagram(l,le);;
 gap> OMPrint(h);
 <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMBIND>
@@ -287,8 +286,7 @@ gap> leq := function(x,y) return y mod x = 0; end;
 function( x, y ) ... end
 gap> N := 102;
 102
-gap> h := CreateHasseDiagram(Filtered([1..N],i->N mod i = 0), leq);
-<general mapping: <object> -> <object> >
+gap> h := CreateHasseDiagram(Filtered([1..N],i->N mod i = 0), leq);;
 gap> OMPrint(h);
 <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMBIND>
@@ -403,8 +401,7 @@ gap> rcl := GreensRClasses( o4 );
   <Green's R-class: Transformation( [ 1, 2, 2, 2 ] )>, 
   <Green's R-class: Transformation( [ 1, 2, 2, 3 ] )>, 
   <Green's R-class: Transformation( [ 1, 2, 3, 3 ] )> ]
-gap> h := CreateHasseDiagram(rcl, IsGreensLessThanOrEqual);
-<general mapping: <object> -> <object> >
+gap> h := CreateHasseDiagram(rcl, IsGreensLessThanOrEqual);;
 gap> OMPrint(h);
 <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMBIND>
@@ -486,22 +483,18 @@ gap>
 ###################################################################
 ## Some basic Hasse Diagrams - for when everything else is broken
 ###################################################################
-gap> d := Domain(["0","a","b","c","1"]);
-<object>
+gap> d := Domain(["0","a","b","c","1"]);;
 gap> Elements(d);
 [ "0", "1", "a", "b", "c" ]
 gap> Size(d);
 5
-gap> 
 gap> r := BinaryRelationByElements(d,
 > [ DirectProductElement(["0","a"]),
 > DirectProductElement(["0","b"]),
 > DirectProductElement(["0","c"]),
 > DirectProductElement(["a","1"]),
 > DirectProductElement(["b","1"]),
-> DirectProductElement(["c","1"])]);
-<general mapping: <object> -> <object> >
-gap> 
+> DirectProductElement(["c","1"])]);;
 gap> SetIsHasseDiagram(r, true);
 gap> OMPrint(r);
 <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
@@ -583,8 +576,7 @@ gap>
 gap> p := Partitions(5);
 [ [ 1, 1, 1, 1, 1 ], [ 2, 1, 1, 1 ], [ 2, 2, 1 ], [ 3, 1, 1 ], [ 3, 2 ], 
   [ 4, 1 ], [ 5 ] ]
-gap> h := CreateHasseDiagram(p, refines);
-<general mapping: <object> -> <object> >
+gap> h := CreateHasseDiagram(p, refines);;
 gap> OMPrint(h);
 <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMBIND>

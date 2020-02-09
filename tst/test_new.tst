@@ -289,8 +289,7 @@ true
 gap> CloseStream(stream);
 
 ### test of Hasse
-gap> d := Domain(["0","a","b","c","1"]);
-<object>
+gap> d := Domain(["0","a","b","c","1"]);;
 gap> Elements(d);
 [ "0", "1", "a", "b", "c" ]
 gap> Size(d);
@@ -301,14 +300,11 @@ gap> r := BinaryRelationByElements(d,
 > DirectProductElement(["0","c"]),
 > DirectProductElement(["a","1"]),
 > DirectProductElement(["b","1"]),
-> DirectProductElement(["c","1"])]);
-<general mapping: <object> -> <object> >
-gap> p := TransitiveClosureBinaryRelation(ReflexiveClosureBinaryRelation(r));
-<general mapping: <object> -> <object> >
+> DirectProductElement(["c","1"])]);;
+gap> p := TransitiveClosureBinaryRelation(ReflexiveClosureBinaryRelation(r));;
 gap> IsPartialOrderBinaryRelation(p);
 true
-gap> h := HasseDiagram(p);
-<general mapping: <object> -> <object> >
+gap> h := HasseDiagram(p);;
 
 # the bug was here.
 gap> Elements(UnderlyingRelation(h));
