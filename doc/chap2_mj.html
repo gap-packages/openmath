@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <title>GAP (openmath) - Chapter 2: OpenMath functionality in GAP</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -23,21 +23,21 @@
 <div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
-<p><a id="X83C7040B7B389CA5" name="X83C7040B7B389CA5"></a></p>
-<div class="ChapSects"><a href="chap2_mj.html#X83C7040B7B389CA5">2 <span class="Heading"><strong class="pkg">OpenMath</strong> functionality in <strong class="pkg">GAP</strong></span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8393E7C57E539406">2.1 <span class="Heading">Viewing <strong class="pkg">OpenMath</strong> representation of an object</span></a>
+<p><a id="X7FE774BE829841A0" name="X7FE774BE829841A0"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X7FE774BE829841A0">2 <span class="Heading"><strong class="pkg">OpenMath</strong> functionality in <strong class="pkg">GAP</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X817CD8387FEDF873">2.1 <span class="Heading">Viewing <strong class="pkg">OpenMath</strong> representation of an object</span></a>
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B1815F078D8312B">2.1-1 OMPrint</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X876AD5BC7A8812C3">2.1-2 OMString</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7EB959397AB2B646">2.2 <span class="Heading">Reading <strong class="pkg">OpenMath</strong> code from streams and strings</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7FA9F1747BDBB7AD">2.2 <span class="Heading">Reading <strong class="pkg">OpenMath</strong> code from streams and strings</span></a>
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7FBDCB3C83BBB115">2.2-1 OMGetObject</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BFA1BAB7DA665F4">2.2-2 EvalOMString</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X87E11972845542AE">2.3 <span class="Heading">Writing <strong class="pkg">OpenMath</strong> code to streams</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X858CE5BC84C6B18D">2.3 <span class="Heading">Writing <strong class="pkg">OpenMath</strong> code to streams</span></a>
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X79EE2E8B7C83E0F4">2.3-1 IsOpenMathWriter</a></span>
@@ -56,7 +56,7 @@
 
 <h3>2 <span class="Heading"><strong class="pkg">OpenMath</strong> functionality in <strong class="pkg">GAP</strong></span></h3>
 
-<p><a id="X8393E7C57E539406" name="X8393E7C57E539406"></a></p>
+<p><a id="X817CD8387FEDF873" name="X817CD8387FEDF873"></a></p>
 
 <h4>2.1 <span class="Heading">Viewing <strong class="pkg">OpenMath</strong> representation of an object</span></h4>
 
@@ -64,7 +64,7 @@
 
 <h5>2.1-1 OMPrint</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPrint</code>( <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPrint</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>OMPrint writes the default XML <strong class="pkg">OpenMath</strong> encoding of <strong class="pkg">GAP</strong> object <var class="Arg">obj</var> to the standard output.</p>
 
 <p>One can try it with different <strong class="pkg">GAP</strong> objects to see if they can be converted to <strong class="pkg">OpenMath</strong> and learn how their <strong class="pkg">OpenMath</strong> representation looks like. Here we show the encoding for lists of integers and rationals:</p>
@@ -322,7 +322,7 @@
 
 <h5>2.1-2 OMString</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMString</code>( <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMString</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>OMString returns a string with the default XML <strong class="pkg">OpenMath</strong> encoding of <strong class="pkg">GAP</strong> object <var class="Arg">obj</var>. If used with the <code class="keyw">noomobj</code> option, then initial and final &lt;OMOBJ&gt; tags will be omitted.</p>
 
 
@@ -335,7 +335,7 @@
 
 </pre></div>
 
-<p><a id="X7EB959397AB2B646" name="X7EB959397AB2B646"></a></p>
+<p><a id="X7FA9F1747BDBB7AD" name="X7FA9F1747BDBB7AD"></a></p>
 
 <h4>2.2 <span class="Heading">Reading <strong class="pkg">OpenMath</strong> code from streams and strings</span></h4>
 
@@ -343,8 +343,8 @@
 
 <h5>2.2-1 OMGetObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMGetObject</code>( <var class="Arg">stream</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<p><var class="Arg">stream</var> is an input stream (see <code class="func">InputTextFile</code> (<a href="../../../doc/ref/chap10_mj.html#X8343D04981128784"><span class="RefLink">Reference: InputTextFile</span></a>), <code class="func">InputTextUser</code> (<a href="../../../doc/ref/chap10_mj.html#X83531E4C7C53544F"><span class="RefLink">Reference: InputTextUser</span></a>), <code class="func">InputTextString</code> (<a href="../../../doc/ref/chap10_mj.html#X7ABABCDF7ED81F7F"><span class="RefLink">Reference: InputTextString</span></a>), <code class="func">InputOutputLocalProcess</code> (<a href="../../../doc/ref/chap10_mj.html#X820799A3824684AC"><span class="RefLink">Reference: InputOutputLocalProcess</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream (for client)</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream (for server)</span></a>)) with an <strong class="pkg">OpenMath</strong> object on it. <code class="func">OMGetObject</code> takes precisely one object off <var class="Arg">stream</var> and returns it as a GAP object. Both XML and binary <strong class="pkg">OpenMath</strong> encoding are supported: autodetection is used.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMGetObject</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><var class="Arg">stream</var> is an input stream (see <code class="func">InputTextFile</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap10_mj.html#X8343D04981128784"><span class="RefLink">Reference: InputTextFile</span></a>), <code class="func">InputTextUser</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap10_mj.html#X83531E4C7C53544F"><span class="RefLink">Reference: InputTextUser</span></a>), <code class="func">InputTextString</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap10_mj.html#X7ABABCDF7ED81F7F"><span class="RefLink">Reference: InputTextString</span></a>), <code class="func">InputOutputLocalProcess</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap10_mj.html#X820799A3824684AC"><span class="RefLink">Reference: InputOutputLocalProcess</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream for client</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream for server</span></a>)) with an <strong class="pkg">OpenMath</strong> object on it. <code class="func">OMGetObject</code> takes precisely one object off <var class="Arg">stream</var> and returns it as a GAP object. Both XML and binary <strong class="pkg">OpenMath</strong> encoding are supported: autodetection is used.</p>
 
 <p>This may be used to retrieve objects from a file. In the following example we demonsrate reading the same content in binary and XML formats using the test files supplied with the package (the package autodetects whether binary or XML encoding is used):</p>
 
@@ -380,8 +380,8 @@ E(4)
 
 <h5>2.2-2 EvalOMString</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EvalOMString</code>( <var class="Arg">omstr</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<p>This function is an analog of <code class="func">EvalString</code> (<a href="../../../doc/ref/chap27_mj.html#X7DE4CCD285440659"><span class="RefLink">Reference: EvalString</span></a>). Its argument <var class="Arg">omstr</var> must be a string containing a single <strong class="pkg">OpenMath</strong> object. <code class="func">EvalOMString</code> will return the <strong class="pkg">GAP</strong> object represented by <var class="Arg">omstr</var>.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EvalOMString</code>( <var class="Arg">omstr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function is an analog of <code class="func">EvalString</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap27_mj.html#X7DE4CCD285440659"><span class="RefLink">Reference: EvalString</span></a>). Its argument <var class="Arg">omstr</var> must be a string containing a single <strong class="pkg">OpenMath</strong> object. <code class="func">EvalOMString</code> will return the <strong class="pkg">GAP</strong> object represented by <var class="Arg">omstr</var>.</p>
 
 <p>If <var class="Arg">omstr</var> contains more <strong class="pkg">OpenMath</strong> objects, the rest will be ignored.</p>
 
@@ -396,44 +396,44 @@ true
 
 </pre></div>
 
-<p><a id="X87E11972845542AE" name="X87E11972845542AE"></a></p>
+<p><a id="X858CE5BC84C6B18D" name="X858CE5BC84C6B18D"></a></p>
 
 <h4>2.3 <span class="Heading">Writing <strong class="pkg">OpenMath</strong> code to streams</span></h4>
 
 <p>While it is possible to read <strong class="pkg">OpenMath</strong> code directly from a stream, writing <strong class="pkg">OpenMath</strong> to streams uses a different setup. It requires special objects called <strong class="pkg">OpenMath</strong> <em>writers</em>, which encapsulate streams and may be viewed as transducers accepting <strong class="pkg">GAP</strong> objects and writing them to a stream in the XML or binary <strong class="pkg">OpenMath</strong></p>
 
-<p>Such setup makes it possible to re-use the same stream for both binary and XML <strong class="pkg">OpenMath</strong> communication, using different <strong class="pkg">OpenMath</strong> writers in different calls. It also allows to re-use most of the high-level code for <strong class="pkg">GAP</strong> to <strong class="pkg">OpenMath</strong> conversion, having separate methods for generating binary and XML <strong class="pkg">OpenMath</strong> only for low-level output (<strong class="pkg">OpenMath</strong> tags and basic objects). This makes easier adding support to new mathematical objects and private content dictionaries as described in Chapter <a href="chap3_mj.html#X84EBC4EC7D3DC9CB"><span class="RefLink">3</span></a> since it does not require changing the low-level functionality.</p>
+<p>Such setup makes it possible to re-use the same stream for both binary and XML <strong class="pkg">OpenMath</strong> communication, using different <strong class="pkg">OpenMath</strong> writers in different calls. It also allows to re-use most of the high-level code for <strong class="pkg">GAP</strong> to <strong class="pkg">OpenMath</strong> conversion, having separate methods for generating binary and XML <strong class="pkg">OpenMath</strong> only for low-level output (<strong class="pkg">OpenMath</strong> tags and basic objects). This makes easier adding support to new mathematical objects and private content dictionaries as described in Chapter <a href="chap3_mj.html#X795882BD7DC3B2E4"><span class="RefLink">3</span></a> since it does not require changing the low-level functionality.</p>
 
 <p><a id="X79EE2E8B7C83E0F4" name="X79EE2E8B7C83E0F4"></a></p>
 
 <h5>2.3-1 IsOpenMathWriter</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOpenMathWriter</code></td><td class="tdright">( category )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOpenMathXMLWriter</code></td><td class="tdright">( category )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOpenMathBinaryWriter</code></td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOpenMathWriter</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOpenMathXMLWriter</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOpenMathBinaryWriter</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p><code class="func">IsOpenMathWriter</code>is a category for <strong class="pkg">OpenMath</strong> writers. It has two subcategories: <code class="func">IsOpenMathXMLWriter</code> and <code class="func">IsOpenMathBinaryWriter</code>.</p>
 
 <p><a id="X798979EB7E4723A2" name="X798979EB7E4723A2"></a></p>
 
 <h5>2.3-2 OpenMathXMLWriter</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OpenMathXMLWriter</code>( <var class="Arg">s</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OpenMathXMLWriter</code>( <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>for a stream <var class="Arg">s</var>, returns an object in the category <code class="func">IsOpenMathXMLWriter</code> (<a href="chap2_mj.html#X79EE2E8B7C83E0F4"><span class="RefLink">2.3-1</span></a>).</p>
 
 <p><a id="X786D6A987C1FAB0B" name="X786D6A987C1FAB0B"></a></p>
 
 <h5>2.3-3 OpenMathBinaryWriter</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OpenMathBinaryWriter</code>( <var class="Arg">s</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OpenMathBinaryWriter</code>( <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>for a stream <var class="Arg">s</var>, returns an object in the category <code class="func">OpenMathBinaryWriter</code>.</p>
 
 <p><a id="X84FC6AD5872CBF33" name="X84FC6AD5872CBF33"></a></p>
 
 <h5>2.3-4 OMPutObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPutObject</code>( <var class="Arg">stream</var>, <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPutObjectNoOMOBJtags</code>( <var class="Arg">stream</var>, <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<p><code class="func">OMPutObject</code> writes (appends) the XML <strong class="pkg">OpenMath</strong> encoding of the <strong class="pkg">GAP</strong> object <var class="Arg">obj</var> to output stream <var class="Arg">stream</var> (see <code class="func">InputTextFile</code> (<a href="../../../doc/ref/chap10_mj.html#X8343D04981128784"><span class="RefLink">Reference: InputTextFile</span></a>), <code class="func">OutputTextUser</code> (<a href="../../../doc/ref/chap10_mj.html#X83E5FC9487766297"><span class="RefLink">Reference: OutputTextUser</span></a>), <code class="func">OutputTextString</code> (<a href="../../../doc/ref/chap10_mj.html#X7FEDA5167979B74D"><span class="RefLink">Reference: OutputTextString</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream (for client)</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream (for server)</span></a>)).</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPutObject</code>( <var class="Arg">stream</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPutObjectNoOMOBJtags</code>( <var class="Arg">stream</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">OMPutObject</code> writes (appends) the XML <strong class="pkg">OpenMath</strong> encoding of the <strong class="pkg">GAP</strong> object <var class="Arg">obj</var> to output stream <var class="Arg">stream</var> (see <code class="func">InputTextFile</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap10_mj.html#X8343D04981128784"><span class="RefLink">Reference: InputTextFile</span></a>), <code class="func">OutputTextUser</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap10_mj.html#X83E5FC9487766297"><span class="RefLink">Reference: OutputTextUser</span></a>), <code class="func">OutputTextString</code> (<a href="https://www.gap-system.org/Manuals/doc/ref/chap10_mj.html#X7FEDA5167979B74D"><span class="RefLink">Reference: OutputTextString</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream for client</span></a>), <code class="func">InputOutputTCPStream</code> (<a href="../../../pkg/scscp/doc/chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">SCSCP: InputOutputTCPStream for server</span></a>)).</p>
 
 <p>The second version does the same but without &lt;OMOBJ&gt; tags, what may be useful for assembling complex <strong class="pkg">OpenMath</strong> objects.</p>
 
@@ -471,7 +471,7 @@ true
 
 <h5>2.3-5 OMPlainString</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPlainString</code>( <var class="Arg">string</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPlainString</code>( <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p><code class="func">OMPlainString</code> wraps the string into a <strong class="pkg">GAP</strong> object of a special kind called an <strong class="pkg">OpenMath</strong> plain string. Internally such object is represented as a string, but <code class="func">OMPutObject</code> (<a href="chap2_mj.html#X84FC6AD5872CBF33"><span class="RefLink">2.3-4</span></a>) threat it in a different way: instead of converting it into a &lt;OMSTR&gt; object, an <strong class="pkg">OpenMath</strong> plain string will be plainly substituted into the output (this explains its name) without decorating it with &lt;OMSTR&gt; tags.</p>
 
 <p>It is assumed that <strong class="pkg">OpenMath</strong> plain string contains valid <strong class="pkg">OpenMath</strong> code; no actual validation is performed during its creation. Such functionality may be useful to compose some <strong class="pkg">OpenMath</strong> code at the <strong class="pkg">GAP</strong> level to communicate it to the other system, in particular, to send there symbols which are not supported by <strong class="pkg">GAP</strong>, for example:</p>
@@ -496,8 +496,8 @@ true
 
 <h5>2.4-1 OMTestXML</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMTestXML</code>( <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMTest</code>( <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMTestXML</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMTest</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Converts <var class="Arg">obj</var> to XML <strong class="pkg">OpenMath</strong> and back. Returns true if and only if <var class="Arg">obj</var> is unchanged (as a <strong class="pkg">GAP</strong> object) by this operation. The <strong class="pkg">OpenMath</strong> standard does not stipulate that converting to and from <strong class="pkg">OpenMath</strong> should be the identity function so this is a useful diagnostic tool.</p>
 
 
@@ -514,7 +514,7 @@ true
 
 <h5>2.4-2 OMTestBinary</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMTestBinary</code>( <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMTestBinary</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Converts <var class="Arg">obj</var> to binary <strong class="pkg">OpenMath</strong> and back. Returns true if and only if <var class="Arg">obj</var> is unchanged (as a <strong class="pkg">GAP</strong> object) by this operation. The <strong class="pkg">OpenMath</strong> standard does not stipulate that converting to and from <strong class="pkg">OpenMath</strong> should be the identity function so this is a useful diagnostic tool.</p>
 
 

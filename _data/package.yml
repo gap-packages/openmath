@@ -1,6 +1,6 @@
 name: OpenMath
-version: 11.4.2
-date: 2017-02-28
+version: 11.5.0
+date: 2020-02-09
 description: |
     OpenMath functionality in GAP
 
@@ -18,14 +18,14 @@ maintainers:
     - name: Max Nicosia
       url: http://www-edc.eng.cam.ac.uk/~lmn27/
 
-GAP: ">=4.8"
+GAP: " >= 4.9.0"
 
 needed-pkgs:
-    - name: "GapDoc"
-      version: ">= 1.5"
+    - name: "GAPDoc"
+      version: ">= 1.6.0"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
     - name: "IO"
-      version: ">= 4.4"
+      version: ">= 4.5.1"
       url: "https://gap-packages.github.io/io"
 
 www: https://gap-packages.github.io/openmath
@@ -34,7 +34,7 @@ packageinfo: https://gap-packages.github.io/openmath/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/openmath/releases/download/v11.4.2/OpenMath-11.4.2.tar.gz
+      url: https://github.com/gap-packages/openmath/releases/download/v11.5.0/OpenMath-11.5.0.tar.gz
 
 abstract: |
     This package provides an <a href="http://www.openmath.org/">OpenMath</a> phrasebook for <span class="pkgname">GAP</span>. This package allows <span class="pkgname">GAP</span> users to import and export mathematical objects encoded in OpenMath, for the purpose of exchanging them with other applications that are OpenMath enabled.

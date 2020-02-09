@@ -26,17 +26,16 @@
   
   [33X[0;0YFor  practical purposes, the [5XOpenMath[105X package will be most efficient if used
   in  conjunction  with  the  [5XGAP[105X  package  [5XSCSCP[105X  ([KL]) which implements the
-  Symbolic   Computation   Software  Composability  protocol  ([FHKLR]).  This
+  Symbolic   Computation   Software  Composability  protocol  ([FHK+c]).  This
   protocol  specifies  an  [5XOpenMath[105X-based  remote procedure call framework, in
   which  all  messages  (procedure  calls and returns of results of successful
   computation  or  error  messages)  are  encoded  in  [5XOpenMath[105X  using content
-  dictionaries  [5Xscscp1[105X  and  [5Xscscp2[105X  ([FHKLLRa],  [FHKLLRb]).  Using the [5XSCSCP[105X
-  package,   [5XGAP[105X   can   communicate   locally  or  remotely  with  any  other
-  [5XOpenMath[105X-enabled  [5XSCSCP[105X-compliant  application which may be not only another
-  computer algebra system but also another instance of the [5XGAP[105X system or even,
-  for  example, an external C/C++ or Java application. Such communication will
-  go  into  a  seamless  manner  with the [5XGAP[105X/[5XOpenMath[105X conversion going in the
-  background.[133X
+  dictionaries  [5Xscscp1[105X and [5Xscscp2[105X ([FHK+a], [FHK+b]). Using the [5XSCSCP[105X package,
+  [5XGAP[105X  can  communicate  locally  or  remotely with any other [5XOpenMath[105X-enabled
+  [5XSCSCP[105X-compliant  application  which may be not only another computer algebra
+  system  but also another instance of the [5XGAP[105X system or even, for example, an
+  external  C/C++  or  Java  application.  Such  communication  will go into a
+  seamless manner with the [5XGAP[105X/[5XOpenMath[105X conversion going in the background.[133X
   
   
   [1X1.2 [33X[0;0YInstallation of the package[133X[101X

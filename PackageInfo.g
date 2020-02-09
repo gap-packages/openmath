@@ -15,12 +15,13 @@ SetPackageInfo( rec(
 PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.4.2",
-Date := "28/02/2017",
+Version := "11.5.0",
+Date := "09/02/2020", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "11.4.2">
-##  <!ENTITY RELEASEDATE "28 February 2017">
-##  <!ENTITY RELEASEYEAR "2017">
+##  <!ENTITY VERSION "11.5.0">
+##  <!ENTITY RELEASEDATE "09 February 2020">
+##  <!ENTITY RELEASEYEAR "2020">
 ##  <#/GAPDoc>
 
 SourceRepository := rec(
@@ -114,12 +115,12 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4.8",
+  GAP := " >= 4.9.0",
   # Needed packages:
   # GapDoc provides the function ParseTreeXMLString
   # IO is needed to generate random string from really random source 
-  NeededOtherPackages := [ [ "GapDoc", ">= 1.5" ], 
-                           [ "IO", ">= 4.4"] ],
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.6.0" ],
+                           [ "IO", ">= 4.5.1" ] ],  
   ExternalConditions := [ ]
 ),
 
