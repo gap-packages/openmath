@@ -55,7 +55,7 @@
 
 </li>
 </ul>
-<p>For the detailed information about <strong class="pkg">OpenMath</strong> standard and content dictionaries see the <strong class="pkg">OpenMath</strong> homepage <span class="URL"><a href="http://www.openmath.org">http://www.openmath.org</a></span>.</p>
+<p>For the detailed information about <strong class="pkg">OpenMath</strong> standard and content dictionaries see the <strong class="pkg">OpenMath</strong> homepage <span class="URL"><a href="https://www.openmath.org">https://www.openmath.org</a></span>.</p>
 
 <p>For practical purposes, the <strong class="pkg">OpenMath</strong> package will be most efficient if used in conjunction with the <strong class="pkg">GAP</strong> package <strong class="pkg">SCSCP</strong> (<a href="chapBib.html#biBSCSCPpkg">[KL]</a>) which implements the Symbolic Computation Software Composability protocol (<a href="chapBib.html#biBSCSCPspec">[FHK+c]</a>). This protocol specifies an <strong class="pkg">OpenMath</strong>-based remote procedure call framework, in which all messages (procedure calls and returns of results of successful computation or error messages) are encoded in <strong class="pkg">OpenMath</strong> using content dictionaries <strong class="pkg">scscp1</strong> and <strong class="pkg">scscp2</strong> (<a href="chapBib.html#biBscscp1cd">[FHK+a]</a>, <a href="chapBib.html#biBscscp2cd">[FHK+b]</a>). Using the <strong class="pkg">SCSCP</strong> package, <strong class="pkg">GAP</strong> can communicate locally or remotely with any other <strong class="pkg">OpenMath</strong>-enabled <strong class="pkg">SCSCP</strong>-compliant application which may be not only another computer algebra system but also another instance of the <strong class="pkg">GAP</strong> system or even, for example, an external C/C++ or Java application. Such communication will go into a seamless manner with the <strong class="pkg">GAP</strong>/<strong class="pkg">OpenMath</strong> conversion going in the background.</p>
 
@@ -74,12 +74,16 @@
 
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("openmath");</span>
 -----------------------------------------------------------------------------
-Loading  OpenMath 11.4.0 (OpenMath functionality in GAP)
+Loading  OpenMath 11.5.1 (OpenMath functionality in GAP)
 by Marco Costantini,
-   Alexander Konovalov (http://blogs.cs.st-andrews.ac.uk/alexk/),
-   Max Nicosia, and
+   Olexandr Konovalov (https://alex-konovalov.github.io/),
+   Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/), and
    Andrew Solomon.
+maintained by:
+   Olexandr Konovalov (https://alex-konovalov.github.io/) and
+   Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/).
 Homepage: https://gap-packages.github.io/openmath
+Report issues at https://github.com/gap-packages/openmath/issues
 -----------------------------------------------------------------------------
 true
 

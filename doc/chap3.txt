@@ -81,7 +81,7 @@
   
   [33X[0;0YThe  package  is  in  the  continuous development and will support even more
   symbols  in  the  future. In the meantime, if you will have any requests for
-  the support for particular symbols, please contact Alexander Konovalov.[133X
+  the support for particular symbols, please contact Olexandr Konovalov.[133X
   
   
   [1X3.2 [33X[0;0YAdding support for private content dictionaries and symbols[133X[101X

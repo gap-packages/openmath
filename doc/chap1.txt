@@ -22,7 +22,7 @@
         dictionaries.[133X
   
   [33X[0;0YFor   the   detailed   information   about  [5XOpenMath[105X  standard  and  content
-  dictionaries see the [5XOpenMath[105X homepage [7Xhttp://www.openmath.org[107X.[133X
+  dictionaries see the [5XOpenMath[105X homepage [7Xhttps://www.openmath.org[107X.[133X
   
   [33X[0;0YFor  practical purposes, the [5XOpenMath[105X package will be most efficient if used
   in  conjunction  with  the  [5XGAP[105X  package  [5XSCSCP[105X  ([KL]) which implements the
@@ -57,12 +57,16 @@
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XLoadPackage("openmath");[127X[104X
     [4X[28X-----------------------------------------------------------------------------[128X[104X
-    [4X[28XLoading  OpenMath 11.4.0 (OpenMath functionality in GAP)[128X[104X
+    [4X[28XLoading  OpenMath 11.5.1 (OpenMath functionality in GAP)[128X[104X
     [4X[28Xby Marco Costantini,[128X[104X
-    [4X[28X   Alexander Konovalov (http://blogs.cs.st-andrews.ac.uk/alexk/),[128X[104X
-    [4X[28X   Max Nicosia, and[128X[104X
+    [4X[28X   Olexandr Konovalov (https://alex-konovalov.github.io/),[128X[104X
+    [4X[28X   Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/), and[128X[104X
     [4X[28X   Andrew Solomon.[128X[104X
+    [4X[28Xmaintained by:[128X[104X
+    [4X[28X   Olexandr Konovalov (https://alex-konovalov.github.io/) and[128X[104X
+    [4X[28X   Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/).[128X[104X
     [4X[28XHomepage: https://gap-packages.github.io/openmath[128X[104X
+    [4X[28XReport issues at https://github.com/gap-packages/openmath/issues[128X[104X
     [4X[28X-----------------------------------------------------------------------------[128X[104X
     [4X[28Xtrue[128X[104X
     [4X[28X[128X[104X

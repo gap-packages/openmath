@@ -1,7 +1,7 @@
 ###########################################################################
 ##
 #W    PackageInfo.g            OpenMath Package            Marco Costantini
-##                                                      Alexander Konovalov
+##                                                       Olexandr Konovalov
 ##                                                              Max Nicosia
 ##                                                           Andrew Solomon
 ##
@@ -15,13 +15,13 @@ SetPackageInfo( rec(
 PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.5.0",
-Date := "09/02/2020", # dd/mm/yyyy format
+Version := "11.5.1",
+Date := "29/04/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "11.5.0">
-##  <!ENTITY RELEASEDATE "09 February 2020">
-##  <!ENTITY RELEASEYEAR "2020">
+##  <!ENTITY VERSION "11.5.1">
+##  <!ENTITY RELEASEDATE "29 April 2022">
+##  <!ENTITY RELEASEYEAR "2022">
 ##  <#/GAPDoc>
 
 SourceRepository := rec(
@@ -47,11 +47,11 @@ Persons := [
  
   rec(
     LastName      := "Konovalov",
-    FirstNames    := "Alexander",
+    FirstNames    := "Olexandr",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "alexander.konovalov@st-andrews.ac.uk",
-    WWWHome       := "http://blogs.cs.st-andrews.ac.uk/alexk/",
+    Email         := "obk1@st-andrews.ac.uk",
+    WWWHome       := "https://alex-konovalov.github.io/",
     PostalAddress := Concatenation( [
                      "School of Computer Science\n",
                      "University of St Andrews\n",

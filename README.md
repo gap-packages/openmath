@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/gap-packages/openmath.svg?branch=master)](https://travis-ci.org/gap-packages/openmath)
+[![Build Status](https://github.com/gap-packages/openmath/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/openmath/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/github/gap-packages/openmath/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/openmath)
 
 # The OpenMath package
 
-This package provides a GAP phrasebook for OpenMath (http://www.openmath.org/):
+This package provides a GAP phrasebook for [OpenMath](https://www.openmath.org/):
 it allows GAP users to import and export mathematical objects encoded in
 OpenMath, for the purpose of exchanging them with other OpenMath-enabled 
 applications.
@@ -11,7 +11,7 @@ applications.
 The OpenMath package is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free
 Software Foundation; either version 2 of the License, or (at your option) any
-later version. See the FSF's own site http://www.gnu.org/licenses/gpl.html
+later version. See the FSF's own site <https://www.gnu.org/licenses/gpl.html>
 for the details.
 
 The installation of the package is standard: for details, see GAP reference
@@ -25,7 +25,7 @@ Full information and documentation can be found in the manual, available
 as PDF `doc/manual.pdf` or as HTML `doc/chap0.html`, or on the package
 homepage at
 
-  <http://gap-packages.github.io/openmath/>
+  <https://gap-packages.github.io/openmath/>
 
 
 ## Bug reports and feature requests
