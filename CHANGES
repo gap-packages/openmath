@@ -84,7 +84,7 @@
   
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   
-Since 2007 Alexander Konovalov made several further changes in this package
+Since 2007 Olexandr Konovalov made several further changes in this package
 and after an agreement with Andrew Solomon became its maintainer. The list 
 of major updates is below:
 
@@ -151,7 +151,7 @@ of major updates is below:
   - removed printutil.g since now GAPDoc has printutil.{gd,gi} and replaced in 
     private.g ViewString by StringView as it was renamed in printutil.*
   
-Alexander Konovalov                                               April 2009  
+Olexandr Konovalov                                               April 2009  
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 

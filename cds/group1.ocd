@@ -23,7 +23,7 @@
 <CDComment>
 Written by A. Solomon on 1998-11-19
 Modified by David Carlisle 1998-04-28
-Modified by Alexander Konovalov 2009-04-18 (replaced group1.group by group1.group_by_generators)
+Modified by Olexandr Konovalov 2009-04-18 (replaced group1.group by group1.group_by_generators)
 </CDComment>
 
 <CDDefinition>

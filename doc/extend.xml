@@ -89,7 +89,7 @@ gap> OMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );
 
 The package is in the continuous development and will support even more symbols in the future.
 In the meantime, if you will have any requests for the support for particular symbols, please
-contact Alexander Konovalov.
+contact Olexandr Konovalov.
 
 </Section>
 

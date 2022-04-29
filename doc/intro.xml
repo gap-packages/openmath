@@ -62,12 +62,16 @@ When the &OpenMath; package is installed, it may be loaded as shown below
 <![CDATA[
 gap> LoadPackage("openmath");
 -----------------------------------------------------------------------------
-Loading  OpenMath 11.4.0 (OpenMath functionality in GAP)
+Loading  OpenMath 11.5.1 (OpenMath functionality in GAP)
 by Marco Costantini,
-   Alexander Konovalov (http://blogs.cs.st-andrews.ac.uk/alexk/),
-   Max Nicosia, and
+   Olexandr Konovalov (https://alex-konovalov.github.io/),
+   Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/), and
    Andrew Solomon.
+maintained by:
+   Olexandr Konovalov (https://alex-konovalov.github.io/) and
+   Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/).
 Homepage: https://gap-packages.github.io/openmath
+Report issues at https://github.com/gap-packages/openmath/issues
 -----------------------------------------------------------------------------
 true
 ]]>

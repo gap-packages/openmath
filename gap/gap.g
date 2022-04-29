@@ -2,7 +2,7 @@
 ##
 #W  gap.g                  OpenMath Package                  Andrew Solomon
 #W                                                         Marco Costantini
-#W                                                      Alexander Konovalov
+#W                                                       Olexandr Konovalov
 ##
 #Y    Copyright (C) 1999, 2000, 2001, 2006
 #Y    School Math and Comp. Sci., University of St.  Andrews, Scotland

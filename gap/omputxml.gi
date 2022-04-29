@@ -2,7 +2,7 @@
 ##
 #W  omput.gi                OpenMath Package                 Andrew Solomon
 #W                                                         Marco Costantini
-#W                                                      Alexander Konovalov
+#W                                                       Olexandr Konovalov
 ##
 ##
 #Y  Copyright (C) 1999, 2000, 2001, 2006

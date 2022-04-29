@@ -1,6 +1,6 @@
 Development notes file:
 * started by Marco Costantini
-* updated by Alexander Konovalov
+* updated by Olexandr Konovalov
 
 This file contains notes for development and for releasing a new version; 
 it is not intended to be a part of the release.
@@ -332,10 +332,10 @@ Some historical notes from previous releases and changelogs
 are collected below.
 
 To contact developers, please write to:
-alexk at mcs dot st-andrews dot ac dot uk
+obk1 at st-andrews dot ac dot uk
 
 
-Alexander Konovalov
+Olexandr Konovalov
 
 April 2009
 

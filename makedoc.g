@@ -1,6 +1,6 @@
 ###########################################################################
 ##
-#W    buildman.g             OpenMath Package           Alexander Konovalov
+#W    buildman.g             OpenMath Package            Olexandr Konovalov
 ##                                                      
 ###########################################################################
 
