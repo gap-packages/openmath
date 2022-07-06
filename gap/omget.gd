@@ -96,15 +96,5 @@ DeclareGlobalFunction("OMGetObject");
 ##  <#/GAPDoc>
 DeclareGlobalFunction("EvalOMString");
 
-
-#####################################################################
-##
-##  The Symbol Record for supported symbols from official OpenMath CDs
-##
-##  Maps a pair ["cd", "name"] to the corresponding OMgap... function
-##  defined above or immediately in the record
-##
-DeclareGlobalVariable("OMsymRecord");
-
 #############################################################################
 #E

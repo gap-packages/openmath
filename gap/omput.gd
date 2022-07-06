@@ -14,7 +14,7 @@
 
 ###########################################################################
 
-DeclareGlobalVariable("OpenMathRealRandomSource");
+BindGlobal("OpenMathRealRandomSource", fail);
 
 ###########################################################################
 ##

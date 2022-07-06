@@ -67,16 +67,13 @@ end);
 # is entered.
 #
 BindGlobal( "RandomString", function( n )
-    local symbols, i;
+    local symbols;
     symbols := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-    if IsBound( OpenMathRealRandomSource ) then 
-        if IsRandomSource( OpenMathRealRandomSource ) then
-            return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
-        fi;    
+    if not IsRandomSource( OpenMathRealRandomSource ) then
+        MakeReadWriteGlobal( "OpenMathRealRandomSource" );
+        UnbindGlobal( "OpenMathRealRandomSource" );
+        BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "urandom" ));
     fi;
-    MakeReadWriteGlobal( "OpenMathRealRandomSource" );
-    UnbindGlobal( "OpenMathRealRandomSource" );
-    BindGlobal( "OpenMathRealRandomSource", RandomSource( IsRealRandomSource, "urandom" ));
     return List( [1..n], i -> Random( OpenMathRealRandomSource, symbols) );
     end);
     
