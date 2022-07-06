@@ -107,7 +107,7 @@ exchanging them with other applications that are OpenMath enabled.",
 PackageDoc := rec(
   BookName  := "OpenMath",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "OpenMath functionality in GAP",
