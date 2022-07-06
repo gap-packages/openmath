@@ -313,7 +313,7 @@ BindGlobal("OMgap_term", x->x );
 ##  Maps a pair ["cd", "name"] to the corresponding OMgap... function
 ##  defined above or immediately in the record
 ##
-InstallValue( OMsymRecord, rec( 
+BindGlobal( "OMsymRecord", rec(
 
 alg1 := rec( 
 	one  := 1, 
