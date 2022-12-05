@@ -57,7 +57,7 @@
     [4X[28X[128X[104X
     [4X[25Xgap>[125X [27XLoadPackage("openmath");[127X[104X
     [4X[28X-----------------------------------------------------------------------------[128X[104X
-    [4X[28XLoading  OpenMath 11.5.1 (OpenMath functionality in GAP)[128X[104X
+    [4X[28XLoading  OpenMath 11.5.2 (OpenMath functionality in GAP)[128X[104X
     [4X[28Xby Marco Costantini,[128X[104X
     [4X[28X   Olexandr Konovalov (https://alex-konovalov.github.io/),[128X[104X
     [4X[28X   Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/), and[128X[104X
