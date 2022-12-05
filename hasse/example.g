@@ -27,7 +27,7 @@ le := function(p,t)
 end;
 
 s := SymmetricGroup(4);
-l := AsList(s);
+l := AsSet(s);
 h := CreateHasseDiagram(l,le);
 DrawHasse(h);
 
