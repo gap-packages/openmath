@@ -36,7 +36,7 @@
 * Updated example of OMsymRecord.nums1.
 
 11.11.0 (March 2012)
-* Added .ocd files for private content dictonaries, already implemented in
+* Added .ocd files for private content dictionaries, already implemented in
   the package, to the 'ocd' directory.
 * Extended usage of floats from GAP 4.5  
 * As a result, this version requires at least GAP 4.5 to work.
@@ -144,7 +144,7 @@ of major updates is below:
 * Various technical changes:
   - updated PackageInfo.g file
   - removed the non-standard banner 
-  - removed INSTALL file containig duplicated information
+  - removed INSTALL file containing duplicated information
   - added openmatj/gap/buildman.g with utility functions to build the manual
   - rewrote the README file which is also the changelog
   - changed the system of version numbers
@@ -254,7 +254,7 @@ in the meantime:
   - Added some notes
 
 * in various files
-  - Refactored the code, so that the code is splitted into
+  - Refactored the code, so that the code is split into
     several independent modules (see file read.g).
   - Added commands to close all the streams.
   - Modified to fit with the file structure prescribed in the

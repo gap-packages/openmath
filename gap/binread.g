@@ -74,7 +74,7 @@ end;
 #F  ReadAllTokens ( <length>, <stream>, <isUTF16> )
 ##
 ##  Auxiliary function to read all tokens for a given 
-##  length and ouput them as a string. 
+##  length and output them as a string.
 ##  If isUTF16 flag is TRUE every second token will be skipped.
 ## 
 ##  Input: length (int), stream, isUTF16 (boolean)
@@ -91,7 +91,7 @@ ReadAllTokens := function (length, stream, isUTF16)
 		if isUTF16 then
 			curByte := ToBlist(curByte);
 			if UTF_NOT_SUPP = IntersectionBlist(curByte ,UTF_NOT_SUPP) then
-				Error("Characted in string not supported\n");	
+				Error("Character in string not supported");
 			fi;
 			ReadByte(stream);
 		fi;
@@ -344,7 +344,7 @@ end;
 ##
 #F  CreateRecordReference ( <objectRef>, <isInternal> )
 ##
-##  Auxiliary function to create a record representation of a referece,
+##  Auxiliary function to create a record representation of a reference,
 ##  either internal or external 
 ##  
 ##  Input: objectRef (string), isInternal (boolean)

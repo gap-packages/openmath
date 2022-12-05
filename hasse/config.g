@@ -12,7 +12,7 @@
 
 
 ##########################################################################
-# Some System dependent defitions
+# Some System dependent definitions
 ##
 BROWSER_COMMAND := "open"; # "netscape-navigator";
 

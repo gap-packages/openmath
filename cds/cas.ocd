@@ -33,7 +33,7 @@ Causes the compute engine process to terminate.
 <Description>
 Two arguments the first a string, the name of a variable in the 
 computer algebra engine (CAE). Assigns the second argument to the 
-variable denoted by the first arguement.
+variable denoted by the first argument.
 </Description>
 <Example>
 <!-- a := 1; -->
