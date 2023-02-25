@@ -6,10 +6,10 @@
                          [1X[5XOpenMath[105X functionality in GAP[101X
   
   
-                                 Version 11.5.2
+                                 Version 11.5.3
   
   
-                                06 December 2022
+                                25 February 2023
   
   
                                 Marco Costantini
