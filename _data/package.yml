@@ -1,5 +1,6 @@
 name: OpenMath
-version: 11.5.3
+version: "11.5.3"
+license: "GPL-2.0-or-later"
 date: 2023-02-25
 description: |
     OpenMath functionality in GAP
@@ -42,3 +43,32 @@ abstract: |
 status: accepted
 doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
+keywords: |
+    OpenMath, Phrasebook.
+citeas: |
+    <p class='BibEntry'>
+    [<span class='BibKey'>CKNS23</span>]   <b class='BibAuthor'>Costantini, M., Konovalov, O., Nicosia, M. and Solomon, A.</b>,
+     <i class='BibTitle'>OpenMath, OpenMath functionality in GAP,
+             Version 11.5.3</i>
+     (<span class='BibYear'>2023</span>)<br />
+    (<span class='BibNote'>Refereed GAP package</span>),
+    <span class='BibHowpublished'><a href="https://gap-packages.github.io/openmath">https://gap-packages.github.io/openmath</a></span>.
+    </p>
+    
+
+bibtex: |
+    @misc{ OpenMath11.5.3,
+      author =           {Costantini,  M.  and Konovalov, O. and Nicosia, M. and
+                          Solomon, A.},
+      title =            {{OpenMath},  OpenMath  functionality in GAP, {V}ersion
+                          11.5.3},
+      month =            {Feb},
+      year =             {2023},
+      note =             {Refereed GAP package},
+      howpublished =     {\href        {https://gap-packages.github.io/openmath}
+                          {\texttt{https://gap-packages.github.io/}\discretionary
+                          {}{}{}\texttt{openmath}}},
+      keywords =         {OpenMath; Phrasebook},
+      printedkey =       {CKNS23}
+    }
+
