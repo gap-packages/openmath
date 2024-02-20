@@ -57,6 +57,20 @@ On various stages the development of the OpenMath package was supported by:
 - [OpenDreamKit](http://opendreamkit.org/) Horizon 2020
   European Research Infrastructures project #676541.
 
+{% if site.data.package.citeas %}
+## Citing
+
+Please, cite this package as
+
+{{site.data.package.citeas}}
+
+You can get more info by typing `Cite("{{ site.data.package.name }}");` in the gap prompt.
+
+{% include button-bibtex.html %}
+
+{% endif %}
+
+
 {% if site.github.issues_url %}
 ## Feedback
 
