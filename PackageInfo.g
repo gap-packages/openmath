@@ -111,7 +111,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "OpenMath functionality in GAP",
-  Autoload  := true
 ),
 
 Dependencies := rec(
@@ -126,7 +125,6 @@ Dependencies := rec(
 
 AvailabilityTest := ReturnTrue,
 
-Autoload := false,
 
 TestFile := "tst/testall.g",
 
