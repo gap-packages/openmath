@@ -9,8 +9,7 @@
 
 Producing &OpenMath; representation of polynomials, one may get a warning:
 
-<Log>
-<![CDATA[
+<Log><![CDATA[
 gap> x:=Indeterminate(Rationals,"x");; y:=Indeterminate(Rationals,"y");;
 gap> OMPrint(x^2+y);
 #I  Warning : polynomial will be printed using its default ring 
@@ -42,14 +41,12 @@ gap> OMPrint(x^2+y);
 		</OMA>
 	</OMA>
 </OMOBJ>
-]]>
-</Log>
+]]></Log>
 Indeed, now when another polynomial will be printed, it will belong to a
 ring with a different identifier (despite &GAP; will be able to perform
 arithmetical operations on these polynomials like when they belong to the
 same ground ring):
-<Log>
-<![CDATA[
+<Log><![CDATA[
 gap> OMPrint(x+1);
 #I  Warning : polynomial will be printed using its default ring 
 #I  because the default OpenMath polynomial ring is not specified 
@@ -78,8 +75,7 @@ gap> OMPrint(x+1);
 		</OMA>
 	</OMA>
 </OMOBJ>
-]]>
-</Log>
+]]></Log>
 Thus, the warning means that it is not guaranteed that the polynomial ring
 will have the same identifier <C>&lt;OMA id="polyring..." ></C> when
 another or same polynomial from this ring will be printed next time.
@@ -88,8 +84,7 @@ is being exchanged with another system and it is crucial that all of
 them will belong to the same ring, then such ring must be created
 explicitly and then <C>SetOpenMathDefaultPolynomialRing</C> must be
 called:
-<Log>
-<![CDATA[
+<Log><![CDATA[
 gap> x:=Indeterminate(Rationals,"x");; y:=Indeterminate(Rationals,"y");;
 gap> R:=PolynomialRing(Rationals,[x,y]);;
 gap> SetOpenMathDefaultPolynomialRing(R);
@@ -119,13 +114,11 @@ gap> OMPrint(x^2+y);
 		</OMA>
 	</OMA>
 </OMOBJ>
-]]>
-</Log>
+]]></Log>
 Now we can see that both polynomials belong to the ring with the same 
 identifier, and the &OpenMath; representation of the 2nd polynomial 
 properly reflects that it belongs to a polynomial ring with two variables.
-<Log>
-<![CDATA[
+<Log><![CDATA[
 gap> OMPrint(x+1);  
 <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
@@ -148,8 +141,7 @@ gap> OMPrint(x+1);
 		</OMA>
 	</OMA>
 </OMOBJ> 
-]]>
-</Log>
+]]></Log>
 
 <#Include Label="OMString">
 

@@ -20,8 +20,7 @@ corresponding CD. If the value of the component is not equal to
 for conversion. The following example of the entry for the <C>nums1</C> CD
 demonstrates a combination of all possible cases:
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> Display( OMsymRecord.nums1 );          
 rec(
   NaN := nan,
@@ -34,8 +33,7 @@ rec(
   rational := function ( x )
         return OMgapId( [ OMgap2ARGS( x ), x[1] / x[2] ] )[2];
     end )
-]]>
-</Example>
+]]></Example>
 
 <C>OMsymRecord</C> contains all symbols for which conversion from 
 &OpenMath; to &GAP; is supported except some special symbols related
@@ -47,11 +45,9 @@ To check quickly if &GAP; can parse a given &OpenMath; object,
 copy the &OpenMath; code and paste it directly into standard input
 after the following command:
 
-<Log>
-<![CDATA[
+<Log><![CDATA[
 gap> s:= InputTextUser();; g := OMGetObject(s); CloseStream(s);
-]]>
-</Log>
+]]></Log>
 
 The main tool for the conversion from &GAP; to &OpenMath; is 
 <C>OMPut( &lt;writer>, &lt;object> )</C>. A number of methods for
@@ -61,8 +57,7 @@ The main tool for the conversion from &GAP; to &OpenMath; is
 To check quickly whether the object may be converted to &OpenMath;,
 call <C>OMprint</C> for that object, for example:
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> OMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );                
 <OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0">
 	<OMA>
@@ -84,8 +79,7 @@ gap> OMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );
 		</OMA>
 	</OMA>
 </OMOBJ>
-]]>
-</Example>
+]]></Example>
 
 The package is in the continuous development and will support even more symbols in the future.
 In the meantime, if you will have any requests for the support for particular symbols, please

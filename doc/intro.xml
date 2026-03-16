@@ -58,8 +58,7 @@ Then to be able to load &OpenMath; you need to call GAP with the
 <P/>
 When the &OpenMath; package is installed, it may be loaded as shown below 
 (possibly loading required packages at the same time):
-<Log>
-<![CDATA[
+<Log><![CDATA[
 gap> LoadPackage("openmath");
 -----------------------------------------------------------------------------
 Loading  OpenMath 11.5.2 (OpenMath functionality in GAP)
@@ -74,8 +73,7 @@ Homepage: https://gap-packages.github.io/openmath
 Report issues at https://github.com/gap-packages/openmath/issues
 -----------------------------------------------------------------------------
 true
-]]>
-</Log>
+]]></Log>
 
 </Section>
 
