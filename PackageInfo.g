@@ -18,11 +18,6 @@ Subtitle := "OpenMath functionality in GAP",
 Version := "11.5.4",
 Date := "11/08/2026", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
-##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "11.5.4">
-##  <!ENTITY RELEASEDATE "11 August 2026">
-##  <!ENTITY RELEASEYEAR "2026">
-##  <#/GAPDoc>
 
 SourceRepository := rec(
     Type := "git",
@@ -128,8 +123,28 @@ AvailabilityTest := ReturnTrue,
 
 TestFile := "tst/testall.g",
 
-Keywords := [ "OpenMath", "Phrasebook" ]
+Keywords := [ "OpenMath", "Phrasebook" ],
 
+AutoDoc := rec(
+    entities := rec(
+        IO := "<Package>IO</Package>",
+        OpenMath := "<Package>OpenMath</Package>",
+        scscp1 := "<Package>scscp1</Package>",
+        scscp2 := "<Package>scscp2</Package>",
+        SCSCP := "<Package>SCSCP</Package>",
+        VERSION := ~.Version,
+        RELEASEYEAR := ~.Date{[7..10]},
+        RELEASEDATE := function(date)
+          local day, month, year, allMonths;
+          day := Int(date{[1,2]});
+          month := Int(date{[4,5]});
+          year := Int(date{[7..10]});
+          allMonths := [ "January", "February", "March", "April", "May", "June", "July",
+                         "August", "September", "October", "November", "December"];
+          return Concatenation(String(day)," ", allMonths[month], " ", String(year));
+        end(~.Date),
+    ),
+),
 ));
 
 
