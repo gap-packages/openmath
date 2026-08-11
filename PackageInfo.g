@@ -15,7 +15,7 @@ SetPackageInfo( rec(
 PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.5.4",
+Version := "11.5.5",
 Date := "11/08/2026", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
