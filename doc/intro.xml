@@ -63,11 +63,11 @@ gap> LoadPackage("openmath");
 -----------------------------------------------------------------------------
 Loading  OpenMath 11.5.2 (OpenMath functionality in GAP)
 by Marco Costantini,
-   Olexandr Konovalov (https://alex-konovalov.github.io/),
+   Olexandr Konovalov (https://olexandr-konovalov.github.io/),
    Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/), and
    Andrew Solomon.
 maintained by:
-   Olexandr Konovalov (https://alex-konovalov.github.io/) and
+   Olexandr Konovalov (https://olexandr-konovalov.github.io/) and
    Max Nicosia (http://www-edc.eng.cam.ac.uk/~lmn27/).
 Homepage: https://gap-packages.github.io/openmath
 Report issues at https://github.com/gap-packages/openmath/issues
