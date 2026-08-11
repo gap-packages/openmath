@@ -15,13 +15,13 @@ SetPackageInfo( rec(
 PackageName := "OpenMath",
 Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.5.3",
-Date := "25/02/2023", # dd/mm/yyyy format
+Version := "11.5.4",
+Date := "11/08/2026", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "11.5.3">
-##  <!ENTITY RELEASEDATE "25 February 2023">
-##  <!ENTITY RELEASEYEAR "2023">
+##  <!ENTITY VERSION "11.5.4">
+##  <!ENTITY RELEASEDATE "11 August 2026">
+##  <!ENTITY RELEASEYEAR "2026">
 ##  <#/GAPDoc>
 
 SourceRepository := rec(
