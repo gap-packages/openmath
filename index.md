@@ -47,16 +47,6 @@ The following additional GAP packages are not required, but suggested:
  {% endfor %}
 {% endif %}
 
-## Acknowledgements
-
-On various stages the development of the OpenMath package was supported by:
-- European Commission through ESPRIT grant EP 24969
-  ["Accessing and Using Mathematical Information Electronically"](http://web.archive.org/web/20040416013945/http://www.nag.co.uk/projects/OpenMath.html).
-- EU FP6 Programme project 026133
-  ["SCIEnce - Symbolic Computation Infrastructure for Europe"](http://www.symbolic-computing.org/).
-- [OpenDreamKit](http://opendreamkit.org/) Horizon 2020
-  European Research Infrastructures project #676541.
-
 {% if site.data.package.citeas %}
 ## Citing
 
