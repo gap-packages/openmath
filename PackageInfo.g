@@ -113,7 +113,7 @@ Dependencies := rec(
   # Needed packages:
   # GapDoc provides the function ParseTreeXMLString
   # IO is needed to generate random string from really random source 
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.6.0" ],
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.6.0" ],  # for ParseTreeXMLString, used to read OpenMath XML
                            [ "IO", ">= 4.5.1" ] ],  
   ExternalConditions := [ ]
 ),
