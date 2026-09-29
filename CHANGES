@@ -1,11 +1,29 @@
-11.4.3 (2022-12-06)
+11.5.5 (2026-08-11)
+* Build the manual with AutoDoc
+
+11.5.4 (2026-08-11)
+* Fixed spurious empty lines in the manual
+* Removed the obsolete Autoload flag from PackageInfo.g
+* Janitorial changes
+
+11.5.3 (2023-02-25)
+* Janitorial changes
+
+11.5.2 (2022-12-06)
+* Removed code that is no longer needed
+* Use AsSet instead of AsList in the Hasse diagram example to get a stable
+  order of the result
 * Janitorial changes
 
 11.5.1 (2022-04-29)
+* Updated URLs in the bibliography and switched many to https
 * Janitorial changes
 
 11.5.0 (2020-02-09)
-* ...
+* Now requires GAP 4.9
+* Fixed DrawHasse: it now outputs an HTML file
+* Added a standard test suite and more tests
+* Added a License field to PackageInfo.g
 
 11.4.2 (February 2017)
 * Replaced EvalString by Int to convert a string to an integer
@@ -29,22 +47,22 @@
 * Added function EvalOMString which is an analog of EvalString to evaluate
   a string containing an OpenMath object
 
-11.11.5 (October 2013)
+11.1.5 (October 2013)
 * Test output updated to match GAP 4.7.1
 
-11.11.4 (March 2013)
+11.1.4 (March 2013)
 * Cleaned up usage of some obsoletes
 
-11.11.3 (February 2013)
+11.1.3 (February 2013)
 * Updated tests to automate failure detection
 
-11.11.2 (May 2012)
+11.1.2 (May 2012)
 * Improved testing facilities
 
-11.11.1 (April 2012)
+11.1.1 (April 2012)
 * Updated example of OMsymRecord.nums1.
 
-11.11.0 (March 2012)
+11.1.0 (March 2012)
 * Added .ocd files for private content dictionaries, already implemented in
   the package, to the 'ocd' directory.
 * Extended usage of floats from GAP 4.5  
