@@ -483,19 +483,12 @@ function(stream, isRecursiveCall)
 			#get the base
 			base := IntersectionBlist(basensign ,(UnionBlist(MASK_BASE_256, MASK_BASE_16)));
 			if base = MASK_BASE_256 then
-				objectStri := "";
-				i := objLength;
-				# for all the bytes that compose the number
-				while i >0 do
-					#read the byte
-					curByte := ReadByte(stream);
-					#converting the values into hex
-					curByte := HexStringInt(curByte);
-					#adding the hex digits to the string
-					Append(objectStri,curByte);
-					i := i -1;
+				# the digits are raw bytes, most significant first
+				# (OpenMath 2.0, section 3.2.2)
+				num := 0;
+				for i in [1..objLength] do
+					num := num * 256 + ReadByte(stream);
 				od;
-				num := IntHexString(objectStri);		
 			else
 				objectStri := ReadAllTokens(objLength, stream, false);
 				#needs to be converted to a b10 before assigning it	
