@@ -361,42 +361,50 @@ end);
 InstallMethod(OMPut, "for a float to binary OpenMath", true,
 [ IsOpenMathBinaryWriter, IsFloat ],0,
 function(writer, f)
-	local intPart, decPart, sign, decHex, decBin, decBinLen, exponent, 
-	      pos, mantissa, intBin, absIntPart;
+	local ext, m, e, len, sign, exponent, fraction, bits, i;
+	# OpenMath 2.0, section 3.2.2: the tag is followed by the eight bytes
+	# of the IEEE 754 double, most significant byte first.
+	if not IsIEEE754FloatRep(f) then
+		f := NewFloat(IsIEEE754FloatRep, f);
+	fi;
+	# ExtRepOfObj gives [ m, e ] with f = m * 2^(e - bit length of m),
+	# or [ 0, k ] for the special values 0, -0, inf, -inf and nan.
+	ext := ExtRepOfObj(f);
+	m := ext[1];
+	e := ext[2];
+	sign := 0;
+	if m = 0 then
+		exponent := 0;
+		fraction := 0;
+		if e = 1 or e = 3 then
+			sign := 1;
+		fi;
+		if e = 2 or e = 3 then
+			exponent := 2047;
+		elif e = 4 then
+			exponent := 2047;
+			fraction := 2^51; # quiet NaN
+		fi;
+	else
+		if m < 0 then
+			sign := 1;
+			m := -m;
+		fi;
+		len := Log2Int(m) + 1;
+		exponent := e - 1 + 1023;
+		if exponent > 0 then
+			fraction := m * 2^(53 - len) - 2^52;
+		else
+			# subnormal
+			exponent := 0;
+			fraction := m * 2^(e - len + 1074);
+		fi;
+	fi;
+	bits := sign * 2^63 + exponent * 2^52 + fraction;
 	WriteByte( writer![1], 3);
-	if f > 0 then
-		sign := false;
-	else
-		sign := true;
-	fi;
-	intPart := Int(f);
-	if IsIntFloat(f) then 
-		decPart := 0;
-	else
-		decPart := f - intPart;
-	fi;
-	decHex := WriteDecasHex(decPart);
-	decBin := WriteHexAsBin(decHex, true);
-	decBinLen := Length(decBin);
-	absIntPart := AbsInt(intPart);
-	if absIntPart = 0 then
-		pos := FindFirst1BinaryString(decBin);
-		exponent := 1023 - pos;
-		exponent := WriteHexAsBin(HexStringInt(exponent), false);
-		mantissa := decBin{[pos+1..decBinLen]};
-	else
-		intBin := WriteHexAsBin(HexStringInt(absIntPart),false);
-		pos := Length(intBin) -1;
-		exponent := 1023 + pos;
-		exponent := WriteHexAsBin(HexStringInt(exponent), false);
-		Append(intBin, decBin);
-		mantissa := intBin{[2..Length(intBin)]};
-	fi;
-	if Length(mantissa) > 52 then
-		mantissa := mantissa{[1..52]};
-	fi;
-	WriteBinStringsAsBytes( sign, exponent, mantissa , writer![1]);
-
+	for i in [7, 6 .. 0] do
+		WriteByte( writer![1], QuoInt(bits, 2^(8 * i)) mod 256 );
+	od;
 end);
 
 
