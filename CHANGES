@@ -1,3 +1,6 @@
+11.5.6 (2026-09-29)
+* Removed the undocumented global function HasseDiagram
+
 11.5.5 (2026-08-11)
 * Build the manual with AutoDoc
 
