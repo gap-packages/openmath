@@ -1,152 +1,103 @@
-###########################################################################
+#############################################################################
+##  
+##  Demo PackageInfo.g for the GitHubPagesForGAP
 ##
-#W    PackageInfo.g            OpenMath Package            Marco Costantini
-##                                                       Olexandr Konovalov
-##                                                              Max Nicosia
-##                                                           Andrew Solomon
-##
-#Y    Copyright (C) 1999, 2000, 2001, 2006, 2007-2011
-#Y    School Math and Comp. Sci., University of St.  Andrews, Scotland
-#Y    Copyright (C) 2004, 2005, 2006 Marco Costantini
-##
-##    PackageInfo.g file
-##
+
 SetPackageInfo( rec(
-PackageName := "OpenMath",
-Subtitle := "OpenMath functionality in GAP",
 
-Version := "11.5.5",
-Date := "11/08/2026", # dd/mm/yyyy format
-License := "GPL-2.0-or-later",
+PackageName := "GitHubPagesForGAP",
 
-SourceRepository := rec(
-    Type := "git",
-    URL := Concatenation( "https://github.com/gap-packages/", LowercaseString(~.PackageName) ),
-),
-IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := Concatenation( "https://gap-packages.github.io/", LowercaseString(~.PackageName) ),
-README_URL      := Concatenation( ~.PackageWWWHome, "/README.md" ),
-PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
-ArchiveURL      := Concatenation( ~.SourceRepository.URL,
-                                 "/releases/download/v", ~.Version,
-                                 "/", ~.PackageName, "-", ~.Version ),
-ArchiveFormats := ".tar.gz",
+Subtitle := "A GitHub Pages generator for GAP packages",
+Version := "0.4",
+Date := "10/04/2025", # dd/mm/yyyy format
+License := "0BSD",
 
 Persons := [
   rec(
-    LastName      := "Costantini",
-    FirstNames    := "Marco",
-    IsAuthor      := true,
-    IsMaintainer  := false
-  ),
- 
-  rec(
-    LastName      := "Konovalov",
-    FirstNames    := "Olexandr",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "obk1@st-andrews.ac.uk",
-    WWWHome       := "https://olexandr-konovalov.github.io/",
-    PostalAddress := Concatenation( [
-                     "School of Computer Science\n",
-                     "University of St Andrews\n",
-                     "Jack Cole Building, North Haugh,\n",
-                     "St Andrews, Fife, KY16 9SX, Scotland" ] ),
-    Place         := "St Andrews",
-    Institution   := "University of St Andrews"
-  ),  
-  
-  rec(
-    LastName      := "Nicosia",
+    LastName      := "Horn",
     FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "lmn27@cam.ac.uk",
-    WWWHome       := "http://www-edc.eng.cam.ac.uk/~lmn27/",
-    PostalAddress := Concatenation( [
-                     "University of Cambridge\n",
-                     "Department of Engineering\n",
-                     "Engineering Design Centre\n",
-                     "Intelligent Interactive Systems Group\n",
-                     "Trumpington Street, Cambridge, CB2 1PZ, UK" ] ),
-    Place         := "St Andrews",
-    Institution   := "University of St Andrews"
-  ),   
-  
+    Email         := "mhorn@rptu.de",
+    WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername:= "fingolfin",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "RPTU Kaiserslautern-Landau\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "RPTU Kaiserslautern-Landau"
+  ),
+
   rec(
-    LastName      := "Solomon",
-    FirstNames    := "Andrew",
+    LastName      := "Thor",
+    FirstNames    := "A. U.",
     IsAuthor      := true,
     IsMaintainer  := false,
-    PostalAddress := Concatenation( [
-    "Faculty of IT\n",
-    "University of Technology, Sydney\n",
-    "Broadway, NSW 2007\n",
-    "Australia" ] ),
-    Institution   := "Faculty of Information Technology, University of Technology, Sydney."
+    #Email         := "author@example.com",
+  ),
+
+  rec(
+    LastName      := "Itor",
+    FirstNames    := "Jan",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    #Email         := "janitor@example.com",
   ),
 ],
 
-Status := "accepted",
-CommunicatedBy := "David Joyner (Annapolis)",
-AcceptDate := "08/2010",
+Status := "other",
+
+# The following are not strictly necessary in your own PackageInfo.g
+# (in the sense that update.g only looks at the usual fields
+# like PackageWWWHome, ArchiveURL etc.). But they are convenient
+# if you use exactly the scheme for your package website that we propose.
+GithubUser := "gap-system",
+GithubRepository := ~.PackageName,
+GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
+
+PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
+README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+# The following assumes you are using the Github releases system. If not, adjust
+# it accordingly.
+ArchiveURL     := Concatenation(~.GithubWWW,
+                    "/releases/download/v", ~.Version, "/",
+                    ~.GithubRepository, "-", ~.Version),
+
+ArchiveFormats := ".tar.gz .tar.bz2",
 
 AbstractHTML := 
-
-"This package provides an <a href=\"http://www.openmath.org/\">OpenMath</a> \
-phrasebook for <span class=\"pkgname\">GAP</span>. \
-This package allows <span class=\"pkgname\">GAP</span> users to import \
-and export mathematical objects encoded in OpenMath, for the purpose of \
-exchanging them with other applications that are OpenMath enabled.",
+  "This is a pseudo package that contains no actual\
+  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
+  GAP packages that allows to quickly setup GitHub Pages.",
 
 PackageDoc := rec(
-  BookName  := "OpenMath",
+  BookName  := "GitHubPagesForGAP",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0_mj.html",
+  HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "OpenMath functionality in GAP",
+  LongTitle := "A GitHub Pages generator for GAP packages",
 ),
 
+# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP := " >= 4.9.0",
-  # Needed packages:
-  # GapDoc provides the function ParseTreeXMLString
-  # IO is needed to generate random string from really random source 
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.6.0" ],
-                           [ "IO", ">= 4.5.1" ] ],  
-  ExternalConditions := [ ]
+  GAP := ">=4.8.1",
+  NeededOtherPackages := [
+    ["GAPDoc", ">= 1.2"],
+    ["IO", ">= 4.1"],
+  ],
+  SuggestedOtherPackages := [["orb", ">= 4.2"]],
+  ExternalConditions := []
 ),
 
 AvailabilityTest := ReturnTrue,
 
+Keywords := ["GitHub Pages", "GAP"]
 
-TestFile := "tst/testall.g",
-
-Keywords := [ "OpenMath", "Phrasebook" ],
-
-AutoDoc := rec(
-    entities := rec(
-        IO := "<Package>IO</Package>",
-        OpenMath := "<Package>OpenMath</Package>",
-        scscp1 := "<Package>scscp1</Package>",
-        scscp2 := "<Package>scscp2</Package>",
-        SCSCP := "<Package>SCSCP</Package>",
-        VERSION := ~.Version,
-        RELEASEYEAR := ~.Date{[7..10]},
-        RELEASEDATE := function(date)
-          local day, month, year, allMonths;
-          day := Int(date{[1,2]});
-          month := Int(date{[4,5]});
-          year := Int(date{[7..10]});
-          allMonths := [ "January", "February", "March", "April", "May", "June", "July",
-                         "August", "September", "October", "November", "December"];
-          return Concatenation(String(day)," ", allMonths[month], " ", String(year));
-        end(~.Date),
-    ),
-),
 ));
 
 
-#############################################################################
-#E
