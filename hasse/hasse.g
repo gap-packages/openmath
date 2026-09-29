@@ -24,15 +24,6 @@ DeclareProperty("IsHasseDiagram", IsBinaryRelation);
 ## Return the Hasse Diagram of a partial order.
 ##
 
-HasseDiagram := function(rel)
-	local h;
-	h :=  HasseDiagramBinaryRelation(rel);
-	SetIsHasseDiagram(h,true);
-	return h;
-end;
-
-
-
 # f is a list of elements, le is the comparison function
 CreateHasseDiagram := function(f, le)
   local rel, lc, tups, i, j, IsMinimalInList, MinElts, EltCovers, ListCovers;

@@ -304,7 +304,8 @@ gap> r := BinaryRelationByElements(d,
 gap> p := TransitiveClosureBinaryRelation(ReflexiveClosureBinaryRelation(r));;
 gap> IsPartialOrderBinaryRelation(p);
 true
-gap> h := HasseDiagram(p);;
+gap> h := HasseDiagramBinaryRelation(p);;
+gap> SetIsHasseDiagram(h,true);
 
 # the bug was here.
 gap> Elements(UnderlyingRelation(h));
