@@ -35,62 +35,62 @@
 * Added a standard test suite and more tests
 * Added a License field to PackageInfo.g
 
-## 11.4.2 (February 2017)
+## 11.4.2 (2017-02-28)
 
 * Replaced EvalString by Int to convert a string to an integer
 
-## 11.4.1 (February 2017)
+## 11.4.1 (2017-02-16)
 
 * Added xmlns and version to OMOBJ tag
 
-## 11.4.0 (February 2017)
+## 11.4.0 (2017-02-06)
 
 * New release after switching to GitHub and GitHub pages
 * Replace obsolete Tuple by DirectProductElement
 * Switched from READ_COMMAND to READ_COMMAND_REAL (available from GAP 4.8.2)
 
-## 11.3.1 (February 2016)
+## 11.3.1 (2016-02-03)
 
 * Removed old compatibility code for MACFLOATs
 
-## 11.3.0 (January 2016)
+## 11.3.0 (2016-01-08)
 
 * Upgraded to work with GAP 4.8
 * Fixed the output of integer2.class to work in GAP 4.8
 
-## 11.2.0 (November 2013)
+## 11.2.0 (2013-11-16)
 
 * Added function EvalOMString which is an analog of EvalString to evaluate
   a string containing an OpenMath object
 
-## 11.1.5 (October 2013)
+## 11.1.5 (2013-10-30)
 
 * Test output updated to match GAP 4.7.1
 
-## 11.1.4 (March 2013)
+## 11.1.4 (2013-03-27)
 
 * Cleaned up usage of some obsoletes
 
-## 11.1.3 (February 2013)
+## 11.1.3 (2013-02-01)
 
 * Updated tests to automate failure detection
 
-## 11.1.2 (May 2012)
+## 11.1.2 (2012-05-31)
 
 * Improved testing facilities
 
-## 11.1.1 (April 2012)
+## 11.1.1 (2012-04-18)
 
 * Updated example of OMsymRecord.nums1.
 
-## 11.1.0 (March 2012)
+## 11.1.0 (2012-03-23)
 
 * Added .ocd files for private content dictionaries, already implemented in
   the package, to the 'ocd' directory.
 * Extended usage of floats from GAP 4.5
 * As a result, this version requires at least GAP 4.5 to work.
 
-## 11.0.0 (October 2011)
+## 11.0.0 (2011-10-28)
 
 * Included bidirectional support for binary OpenMath encoding implemented
   by Max Nicosia during his internship in St Andrews in Summer 2010, as
@@ -103,7 +103,7 @@
 * Removed no longer needed INRIA OpenMath library which was formerly used
   to work with binary OpenMath encoding.
 
-## 10.1.0 (March 2010)
+## 10.1.0 (2010-03-30)
 
 * Switched dev/random -> dev/urandom to prevent the server from blocking
   and waiting for additional entropy to be collected.
@@ -124,7 +124,7 @@
 * OMPut for a finite field element using finfield1 CD.
 * OMPut for a finite field using setname2.{GFp,GFpn}.
 
-## 10.0.4 (May 2009)
+## 10.0.4 (2009-05-26)
 
 * Added official symbols semigroup4.automorphism_group and
   semigroup4.homomorphism_by_generators, and and private
