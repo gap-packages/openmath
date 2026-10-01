@@ -1,204 +1,226 @@
-11.5.6 (2026-09-29)
+## 11.5.6 (2026-09-29)
+
 * Removed the undocumented global function HasseDiagram
 
-11.5.5 (2026-08-11)
+## 11.5.5 (2026-08-11)
+
 * Build the manual with AutoDoc
 
-11.5.4 (2026-08-11)
+## 11.5.4 (2026-08-11)
+
 * Fixed spurious empty lines in the manual
 * Removed the obsolete Autoload flag from PackageInfo.g
 * Janitorial changes
 
-11.5.3 (2023-02-25)
+## 11.5.3 (2023-02-25)
+
 * Janitorial changes
 
-11.5.2 (2022-12-06)
+## 11.5.2 (2022-12-06)
+
 * Removed code that is no longer needed
 * Use AsSet instead of AsList in the Hasse diagram example to get a stable
   order of the result
 * Janitorial changes
 
-11.5.1 (2022-04-29)
+## 11.5.1 (2022-04-29)
+
 * Updated URLs in the bibliography and switched many to https
 * Janitorial changes
 
-11.5.0 (2020-02-09)
+## 11.5.0 (2020-02-09)
+
 * Now requires GAP 4.9
 * Fixed DrawHasse: it now outputs an HTML file
 * Added a standard test suite and more tests
 * Added a License field to PackageInfo.g
 
-11.4.2 (February 2017)
+## 11.4.2 (February 2017)
+
 * Replaced EvalString by Int to convert a string to an integer
 
-11.4.1 (February 2017)
+## 11.4.1 (February 2017)
+
 * Added xmlns and version to OMOBJ tag
 
-11.4.0 (February 2017)
+## 11.4.0 (February 2017)
+
 * New release after switching to GitHub and GitHub pages
 * Replace obsolete Tuple by DirectProductElement
 * Switched from READ_COMMAND to READ_COMMAND_REAL (available from GAP 4.8.2)
 
-11.3.1 (February 2016)
+## 11.3.1 (February 2016)
+
 * Removed old compatibility code for MACFLOATs
 
-11.3.0 (January 2016)
+## 11.3.0 (January 2016)
+
 * Upgraded to work with GAP 4.8
 * Fixed the output of integer2.class to work in GAP 4.8
 
-11.2.0 (November 2013)
+## 11.2.0 (November 2013)
+
 * Added function EvalOMString which is an analog of EvalString to evaluate
   a string containing an OpenMath object
 
-11.1.5 (October 2013)
+## 11.1.5 (October 2013)
+
 * Test output updated to match GAP 4.7.1
 
-11.1.4 (March 2013)
+## 11.1.4 (March 2013)
+
 * Cleaned up usage of some obsoletes
 
-11.1.3 (February 2013)
+## 11.1.3 (February 2013)
+
 * Updated tests to automate failure detection
 
-11.1.2 (May 2012)
+## 11.1.2 (May 2012)
+
 * Improved testing facilities
 
-11.1.1 (April 2012)
+## 11.1.1 (April 2012)
+
 * Updated example of OMsymRecord.nums1.
 
-11.1.0 (March 2012)
+## 11.1.0 (March 2012)
+
 * Added .ocd files for private content dictionaries, already implemented in
   the package, to the 'ocd' directory.
-* Extended usage of floats from GAP 4.5  
+* Extended usage of floats from GAP 4.5
 * As a result, this version requires at least GAP 4.5 to work.
 
-11.0.0 (October 2011)
-* Included bidirectional support for binary OpenMath encoding implemented 
-  by Max Nicosia during his internship in St Andrews in Summer 2010, as 
+## 11.0.0 (October 2011)
+
+* Included bidirectional support for binary OpenMath encoding implemented
+  by Max Nicosia during his internship in St Andrews in Summer 2010, as
   a result of which Max joined the authors of the package.
 * Introduced OpenMathXMLWriter and OpenMathBinaryWriter objects, which
-  encapsulate streams and may be viewed as transducers accepting GAP 
+  encapsulate streams and may be viewed as transducers accepting GAP
   objects and writing them to a stream in the XML or binary OpenMath.
-* Changed the first argument of OMPutObject from stream to 
+* Changed the first argument of OMPutObject from stream to
   OpenMathXMLWriter or OpenMathBinaryWriter.
 * Removed no longer needed INRIA OpenMath library which was formerly used
   to work with binary OpenMath encoding.
-  
-10.1.0 (March 2010)
+
+## 10.1.0 (March 2010)
+
 * Switched dev/random -> dev/urandom to prevent the server from blocking
   and waiting for additional entropy to be collected.
-* Added permutation1.{action, are_distinct, cycle, cycle_type, domain, 
-  endomap, endomap_left_compose, endomap_right_compose, inverse, is_bijective, 
-  is_endomap, is_list_perm, is_permutation, length, list_perm, listendomap, 
+* Added permutation1.{action, are_distinct, cycle, cycle_type, domain,
+  endomap, endomap_left_compose, endomap_right_compose, inverse, is_bijective,
+  is_endomap, is_list_perm, is_permutation, length, list_perm, listendomap,
   order, permutation, permutationsn, sign, support}.
-* OpenMath to GAP support for finfield1.{conway_polynomial, discrete_log, 
-  field_by_conway, is_primitive, primitive_element} and 
+* OpenMath to GAP support for finfield1.{conway_polynomial, discrete_log,
+  field_by_conway, is_primitive, primitive_element} and
   setname2.{Boolean, GFp, GFpn, Zm}.
-* Method to print finite field element as a power of a primitive element 
-  of a given field, and adjustment of output for polynomials over finite 
+* Method to print finite field element as a power of a primitive element
+  of a given field, and adjustment of output for polynomials over finite
   fields.
-* Introduced OpenMathDefaultPolynomialRing to output collections of 
+* Introduced OpenMathDefaultPolynomialRing to output collections of
   polynomials.
-* OMPrint may accept 1 or 2 arguments to be compatible with 3-argument 
+* OMPrint may accept 1 or 2 arguments to be compatible with 3-argument
   version of OMPut.
 * OMPut for a finite field element using finfield1 CD.
 * OMPut for a finite field using setname2.{GFp,GFpn}.
 
-10.0.4 (May 2009):
-* Added official symbols semigroup4.automorphism_group and 
-  semigroup4.homomorphism_by_generators, and and private 
+## 10.0.4 (May 2009)
+
+* Added official symbols semigroup4.automorphism_group and
+  semigroup4.homomorphism_by_generators, and and private
   monoid1.monoid_by_generators, semigroup1.semigroup_by_generators,
   transform1.transformation to support two-sided conversion of
-  transformations, transformation semigroups and their automorphism groups; 
-  private symbols record1.record for records and pcgroup1.pcgroup_by_pcgscode 
+  transformations, transformation semigroups and their automorphism groups;
+  private symbols record1.record for records and pcgroup1.pcgroup_by_pcgscode
   for PcGroups.
-  
+
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  
+
 Since 2007 Olexandr Konovalov made several further changes in this package
-and after an agreement with Andrew Solomon became its maintainer. The list 
+and after an agreement with Andrew Solomon became its maintainer. The list
 of major updates is below:
 
 * Fixes of names of symbols and their distribution across CDs following recent
   changes in OpenMath CDs. * Multiple additions and updates to support various
-  symbols from CDs alg1, algnums, arith1, arith2, arith3, calculus1, 
-  comnbinat1, fieldname1, group1, group2, group, groupname1, integer1, 
-  integer2, list1, logic1, permgp1, set1. 
-  
+  symbols from CDs alg1, algnums, arith1, arith2, arith3, calculus1,
+  comnbinat1, fieldname1, group1, group2, group, groupname1, integer1,
+  integer2, list1, logic1, permgp1, set1.
+
 * Extended support of polynomial CDs.
 
 * Fixed and extended support of OpenMath references.
 
 * Fixed error messages for unexpected_symbol, unhandled_symbol, unsupported_CD
   as required by the 'error' OM CD.
-    
+
 * Changes in conversion from GAP to OpenMath:
 - introduced OMINT_LIMIT and fixed OMput for integers too large to be printed.
-- commented out method for OMPut( <stream>,  <vector> ) to have the default 
+- commented out method for OMPut( `<stream>`,  `<vector>` ) to have the default
   output as list1.list.
-  
-* OMsymTable turned from the list of nested lists into a record and renamed it 
+
+* OMsymTable turned from the list of nested lists into a record and renamed it
   to OMsymRecord.
 
-* Removed OMnullarySymbolToGAP, now all lookup is performed by OMsymLookup 
+* Removed OMnullarySymbolToGAP, now all lookup is performed by OMsymLookup
   with no distinction between nullary and n-ary OpenMath symbols.
-  
+
 * New functionality:
-  - New function OMPutObjectNoOMOBJtags, a variation of the function 
-    OMPutObject to write to the stream the OpenMath object without enclosing 
-    <OMOBJ> .. </OMOBJ> tags, which may be useful for combining complex 
+  - New function OMPutObjectNoOMOBJtags, a variation of the function
+    OMPutObject to write to the stream the OpenMath object without enclosing
+    `<OMOBJ>` .. `</OMOBJ>` tags, which may be useful for combining complex
     objects.
-  - New objects OMPlainString which are strings of OpenMath code that are 
-    plainly substituted into the output while printing/writing into stream 
+  - New objects OMPlainString which are strings of OpenMath code that are
+    plainly substituted into the output while printing/writing into stream
     instead of converting to OMSTR, which may be useful for composing OpenMath
     code from GAP.
-  - New function OMString to return a string with the OpenMath representation 
-    of a GAP object.     
-    
+  - New function OMString to return a string with the OpenMath representation
+    of a GAP object.
+
 * Better organising of handling private CDs/symbols:
-  - created directory 'openmath/private' to store implementations of our 
+  - created directory 'openmath/private' to store implementations of our
     private CDs and private/experimental symbols (this is also the place where
-    users may put their code if they will need to addsupport for their own 
+    users may put their code if they will need to addsupport for their own
     private CDs)
-  - moved to 'openmath/private/private.{g,gi}' code for algnums and cas CDs 
-    and for private symbols groups1.group_by_generators, 
+  - moved to 'openmath/private/private.{g,gi}' code for algnums and cas CDs
+    and for private symbols groups1.group_by_generators,
     groups1.character_table and groups1.character_table_of_group
-  - transformed OM_append into two functions OM_append_new and 
+  - transformed OM_append into two functions OM_append_new and
     OM_append_private.
 
-* multiple rearrangements of declaring and assigning global variables and 
-  moving of reading *.g files from read.g to init.g to fix errors when 
+* multiple rearrangements of declaring and assigning global variables and
+  moving of reading *.g files from read.g to init.g to fix errors when
   OpenMath is loaded as required package from other package.
-  
+
 * Converted the manual into GAPDoc format and extended it.
 
 * Various technical changes:
   - updated PackageInfo.g file
-  - removed the non-standard banner 
+  - removed the non-standard banner
   - removed INSTALL file containing duplicated information
   - added openmatj/gap/buildman.g with utility functions to build the manual
   - rewrote the README file which is also the changelog
   - changed the system of version numbers
-  - removed printutil.g since now GAPDoc has printutil.{gd,gi} and replaced in 
+  - removed printutil.g since now GAPDoc has printutil.{gd,gi} and replaced in
     private.g ViewString by StringView as it was renamed in printutil.*
-  
-Olexandr Konovalov                                               April 2009  
+
+Olexandr Konovalov                                               April 2009
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-The first release of the package was produced in March 2000 by Andrew Solomon 
-when he worked at the School of Computer Science, University of St Andrews. 
+The first release of the package was produced in March 2000 by Andrew Solomon
+when he worked at the School of Computer Science, University of St Andrews.
 
-After agreement with Andrew Solomon, Marco Costantini became the maintainer 
-of this package. In June 2004 Marco Costantini made some modifications in 
+After agreement with Andrew Solomon, Marco Costantini became the maintainer
+of this package. In June 2004 Marco Costantini made some modifications in
 this package in order to make it usable again:
 * provided a PackageInfo.g file as needed by GAP 4.4;
 * changed "share package" to "package" as the term "share" became obsolete;
 * made slight modifications in the file doc/make_doc;
 * added the warning about non-standard compilation.
 
-Later Marco Costantini made the following modifications listed below, which 
-were necessary in order to extend the functionality and to fix the bugs, 
-and because both OpenMath and the package mechanism of GAP have evolved 
+Later Marco Costantini made the following modifications listed below, which
+were necessary in order to extend the functionality and to fix the bugs,
+and because both OpenMath and the package mechanism of GAP have evolved
 in the meantime:
 
 * file pkg/openmath/gap/gap.g
@@ -215,7 +237,7 @@ in the meantime:
 * file pkg/openmath/gap/parse.gi
   - Added support for the new OpenMath 2.0 objects that contain
     information inside the OMOBJ tag.
-  - Now ``gpipe'' is called using Process instead of Exec 
+  - Now ``gpipe'' is called using Process instead of Exec
     (this increases both the performance and the portability).
 
 * added files xmltree.gd and xmltree.gi that contain
@@ -235,7 +257,7 @@ in the meantime:
   - Modified also to avoid using a new temporary directory for
     each call of OMGetObject.
 
-* file pkg/openmath/gap/omput.gi 
+* file pkg/openmath/gap/omput.gi
   - Updated and fixed functions ``OMPut'' and related, according
     to the current OpenMath CDs.
   - Simplified the code for the OMPutby methods, by introducing
@@ -249,11 +271,11 @@ in the meantime:
   - Fixed some typos.
 
 * Added file pkg/openmath/hasse/config.g
-  - Removed unnecessay INSTALLATION_PATH 
+  - Removed unnecessay INSTALLATION_PATH
   - Warning about SERVLET
 
 * file pkg/openmath/PackageInfo.g
-  - Provided an up-to-date, informative, complete and working 
+  - Provided an up-to-date, informative, complete and working
     PackageInfo.g file.
 
 * file pkg/openmath/init.g
@@ -261,14 +283,14 @@ in the meantime:
   - Removed the outdated stuff
 
 * file pkg/openmath/read.g
-  - Now the is clearly indiceted which is the interdependence 
+  - Now the is clearly indiceted which is the interdependence
     of the files in the package.
   - Reads the file pkg/openmath/gap/new.g above.
   - Moved reading of \*.gd files to file init.g
   - Converted ReadPkg to ReadPackage
   - Removed banner (moved to PackageInfo.g file)
 
-* added files pkg/openmath/tst/test_new, pkg/openmath/tst/test_new.src, 
+* added files pkg/openmath/tst/test_new, pkg/openmath/tst/test_new.src,
   pkg/openmath/tst/test_new.omt
   - Provided a test file.
 
@@ -292,13 +314,12 @@ in the meantime:
   - various minor changes.
 
 * Now the package loads, and provides conversion from GAP to
-  OpenMath, even if the external binary has not been compiled. 
-  In this case, if the conversion from OpenMath to GAP is 
+  OpenMath, even if the external binary has not been compiled.
+  In this case, if the conversion from OpenMath to GAP is
   attempted, an informative error message is issued.
 
 Marco Costantini
 
 December 2005, January and July 2006
 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-  
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
